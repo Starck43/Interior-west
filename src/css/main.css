@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/roboto-regular-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 400;
+  src: url("../fonts/roboto-italic-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  src: url("../fonts/roboto-bold-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: italic;
+  font-weight: 700;
+  src: url("../fonts/roboto-bolditalic-webfont.woff2") format("woff2");
+}
+
+::-webkit-input-placeholder {
+  color: #666;
+}
+
+::-moz-placeholder {
+  color: #666;
+}
+
+:-ms-input-placeholder {
+  color: #666;
+}
+
+::-ms-input-placeholder {
+  color: #666;
+}
+
+::placeholder {
+  color: #666;
+}
+
+::-moz-selection {
+  background-color: orange;
+  color: #fff;
+}
+
+::selection {
+  background-color: orange;
+  color: #fff;
+}
+
+input, textarea {
+  outline: none;
+}
+
+input:focus:required:invalid, textarea:focus:required:invalid {
+  border-color: red;
+}
+
+input:required:valid, textarea:required:valid {
+  border-color: green;
+}
+
+body {
+  font-size: 16px;
+  min-width: 320px;
+  position: relative;
+  line-height: 1.65;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.img {
+  width: 100%;
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 20px;
+  -ms-grid-columns: 1fr 20px 1fr;
+  grid-template-columns: 1fr 1fr;
+      grid-template-areas: "left right";
+}
+
+.grid > div:first-child {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: left;
+}
+
+.grid > div:last-child {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: right;
+}
+
+@media (max-width: 575.98px) {
+  .grid {
+    display: block;
+  }
+  .grid > div {
+    padding: 10px 0;
+  }
+}
+
+.parent {
+  background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7);
+}
