@@ -1,0 +1,41 @@
+{
+  "name": "Start-WP-Template",
+  "version": "1.0.0",
+  "description": "A new Web project template description",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "S.Shabalin",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^4.3.1",
+    "browser-sync": "^2.26.7",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-cache": "^1.1.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-resolve-dependencies": "^3.0.1",
+    "gulp-rsync": "0.0.8",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify-es": "^1.0.4",
+    "imagemin": "^7.0.0",
+    "imagemin-jpeg-recompress": "^6.0.0",
+    "jquery": "^3.4.1",
+    "pngquant": "^3.0.0",
+    "postcss-import": "^12.0.1"
+  },
+  "dependencies": {
+    "acorn": "^6.2.1",
+    "popper.js": "^1.14.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Starck43/Start-WP-Template.git"
+  },
+}
