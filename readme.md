@@ -25,17 +25,17 @@
 <h2>Основные скрипты Gulp для работы с проектом:</h2>
 
 <ul>
-	<li><strong title="gulp styles"><em>gulp styles</em></b>: конвертирует все файлы sass в css/main.css</li>
-	<li><strong title="gulp vendors-styles"><em>gulp vendors-styles</em></b>: подключает сторонние css файлы, включая стили, прописанные через @import в файле css/_vendors.css</li>
-	<li><strong title="gulp scripts"><em>gulp scripts</em></b>: объединяет собственные скрипты c именем *custom* в файл custom.min.js и сжимает их</li>
-	<li><strong title="gulp vendors-scripts"><em>gulp vendors-scripts</em></b>: объединяет все сторонние скрипты в папке js, кроме *custom*.js и сжимает их, записывая в файл js/vendors.min.js</li>
-	<li><strong title="gulp css-compress"><em>gulp css-compress</em></b>: сжатие собственных стилей в файл css/main.min.css</li>
-	<li><strong title="gulp rsync"><em>gulp rsync</em></b>: выгрузка проекта на рабочий сервер</li>
-	<li><strong title="gulp [default]"><em>gulp</em></b>: запуск группы тасков для слежения за изменениями css, js и php файлов</li>
+	<li><b title="gulp styles"><em>gulp styles</em></b>: конвертирует все файлы sass в css/main.css</li>
+	<li><b title="gulp vendors-styles"><em>gulp vendors-styles</em></b>: подключает сторонние css файлы, включая стили, прописанные через @import в файле css/_vendors.css</li>
+	<li><b title="gulp scripts"><em>gulp scripts</em></b>: объединяет собственные скрипты c именем *custom* в файл custom.min.js и сжимает их</li>
+	<li><b title="gulp vendors-scripts"><em>gulp vendors-scripts</em></b>: объединяет все сторонние скрипты в папке js, кроме *custom*.js и сжимает их, записывая в файл js/vendors.min.js</li>
+	<li><b title="gulp css-compress"><em>gulp css-compress</em></b>: сжатие собственных стилей в файл css/main.min.css</li>
+	<li><b title="gulp rsync"><em>gulp rsync</em></b>: выгрузка проекта на рабочий сервер</li>
+	<li><b title="gulp [default]"><em>gulp</em></b>: запуск группы тасков для слежения за изменениями css, js и php файлов</li>
 </ul>
 
 <h2>Структура рабочей папки src:</h2>
 
 <ol>
-	<li><b>js/_custom.js</b></li>
+	<li><b>js/_custom.js</b> - кастомный файл, где можно размещать собственные скрипты</li>
 </ol>
