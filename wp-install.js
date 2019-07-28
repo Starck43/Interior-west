@@ -9,7 +9,7 @@ var fs = require('fs'),
 var FILE_URL = 'https://ru.wordpress.org/latest-ru_RU.zip';
 var file_name = url.parse(FILE_URL).pathname.split('/').pop();
 var EXTRACT_DIR = 'src';
-
+var WP_DIR = 'wordpress';
 
 function downloadHTTP(url){
 	var file = fs.createWriteStream(file_name);
@@ -35,26 +35,48 @@ function downloadHTTP(url){
 
 function unpack(path) {
 
-	console.log(file_name + ' is extracting...');
+/*	console.log(file_name + ' is extracting...');
 	fs.createReadStream(file_name)
 	.pipe(unzipper.Extract({ path: path }))
   	.promise()
   	.then( () => {
   				console.log('Done!');
-				console.log(file_name + ' is removing...');
+				console.log(file_name + ' is deleting...');
 				fs.unlink(file_name, function(e) {
 					if (e) return console.log(e);
-					console.log('Done!');
-				});  
-
+					console.log('Done. Delete complete!');
+				});
   			})
   	.catch( e => console.error('Unpacking error', e) );
-
+*/  	
+  	if (fs.realpathSync(path + '/' + WP_DIR + '/wp-content')) {
+  		fs.readdir(path, (err, files) => {
+	    if (!err) {
+	      for (let file of files) {
+	        // Delete each file
+	        fs.unlinkSync(path.join(_dirloc, file))
+	      }
+	    }
+		})
+		// After the 'done' of each file delete,
+		// Delete the directory itself.
+	  	if (fs.unlinkSync(_dirloc)) {
+	    	console.log('Directory has been deleted!')
+		}
+		console.log('Removing from "' + path + '/' + WP_DIR + '/wp-content" to "' + path + '/wp-content" is beginning...');
+		fs.rename(path + '/' + WP_DIR + '/wp-content', path + '/' + 'wp-content' , (err) => {
+			if (err) throw err;
+			console.log('Remove complete!');
+		});
+  	}
 }
 
-downloadHTTP(FILE_URL)
+unpack(EXTRACT_DIR);
+
+/*downloadHTTP(FILE_URL)
 	.then( function() {
 		console.log('Done!');
 		unpack(EXTRACT_DIR);
 	})
 	.catch( e => console.error('Error while downloading', e) );
+*/

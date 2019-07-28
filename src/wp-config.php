@@ -10,6 +10,10 @@
  *
  * @package WordPress
  */
+/** определяем директорию wp-content **/
+define( 'WP_CONTENT_DIR', __DIR__ .'/wp-content');
+define( 'WP_CONTENT_URL',  "//{$_SERVER['HTTP_HOST']}/wp-content" );
+
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
 define('DB_NAME', 'your_db_name');
