@@ -1,5 +1,5 @@
 // Dependencies
-var fs = require('fs'),
+var fs = require('fs-extra'),
 	url = require('url'),
 	http = require('https'),
 	unzipper = require('unzipper');
@@ -35,40 +35,31 @@ function downloadHTTP(url){
 
 function unpack(path) {
 
-/*	console.log(file_name + ' is extracting...');
-	fs.createReadStream(file_name)
-	.pipe(unzipper.Extract({ path: path }))
-  	.promise()
-  	.then( () => {
-  				console.log('Done!');
-				console.log(file_name + ' is deleting...');
-				fs.unlink(file_name, function(e) {
-					if (e) return console.log(e);
-					console.log('Done. Delete complete!');
-				});
-  			})
-  	.catch( e => console.error('Unpacking error', e) );
-*/  	
-  	if (fs.realpathSync(path + '/' + WP_DIR + '/wp-content')) {
-  		fs.readdir(path, (err, files) => {
-	    if (!err) {
-	      for (let file of files) {
-	        // Delete each file
-	        fs.unlinkSync(path.join(_dirloc, file))
-	      }
-	    }
-		})
-		// After the 'done' of each file delete,
-		// Delete the directory itself.
-	  	if (fs.unlinkSync(_dirloc)) {
-	    	console.log('Directory has been deleted!')
-		}
-		console.log('Removing from "' + path + '/' + WP_DIR + '/wp-content" to "' + path + '/wp-content" is beginning...');
-		fs.rename(path + '/' + WP_DIR + '/wp-content', path + '/' + 'wp-content' , (err) => {
-			if (err) throw err;
-			console.log('Remove complete!');
-		});
-  	}
+	try {
+			fs.accessSync(file_name);     
+			console.log(file_name + ' is extracting...');
+			fs.createReadStream(file_name)
+			.pipe(unzipper.Extract({ path: path }))
+		  	.promise()
+		  	.then( () => {
+		  				console.log('Done!');
+						console.log(file_name + ' is deleting...');
+						fs.unlink(file_name, function(e) {
+							if (e) return console.log(e);
+							console.log('Delete complete!');
+						});
+		  			})
+		  	.catch( e => console.error('Unpacking error', e) );
+	} catch (err) {
+		console.log('Nothing to extract')
+	}
+  	
+	var wpcontent_folder = path + '/' + WP_DIR + '/wp-content';
+  	if (fs.realpathSync(wpcontent_folder)) {
+		console.log('Deleting folder "' + wpcontent_folder + '"...');
+		fs.removeSync(wpcontent_folder);
+		console.log('Done!');
+  	} else {console.log('Nothing to delete')}
 }
 
 unpack(EXTRACT_DIR);
