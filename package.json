@@ -1,11 +1,12 @@
 {
   "name": "Start-WP-Template",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A new Web project template description",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "git": "https://github.com/Starck43/Start-WP-Template.git",
   "author": "S.Shabalin",
   "license": "ISC",
   "devDependencies": {
@@ -27,14 +28,11 @@
     "imagemin-jpeg-recompress": "^6.0.0",
     "jquery": "^3.4.1",
     "pngquant": "^3.0.0",
-    "postcss-import": "^12.0.1"
+    "postcss-import": "^12.0.1",
   },
   "dependencies": {
     "acorn": "^6.2.1",
-    "popper.js": "^1.14.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Starck43/Start-WP-Template.git"
-  },
+    "popper.js": "^1.14.7",
+    "unzipper": "^0.10.1"
+  }
 }

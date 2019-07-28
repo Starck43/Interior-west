@@ -9,8 +9,9 @@ cd $2
 rm -r -f .git
 # Создаем папку для исходников(макеты, логотипы и прочее)    
 mkdir source
-# ставим WordPress
 # Линкуем глобальные пакеты
 npm i
+# ставим WordPress (последняя русская версия) с сервера https://ru.wordpress.org/latest-ru_RU.zip в папку src/wordpress
+node wp-install
 # Запускаем gulp(или npm run start)    
 gulp

@@ -1,3 +1,7 @@
+/*
+@Version: 1.0.1
+*/
+
 var gulp 		 = require('gulp'),
 	sass 		 = require('gulp-sass'),   // Подключаем SASS
 	browserSync  = require('browser-sync'), // Подключаем Browser Sync
@@ -17,7 +21,7 @@ var gulp 		 = require('gulp'),
 
 var path = {
         src: 'src/',
-        html: 'wp-content/themes/mytheme-child/' // Путь до дочерней темы WP. Если название другое, то надо указать тут 
+        dest: 'src/wordpress/wp-content/themes/mytheme-child/' // Путь до дочерней темы WP. Если название другое, то надо указать тут 
 }
 
 gulp.task('message', async function() { // Вывод любой информации в консоль
@@ -97,7 +101,7 @@ gulp.task('vendors-scripts', function() {
 });
 
 gulp.task('html', function() {
-    return gulp.src([path.html+'**/*.html', path.html+'**/*.php'])
+    return gulp.src([path.dest+'**/*.html', path.dest+'**/*.php'])
         .pipe(browserSync.reload({ stream: true }))
 });
 
@@ -133,7 +137,7 @@ gulp.task('watch', function() { //таск слежения изменений �
     gulp.watch([path.src+'css/**/*.css', '!'+path.src+'css/main.css'], gulp.parallel('vendors-styles')); // Наблюдение за вендорными css файлами в папке _src
     gulp.watch([path.src+'js/custom.js'], gulp.parallel('scripts')); // Наблюдение за главным JS файлом
     gulp.watch([path.src+'js/*.js', '!'+path.src+'js/*custom*.js'], gulp.parallel('vendors-scripts')); // Наблюдение за сторонней библиотекой JS файлов
-    gulp.watch([path.html+'**/*.html', path.html+'**/*.php'], gulp.parallel('html')); // Наблюдение за HTML файлами в корне проекта
+    gulp.watch([path.dest+'**/*.html', path.dest+'**/*.php'], gulp.parallel('html')); // Наблюдение за HTML файлами в корне проекта
 });
 
 //Чистка кэша. Запускается при необходимости

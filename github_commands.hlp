@@ -46,3 +46,4 @@ git merge dev - сделаем слияние с удаленными файла
 
 Заказать удаленный репозитарий себе на локальный сервер в текущую папку, где запущена консоль cmd:
 git clone git clone git@github.com:Starck43/Start-WP-Template ./ - закачка в текущую папку или можно указать имя папки
+git clone https://github.com/Starck43/Start-WP-Template WP-Template - закачка в папку WP-Template через http
