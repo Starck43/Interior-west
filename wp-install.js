@@ -15,7 +15,7 @@ function downloadHTTP(url, file_name){
 	return new Promise((resolve, reject) => {
 	    var responseSent = false; // flag to make sure that response is sent only once.
 	    http.get(url, response => {
-	    	console.log('Downloading the latest WordPress version from ' + url);
+	    	console.log('Downloading the latest WordPress version from ' + url +'...');
 	    	response.pipe(file);
 	    	file.on('finish', () =>{
 	    		file.close(() => {
@@ -43,7 +43,7 @@ function unpack(file_name, path) {
 		.promise()
 		.then( () => {
 				console.log('Done!');
-				console.log('"' + file_name + '" is deleting...');
+				console.log(file_name + ' is deleting...');
 				fs.unlink(file_name, function(e) {
 					if (e) return console.log(e);
 					console.log('Delete complete!');
@@ -53,10 +53,11 @@ function unpack(file_name, path) {
 					console.log('Deleting folder "' + wpcontent_folder + '"...');
 					fs.removeSync(wpcontent_folder);
 					console.log('Delete complete!');
+					console.log('WORDPRESS has been installed');
 				});
 		})
 		.catch ( err => console.error('Unpacking error', err) );
-	} catch (err => console.log('There is no "' + file_name + '" file to extract') );
+	} catch {err => console.log('There is no "' + file_name + '" file to extract') };
 	
 }
 
