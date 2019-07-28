@@ -2,5 +2,4 @@
 /.git/
 /**/Thumbs.db
 /**/*.DS_Store
-/src/wordpress/*
-!/src/wordpress/wp-content/themes/mytheme-child/*
+/src/wordpress/

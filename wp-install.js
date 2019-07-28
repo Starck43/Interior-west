@@ -7,11 +7,10 @@ var fs = require('fs-extra'),
 // App variables
 //var FILE_URL = 'http://ru.wordpress.org/latest.tar.gz';
 var FILE_URL = 'https://ru.wordpress.org/latest-ru_RU.zip';
-var file_name = url.parse(FILE_URL).pathname.split('/').pop();
+var ZIP_FILE = url.parse(FILE_URL).pathname.split('/').pop();
 var EXTRACT_DIR = 'src';
-var WP_DIR = 'wordpress';
 
-function downloadHTTP(url){
+function downloadHTTP(url, file_name){
 	var file = fs.createWriteStream(file_name);
 	return new Promise((resolve, reject) => {
 	    var responseSent = false; // flag to make sure that response is sent only once.
@@ -33,41 +32,38 @@ function downloadHTTP(url){
 	});
 }
 
-function unpack(path) {
+function unpack(file_name, path) {
 
 	try {
-			fs.accessSync(file_name);     
-			console.log(file_name + ' is extracting...');
-			fs.createReadStream(file_name)
-			.pipe(unzipper.Extract({ path: path }))
-		  	.promise()
-		  	.then( () => {
-		  				console.log('Done!');
-						console.log(file_name + ' is deleting...');
-						fs.unlink(file_name, function(e) {
-							if (e) return console.log(e);
-							console.log('Delete complete!');
-						});
-		  			})
-		  	.catch( e => console.error('Unpacking error', e) );
-	} catch (err) {
-		console.log('Nothing to extract')
-	}
-  	
-	var wpcontent_folder = path + '/' + WP_DIR + '/wp-content';
-  	if (fs.realpathSync(wpcontent_folder)) {
-		console.log('Deleting folder "' + wpcontent_folder + '"...');
-		fs.removeSync(wpcontent_folder);
-		console.log('Done!');
-  	} else {console.log('Nothing to delete')}
+		var wpcontent_folder = path + '/wordpress/wp-content';
+		fs.accessSync(file_name);     
+		console.log(file_name + ' is extracting...');
+		fs.createReadStream(file_name)
+		.pipe(unzipper.Extract({ path: path }))
+		.promise()
+		.then( () => {
+				console.log('Done!');
+				console.log('"' + file_name + '" is deleting...');
+				fs.unlink(file_name, function(e) {
+					if (e) return console.log(e);
+					console.log('Delete complete!');
+				});
+				fs.realpath(wpcontent_folder, function(e) {
+					if (e) return console.log(e);
+					console.log('Deleting folder "' + wpcontent_folder + '"...');
+					fs.removeSync(wpcontent_folder);
+					console.log('Delete complete!');
+				});
+		})
+		.catch ( err => console.error('Unpacking error', err) );
+	} catch (err => console.log('There is no "' + file_name + '" file to extract') );
+	
 }
 
-unpack(EXTRACT_DIR);
 
-/*downloadHTTP(FILE_URL)
+downloadHTTP(FILE_URL, ZIP_FILE)
 	.then( function() {
-		console.log('Done!');
-		unpack(EXTRACT_DIR);
+		console.log('File downloaded successfully!');
+		unpack(ZIP_FILE, EXTRACT_DIR);
 	})
-	.catch( e => console.error('Error while downloading', e) );
-*/
+	.catch ( err => console.error('Error while downloading', err) );
