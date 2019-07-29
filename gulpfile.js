@@ -48,7 +48,7 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
             overrideBrowserslist: ['last 2 versions']
         })) // Создаем префиксы
         //.pipe(sourcemaps.write()) //пропишем sourcemap
-		.pipe(gulp.dest(path.src+'css')) // Выгружаем результат в папку src/css
+		.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку src/css
 		.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
 });
 
@@ -69,7 +69,7 @@ gulp.task('css-compress', async function() {
     var buildCss =  gulp.src(path.src+'css/main.css') // Сжимаем библиотеки
     .pipe(cleanCSS({level:2})) // Сжимаем CSS файл
     .pipe(rename({suffix: '.min'})) // Добавляем суффикс .min
-    .pipe(gulp.dest(path.src+'css'))
+    .pipe(gulp.dest(path.dest+'css'))
 });
 
 gulp.task('scripts', function() {
@@ -78,7 +78,7 @@ gulp.task('scripts', function() {
     .pipe(concat('custom.min.js')) // Объединяем в один файл
     .pipe(uglify()) // Minify js (opt.)
     //.pipe(sourcemaps.write()) // Пропишем карты
-    .pipe(gulp.dest(path.src+'js')) // Выгружаем в папку src/js
+    .pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку src/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта
 });
 
@@ -97,7 +97,7 @@ gulp.task('vendors-scripts', function() {
         })
     .pipe(concat('vendors.min.js')) // Объединяем в один файл
     .pipe(uglify()) // Сжимаем JS файл
-	.pipe(gulp.dest(path.src+'js')) // Выгружаем в папку src/js
+	.pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку src/js
 });
 
 gulp.task('html', function() {
@@ -118,7 +118,7 @@ gulp.task('img', function() {
 	    	imagemin.optipng(),
 	    	imagemin.svgo()
 	    	]))
-        .pipe(gulp.dest('img/')); // Выгружаем обратно в img
+        .pipe(gulp.dest(path.dest+'img')); // Выгружаем обратно в img
 });
 
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
