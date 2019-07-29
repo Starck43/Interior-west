@@ -1,6 +1,8 @@
 /*
-@Version: 1.0.1
-*/
+ * Gulpfile.js
+ * @Version: 1.0.3
+ * Author: Stanislav Shabalin
+ */
 
 var gulp 		 = require('gulp'),
 	sass 		 = require('gulp-sass'),   // Подключаем SASS
@@ -20,7 +22,7 @@ var gulp 		 = require('gulp'),
     autoprefixer = require('gulp-autoprefixer');// Подключаем библиотеку для автоматического добавления префиксов
 
 var path = {
-        src: 'src/',
+        src: 'src/', // Здесь хранятся исходные данные
         dest: 'src/wordpress/wp-content/themes/mytheme-child/' // Путь до дочерней темы WP. Если название другое, то надо указать тут 
 }
 
@@ -30,16 +32,13 @@ gulp.task('message', async function() { // Вывод любой информа�
 
 
 gulp.task('styles', function() { // таск 'styles' обработает все файлы *.sass, вложенные в любые подпапки
-	return gulp.src(
-        [
-            path.src+'sass/**/*.sass'
-        ])
+	return gulp.src(path.src+'sass/**/*.sass')
 		// Пример: gulp.src('src/sass/*.+(sass|scss)')
 		// Пример: gulp.src(['src/sass/**/*.sass','!src/sass/libs.sass'])  ! - кроме styles.sass
         //.pipe(sourcemaps.init()) //инициализируем soucemap
-		.pipe(sass({ outputStyle: 'expanded' })) // Функция преобразования SASS в CSS. { outputStyle: 'expanded' } развертывает все унификации
+		.pipe(sass({ outputStyle: 'expanded' })) //  Опция { outputStyle: 'expanded' } развертывает все унификации
 		/*
-			файлы с подчеркиванием не учавтсвуют в компиляции, например, _part.sass. 
+			файлы с подчеркиванием не участвуют в компиляции, например, _part.sass. 
 			Его подключают через @import 'part' в файле *.sass 
 		*/
         .pipe(concat('main.css')) // Объединяем все найденные файлы в один
@@ -48,7 +47,7 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
             overrideBrowserslist: ['last 2 versions']
         })) // Создаем префиксы
         //.pipe(sourcemaps.write()) //пропишем sourcemap
-		.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку src/css
+		.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 		.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
 });
 
@@ -62,11 +61,11 @@ gulp.task('vendors-styles', function() { // таск обработает все
         .pipe(postcss([ cssImport ])) // Импортируем стили, прописанные через команду @import в начале файла
         .pipe(concat('vendors.min.css')) // Объединяем все найденные файлы в один
         .pipe(cleanCSS({level:2})) // Сжимаем CSS файл
-        .pipe(gulp.dest(path.src+'css')) // Выгружаем результат в папку src/css
+        .pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 });
 
 gulp.task('css-compress', async function() {
-    var buildCss =  gulp.src(path.src+'css/main.css') // Сжимаем библиотеки
+    gulp.src(path.dest+'css/main.css') // Сжимаем библиотеки
     .pipe(cleanCSS({level:2})) // Сжимаем CSS файл
     .pipe(rename({suffix: '.min'})) // Добавляем суффикс .min
     .pipe(gulp.dest(path.dest+'css'))
@@ -78,11 +77,11 @@ gulp.task('scripts', function() {
     .pipe(concat('custom.min.js')) // Объединяем в один файл
     .pipe(uglify()) // Minify js (opt.)
     //.pipe(sourcemaps.write()) // Пропишем карты
-    .pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку src/js
+    .pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта
 });
 
-// Запускается тогда, когда добавляются сторонние скрипты и формируется общий файл libs.min.js
+// Запускается тогда, когда добавляются сторонние скрипты в src/js и формируется общий файл vendors.min.js
 gulp.task('vendors-scripts', function() {
     return gulp.src([ // Берем нужные библиотеки вендорных скриптов
         //'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save-dev jquery)
@@ -91,13 +90,10 @@ gulp.task('vendors-scripts', function() {
     ])
     .pipe(jsRequires({ // подключаем внешние скрипты, если они прописаны в заголовке файлов через @requires
       pattern: /\* @requires [\s-]*(.*\.js)/g
-        }))
-        .on('error', function(err) {
-            console.log(err.message);
-        })
+    })).on('error', function(err) {console.log(err.message)})
     .pipe(concat('vendors.min.js')) // Объединяем в один файл
     .pipe(uglify()) // Сжимаем JS файл
-	.pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку src/js
+	.pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 });
 
 gulp.task('html', function() {
@@ -118,13 +114,13 @@ gulp.task('img', function() {
 	    	imagemin.optipng(),
 	    	imagemin.svgo()
 	    	]))
-        .pipe(gulp.dest(path.dest+'img')); // Выгружаем обратно в img
+        .pipe(gulp.dest(path.dest+'img')); // Выгружаем в папку dest::/img
 });
 
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
     browserSync({ // Выполняем browser Sync
         server: { // Определяем параметры сервера
-            baseDir: 'src' // Директория для сервера - src
+            baseDir: path.src // Директория для сервера - src
         },
         notify: false, // Отключаем уведомления
         online: false, // Work offline without internet connection
@@ -132,7 +128,7 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
     });
 });
 
-gulp.task('watch', function() { //таск слежения изменений в Sass,html,php,js. 
+gulp.task('watch', function() { //таск слежения изменений в sass,css,html,php,js. 
     gulp.watch([path.src+'sass/**/*.sass'], gulp.parallel('styles')); // Наблюдение за sass файлами в папке sass
     gulp.watch([path.src+'css/**/*.css', '!'+path.src+'css/main.css'], gulp.parallel('vendors-styles')); // Наблюдение за вендорными css файлами в папке _src
     gulp.watch([path.src+'js/custom.js'], gulp.parallel('scripts')); // Наблюдение за главным JS файлом
@@ -152,7 +148,7 @@ gulp.task('rsync', function() {
         root: path.src,
         hostname: 'username@yousite.com',
         destination: 'yousite/public_html/',
-        // include: ['*.htaccess'], // Included files
+        include: ['*.htaccess'], // Included files
         exclude: ['**/Thumbs.db', '**/*.DS_Store'], // Excluded files
         recursive: true,
         archive: true,
