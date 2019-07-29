@@ -1,4 +1,12 @@
-// Dependencies
+/*
+ * wp-install.js
+ * Usage: <node wp-nstall> in cmd console
+ * Description: downloading and unpacking Wordpress in folder src/wordpress
+ * Version: 1.0.1
+ * Author: Stanislav Shabalin
+ */
+ 
+ // Dependencies
 var fs = require('fs-extra'),
 	url = require('url'),
 	http = require('https'),
@@ -15,9 +23,9 @@ function downloadHTTP(url, file_name){
 	return new Promise((resolve, reject) => {
 	    var responseSent = false; // flag to make sure that response is sent only once.
 	    http.get(url, response => {
-	    	console.log('Downloading the latest WordPress version from ' + url +'...');
+	    	console.log('Downloading the latest WordPress [rus] from ' + url +'...');
 	    	response.pipe(file);
-	    	file.on('finish', () =>{
+	    	file.on('finish', () => {
 	    		file.close(() => {
 	    			if (responseSent) return;
 	    			responseSent = true;
@@ -63,8 +71,8 @@ function unpack(file_name, path) {
 
 
 downloadHTTP(FILE_URL, ZIP_FILE)
-	.then( function() {
-		console.log('File downloaded successfully!');
+	.then( () => {
+		console.log('File is downloaded successfully!');
 		unpack(ZIP_FILE, EXTRACT_DIR);
 	})
 	.catch ( err => console.error('Error while downloading', err) );
