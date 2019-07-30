@@ -6,27 +6,27 @@
 <p><i>PS: За основу был взят шаблон <a href="http://github.com/agragregra/oh5">OptimizedHTML 5</a></i></p>
 
 <p><b>В пакет входят:</b> 
-<li><b>resources</b> - папка для сбора и хранения исходных данных заказчика (ТЗ, макеты, примеры и тд)</li>
-<li><b>src/</b> - рабочаяя папка проекта для разработки</li>
-<li><b>src/css</b> - исходные подключаемые стили сторонних плагинов</li>
-<li><b>src/js</b> - свои кастомные и сторонние скрипты</li>
-<li><b>src/fonts</b> - исходные шрифты для подключения в main.css</li>
-<li><b>src/sass</b> - исходные собственные стили для препроцессора sass. Компилируются в main.css</li>
-<li><b>src/img</b> - исходные изображения (например, логотипы и тп, которые не войдут в media библиотеку WP)</li>
-<li><b>src/plugins</b> - библиотеки сторонних разработчиков (подключаются, например, в css/vendors.css и js/_vendors.js файлах)</li>
-<li><b>src/worpdress</b> - папка Worpress</li>
-<li><b>src/wp-content/</b> - папка контента для Worpress (вынесена из стандартного размещения внутри Worpdress)</li>
-<li><b>src/wp-content/themes/mytheme-child/</b> - папка с подключенной дочерней темой (functions.php, style.css)</li>
-<li><b>src/wp-content/themes/mytheme-child/css</b> - папка с подключаемыми стилями (main.min.css, vendors.min.css)</li>
-<li><b>src/wp-content/themes/mytheme-child/js</b> - папка с подключаемыми скриптами (custom.min.js, vendors.min.js)</li>
-<li><b>src/wp-content/themes/mytheme-child/img</b> - папка с подключаемыми изображениями</li>
-<li><b>src/wp-content/themes/mytheme-child/fonts</b> - папка с подключаемыми шрифтами</li>
-<li><b>src/wp-config.php</b> - файл для подключения БД настроек структуры Wordpress</li>
-<li><b>src/index.php</b> - продублированный стартовый файл из папки wordpress с измененными настройками</li>
-<li><b>node_modules</b> - набор плагинов для запуска проекта (определяется в файле <i>package.json</i> и устанавливается после команды <i>npm i</i>). См. ниже "Запуск проекта"</li>
-<li><b><i>package.json</i></b> - собранный установочный пакет необходимых плагинов</li>
-<li><b><i>wp-install.js</i></b> - скрипт для установки последней версии CMS WordPress (rus)</li>
-<li><b><i>gulpfile.js</i></b> - скрипты gulp для работы с проектом</li>
+<div><b>resources</b> - папка для сбора и хранения исходных данных заказчика (ТЗ, макеты, примеры и тд)</div>
+<div><b>src/</b> - рабочаяя папка проекта для разработки</div>
+<div><b>src/css</b> - исходные подключаемые стили сторонних плагинов</div>
+<div><b>src/js</b> - свои кастомные и сторонние скрипты</div>
+<div><b>src/fonts</b> - исходные шрифты для подключения в main.css</div>
+<div><b>src/sass</b> - исходные собственные стили для препроцессора sass. Компилируются в main.css</div>
+<div><b>src/img</b> - исходные изображения (например, логотипы и тп, которые не войдут в media библиотеку WP)</div>
+<div><b>src/plugins</b> - библиотеки сторонних разработчиков (подключаются, например, в css/vendors.css и js/_vendors.js файлах)</div>
+<div><b>src/worpdress</b> - папка Worpress</div>
+<div><b>src/wp-content/</b> - папка контента для Worpress (вынесена из стандартного размещения внутри Worpdress)</div>
+<div><b>src/wp-content/themes/mytheme-child/</b> - папка с подключенной дочерней темой (functions.php, style.css)</div>
+<div><b>src/wp-content/themes/mytheme-child/css</b> - папка с подключаемыми стилями (main.min.css, vendors.min.css)</div>
+<div><b>src/wp-content/themes/mytheme-child/js</b> - папка с подключаемыми скриптами (custom.min.js, vendors.min.js)</div>
+<div><b>src/wp-content/themes/mytheme-child/img</b> - папка с подключаемыми изображениями</div>
+<div><b>src/wp-content/themes/mytheme-child/fonts</b> - папка с подключаемыми шрифтами</div>
+<div><b>src/wp-config.php</b> - файл для подключения БД настроек структуры Wordpress</div>
+<div><b>src/index.php</b> - продублированный стартовый файл из папки wordpress с измененными настройками</div>
+<div><b>node_modules</b> - набор плагинов для запуска проекта (определяется в файле <i>package.json</i> и устанавливается после команды <i>npm i</i>). См. ниже "Запуск проекта"</div>
+<div><b><i>package.json</i></b> - собранный установочный пакет необходимых плагинов</div>
+<div><b><i>wp-install.js</i></b> - скрипт для установки последней версии CMS WordPress (rus)</div>
+<div><b><i>gulpfile.js</i></b> - скрипты gulp для работы с проектом</li>
 </p>
 
 <h2>Запуск проекта</h2>
@@ -37,9 +37,9 @@
 	<li>Клонировать или <a href="https://github.com/Starck43/Start-WP-Template/archive/master.zip">скачать</a> <b>стартовый шаблон</b> с GitHub. Для клонирования должен быть установлен Git.</li>
 	<li>Распаковать архив и(или) перейти в папку <b>Start-WP-Template</b></li>
 	<li>Запустить консоль cmd или shell (в Total Commander [shift+правая кнопка мыши]) для выполнения последующих команд:</li>
-	<li>1. <b>npm i</b> - установить плагины в node_modules для нового проекта (запускать в корне проекта через консоль с предустановленным Node.js и глобальным Gulp</li>
-	<li>2. <b>node wp-install</b> - развернуть WordPress</li>
-	<li>3. <b>gulp [default(по умол.)|styles|vendors-styles|scripts|vendors-scripts|css-compress|browser-sync|watch|rsync]</b> - запуск Gulp</li>
+	<li><b>npm i</b> - установить плагины в node_modules для нового проекта (запускать в корне проекта через консоль с предустановленным Node.js и глобальным Gulp</li>
+	<li><b>node wp-install</b> - развернуть WordPress</li>
+	<li><b>gulp [default(по умол.)|styles|vendors-styles|scripts|vendors-scripts|css-compress|browser-sync|watch|rsync]</b> - запуск Gulp</li>
 </ol>
 
 <h2>Основные таски Gulp для работы с проектом:</h2>
