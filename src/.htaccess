@@ -1,3 +1,9 @@
+# Защита xmlrpc
+<Files xmlrpc.php>
+    Order Deny,Allow
+    Deny from all
+</Files>
+
 <ifModule mod_expires.c>
 
 # Add correct content-type for fonts & SVG

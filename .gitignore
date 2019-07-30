@@ -3,3 +3,4 @@
 /**/Thumbs.db
 /**/*.DS_Store
 /src/wordpress/
+!/src/wordpress/search-replace-db
