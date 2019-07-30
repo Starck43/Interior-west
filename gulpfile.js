@@ -18,13 +18,12 @@ var gulp 		 = require('gulp'),
     imagemin     = require('imagemin'), // Подключаем библиотеку для работы с изображениями
     imgCompress  = require('imagemin-jpeg-recompress'), // Подключаем библиотеку для работы с изображениями
     pngquant     = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
-    cache        = require('gulp-cache'), // Подключаем библиотеку кеширования изображений
     autoprefixer = require('gulp-autoprefixer');// Подключаем библиотеку для автоматического добавления префиксов
 
 var path = {
         src: 'src/', // Здесь хранятся исходные данные
         dest: 'src/wordpress/wp-content/themes/mytheme-child/' // Путь до дочерней темы WP. Если название другое, то надо указать тут 
-}
+	}
 
 gulp.task('message', async function() { // Вывод любой информации в консоль
 	console.log('Console message');
@@ -64,6 +63,7 @@ gulp.task('vendors-styles', function() { // таск обработает все
         .pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 });
 
+// Скрипт запускается только вручную
 gulp.task('css-compress', async function() {
     gulp.src(path.dest+'css/main.css') // Сжимаем библиотеки
     .pipe(cleanCSS({level:2})) // Сжимаем CSS файл
@@ -101,9 +101,10 @@ gulp.task('html', function() {
         .pipe(browserSync.reload({ stream: true }))
 });
 
+// Скрипт запускается только вручную
 gulp.task('img', function() {
     return gulp.src(path.src+'img/**/*.+(jpg|png)') // Берем все изображения из img
-	    .pipe(imagemin([
+	    .pipe(imagemin([ // Сжимаем
 	    	imgCompress({
 	    		loops: 4,
 	    		min: 80,
@@ -120,7 +121,7 @@ gulp.task('img', function() {
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
     browserSync({ // Выполняем browser Sync
         server: { // Определяем параметры сервера
-            baseDir: path.src // Директория для сервера - src
+            baseDir: path.src // Директория для сервера - "src"
         },
         notify: false, // Отключаем уведомления
         online: false, // Work offline without internet connection
@@ -136,10 +137,6 @@ gulp.task('watch', function() { //таск слежения изменений �
     gulp.watch([path.dest+'**/*.html', path.dest+'**/*.php'], gulp.parallel('html')); // Наблюдение за HTML файлами в корне проекта
 });
 
-//Чистка кэша. Запускается при необходимости
-gulp.task('clean-cache', function (callback) {
-    return cache.clearAll();
-})
 
 // Deploy - выгрузка готового сайта на хостинг
 gulp.task('rsync', function() {
@@ -158,6 +155,6 @@ gulp.task('rsync', function() {
 });
 
 //Дефолтный таск для запуска процессов слежения за изменениями кода. Выполняется командой Gulp без параметров
-gulp.task('default', gulp.parallel('styles', 'scripts', 'vendors-scripts', 'browser-sync', 'watch'));//'img'
+gulp.task('default', gulp.parallel('styles', 'scripts', 'vendors-scripts', 'browser-sync', 'watch'));
 
 
