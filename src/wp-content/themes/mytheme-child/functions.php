@@ -6,7 +6,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 //echo get_home_url( null, 'wp-admin/', 'https' ); //Example.com: https://example.com/wp-admin/
 $home_url = get_stylesheet_directory_uri(); // for theme-child URL //get_home_url();
 $main_css_file = '/main.min.css';
-if ( !file_exists( $main_css_file ) $main_css_file = '/main.css';
+if ( !file_exists( $home_url . '/css' . $main_css_file )) $main_css_file = '/main.css';
 
 
 // STYLES registry
