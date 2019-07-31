@@ -22,7 +22,7 @@ var gulp 		 = require('gulp'),
 
 var path = {
         src: 'src/', // Здесь хранятся исходные данные
-        dest: 'src/wordpress/wp-content/themes/mytheme-child/' // Путь до дочерней темы WP. Если название другое, то надо указать тут 
+        dest: 'src/wordpress/wp-content/themes/starck-theme/' // Путь до дочерней темы WP. Если название другое, то надо указать тут 
 	}
 
 gulp.task('message', async function() { // Вывод любой информации в консоль

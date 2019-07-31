@@ -1,9 +1,11 @@
-<aside id="sidebar">
+<aside id="main-sidebar">
+
 <?php if ( is_active_sidebar( 'primary-widget-area' ) ) : ?>
 <div id="primary" class="widget-area">
-<ul class="xoxo">
+<section class="widget-element">
 <?php dynamic_sidebar( 'primary-widget-area' ); ?>
-</ul>
+</section>
 </div>
 <?php endif; ?>
+
 </aside>
