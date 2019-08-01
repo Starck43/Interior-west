@@ -1,4 +1,4 @@
-<footer id="main-footer">
+<footer id="site-footer">
 
 <?php wp_footer(); ?>
 

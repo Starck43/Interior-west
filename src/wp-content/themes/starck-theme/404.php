@@ -6,7 +6,7 @@
 
 <article id="post-0" class="post not-found">
 
-<header class="post-header">
+<header class="entry-header">
 <h1 class="entry-title"><?php esc_html_e( 'Not Found', 'starck' ); ?></h1>
 </header>
 
