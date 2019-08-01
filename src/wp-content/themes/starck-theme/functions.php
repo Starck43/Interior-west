@@ -21,7 +21,15 @@ function mytheme_scripts_add() {
 }
 
 // END ENQUEUE PARENT ACTION
-add_theme_support( 'custom-logo' ); //добавление выбора логотипа через настройки темы
+
+//добавление опции установки логотипа через настройки темы
+add_theme_support( 'custom-logo', array(
+	'height'      => 100,
+	'width'       => 400,
+	'flex-height' => true,
+	'flex-width'  => true,
+	'header-text' => array( 'site-title', 'site-description' ),
+) );
 
 add_action( 'after_setup_theme', 'starck_setup' );
 function starck_setup() {
