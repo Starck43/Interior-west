@@ -1,0 +1,38 @@
+/*
+ * Миксины
+ */
+
+//Автоматическое центрирование
+@mixin push--auto 
+	margin:
+		left: auto
+		right: auto
+//Для псевдоэлементов ::before и ::after
+@mixin pseudo($display: block, $pos: absolute, $content:'')
+	content: $content
+	display: $display
+	position: $pos
+
+@function active_font($font)
+	$active_font: sans-serif
+	@if $font { $active_font: $font + ', ' + $active_font }
+	@return $active_font
+
+@mixin font-settings($font:false, $colour:false, $size:false, $weight:false, $lh:false)
+	font-family: active_font($font), Helvetica, Arial
+	@if $size { font-size: $size }
+	@if $colour { color: $colour }
+	@if $weight { font-weight: $weight }
+	@if $lh { line-height: $lh }
+
+// Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 
+// чтобы поддерживать соотношение. Пример: @include responsive-ratio(16,9)
+@mixin responsive-ratio($x,$y, $pseudo:false)
+	$padding: unquote(( $y / $x )*100+'%')
+	@if $pseudo
+		&::before
+			@include pseudo($pos: relative)
+			width: 100%
+			padding-top: $padding
+	@else
+		padding-top: $padding

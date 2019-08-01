@@ -42,6 +42,15 @@
 	<li><b>gulp [default(по умол.)|styles|vendors-styles|scripts|vendors-scripts|css-compress|browser-sync|watch|rsync]</b> - запуск Gulp</li>
 </ol>
 
+<pre>В папке src/wp-content/themes созданы две темы: 
+<ul>
+<div>Основная с минимальным кодом - Starck</div>
+<div>Дочерняя GeneratePress-child</div>
+</ul>
+<p>! Родительскую тему GeneratePress необходимо предварительно установить, чтобы заработала дочерняя.</p>
+<p>! Подключение стилей и скриптов настроено в <b>functions.php</b>. Кастомные файлы располагаются во вложенных в тему соответствующих папках.</p>
+</pre>
+
 <h2>Основные таски Gulp для работы с проектом:</h2>
 
 <pre><b>gulp</b> - главный таск для запуска всего пакета целиком. Выполняется через командную консоль</pre>

@@ -1,11 +1,16 @@
+/*
+ * Custom Sass
+ */
+
 @import vars
+@import mixins
 @import fonts
 
 
 ::placeholder
 	color: #666
 
-::selection
+::selection //когд выделяем текст на странице
 	background-color: $accent
 	color: #fff
 
@@ -15,18 +20,13 @@ input, textarea
 		border-color: red
 	&:required:valid
 		border-color: green
-
-body
-	font-size: 16px
-	min-width: 320px
-	position: relative
-	line-height: 1.65
-	font-family: 'Roboto', sans-serif
-	overflow-x: hidden
-	color: $text
-
-// Custom Sass / Remove before use
-
+a
+	text-decoration: none 
+	color: $link-color
+	&:hover
+	 	color: $link-color-hover
+li
+	list-style-type: none /* Убираем глобально маркеры */
 .container
 	max-width: $container_max_w
 	padding:
@@ -60,3 +60,38 @@ body
 
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
+
+.center
+	text-align: center
+	 
+body
+	@include font-settings(Roboto, $text-color, $text-size, 300, 1.25)
+	min-width: 320px
+	position: relative
+	overflow-x: hidden
+	color: $text-color
+	background-color: $body-bg
+
+header
+	background-color: $header-bg
+	max-width: $container_max_w 
+	@include push--auto
+	@extend .center
+
+main
+	max-width: $container-max-w
+	@include push--auto
+
+#site-title
+	font-size: 30px
+	 
+#content
+	float: left
+	width: 75%
+	background-color: $content-bg
+
+#main-sidebar
+	float: right
+	width: 25%
+	background-color: $sidebar-bg 
+

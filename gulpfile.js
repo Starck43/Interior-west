@@ -22,8 +22,11 @@ var gulp 		 = require('gulp'),
 
 var path = {
         src: 'src/', // Здесь хранятся исходные данные
-        dest: 'src/wordpress/wp-content/themes/starck-theme/' // Путь до дочерней темы WP. Если название другое, то надо указать тут 
+        dest: 'src/wp-content/themes/starck-theme/' // Путь до дочерней темы WP. 
 	}
+var site = {
+		http: 'localhost' // здесь нужно указать адрес рабочего сайта, удаленного или локального
+}
 
 gulp.task('message', async function() { // Вывод любой информации в консоль
 	console.log('Console message');
@@ -119,10 +122,9 @@ gulp.task('img', function() {
 });
 
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
-    browserSync({ // Выполняем browser Sync
-        server: { // Определяем параметры сервера
-            baseDir: path.src // Директория для сервера - "src"
-        },
+    browserSync({ // Определяем параметры сервера.
+        //server: { baseDir: path.src },  // Нельзя подключать одновремено с proxy
+		proxy: site.http,
         notify: false, // Отключаем уведомления
         online: false, // Work offline without internet connection
         // tunnel: true, tunnel: 'projectname', // Demonstration page: http://projectname.localtunnel.me
