@@ -21,6 +21,7 @@ function mytheme_scripts_add() {
 }
 
 // END ENQUEUE PARENT ACTION
+add_theme_support( 'custom-logo' ); //добавление выбора логотипа через настройки темы
 
 add_action( 'after_setup_theme', 'starck_setup' );
 function starck_setup() {
