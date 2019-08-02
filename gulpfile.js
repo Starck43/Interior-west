@@ -25,7 +25,7 @@ var path = {
         dest: 'src/wp-content/themes/starck-theme/' // Путь до дочерней темы WP. 
 	}
 var site = {
-		http: 'localhost' // здесь нужно указать адрес рабочего сайта, удаленного или локального
+		http: 'start-web.loc' // здесь нужно указать адрес рабочего сайта, удаленного или локального
 }
 
 gulp.task('message', async function() { // Вывод любой информации в консоль
@@ -157,6 +157,6 @@ gulp.task('rsync', function() {
 });
 
 //Дефолтный таск для запуска процессов слежения за изменениями кода. Выполняется командой Gulp без параметров
-gulp.task('default', gulp.parallel('styles', 'scripts', 'vendors-scripts', 'browser-sync', 'watch'));
+gulp.task('default', gulp.parallel('browser-sync', 'watch'));
 
 

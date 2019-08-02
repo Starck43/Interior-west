@@ -62,39 +62,60 @@ li
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
 
-.center
+.content-align-center
 	text-align: center
-	 
+	
+html
+	background-color: darken($body-bg,5%)
+
 body
 	@include font-settings(Roboto, $text-color, $text-size, 300, 1.25)
 	min-width: 320px
+	max-width: $container_max_w 
 	position: relative
 	overflow-x: hidden
 	color: $text-color
 	background-color: $body-bg
+	margin-top: 0
+	margin-bottom: 0
+	@include push--auto
 
-header
+#site-header
+	//@extend .center
 	background-color: $header-bg
-	max-width: $container_max_w 
-	@include push--auto
-	@extend .center
 
-main
-	max-width: $container-max-w
-	@include push--auto
+#main
+	//max-width: $container-max-w
+	//@include push--auto
+	height: 100%
+	min-height: 100vh
+	margin: $grid-gutter-width * 2 $grid-gutter-width
+
+	#content
+		float: left
+		width: 75%
+		background-color: $content-bg
+		padding-right: $grid-gutter-width
+		box-sizing: border-box
+	
 	&-sidebar
+		float: left
+		width: 25%
+		background-color: $sidebar-bg 
 		border: 1px solid $border-color
-
-#site-title
-	font-size: 30px
+		box-sizing: border-box
+		
+#site-footer
+	color: #FFF
+	background-color: $footer-bg
+	padding: $grid-gutter-width / 2
+	
+#site-header
+	padding: $grid-gutter-width / 2
+	line-height: 1
+	#header-title
+		h1
+			font-size: 30px
 	 
-#content
-	float: left
-	width: 75%
-	background-color: $content-bg
 
-#main-sidebar
-	float: right
-	width: 25%
-	background-color: $sidebar-bg 
 

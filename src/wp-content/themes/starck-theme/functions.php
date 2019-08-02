@@ -22,6 +22,9 @@ function mytheme_scripts_add() {
 
 // END ENQUEUE PARENT ACTION
 
+add_action( 'after_setup_theme', 'starck_setup' );
+function starck_setup() {
+load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
 //добавление опции установки логотипа через настройки темы
 add_theme_support( 'custom-logo', array(
 	'height'      => 100,
@@ -30,10 +33,6 @@ add_theme_support( 'custom-logo', array(
 	'flex-width'  => true,
 	'header-text' => array( 'site-title', 'site-description' ),
 ) );
-
-add_action( 'after_setup_theme', 'starck_setup' );
-function starck_setup() {
-load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
 add_theme_support( 'title-tag' );
 add_theme_support( 'automatic-feed-links' );
 add_theme_support( 'post-thumbnails' );

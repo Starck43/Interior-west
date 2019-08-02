@@ -15,7 +15,7 @@ $grid-breakpoints: (xs: 420px, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
 
 // User variables:
 // sizes
-$container_max-w: 800px
+$container_max-w: 1000px
 
 //fonts
 $text-size: 14px
@@ -26,16 +26,18 @@ $H4: 18px
 $H5: 16px
 
 //colors
+$main-color: #69c
 $body-bg: white
 $header-bg: white
+$footer-bg: $main-color
 $content-bg: white
-$sidebar-bg: #ddd
+$sidebar-bg: #fff
 $text-color: #333
 $page-title-color: orange
-$link-color: #69c
+$link-color: $main-color
 $link-color-hover: lighten($link-color, 20%) //darken($link-color, 20%)
-$border-color: #eee
+$border-color: darken($sidebar-bg, 20%)
 $accent: orange
 $main-color: rgba(0, 0, 0, 0.5)
-$opacity-color: opacity($main-color, 0.5)
+$opacity-color: opacify($main-color, 0.5)
 $transparent-color: transparentize($main-color, 0.3)
