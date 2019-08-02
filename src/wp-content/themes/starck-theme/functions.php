@@ -25,18 +25,32 @@ function mytheme_scripts_add() {
 add_action( 'after_setup_theme', 'starck_setup' );
 function starck_setup() {
 load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
+
+//добавление фонового изображения через настройки темы
+add_theme_support( 'custom-background', array(
+	'default-color'          => '',
+	'default-image'          => '',
+	'wp-head-callback'       => '_custom_background_cb',
+	'admin-head-callback'    => '',
+	'admin-preview-callback' => ''
+) );
+
 //добавление опции установки логотипа через настройки темы
 add_theme_support( 'custom-logo', array(
 	'height'      => 100,
 	'width'       => 400,
 	'flex-height' => true,
 	'flex-width'  => true,
-	'header-text' => array( 'site-title', 'site-description' ),
+	'uploads' 	  => true,
+	'default-image' => get_template_directory_uri() . '/img/logo.png
+	//'header-text' => array( 'site-title', 'site-description' ),
 ) );
+
 add_theme_support( 'title-tag' );
 add_theme_support( 'automatic-feed-links' );
 add_theme_support( 'post-thumbnails' );
 add_theme_support( 'html5', array( 'search-form' ) );
+
 global $content_width;
 if ( ! isset( $content_width ) ) { $content_width = 1920; }
 register_nav_menus( array( 'main-menu' => esc_html__( 'Main Menu', 'starck' ) ) );
