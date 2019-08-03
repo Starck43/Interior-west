@@ -40,6 +40,7 @@
 	<li><b>npm i</b> - установить плагины в node_modules для нового проекта (запускать в корне проекта через консоль с предустановленным Node.js и глобальным Gulp</li>
 	<li><b>node wp-install</b> - развернуть WordPress</li>
 	<li><b>gulp [default(по умол.)|styles|vendors-styles|scripts|vendors-scripts|css-compress|browser-sync|watch|rsync]</b> - запуск Gulp</li>
+	<li>Создать БД в phpMyAdmin с названием wordpress и создать нового пользователя со своим именем и паролем (по умол: admin/admin). Разрешить все права на управление базой wordpress</li>
 </ol>
 
 <pre>В папке src/wp-content/themes созданы две темы: 

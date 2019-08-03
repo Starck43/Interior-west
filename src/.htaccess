@@ -4,6 +4,12 @@
     Deny from all
 </Files>
 
+# Защита wp-config.php
+<Files wp-config.php>
+ Order Allow,Deny
+ Deny from all
+</Files>
+
 <ifModule mod_expires.c>
 
 # Add correct content-type for fonts & SVG
