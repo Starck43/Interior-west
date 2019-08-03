@@ -17,7 +17,7 @@ var gulp 		 = require('gulp'),
     rename       = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
     imagemin     = require('imagemin'), // Подключаем библиотеку для работы с изображениями
     imgCompress  = require('imagemin-jpeg-recompress'), // Подключаем библиотеку для работы с изображениями
-    pngquant     = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
+    //pngquant     = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
     autoprefixer = require('gulp-autoprefixer');// Подключаем библиотеку для автоматического добавления префиксов
 
 var path = {
@@ -25,7 +25,7 @@ var path = {
         dest: 'src/wp-content/themes/starck-theme/' // Путь до дочерней темы WP. 
 	}
 var site = {
-		http: 'start-web.loc' // здесь нужно указать адрес рабочего сайта, удаленного или локального
+		http: 'start-web' // здесь нужно указать адрес рабочего сайта, удаленного или локального
 }
 
 gulp.task('message', async function() { // Вывод любой информации в консоль
