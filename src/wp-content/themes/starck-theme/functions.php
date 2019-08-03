@@ -1,6 +1,6 @@
 <?php
 
-//echo get_home_url( null, 'wp-admin/', 'https' ); //Example.com: https://example.com/wp-admin/
+//$home_url = get_home_url( null, 'wp-admin/', 'https' ); //Example.com: https://example.com/wp-admin/
 $home_url = get_stylesheet_directory_uri(); // for theme-child URL //get_home_url();
 $main_css_file = '/main.min.css';
 if ( !file_exists( $home_url . '/css' . $main_css_file )) $main_css_file = '/main.css';
@@ -24,36 +24,43 @@ function mytheme_scripts_add() {
 
 add_action( 'after_setup_theme', 'starck_setup' );
 function starck_setup() {
-load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
+	load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
 
-//добавление фонового изображения через настройки темы
-add_theme_support( 'custom-background', array(
-	'default-color'          => '',
-	'default-image'          => '',
-	'wp-head-callback'       => '_custom_background_cb',
-	'admin-head-callback'    => '',
-	'admin-preview-callback' => ''
-) );
+	//добавление фонового изображения через настройки темы
+	add_theme_support( 'custom-background', array(
+		'default-color'          => '',
+		'default-image'          => '',
+		'wp-head-callback'       => '_custom_background_cb',
+		'admin-head-callback'    => '',
+		'admin-preview-callback' => ''
+	) );
 
-//добавление опции установки логотипа через настройки темы
-add_theme_support( 'custom-logo', array(
-	'height'      => 100,
-	'width'       => 400,
-	'flex-height' => true,
-	'flex-width'  => true,
-	'uploads' 	  => true,
-	'default-image' => get_template_directory_uri() . '/img/logo.png
-	//'header-text' => array( 'site-title', 'site-description' ),
-) );
+	add_theme_support( 'custom-header', array(
+		'width'         => 1100,
+		'height'        => 600,
+		'uploads'       => true,
+		//'default-image' => $home_url . '/img/header.jpg',
+	) );
 
-add_theme_support( 'title-tag' );
-add_theme_support( 'automatic-feed-links' );
-add_theme_support( 'post-thumbnails' );
-add_theme_support( 'html5', array( 'search-form' ) );
+	//добавление опции установки логотипа через настройки темы
+	add_theme_support( 'custom-logo', array(
+		'width'       => 400,
+		'height'      => 120,
+		'flex-width'  => true,
+		'flex-height' => true,
+		'uploads' 	  => true,
+		'default-image' => $home_url . '/img/logo.png',
+		'header-text' => array( 'site-title', 'site-description' )
+	) );
 
-global $content_width;
-if ( ! isset( $content_width ) ) { $content_width = 1920; }
-register_nav_menus( array( 'main-menu' => esc_html__( 'Main Menu', 'starck' ) ) );
+	add_theme_support( 'title-tag' );
+	add_theme_support( 'automatic-feed-links' );
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'html5', array( 'search-form' ) );
+
+	global $content_width;
+	if ( ! isset( $content_width ) ) { $content_width = 1920; }
+	register_nav_menus( array( 'main-menu' => esc_html__( 'Main Menu', 'starck' ) ) );
 }
 
 add_action( 'wp_footer', 'starck_footer_scripts' );
