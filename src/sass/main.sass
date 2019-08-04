@@ -76,12 +76,13 @@ body
 	@include font-settings(Roboto, $text-color, $text-size, 300, 1.25)
 	min-width: 320px
 	position: relative
-	margin:
-		top: 0
-		bottom: 0
+	margin: 0
 	color: $text-color
 	background-color: $body-bg
 	overflow-x: hidden
+	&.no-sidebar
+		#content
+			width: 100%
 
 #container
 	max-width: $container_max_w 
@@ -122,18 +123,21 @@ body
 	//@include push--auto
 	height: 100%
 	min-height: 100vh
-	margin: $grid-gutter-width * 2 $grid-gutter-width
-
+	padding: $grid-gutter-width * 2 $grid-gutter-width
+	background-color: $content-bg
+	
 	#content
 		float: left
 		width: 75%
 		background-color: $content-bg
-		padding-right: $grid-gutter-width
+		padding: 0 $grid-gutter-width
 		box-sizing: border-box
+		&.right-content
+			float: right
 	
 	&-sidebar
-		float: left
 		width: 25%
+		float: left
 		background-color: $sidebar-bg 
 		border: 1px solid $border-color
 		box-sizing: border-box

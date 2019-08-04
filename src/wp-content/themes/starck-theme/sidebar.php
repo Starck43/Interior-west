@@ -1,11 +1,13 @@
-<aside id="main-sidebar">
+<aside id="main-sidebar" <?php starck_add_classes( 'sidebar' ); ?>>
 
-<?php if ( is_active_sidebar( 'primary-widget-area' ) ) : ?>
 <div id="primary" class="widget-area">
-<section class="widget-element">
-<?php dynamic_sidebar( 'primary-widget-area' ); ?>
-</section>
+	<section class="widget-element">
+		<?php 
+		if ( ! dynamic_sidebar( 'right-sidebar' ) ) { //Если сайдбар отмечен в настройках темы и виджетов пока нет, то вывести для примера произвольные виджеты
+			add_default_sidebar_widget( 'right-sidebar' );
+		}
+		?>
+	</section>
 </div>
-<?php endif; ?>
 
 </aside>

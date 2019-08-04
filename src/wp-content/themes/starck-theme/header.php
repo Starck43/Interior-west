@@ -4,12 +4,12 @@
 	<meta charset="<?php esc_attr( bloginfo( 'charset' ) ); ?>" />
 	<meta name="description" content="Starter web template for Wordpress">
 	<meta name="viewport" content="width=device-width" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="icon" href="img/favicon.png">
 	<?php wp_head(); ?>
 </head>
+
 <body <?php body_class(); ?>>
-<!-- container -->
-<div id="container">
 
 	<header id="site-header">
 
@@ -47,3 +47,6 @@
 		</nav>
 
 	</header>
+	<!-- container -->
+	<div id="container">
+

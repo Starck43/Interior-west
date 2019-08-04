@@ -2,31 +2,31 @@
 
 <main id="main">
 
-<div id="content" role="main">
+	<section id="content" <?php starck_add_classes( 'content' ); ?> role="main">
 
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-<header class="header">
-<h1 class="entry-title"><?php the_title(); ?></h1> <?php edit_post_link(); ?>
-</header>
+				<header class="header">
+					<h1 class="entry-title"><?php the_title(); ?></h1> <?php edit_post_link(); ?>
+				</header>
 
-<div class="entry-content">
-<?php if ( has_post_thumbnail() ) { the_post_thumbnail(); } ?>
-<?php the_content(); ?>
-<div class="entry-links"><?php wp_link_pages(); ?></div>
-</div>
+				<div class="entry-content">
+					<?php if ( has_post_thumbnail() ) { the_post_thumbnail(); } ?>
+					<?php the_content(); ?>
+					<div class="entry-links"><?php wp_link_pages(); ?></div>
+				</div>
 
-</article>
+			</article>
 
-<?php if ( comments_open() && ! post_password_required() ) { comments_template( '', true ); } ?>
+			<?php if ( comments_open() && ! post_password_required() ) { comments_template( '', true ); } ?>
 
-<?php endwhile; endif; ?>
+		<?php endwhile; endif; ?>
 
-</div>
+	</section>
 
-<?php get_sidebar(); ?>
+	<?php get_starck_sidebar(); ?>
 
 </main>
 

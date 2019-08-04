@@ -2,28 +2,28 @@
 
 <main id="main">
 
-<div id="content" role="main">
+	<section id="content" <?php starck_add_classes( 'content' ); ?> role="main">
 
-<article id="post-0" class="post not-found">
+		<article id="post-0" class="post not-found">
 
-<header class="entry-header">
-<h1 class="entry-title"><?php esc_html_e( 'Not Found', 'starck' ); ?></h1>
-</header>
+			<header class="entry-header">
+				<h1 class="entry-title"><?php esc_html_e( 'Not Found', 'starck' ); ?></h1>
+			</header>
 
-<div class="entry-content">
-<p><?php esc_html_e( 'Nothing found for the requested page. Try a search instead?', 'starck' ); ?></p>
-<?php get_search_form(); ?>
-</div>
+			<div class="entry-content">
+				<p><?php esc_html_e( 'Nothing found for the requested page. Try a search instead?', 'starck' ); ?></p>
+				<?php get_search_form(); ?>
+			</div>
 
-</article>
+		</article>
 
-<div class="goto-back">
-<a href = "#" <?php echo 'onclick="javascript:history.back(); return false;"'?>><span class="fa fa-angle-left"></span><?php esc_html_e( 'Go back', 'starck' ); ?></a>
-</div>
+		<div class="goto-back">
+			<a href = "#" <?php echo 'onclick="javascript:history.back(); return false;"'?>><span class="fa fa-angle-left"></span><?php esc_html_e( 'Go back', 'starck' ); ?></a>
+		</div>
 
-</div>
+	</section>
 
-<?php get_sidebar(); ?>
+	<?php get_starck_sidebar(); ?>
 
 </main>
 
