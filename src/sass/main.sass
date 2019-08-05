@@ -8,6 +8,12 @@
 
 //@for $h from 1 to 5
 
+//добавляется командой @extend %align-{center|left|right} для позиционирования элементов в блоке
+@each $align in left, center, right
+	%align-#{$align}
+		text-align: #{$align}
+	
+
 ::placeholder
 	color: #666
 
@@ -33,8 +39,8 @@ li
 .container
 	max-width: $container_max_w
 	padding:
-		right: $gutter/2
-		left: $gutter/2
+		right: $gutter-20/2
+		left: $gutter-20/2
 	margin:
 		left: auto
 		right: auto
@@ -50,7 +56,7 @@ li
 	
 .grid
 	display: grid
-	grid-gap: $gutter
+	grid-gap: $gutter-20
 	grid-template-columns: 1fr 1fr
 	grid-template-areas: "left right"
 	> div:first-child
@@ -60,16 +66,11 @@ li
 	+media-breakpoint-down(xs)
 		display: block
 		> div
-			padding: $gutter/2 0
+			padding: $gutter-20/2 0
 
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
 
-//добавляется командой @extend %align-{center|left|right} для позиционирования элементов в блоке
-@each $align in left, center, right
-	%align-#{$align}
-		text-align: #{$align}
-	
 html
 	background-color: darken($body-bg,5%)
 
@@ -78,64 +79,76 @@ body
 	min-width: 320px
 	position: relative
 	margin: 0
-	color: $text-color
+	//color: $text-color
 	background-color: $body-bg
 	overflow-x: hidden
 	
 header 
-#site-header
-
+	background-color: #eee //$header-bg
+	padding:
+		top: $gutter-20/2
+	margin:
+		bottom: $gutter-20/2
+	 
 	#site-header
+		display: flex
 		float: left		
-		@extend %align-center
+		margin-bottom: $gutter-20/2
+		text-align: center
 		
 		.custom-logo
 			max-width: 200px
 			
-		#header
+		.site
 			&-logo
 				float: left
+				margin: auto $gutter-20/2
 			&-title
 				float: left
-				margin: 0 20px
-				line-height: 1.3
+				margin: auto $gutter-20/2
+
 				h1
 					font-size: 30px		
 					margin: 0
-						
+
 	#site-search
 		float: right
+		margin: 0 $gutter-20/2
 		
 	#site-menu
 		clear: both
-		@extend %align-right
-			
-		background-color: $header-bg
-		border: 
-			bottom: 1px solid $main-color
+		text-align: right
+		background-color: $site-menu-bg
+		ul
+			li
+				padding: $gutter-20/2 $gutter-20 
+		
+		a
+			color: $menu-link-color 
+
 
 
 		
 main
 	@include push--auto
-	background-color: $main-bg
 
 	#main-header
-		padding: 20px 0
+		padding: $gutter-20 0
 		display: none //если нет контента
 
 	#container
 		height: 100%
 		max-width: $container_max_w 
 		min-height: 100vh
-		padding: $grid-gutter-width * 2 $grid-gutter-width
+		padding: $gutter-20 * 2 $gutter-20
 		@include push--auto
+		background-color: $main-bg
 		
 		#content
 			float: left
 			width: 75%
+			padding: 0 $gutter-20
 			background-color: $content-bg
-			padding: 0 $grid-gutter-width
 			box-sizing: border-box
 			
 			&.right-position
@@ -147,6 +160,7 @@ main
 		#main-sidebar
 			width: 25%
 			float: left
+			padding: $gutter-20/2
 			background-color: $sidebar-bg 
 			border: 1px solid $border-color
 			box-sizing: border-box
@@ -155,7 +169,7 @@ main
 footer
 	color: #FFF
 	background-color: $footer-bg
-	padding: $grid-gutter-width / 2
+	padding:  $gutter-20 / 2
 	
 	 
 

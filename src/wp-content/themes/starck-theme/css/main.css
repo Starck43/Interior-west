@@ -106,11 +106,11 @@ input:required:valid, textarea:required:valid {
 a {
   text-decoration: none;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.1);
+  color: #69c;
 }
 
 a:hover {
-  color: rgba(51, 51, 51, 0.1);
+  color: #b3cce6;
 }
 
 li {
@@ -133,6 +133,7 @@ li {
 
 .img {
   width: 100%;
+  height: auto;
 }
 
 .grid {
@@ -169,20 +170,8 @@ li {
   background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7);
 }
 
-.content-left {
-  text-align: left;
-}
-
-.content-center {
-  text-align: center;
-}
-
-.content-right {
-  text-align: right;
-}
-
 html {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(83, 140, 198, 0.1);
 }
 
 body {
@@ -194,102 +183,112 @@ body {
   min-width: 320px;
   position: relative;
   margin: 0;
-  color: #333;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(102, 153, 204, 0.1);
   overflow-x: hidden;
 }
 
-body.no-sidebar #content {
-  width: 100%;
+header {
+  background-color: #eee;
+  padding-top: 10px;
+  margin-bottom: 10px;
 }
 
-#container {
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: transparent;
-}
-
-#site-header {
-  background-color: white;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-#site-header #search {
-  float: right;
-}
-
-#site-header #site-menu {
-  text-align: right;
-  clear: both;
-}
-
-#site-header-container {
+header #site-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   float: left;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-#site-header img {
-  height: auto;
-}
-
-#site-header .custom-logo {
+header #site-header .custom-logo {
   max-width: 200px;
 }
 
-#site-header #header-logo {
+header #site-header .site-logo {
   float: left;
+  margin: auto 10px;
 }
 
-#site-header #header-title {
+header #site-header .site-title {
   float: left;
-  margin: 0 20px;
-  line-height: 1.3;
+  margin: auto 10px;
 }
 
-#site-header #header-title h1 {
+header #site-header .site-title h1 {
+  font-size: 30px;
   margin: 0;
 }
 
-#main {
+header #site-search {
+  float: right;
+  margin: 0 10px;
+}
+
+header #site-menu {
+  clear: both;
+  text-align: right;
+  background-color: #69c;
+}
+
+header #site-menu ul li {
+  padding: 10px 20px;
+}
+
+header #site-menu a {
+  color: white;
+}
+
+main {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main #main-header {
+  padding: 20px 0;
+  display: none;
+}
+
+main #container {
   height: 100%;
+  max-width: 1000px;
   min-height: 100vh;
   padding: 40px 20px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: white;
 }
 
-#main #content {
+main #container #content {
   float: left;
   width: 75%;
-  background-color: white;
   padding: 0 20px;
+  background-color: #cccccc;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-#main #content.right-content {
+main #container #content.right-position {
   float: right;
 }
 
-#main-sidebar {
+main #container #content.full-width {
+  width: 100%;
+}
+
+main #container #main-sidebar {
   width: 25%;
   float: left;
-  background-color: #fff;
-  border: 1px solid #cccccc;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid rgba(102, 153, 204, 0.1);
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-#site-footer {
+footer {
   color: #FFF;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #69c;
   padding: 10px;
-}
-
-#site-header {
-  padding: 10px;
-  line-height: 1;
-}
-
-#site-header #header-title h1 {
-  font-size: 30px;
 }

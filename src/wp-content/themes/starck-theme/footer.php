@@ -1,7 +1,8 @@
-	</div>
+		</div>
 	<!-- end container -->
-	
-	<footer id="site-footer">
+	</main>
+	<!-- end main -->
+	<footer id="site-footer"  <?php starck_add_classes('footer'); ?> >
 
 		<?php wp_footer(); ?>
 

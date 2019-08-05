@@ -1,12 +1,10 @@
 /*
-* The template for displaying Search Results
-*
-* @author: S.Shabalin
-*/
+ * The template for displaying search results
+ *
+ * @author: S.Shabalin
+ */
 
 <?php get_header(); ?>
-
-<main id="main">
 
 	<section id="content" class="search" role="main">
 
@@ -15,7 +13,7 @@
 			<section class="post search-result found">
 
 				<header class="search-header">
-					<h1 class="entry-title"><?php printf( esc_html__( 'Search Results for: %s', 'starck' ), get_search_query() ); ?></h1>
+					<h1 class="search-title"><?php printf( esc_html__( 'Search Results for: %s', 'starck' ), get_search_query() ); ?></h1>
 				</header>
 
 				<?php while ( have_posts() ) : the_post(); ?>
@@ -28,10 +26,10 @@
 
 		<?php else : ?>
 
-			<section id="post-0" class="post no-results not-found">
+			<section class="post-0 no-result not-found">
 
 				<header class="search-header">
-					<h1 class="entry-title"><?php esc_html_e( 'Nothing Found', 'starck' ); ?></h1>
+					<h1 class="search-title"><?php esc_html_e( 'Nothing Found', 'starck' ); ?></h1>
 				</header>
 
 				<div class="entry-content">
@@ -50,7 +48,5 @@
 	</section>
 
 	<?php get_starck_sidebar(); ?>
-
-</main>
 
 <?php get_footer(); ?>

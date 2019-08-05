@@ -11,9 +11,16 @@
 
 <body <?php body_class(); ?>>
 
-	<header id="site-header">
-
-		<section id="site-header-container">
+	<header id="header"  <?php starck_add_classes('header'); ?>>
+		<?php
+		$custom_header = get_custom_header();
+		if ( ! empty( $custom_header->attachment_id ) ) {
+			?>
+			<img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
+			<?php
+		}
+		?>
+		<section id="site-header">
 			<?php
 			$custom_logo_id = get_theme_mod( 'custom_logo' );
 			if ( $custom_logo_id ) {
@@ -33,20 +40,17 @@
 				<div class="site-description"><?php bloginfo( 'description' ); ?></div>
 			</div>
 		</section>
-		<?php
-		$custom_header = get_custom_header();
-		if ( ! empty( $custom_header->attachment_id ) ) {
-		?>
-		<img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
-		<?php
-		}
-		?>
-		<div id="search"><?php get_search_form(); ?></div>
+		
+		<div id="site-search"><?php get_search_form(); ?></div>
 		<nav id="site-menu">
 			<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
 		</nav>
 
 	</header>
-	<!-- container -->
-	<div id="container">
+	<!-- main -->
+	<main id="main" <?php starck_add_classes('main'); ?> >
 
+		<header id="main-header">
+		</header>
+		<!-- container -->
+		<div id="container" <?php starck_add_classes( 'container' ); ?> >

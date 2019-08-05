@@ -1,10 +1,8 @@
 <?php get_header(); ?>
 
-<main id="main">
-
 	<section id="content" <?php starck_add_classes( 'content','tags' ); ?> role="main">
 
-		<header class="header">
+		<header class="entry-header">
 
 			<h1 class="entry-title"><?php single_term_title(); ?></h1>
 			<div class="archive-meta">
@@ -22,7 +20,5 @@
 	</section>
 
 	<?php get_starck_sidebar(); ?>
-
-</main>
 
 <?php get_footer(); ?>

@@ -172,14 +172,15 @@ if ( ! function_exists( 'starck_content_classes' ) ) {
 			switch ( $sidebar_layout ) {
 
 				case 'right-sidebar' :
-					$classes[] = 'left-content';
+					$classes[] = 'left-position';
 				break;
 
 				case 'left-sidebar' :
-					$classes[] = 'right-content';
+					$classes[] = 'right-position';
 				break;
 
 				case 'no-sidebar' :
+					$classes[] = 'full-width';
 				break;
 
 			}
