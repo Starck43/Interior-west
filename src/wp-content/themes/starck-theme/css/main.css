@@ -131,7 +131,7 @@ li {
   height: auto;
 }
 
-.img {
+img {
   width: 100%;
   height: auto;
 }
@@ -187,60 +187,81 @@ body {
   overflow-x: hidden;
 }
 
-header {
+#header {
+  display: table;
+  width: 100%;
   background-color: #eee;
   padding-top: 10px;
-  margin-bottom: 10px;
 }
 
-header #site-header {
+#header #site-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   float: left;
-  margin-bottom: 10px;
   text-align: center;
 }
 
-header #site-header .custom-logo {
+#header #site-header a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#header #site-header .custom-logo {
   max-width: 200px;
 }
 
-header #site-header .site-logo {
+#header #site-header .site-logo {
   float: left;
   margin: auto 10px;
 }
 
-header #site-header .site-title {
+#header #site-header .site-title {
   float: left;
   margin: auto 10px;
 }
 
-header #site-header .site-title h1 {
+#header #site-header .site-title h1 {
   font-size: 30px;
+  line-height: 100%;
   margin: 0;
 }
 
-header #site-search {
-  float: right;
-  margin: 0 10px;
+#header #site-header .site-title h1 a:hover {
+  color: #69c;
 }
 
-header #site-menu {
-  clear: both;
-  text-align: right;
+#header #site-search {
+  display: table-cell;
+  float: right;
+  margin: 0 10px 10px;
+}
+
+#header #site-menu {
+  display: table-cell;
+  clear: right;
+  float: right;
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
   background-color: #69c;
 }
 
-header #site-menu ul li {
-  padding: 10px 20px;
+#header #site-menu ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
-header #site-menu a {
+#header #site-menu ul li a {
+  display: block;
+  padding: 10px 20px;
   color: white;
 }
 
 main {
+  clear: both;
   margin-left: auto;
   margin-right: auto;
 }

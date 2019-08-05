@@ -13,10 +13,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Display HTML classes for an element.
  *
  * @param string $context The element we're targeting.
- * @param string|array $class One or more classes to add to the class list.
+ * @param string|array $merged_class One or more classes to add to the class list.
  */
-function starck_add_classes( $context, $class = '' ) {
-	echo 'class="' . join( ' ', starck_get_element_classes( $context, $class ) ) . '"'; // WPCS: XSS ok, sanitization ok.
+function starck_add_classes( $context, $merged_class = '' ) {
+	//echo 'class="' . join( ' ', starck_get_element_classes( $context, $merged_class ) ) . '"';
+	$classes = apply_filters( "starck_context_classes", $context, $merged_class );
+	if ($classes) { echo 'class="' . join( ' ', $classes ) . '"'; };
 }
 
 /**
@@ -26,22 +28,27 @@ function starck_add_classes( $context, $class = '' ) {
  * @param string|array $class One or more classes to add to the class list.
  * @return array Array of classes.
  */
-function starck_get_element_classes( $context, $class = '' ) {
+function starck_get_element_classes( $context, $merged_class = '' ) {
 	$classes = array();
 
-	if ( ! empty( $class ) ) {
-		if ( ! is_array( $class ) ) {
-			$class = preg_split( '#\s+#', $class );
+	if ( ! empty( $merged_class ) ) {
+		if ( ! is_array( $merged_class ) ) {
+			$merged_class = preg_split( '#\s+#', $merged_class );
 		}
 		// Соединяем классы, если есть второй параметр
-		$classes = array_merge( $classes, $class );
+		$classes = array_merge( $classes, $merged_class );
 	}
 
 	$classes = array_map( 'esc_attr', $classes );
 
-	return apply_filters( "starck_{$context}_class", $classes, $class );
+	return apply_filters( "starck_{$context}_class", $classes, $merged_class );
 }
 
+function starck_get_classes( $context, $merged_class = '' ) {
+	
+	return apply_filters( "starck_context_classes", $context, $merged_class );
+	
+}
 
 if ( ! function_exists( 'starck_body_classes' ) ) {
 	add_filter( 'body_class', 'starck_body_classes' );
@@ -109,6 +116,71 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 				$classes[] = 'featured-image-active';
 			}
 		}
+
+		return $classes;
+	}
+}
+
+if ( ! function_exists( 'starck_get_context_classes' ) ) {
+	add_filter( 'starck_context_classes', 'starck_get_context_classes', 10, 2 );
+	/**
+	 * Adds custom classes to the context
+	 */
+	function starck_get_context_classes( $context, $merged_class ) {
+
+		$classes = array();
+
+		if ( ! empty( $merged_class ) ) {
+			if ( ! is_array( $merged_class ) ) {
+				$merged_class = preg_split( '#\s+#', $merged_class );
+			}
+			// Соединяем классы, если есть второй параметр
+			$classes = array_merge( $classes, $merged_class );
+		}
+
+		//$classes = array_map( 'esc_attr', $classes );
+		
+		if ('main' == $context) {
+			
+			//$classes[] = starck_get_option['container_width'];
+			//var_dump($content_width);
+		}
+		
+		if ('sidebar' == $context) {
+				
+			// Get the layout sidebar
+			$sidebar_layout = starck_get_layout();
+
+			$classes[] = $sidebar_layout;
+			//$classes[] = 'widget-area';
+		}
+		
+		if ('content' == $context) {
+			
+			$classes[] = 'content';
+
+			// Get the layout
+			$sidebar_layout = starck_get_layout();
+
+			if ( '' !== $sidebar_layout ) {
+				switch ( $sidebar_layout ) {
+
+					case 'right-sidebar' :
+						$classes[] = 'left-position';
+					break;
+
+					case 'left-sidebar' :
+						$classes[] = 'right-position';
+					break;
+
+					case 'no-sidebar' :
+						$classes[] = 'full-width';
+					break;
+
+				}
+			}
+		}
+
 
 		return $classes;
 	}

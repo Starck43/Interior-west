@@ -48,9 +48,9 @@
 
 	</header>
 	<!-- main -->
-	<main id="main" <?php starck_add_classes('main'); ?> >
+	<main id="main" <?php starck_add_classes('main'); ?> role="main">
 
 		<header id="main-header">
 		</header>
 		<!-- container -->
-		<div id="container" <?php starck_add_classes( 'container' ); ?> >
+		<div id="container" <?php starck_add_classes( 'container' ); ?>>

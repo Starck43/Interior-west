@@ -233,6 +233,14 @@ if ( ! function_exists( 'starck_widgets_init' ) ) {
 	}
 }
 
+//Theme functions
+
+require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/defaults.php';
+require get_template_directory() . '/inc/markup.php';
+require get_template_directory() . '/inc/deprecated.php'; //????? Нужен ли
+
+
 if ( ! function_exists( 'starck_content_width' ) ) {
 	add_action( 'wp', 'starck_content_width' );
 	/**
@@ -255,13 +263,6 @@ if ( ! function_exists( 'starck_content_width' ) ) {
 	}
 }
 
-
-//Theme functions
-
-require get_template_directory() . '/inc/customizer.php';
-require get_template_directory() . '/inc/defaults.php';
-require get_template_directory() . '/inc/markup.php';
-require get_template_directory() . '/inc/deprecated.php'; //????? Нужен ли
 
 function starck_get_option( $option ) {
 	$defaults = starck_get_defaults();

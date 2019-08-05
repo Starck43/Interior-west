@@ -50,7 +50,7 @@ li
 	max-width: 100%
 	height: auto
 	
-.img
+img
 	width: 100%
 	height: auto
 	
@@ -83,19 +83,21 @@ body
 	background-color: $body-bg
 	overflow-x: hidden
 	
-header 
+#header
+	display: table
+	width: 100%
 	background-color: #eee //$header-bg
 	padding:
 		top: $gutter-20/2
-	margin:
-		bottom: $gutter-20/2
+		//bottom: $gutter-20/2
 	 
 	#site-header
 		display: flex
 		float: left		
-		margin-bottom: $gutter-20/2
 		text-align: center
-		
+		a
+			display: flex
+			
 		.custom-logo
 			max-width: 200px
 			
@@ -108,28 +110,43 @@ header
 				margin: auto $gutter-20/2
 
 				h1
-					font-size: 30px		
+					font-size: 30px
+					line-height: 100% 		
 					margin: 0
+					a
+						&:hover
+	 						color: $link-color
+
 
 	#site-search
+		display: table-cell
 		float: right
-		margin: 0 $gutter-20/2
+		margin: 0 $gutter-20/2 $gutter-20/2
 		
 	#site-menu
-		clear: both
-		text-align: right
+		display: table-cell
+		clear: right
+		float: right
+		width: 100%
+		margin-top: $gutter-20/2 
+		text-align: center
 		background-color: $site-menu-bg
 		ul
+			display: inline-block
+			margin: 0
+			padding: 0
+			
 			li
-				padding: $gutter-20/2 $gutter-20 
-		
-		a
-			color: $menu-link-color 
+				a
+					display: block
+					padding: $gutter-20/2 $gutter-20
+					color: $menu-link-color
 
 
 
 		
 main
+	clear: both
 	@include push--auto
 
 	#main-header
