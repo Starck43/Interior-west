@@ -46,7 +46,8 @@ li
 	
 .img
 	width: 100%
-
+	height: auto
+	
 .grid
 	display: grid
 	grid-gap: $gutter
@@ -64,9 +65,9 @@ li
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
 
-//класс .content-center/left/right для позиционирования элементов в блоке
+//добавляется командой @extend %align-{center|left|right} для позиционирования элементов в блоке
 @each $align in left, center, right
-	.content-#{$align}
+	%align-#{$align}
 		text-align: #{$align}
 	
 html
@@ -80,79 +81,82 @@ body
 	color: $text-color
 	background-color: $body-bg
 	overflow-x: hidden
-	&.no-sidebar
-		#content
-			width: 100%
-
-#container
-	max-width: $container_max_w 
-	@include push--auto
-	background-color: transparent
-	 
+	
+header 
 #site-header
-	//@extend .center
-	#search
-		float: right
-	#site-menu
-		text-align: right
-		clear: both
-		
-	background-color: $header-bg
-	border: 
-		bottom: 1px solid $main-color
-	&-container
-		float: left
-	img
-		height: auto
-	.custom-logo
-		max-width: 200px
-		
-	#header
-		&-logo
-			float: left
-		&-title
-			float: left
-			margin: 0 20px
-			line-height: 1.3
-			h1
-				margin: 0
-		
 
-#main
-	//max-width: $container-max-w
-	//@include push--auto
-	height: 100%
-	min-height: 100vh
-	padding: $grid-gutter-width * 2 $grid-gutter-width
-	background-color: $content-bg
-	
-	#content
-		float: left
-		width: 75%
-		background-color: $content-bg
-		padding: 0 $grid-gutter-width
-		box-sizing: border-box
-		&.right-content
-			float: right
-	
-	&-sidebar
-		width: 25%
-		float: left
-		background-color: $sidebar-bg 
-		border: 1px solid $border-color
-		box-sizing: border-box
+	#site-header
+		float: left		
+		@extend %align-center
 		
-#site-footer
+		.custom-logo
+			max-width: 200px
+			
+		#header
+			&-logo
+				float: left
+			&-title
+				float: left
+				margin: 0 20px
+				line-height: 1.3
+				h1
+					font-size: 30px		
+					margin: 0
+						
+	#site-search
+		float: right
+		
+	#site-menu
+		clear: both
+		@extend %align-right
+			
+		background-color: $header-bg
+		border: 
+			bottom: 1px solid $main-color
+
+
+		
+main
+	@include push--auto
+	background-color: $main-bg
+
+	#main-header
+		padding: 20px 0
+		display: none //если нет контента
+
+	#container
+		height: 100%
+		max-width: $container_max_w 
+		min-height: 100vh
+		padding: $grid-gutter-width * 2 $grid-gutter-width
+		@include push--auto
+		
+		#content
+			float: left
+			width: 75%
+			background-color: $content-bg
+			padding: 0 $grid-gutter-width
+			box-sizing: border-box
+			
+			&.right-position
+				float: right
+				
+			&.full-width
+				width: 100%
+		
+		#main-sidebar
+			width: 25%
+			float: left
+			background-color: $sidebar-bg 
+			border: 1px solid $border-color
+			box-sizing: border-box
+
+				
+footer
 	color: #FFF
 	background-color: $footer-bg
 	padding: $grid-gutter-width / 2
 	
-#site-header
-	padding: $grid-gutter-width / 2
-	line-height: 1
-	#header-title
-		h1
-			font-size: 30px
 	 
 
 

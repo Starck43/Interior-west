@@ -26,18 +26,19 @@ $H4: 18px
 $H5: 16px
 
 //colors
-$main-color: rgba(0, 0, 0, 0.1)
-$body-bg: $main-color
-$header-bg: white
-$footer-bg: $main-color
-$content-bg: white
-$sidebar-bg: #fff
+$theme-color: #69c
+$body-bg: rgba($theme-color, 0.1)
+$main-bg: white
+$header-bg: $theme-color
+$content-bg: darken(white, 20%)
+$sidebar-bg: $main-bg
+$footer-bg: $theme-color
 $text-color: #333
 $page-title-color: orange
-$link-color: $main-color
+$link-color: $theme-color
 $link-color-hover: lighten($link-color, 20%) //darken($link-color, 20%)
 $border-color: darken($sidebar-bg, 20%)
 $accent: orange
 
-//opacify($main-color, 0.5)
-//transparentize($main-color, 0.3)
+//opacify($theme-color, 0.5)
+//transparentize($theme-color, 0.3)
