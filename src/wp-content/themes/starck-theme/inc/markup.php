@@ -9,17 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-/**
- * Display HTML classes for an element.
- *
- * @param string $context The element we're targeting.
- * @param string|array $merged_class One or more classes to add to the class list.
- */
-function starck_add_classes( $context, $merged_class = '' ) {
-	//echo 'class="' . join( ' ', starck_get_element_classes( $context, $merged_class ) ) . '"';
-	$classes = apply_filters( "starck_get_classes", $context, $merged_class );
-	if ($classes) { echo 'class="' . join( ' ', $classes ) . '"'; };
-}
 
 /**
 
@@ -33,11 +22,33 @@ function starck_merge_classes( $classes, $merged_class = '' ) {
 		// Соединяем классы, если есть второй параметр
 		$classes = array_merge( $classes, $merged_class );
 	}
-
+	// Apply esc_attr() function to array $classes
 	$classes = array_map( 'esc_attr', $classes );
 
-	return $classes;
+	if ($classes) { echo 'class="' . join( ' ', $classes ) . '"'; };
+
 }
+
+
+if ( ! function_exists( 'starck_post_classes' ) ) {
+
+	add_filter( 'post_class', 'starck_post_classes' );
+	/**
+	 * Adds custom classes to the <article> element.
+	 * Remove .hentry class from pages to comply with structural data guidelines.
+	 *
+	 * @since 1.3.39
+	 */
+	function starck_post_classes( $classes ) {
+
+		if ( 'page' == get_post_type() ) {
+			$classes = array_diff( $classes, array( 'hentry' ) );
+		}
+
+		return $classes;
+	}
+}
+
 
 if ( ! function_exists( 'starck_body_classes' ) ) {
 	add_filter( 'body_class', 'starck_body_classes' );
@@ -46,7 +57,8 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 	 
 	 
 	 */
-	function starck_body_classes( $merged_class ) {
+	function starck_body_classes( $classes ) {
+
 		$sidebar_layout 		= starck_get_layout();
 		//$navigation_location 	= starck_get_navigation_location();
 		//$navigation_alignment	= starck_get_option( 'nav_alignment_setting' );
@@ -111,123 +123,52 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 }
 
 
-if ( ! function_exists( 'starck_top_bar_classes' ) ) {
-	add_filter( 'starck_top_bar_class', 'starck_top_bar_classes' );
-	/**
-	 * Adds custom classes to the header.
-	 *
-	 * @since 0.1
-	 */
-	function starck_top_bar_classes( $merged_class ) {
-		$classes[] = 'top-bar';
-
-		if ( 'contained' === starck_get_option( 'top_bar_width' ) ) {
-			$classes[] = 'grid-container';
-			$classes[] = 'grid-parent';
-		}
-
-		$classes[] = 'top-bar-align-' . esc_attr( starck_get_option( 'top_bar_alignment' ) );
-
-		return $classes;
-	}
-}
-
-if ( ! function_exists( 'starck_sidebar_classes' ) ) {
-	add_filter( 'starck_sidebar_class', 'starck_sidebar_classes' );
-	/**
-	 * Adds custom classes to the right sidebar.
-	 */
-	function starck_sidebar_classes( $merged_class ) {
-
-		// Get the layout sidebar
-		$sidebar_layout = starck_get_layout();
-
-		$classes[] = $sidebar_layout;
-		//$classes[] = 'widget-area';
-
-
-
-		return $classes;
-	}
-}
-
-
-if ( ! function_exists( 'starck_content_classes' ) ) {
-	add_filter( 'starck_content_class', 'starck_content_classes' );
-	/**
-	 * Adds custom classes to the content container.
-	 */
-	function starck_content_classes( $merged_class ) {
-
-		$classes[] = 'content';
-
-
-		// Get the layout
-		$sidebar_layout = starck_get_layout();
-
-		if ( '' !== $sidebar_layout ) {
-			switch ( $sidebar_layout ) {
-
-				case 'right-sidebar' :
-					$classes[] = 'left-position';
-				break;
-
-				case 'left-sidebar' :
-					$classes[] = 'right-position';
-				break;
-
-				case 'no-sidebar' :
-					$classes[] = 'full-width';
-				break;
-
-			}
-		}
-
-		return $classes;
-	}
-}
-
 if ( ! function_exists( 'starck_header_classes' ) ) {
-	add_filter( 'starck_header_class', 'starck_header_classes' );
+	add_filter( 'starck_add_header_class', 'starck_header_classes' );
 	/**
 	 * Adds custom classes to the header.
 	 */
 	function starck_header_classes( $merged_class ) {
-		$classes[] = 'site-header';
+		$classes[] = 'header';
 
-		$classes[] = starck_get_option( 'header_layout_setting' );
+		$classes[] = starck_get_option( 'header_bound_setting' );
+		$classes[] = 'align-' . esc_attr( starck_get_option( 'header_alignment' ) );
 
-		return $classes;
+		return starck_merge_classes($classes, $merged_class);
 	}
 }
 
-if ( ! function_exists( 'starck_inside_header_classes' ) ) {
-	add_filter( 'starck_inside_header_class', 'starck_inside_header_classes' );
+
+if ( ! function_exists( 'starck_main_classes' ) ) {
+	add_filter( 'starck_add_main_class', 'starck_main_classes' );
 	/**
-	 * Adds custom classes to inside the header.
+	 * Adds custom classes to the header.
 	 */
-	function starck_inside_header_classes( $merged_class ) {
-		$classes[] = 'inside-header';
+	function starck_main_classes( $merged_class ) {
+		$classes[] = 'main';
 
-		$classes[] = starck_get_option( 'header_inner_width' );
+		$classes[] = starck_get_option( 'main_bound_setting' ); //'bounded', 'wide-full'
+		//$classes[] = starck_get_option( 'header_layout_setting' );
 
-		return $classes;
+		return starck_merge_classes($classes, $merged_class);
 	}
 }
+
 
 if ( ! function_exists( 'starck_navigation_classes' ) ) {
-	add_filter( 'starck_navigation_class', 'starck_navigation_classes' );
+	add_filter( 'starck_add_navigation_class', 'starck_navigation_classes' );
 	/**
 	 * Adds custom classes to the navigation.
 	 
 	 
 	 */
 	function starck_navigation_classes( $merged_class ) {
-		$classes[] = 'main-navigation';
+		$classes[] = 'main-menu';
 
-		$classes[] = starck_get_option( 'nav_layout_setting' );
+		$classes[] = starck_get_option( 'nav_bound_setting' );
+		//$classes[] = starck_get_option( 'nav_layout_setting' );
 
-		if ( 'left' === starck_get_option( 'nav_dropdown_direction' ) ) {
+		if ( 'left' === starck_get_option( 'menu_appearence_direction' ) ) {
 			$nav_layout = starck_get_option( 'nav_position_setting' );
 
 			switch ( $nav_layout ) {
@@ -240,100 +181,59 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 			}
 		}
 
-		return $classes;
+		return starck_merge_classes($classes, $merged_class);
 	}
 }
 
-if ( ! function_exists( 'starck_inside_navigation_classes' ) ) {
-	add_filter( 'starck_inside_navigation_class', 'starck_inside_navigation_classes' );
+
+
+if ( ! function_exists( 'starck_content_classes' ) ) {
+	add_filter( 'starck_add_content_class', 'starck_content_classes' );
 	/**
-	 * Adds custom classes to the inner navigation.
-	 *
-	 * @since 1.3.41
+	 * Adds custom classes to the content container.
 	 */
-	function starck_inside_navigation_classes( $merged_class ) {
-		$classes[] = 'inside-navigation';
+	function starck_content_classes( $merged_class ) {
 
-		if ( 'full-width' !== starck_get_option( 'nav_inner_width' ) ) {
-			$classes[] = 'grid-container';
-			$classes[] = 'grid-parent';
-		}
+		$classes[] = 'main-content';
 
-		return $classes;
+		// Get the sidebar layout
+		$classes[] = starck_get_layout();
+
+		return starck_merge_classes($classes, $merged_class);
 	}
 }
 
-if ( ! function_exists( 'starck_menu_classes' ) ) {
-	add_filter( 'starck_menu_class', 'starck_menu_classes' );
+
+if ( ! function_exists( 'starck_sidebar_classes' ) ) {
+	add_filter( 'starck_add_sidebar_class', 'starck_sidebar_classes' );
 	/**
-	 * Adds custom classes to the menu.
-	 *
-	 * @since 0.1
+	 * Adds custom classes to the right sidebar.
 	 */
-	function starck_menu_classes( $merged_class ) {
-		$classes[] = 'menu';
-		$classes[] = 'sf-menu';
+	function starck_sidebar_classes( $merged_class ) {
+		
+		$classes[] = 'main-sidebar';
 
-		return $classes;
+		return starck_merge_classes($classes, $merged_class);
 	}
 }
+
 
 if ( ! function_exists( 'starck_footer_classes' ) ) {
-	add_filter( 'starck_footer_class', 'starck_footer_classes' );
+	add_filter( 'starck_add_footer_class', 'starck_footer_classes' );
 	/**
 	 * Adds custom classes to the footer.
 	 *
-	 * @since 0.1
 	 */
 	function starck_footer_classes( $merged_class ) {
 		$classes[] = 'site-footer';
 
-		if ( 'contained-footer' === starck_get_option( 'footer_layout_setting' ) ) {
-			$classes[] = 'grid-container';
-			$classes[] = 'grid-parent';
+		$classes[] = starck_get_option( 'footer_bound_setting' );
+		//$classes[] = starck_get_option( 'footer_layout_setting' );
+
+		if ( '1' === starck_get_option( 'footer_widget_setting' ) ) {
+			$classes[] = 'align-' . esc_attr( starck_get_option( 'footer_alignment' ) );
 		}
 
-		if ( is_active_sidebar( 'footer-bar' ) ) {
-			$classes[] = 'footer-bar-active';
-			$classes[] = 'footer-bar-align-' . esc_attr( starck_get_option( 'footer_bar_alignment' ) );
-		}
-
-		return $classes;
-	}
-}
-
-if ( ! function_exists( 'starck_inside_footer_classes' ) ) {
-	add_filter( 'starck_inside_footer_class', 'starck_inside_footer_classes' );
-	/**
-	 * Adds custom classes to the footer.
-	 *
-	 * @since 0.1
-	 */
-	function starck_inside_footer_classes( $merged_class ) {
-		$classes[] = 'footer-widgets-container';
-
-		if ( 'full-width' !== starck_get_option( 'footer_inner_width' ) ) {
-			$classes[] = 'grid-container';
-			$classes[] = 'grid-parent';
-		}
-
-		return $classes;
-	}
-}
-
-if ( ! function_exists( 'starck_post_classes' ) ) {
-	add_filter( 'post_class', 'starck_post_classes' );
-	/**
-	 * Adds custom classes to the <article> element.
-	 * Remove .hentry class from pages to comply with structural data guidelines.
-	 *
-	 * @since 1.3.39
-	 */
-	function starck_post_classes( $merged_class ) {
-		if ( 'page' == get_post_type() ) {
-			$classes = array_diff( $classes, array( 'hentry' ) );
-		}
-
-		return $classes;
+		return starck_merge_classes($classes, $merged_class);
 	}
 }

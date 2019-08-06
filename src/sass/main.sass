@@ -36,19 +36,6 @@ a
 li
 	list-style-type: none /* Убираем глобально маркеры */
 
-.container
-	max-width: $container_max_w
-	padding:
-		right: $gutter-20/2
-		left: $gutter-20/2
-	margin:
-		left: auto
-		right: auto
-
-.img-responsive
-	display: block
-	max-width: 100%
-	height: auto
 	
 img
 	width: 100%
@@ -71,6 +58,10 @@ img
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
 
+.bounded
+	max-width: $container_max_w
+	@include push--auto
+
 html
 	background-color: darken($body-bg,5%)
 
@@ -83,39 +74,73 @@ body
 	background-color: $body-bg
 	overflow-x: hidden
 	
-#header
-	display: table
-	width: 100%
-	background-color: #eee //$header-bg
-	padding:
-		top: $gutter-20/2
-		//bottom: $gutter-20/2
-	 
-	#site-header
+#site-header
+	#container
+		display: table
+		width: 100%
+		padding-top: $gutter-20/2
+		margin-bottom: $gutter-20/2
+		background-color: $main-bg
+
+	&.align-left
+		#branding
+			justify-content: left
+			align-items: start
+
+	&.align-center
+		#branding
+			float: none
+			justify-content: center		
+			align-items: center
+			a
+				justify-content: center
+
+	&.align-right
+		#branding
+			float: right
+			justify-content: right
+			flex-direction: row-reverse
+			align-items: end
+								
+	#branding
 		display: flex
-		float: left		
-		text-align: center
+		float: left
+		margin-bottom: $gutter-20/2
 		a
 			display: flex
-			
+
+			//justify-content: center
+		&.align-vertical
+			flex-direction: column
+			a
+				justify-content: center
+				
+			#branding-logo
+				@include push--auto
+				
+			#branding-title
+				@include push--auto 
+
 		.custom-logo
 			max-width: 200px
 			
-		.site
-			&-logo
-				float: left
-				margin: auto $gutter-20/2
-			&-title
-				float: left
-				margin: auto $gutter-20/2
+		&-logo
+			float: left
+			margin: auto 0
+			padding: 0 $gutter-20/2
+			
+		&-title
+			float: left
+			margin: auto 0
+			padding: 0 $gutter-20/2
 
-				h1
-					font-size: 30px
-					line-height: 100% 		
-					margin: 0
-					a
-						&:hover
-	 						color: $link-color
+			h1
+				font-size: 30px
+				line-height: 100% 		
+				margin: 0
+				a
+					&:hover
+ 						color: $link-color
 
 
 	#site-search
@@ -124,23 +149,29 @@ body
 		margin: 0 $gutter-20/2 $gutter-20/2
 		
 	#site-menu
-		display: table-cell
+		display: flex
 		clear: right
 		float: right
 		width: 100%
-		margin-top: $gutter-20/2 
 		text-align: center
 		background-color: $site-menu-bg
+		
+		&.bounded
+			clear: both
+			float: none
 		ul
-			display: inline-block
+			display: flex
 			margin: 0
 			padding: 0
 			
 			li
+				display: flex
 				a
 					display: block
 					padding: $gutter-20/2 $gutter-20
 					color: $menu-link-color
+				&:hover
+					border-bottom: 3px solid $menu-link-color
 
 
 
@@ -155,7 +186,6 @@ main
 
 	#container
 		height: 100%
-		max-width: $container_max_w 
 		min-height: 100vh
 		padding: $gutter-20 * 2 $gutter-20
 		@include push--auto
@@ -163,15 +193,16 @@ main
 		
 		#content
 			float: left
-			width: 75%
+			width: $content-width
 			padding: 0 $gutter-20
 			background-color: $content-bg
 			box-sizing: border-box
 			
-			&.right-position
+			&.left-sidebar
 				float: right
+				width: $content-width
 				
-			&.full-width
+			&.no-sidebar
 				width: 100%
 		
 		#main-sidebar
@@ -185,8 +216,11 @@ main
 				
 footer
 	color: #FFF
-	background-color: $footer-bg
 	padding:  $gutter-20 / 2
+		
+	#container
+		background-color: $footer-bg
+
 	
 	 
 

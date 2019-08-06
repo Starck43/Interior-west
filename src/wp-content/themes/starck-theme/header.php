@@ -11,46 +11,56 @@
 
 <body <?php body_class(); ?>>
 
-	<header id="header" <?php starck_header_class(); ?>>
-		<?php
-		$custom_header = get_custom_header();
-		if ( ! empty( $custom_header->attachment_id ) ) {
-			?>
-			<img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
+	<header id="site-header" <?php starck_header_class(); ?>>
+
+		<!-- container -->
+		<div id="container" <?php echo "class=" . starck_get_option( 'header_bound_setting' ); ?>>
 			<?php
-		}
-		?>
-		<section id="site-header">
-			<?php
-			$custom_logo_id = get_theme_mod( 'custom_logo' );
-			if ( $custom_logo_id ) {
+			$custom_header = get_custom_header();
+			if ( ! empty( $custom_header->attachment_id ) ) {
+				?>
+				<img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
+				<?php
+			}
+			$branding_direction = (starck_get_option( 'branding_vertical' ) ? 'align-vertical' : '');
 			?>
-			<!-- logo -->
-            <div id="header-logo" class="site-logo">
-				<?php the_custom_logo(); ?>
-            </div>
+			<section id="branding" <?php echo "class=" . $branding_direction; ?>>
+				<?php
+				$custom_logo_id = get_theme_mod( 'custom_logo' );
+				if ( $custom_logo_id ) {
+				?>
+				<!-- logo -->
+	            <div id="branding-logo" class="site-logo">
+					<?php the_custom_logo(); ?>
+	            </div>
+				<?php
+				}
+				?>
+				<!-- header title -->
+				<div id="branding-title" class="site-title">
+					<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '<h1>'; } ?>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" rel="home"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a>
+					<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '</h1>'; } ?>
+					<div class="site-description"><?php bloginfo( 'description' ); ?></div>
+				</div>
+			</section>
+			<?php
+			if ( starck_get_option( 'header_search' ) ) {	
+			?>
+				<div id="site-search"><?php get_search_form(); ?></div>
 			<?php
 			}
 			?>
-			<!-- header title -->
-			<div id="header-title" class="site-title">
-				<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '<h1>'; } ?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" rel="home"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a>
-				<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '</h1>'; } ?>
-				<div class="site-description"><?php bloginfo( 'description' ); ?></div>
-			</div>
-		</section>
-		
-		<div id="site-search"><?php get_search_form(); ?></div>
-		<nav id="site-menu" <?php starck_menu_class(); ?> role="navigation">
-			<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
-		</nav>
-
+			<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
+				<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+			</nav>
+		</div>
+		<!-- end container -->
 	</header>
 	<!-- main -->
-	<main id="main" <?php starck_main_class('main'); ?> role="main">
-
-		<header id="main-header">
-		</header>
+	<main id="main" <?php starck_main_class(); ?> role="main">
 		<!-- container -->
-		<div id="container">
+		<div id="container" <?php echo "class=" . starck_get_option( 'main_bound_setting' ); ?>>
+
+			<header id="main-header">
+			</header>

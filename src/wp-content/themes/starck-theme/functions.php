@@ -63,6 +63,60 @@ function starck_setup() {
 	add_theme_support( 'editor-color-palette', array() );
 	//add_theme_support( 'woocommerce' );
 	
+	
+/**
+ * Add custom header classes to <header> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_header_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_header_class", $merged_class );
+}
+
+/**
+ * Add custom menu classes to <nav> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_navigation_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_navigation_class", $merged_class );
+}
+
+/**
+ * Add custom main classes to <main> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_main_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_main_class", $merged_class );
+}
+
+/**
+ * Add custom content classes to <section id='content'> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_content_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_content_class", $merged_class );
+}
+
+/**
+ * Add custom sidebar classes to <aside id='main-sidebar'> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_sidebar_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_sidebar_class", $merged_class );
+}
+
+/**
+ * Add custom footer classes to <footer> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_footer_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_footer_class", $merged_class );
+}
 	global $content_width;
 	if ( ! isset( $content_width ) ) { $content_width = 1200; }
 	register_nav_menus( array(
