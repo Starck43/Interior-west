@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<section id="content" <?php starck_add_classes( 'content' ); ?> role="main">
+	<section id="content" <?php starck_content_class(); ?>>
 
 		<header class="entry-header">
 			<?php the_post(); ?>

@@ -2,7 +2,7 @@
 	<!-- end container -->
 	</main>
 	<!-- end main -->
-	<footer id="site-footer"  <?php starck_add_classes('footer'); ?> >
+	<footer id="site-footer"  <?php starck_footer_class(); ?> >
 
 		<?php wp_footer(); ?>
 

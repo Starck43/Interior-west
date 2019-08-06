@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<section id="content" <?php starck_add_classes( 'content' ); ?> role="main">
+	<section id="content" <?php starck_content_class(); ?>>
 
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 			<?php get_template_part( 'entry' ); ?>

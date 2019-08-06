@@ -17,19 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function starck_add_classes( $context, $merged_class = '' ) {
 	//echo 'class="' . join( ' ', starck_get_element_classes( $context, $merged_class ) ) . '"';
-	$classes = apply_filters( "starck_context_classes", $context, $merged_class );
+	$classes = apply_filters( "starck_get_classes", $context, $merged_class );
 	if ($classes) { echo 'class="' . join( ' ', $classes ) . '"'; };
 }
 
 /**
- * Retrieve HTML classes for an element.
- *
- * @param string $context The element we're targeting.
- * @param string|array $class One or more classes to add to the class list.
- * @return array Array of classes.
+
  */
-function starck_get_element_classes( $context, $merged_class = '' ) {
-	$classes = array();
+function starck_merge_classes( $classes, $merged_class = '' ) {
 
 	if ( ! empty( $merged_class ) ) {
 		if ( ! is_array( $merged_class ) ) {
@@ -41,13 +36,7 @@ function starck_get_element_classes( $context, $merged_class = '' ) {
 
 	$classes = array_map( 'esc_attr', $classes );
 
-	return apply_filters( "starck_{$context}_class", $classes, $merged_class );
-}
-
-function starck_get_classes( $context, $merged_class = '' ) {
-	
-	return apply_filters( "starck_context_classes", $context, $merged_class );
-	
+	return $classes;
 }
 
 if ( ! function_exists( 'starck_body_classes' ) ) {
@@ -57,7 +46,7 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 	 
 	 
 	 */
-	function starck_body_classes( $classes ) {
+	function starck_body_classes( $merged_class ) {
 		$sidebar_layout 		= starck_get_layout();
 		//$navigation_location 	= starck_get_navigation_location();
 		//$navigation_alignment	= starck_get_option( 'nav_alignment_setting' );
@@ -121,70 +110,6 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 	}
 }
 
-if ( ! function_exists( 'starck_get_context_classes' ) ) {
-	add_filter( 'starck_context_classes', 'starck_get_context_classes', 10, 2 );
-	/**
-	 * Adds custom classes to the context
-	 */
-	function starck_get_context_classes( $context, $merged_class ) {
-
-		$classes = array();
-
-		if ( ! empty( $merged_class ) ) {
-			if ( ! is_array( $merged_class ) ) {
-				$merged_class = preg_split( '#\s+#', $merged_class );
-			}
-			// Соединяем классы, если есть второй параметр
-			$classes = array_merge( $classes, $merged_class );
-		}
-
-		//$classes = array_map( 'esc_attr', $classes );
-		
-		if ('main' == $context) {
-			
-			//$classes[] = starck_get_option['container_width'];
-			//var_dump($content_width);
-		}
-		
-		if ('sidebar' == $context) {
-				
-			// Get the layout sidebar
-			$sidebar_layout = starck_get_layout();
-
-			$classes[] = $sidebar_layout;
-			//$classes[] = 'widget-area';
-		}
-		
-		if ('content' == $context) {
-			
-			$classes[] = 'content';
-
-			// Get the layout
-			$sidebar_layout = starck_get_layout();
-
-			if ( '' !== $sidebar_layout ) {
-				switch ( $sidebar_layout ) {
-
-					case 'right-sidebar' :
-						$classes[] = 'left-position';
-					break;
-
-					case 'left-sidebar' :
-						$classes[] = 'right-position';
-					break;
-
-					case 'no-sidebar' :
-						$classes[] = 'full-width';
-					break;
-
-				}
-			}
-		}
-
-
-		return $classes;
-	}
-}
 
 if ( ! function_exists( 'starck_top_bar_classes' ) ) {
 	add_filter( 'starck_top_bar_class', 'starck_top_bar_classes' );
@@ -193,7 +118,7 @@ if ( ! function_exists( 'starck_top_bar_classes' ) ) {
 	 *
 	 * @since 0.1
 	 */
-	function starck_top_bar_classes( $classes ) {
+	function starck_top_bar_classes( $merged_class ) {
 		$classes[] = 'top-bar';
 
 		if ( 'contained' === starck_get_option( 'top_bar_width' ) ) {
@@ -212,7 +137,7 @@ if ( ! function_exists( 'starck_sidebar_classes' ) ) {
 	/**
 	 * Adds custom classes to the right sidebar.
 	 */
-	function starck_sidebar_classes( $classes ) {
+	function starck_sidebar_classes( $merged_class ) {
 
 		// Get the layout sidebar
 		$sidebar_layout = starck_get_layout();
@@ -232,7 +157,7 @@ if ( ! function_exists( 'starck_content_classes' ) ) {
 	/**
 	 * Adds custom classes to the content container.
 	 */
-	function starck_content_classes( $classes ) {
+	function starck_content_classes( $merged_class ) {
 
 		$classes[] = 'content';
 
@@ -267,7 +192,7 @@ if ( ! function_exists( 'starck_header_classes' ) ) {
 	/**
 	 * Adds custom classes to the header.
 	 */
-	function starck_header_classes( $classes ) {
+	function starck_header_classes( $merged_class ) {
 		$classes[] = 'site-header';
 
 		$classes[] = starck_get_option( 'header_layout_setting' );
@@ -281,7 +206,7 @@ if ( ! function_exists( 'starck_inside_header_classes' ) ) {
 	/**
 	 * Adds custom classes to inside the header.
 	 */
-	function starck_inside_header_classes( $classes ) {
+	function starck_inside_header_classes( $merged_class ) {
 		$classes[] = 'inside-header';
 
 		$classes[] = starck_get_option( 'header_inner_width' );
@@ -297,7 +222,7 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 	 
 	 
 	 */
-	function starck_navigation_classes( $classes ) {
+	function starck_navigation_classes( $merged_class ) {
 		$classes[] = 'main-navigation';
 
 		$classes[] = starck_get_option( 'nav_layout_setting' );
@@ -326,7 +251,7 @@ if ( ! function_exists( 'starck_inside_navigation_classes' ) ) {
 	 *
 	 * @since 1.3.41
 	 */
-	function starck_inside_navigation_classes( $classes ) {
+	function starck_inside_navigation_classes( $merged_class ) {
 		$classes[] = 'inside-navigation';
 
 		if ( 'full-width' !== starck_get_option( 'nav_inner_width' ) ) {
@@ -345,7 +270,7 @@ if ( ! function_exists( 'starck_menu_classes' ) ) {
 	 *
 	 * @since 0.1
 	 */
-	function starck_menu_classes( $classes ) {
+	function starck_menu_classes( $merged_class ) {
 		$classes[] = 'menu';
 		$classes[] = 'sf-menu';
 
@@ -360,7 +285,7 @@ if ( ! function_exists( 'starck_footer_classes' ) ) {
 	 *
 	 * @since 0.1
 	 */
-	function starck_footer_classes( $classes ) {
+	function starck_footer_classes( $merged_class ) {
 		$classes[] = 'site-footer';
 
 		if ( 'contained-footer' === starck_get_option( 'footer_layout_setting' ) ) {
@@ -384,7 +309,7 @@ if ( ! function_exists( 'starck_inside_footer_classes' ) ) {
 	 *
 	 * @since 0.1
 	 */
-	function starck_inside_footer_classes( $classes ) {
+	function starck_inside_footer_classes( $merged_class ) {
 		$classes[] = 'footer-widgets-container';
 
 		if ( 'full-width' !== starck_get_option( 'footer_inner_width' ) ) {
@@ -404,7 +329,7 @@ if ( ! function_exists( 'starck_post_classes' ) ) {
 	 *
 	 * @since 1.3.39
 	 */
-	function starck_post_classes( $classes ) {
+	function starck_post_classes( $merged_class ) {
 		if ( 'page' == get_post_type() ) {
 			$classes = array_diff( $classes, array( 'hentry' ) );
 		}

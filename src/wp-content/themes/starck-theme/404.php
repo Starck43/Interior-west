@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-	<section id="content" <?php starck_add_classes( 'content' ); ?> role="main">
+	<section id="content" <?php starck_content_class(); ?>>
 
 		<article id="post-0" class="post not-found">
 

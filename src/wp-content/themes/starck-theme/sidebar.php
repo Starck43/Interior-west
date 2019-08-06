@@ -1,4 +1,4 @@
-<aside id="main-sidebar" <?php starck_add_classes( 'sidebar' ); ?>>
+<aside id="main-sidebar" <?php starck_sidebar_class(); ?>>
 
 <div id="primary" class="widget-area">
 	<section class="widget-element">
