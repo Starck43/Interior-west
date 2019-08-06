@@ -162,6 +162,27 @@ img {
   margin-right: auto;
 }
 
+.align-left, #site-header .branding-left {
+  float: left;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.align-center, #site-header .branding-center {
+  float: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.align-right, #site-header .branding-right {
+  float: right;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
 html {
   background-color: rgba(83, 140, 198, 0.1);
 }
@@ -182,116 +203,84 @@ body {
 #site-header #container {
   display: table;
   width: 100%;
-  padding-top: 10px;
-  margin-bottom: 10px;
+  padding: 10px 0;
   background-color: white;
 }
 
-#site-header.align-left #branding {
-  -webkit-box-pack: left;
-      -ms-flex-pack: left;
-          justify-content: left;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: start;
+#site-header .branding {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 10px;
 }
 
-#site-header.align-center #branding {
-  float: none;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+#site-header .branding a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-#site-header.align-center #branding a {
+#site-header .branding-center a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-#site-header.align-right #branding {
-  float: right;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
+#site-header .branding-right {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
           flex-direction: row-reverse;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: end;
 }
 
-#site-header #branding {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  float: left;
-  margin-bottom: 10px;
-}
-
-#site-header #branding a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-#site-header #branding.align-vertical {
+#site-header .branding.align-vertical {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
 }
 
-#site-header #branding.align-vertical a {
+#site-header .branding.align-vertical a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-#site-header #branding.align-vertical #branding-logo {
+#site-header .branding.align-vertical #branding-logo {
   margin-left: auto;
   margin-right: auto;
 }
 
-#site-header #branding.align-vertical #branding-title {
+#site-header .branding.align-vertical #branding-title {
   margin-left: auto;
   margin-right: auto;
 }
 
-#site-header #branding .custom-logo {
+#site-header .branding .site-logo {
+  float: left;
+  margin: auto 0;
+  padding: 0 10px;
   max-width: 200px;
 }
 
-#site-header #branding-logo {
+#site-header .branding .site-title {
   float: left;
   margin: auto 0;
   padding: 0 10px;
 }
 
-#site-header #branding-title {
-  float: left;
-  margin: auto 0;
-  padding: 0 10px;
-}
-
-#site-header #branding-title h1 {
+#site-header .branding .site-title h1 {
   font-size: 30px;
   line-height: 100%;
   margin: 0;
 }
 
-#site-header #branding-title h1 a:hover {
+#site-header .branding .site-title h1 a:hover {
   color: #69c;
 }
 
 #site-header #site-search {
   display: table-cell;
-  float: right;
   margin: 0 10px 10px;
 }
 
@@ -299,11 +288,20 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
+  background-color: #69c;
+}
+
+#site-header #site-menu.float-right {
   clear: right;
   float: right;
-  width: 100%;
-  text-align: center;
-  background-color: #69c;
+  width: auto;
+}
+
+#site-header #site-menu.float-left {
+  clear: left;
+  float: left;
+  width: auto;
 }
 
 #site-header #site-menu.bounded {
@@ -311,10 +309,24 @@ body {
   float: none;
 }
 
-#site-header #site-menu ul {
+#site-header #site-menu.above-header {
+  display: table-caption;
+}
+
+#site-header #site-menu .menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#site-header #site-menu.align-center .menu, #site-header #site-menu.branding-center .menu {
+  width: auto;
+}
+
+#site-header #site-menu ul {
   margin: 0;
   padding: 0;
 }
@@ -326,8 +338,8 @@ body {
 }
 
 #site-header #site-menu ul li a {
-  display: block;
-  padding: 10px 20px;
+  padding: 10px 0;
+  margin: 0 20px;
   color: white;
 }
 
@@ -383,11 +395,7 @@ main #container #main-sidebar {
           box-sizing: border-box;
 }
 
-footer {
-  color: #FFF;
-  padding: 10px;
-}
-
 footer #container {
   background-color: #69c;
+  padding: 10px;
 }

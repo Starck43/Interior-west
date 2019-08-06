@@ -22,9 +22,8 @@
 				<img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
 				<?php
 			}
-			$branding_direction = (starck_get_option( 'branding_vertical' ) ? 'align-vertical' : '');
 			?>
-			<section id="branding" <?php echo "class=" . $branding_direction; ?>>
+			<section id="branding" <?php starck_branding_class('branding'); ?>>
 				<?php
 				$custom_logo_id = get_theme_mod( 'custom_logo' );
 				if ( $custom_logo_id ) {
@@ -45,9 +44,9 @@
 				</div>
 			</section>
 			<?php
-			if ( starck_get_option( 'header_search' ) ) {	
+			if ( starck_get_option( 'header_search' ) && 'center' !== starck_get_option( 'branding_alignment' ) ) {	
 			?>
-				<div id="site-search"><?php get_search_form(); ?></div>
+				<div id="site-search" <?php starck_search_class(); ?>><?php get_search_form(); ?></div>
 			<?php
 			}
 			?>

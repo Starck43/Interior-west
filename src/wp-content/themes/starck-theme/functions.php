@@ -74,6 +74,24 @@ function starck_header_class( $merged_class = '' ) {
 }
 
 /**
+ * Add custom branding classes to <id="branding"> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_branding_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_branding_class", $merged_class );
+}
+
+/**
+ * Add custom search classes to <id="search"> element.
+ *
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_search_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_search_class", $merged_class );
+}
+
+/**
  * Add custom menu classes to <nav> element.
  *
  * @param string|array $merged_class. Classes to add to the class list.

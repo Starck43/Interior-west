@@ -62,6 +62,21 @@ img
 	max-width: $container_max_w
 	@include push--auto
 
+.align-left
+	float: left
+	justify-content: flex-start
+	//align-items: start
+	
+.align-center
+	float: none
+	justify-content: center		
+	//align-items: center
+
+.align-right
+	float: right
+	justify-content: flex-end
+	//align-items: end
+
 html
 	background-color: darken($body-bg,5%)
 
@@ -78,36 +93,27 @@ body
 	#container
 		display: table
 		width: 100%
-		padding-top: $gutter-20/2
-		margin-bottom: $gutter-20/2
+		padding: $gutter-20/2 0
 		background-color: $main-bg
+								
+	.branding
+		display: flex
+		padding-bottom: $gutter-20/2
+		a
+			display: flex
 
-	&.align-left
-		#branding
-			justify-content: left
-			align-items: start
+		&-left
+			@extend .align-left
 
-	&.align-center
-		#branding
-			float: none
-			justify-content: center		
-			align-items: center
+		&-center
+			@extend .align-center
 			a
 				justify-content: center
 
-	&.align-right
-		#branding
-			float: right
-			justify-content: right
+		&-right
+			@extend .align-right
 			flex-direction: row-reverse
-			align-items: end
-								
-	#branding
-		display: flex
-		float: left
-		margin-bottom: $gutter-20/2
-		a
-			display: flex
+
 
 			//justify-content: center
 		&.align-vertical
@@ -121,15 +127,14 @@ body
 			#branding-title
 				@include push--auto 
 
-		.custom-logo
-			max-width: 200px
 			
-		&-logo
+		.site-logo
 			float: left
 			margin: auto 0
 			padding: 0 $gutter-20/2
-			
-		&-title
+			max-width: 200px
+
+		.site-title
 			float: left
 			margin: auto 0
 			padding: 0 $gutter-20/2
@@ -145,30 +150,50 @@ body
 
 	#site-search
 		display: table-cell
-		float: right
 		margin: 0 $gutter-20/2 $gutter-20/2
-		
+
+
 	#site-menu
 		display: flex
-		clear: right
-		float: right
 		width: 100%
-		text-align: center
 		background-color: $site-menu-bg
+
+		&.float-right
+			clear: right
+			float: right
+			width: auto
+		
+		&.float-left
+			clear: left
+			float: left
+			width: auto
 		
 		&.bounded
 			clear: both
 			float: none
-		ul
+			
+		&.above-header
+			display: table-caption
+			
+		.menu
 			display: flex
+			//width: 100%
+			height: 40px
+			padding:
+				left: $gutter-20/2
+				right: $gutter-20/2
+		&.align-center
+			.menu
+				width: auto
+		ul
 			margin: 0
 			padding: 0
 			
 			li
 				display: flex
 				a
-					display: block
-					padding: $gutter-20/2 $gutter-20
+					padding: $gutter-20/2 0
+					margin: 0 $gutter-20
 					color: $menu-link-color
 				&:hover
 					border-bottom: 3px solid $menu-link-color
@@ -214,12 +239,11 @@ main
 			box-sizing: border-box
 
 				
-footer
-	color: #FFF
-	padding:  $gutter-20 / 2
-		
+footer	
 	#container
 		background-color: $footer-bg
+		//color: #FFF
+		padding:  $gutter-20 / 2
 
 	
 	 
