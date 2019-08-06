@@ -11,7 +11,7 @@
 
 <body <?php body_class(); ?>>
 
-	<header id="header"  <?php starck_add_classes('header'); ?>>
+	<header id="header" <?php starck_header_class(); ?>>
 		<?php
 		$custom_header = get_custom_header();
 		if ( ! empty( $custom_header->attachment_id ) ) {
@@ -42,15 +42,15 @@
 		</section>
 		
 		<div id="site-search"><?php get_search_form(); ?></div>
-		<nav id="site-menu">
+		<nav id="site-menu" <?php starck_menu_class(); ?> role="navigation">
 			<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
 		</nav>
 
 	</header>
 	<!-- main -->
-	<main id="main" <?php starck_add_classes('main'); ?> role="main">
+	<main id="main" <?php starck_main_class('main'); ?> role="main">
 
 		<header id="main-header">
 		</header>
 		<!-- container -->
-		<div id="container" <?php starck_add_classes( 'container' ); ?>>
+		<div id="container">
