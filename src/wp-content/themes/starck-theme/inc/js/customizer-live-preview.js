@@ -351,7 +351,7 @@ function starck_typography_live_update( id, selector, property, unit, media, set
 	/**
 	 * Content layout
 	 */
-	starck_classes_live_update( 'content_layout_setting', [ 'one-container', 'separate-containers' ], 'body' );
+//	starck_classes_live_update( 'content_layout_setting', [ 'one-container', 'separate-containers' ], 'body' );
 
 	/**
 	 * Top bar width

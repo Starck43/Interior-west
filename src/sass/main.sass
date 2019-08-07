@@ -58,25 +58,25 @@ img
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
 
+#container
+	padding: $gutter-20/2
+	
 .bounded
 	max-width: $container_max_w
-	padding: 0 $gutter-20/2
+	//padding: 0 $gutter-20/2
 	@include push--auto
 
 .align-left
-	//float: left
 	justify-content: flex-start
-	align-items: start
+	align-items: flex-start
 	
 .align-center
-	//float: none
 	justify-content: center		
 	align-items: center
 
 .align-right
-	//float: right
 	justify-content: flex-end
-	align-items: end
+	align-items: flex-end
 
 html
 	background-color: darken($body-bg,5%)
@@ -93,16 +93,12 @@ body
 #site-header
 	#container
 		display: flex
-		width: 100%
+		//padding: $gutter-20/2 0
 		//padding-top: $gutter-20/2
 		//margin-bottom: $gutter-20/2
 		justify-content: space-between
 		background-color: $main-bg
-		
-		&.bounded
-			max-width: $container_max_w - $gutter-20
-			padding: $gutter-20/2 
-		
+	
 	&.branding-right
 		#container
 			flex-direction: row-reverse
@@ -117,15 +113,15 @@ body
 			display: flex
 
 		&-left
-			@extend .align-left
+			//@extend .align-left
 
-		&-center
-			@extend .align-center
+		&.align-center
+			//@extend .align-center
 			a
 				justify-content: center
 
-		&-right
-			@extend .align-right
+		&.align-right
+			//@extend .align-right
 			flex-direction: row-reverse
 
 
@@ -148,16 +144,20 @@ body
 			//padding: 0 $gutter-20/2
 			max-width: 200px
 
-		.site-title
+		#branding-title
 			//float: left
 			margin: auto 0
 			padding: 0 $gutter-20/2
-			a
+
+			.site-title
 				margin: 0
+				line-height: 1
 				font-size: 30px
 				text-transform: uppercase 
+			a
 				&:hover
 						color: $link-color
+
 
 	#header-content
 		display: flex
@@ -166,66 +166,57 @@ body
 		#site-search
 			display: flex
 			margin-bottom: auto 
+			padding-bottom: $gutter-20/2
 			//margin: 0 $gutter-20/2 $gutter-20/2
 
-	&.nav-above-header
-		display: flex
-		flex-direction: column-reverse
-		
 	&.nav-inline-header
 		&.branding-center
 			#site-menu
 				margin-top: $gutter-20/2
 		
-	#site-menu
+#site-menu
+	display: flex
+	width: 100%
+	margin-top: auto
+	background-color: $nav-bg
+
+	&.float-right
+		width: auto
+	
+	&.float-left
+		width: auto
+	
+	.menu
 		display: flex
+		position: relative
 		width: 100%
-		margin:
-			top: auto
-
-		background-color: $nav-bg
-
-		&.float-right
-			width: auto
+		height: $nav-height
+		overflow: hidden	
 		
-		&.float-left
-			width: auto
+	&.center-aligned
+		li
+			justify-content: center
+	
+	&.right-aligned
+		li
+			justify-content: flex-end
 		
-		.menu
+	ul
+		width: 100%
+		margin: 0
+		padding: 0
+		height: $nav-height
+		
+		li
 			display: flex
-			position: relative
-			width: 100%
-			height: $nav-height
-			overflow: hidden
-		
-		&.left
-			li
-				justify-content: start	
-			
-		&.center
-			li
-				justify-content: center
-		
-		&.right
-			li
-				justify-content: end
-			
-		ul
-			width: 100%
-			margin: 0
-			padding: 0
-			height: $nav-height
-			
-			li
-				display: flex
-				a
-					margin: 0 $gutter-20
-					color: $menu-link-color
-					line-height: $nav-height
-					
-				&:hover
-					//border-bottom: 3px solid $menu-link-color
-					background-color:  lighten($nav-bg, 10%)
+			a
+				margin: 0 $gutter-20
+				color: $menu-link-color
+				line-height: $nav-height
+				
+			&:hover
+				//border-bottom: 3px solid $menu-link-color
+				background-color:  lighten($nav-bg, 10%)
 
 		
 main
@@ -239,9 +230,9 @@ main
 	#container
 		height: 100%
 		min-height: 100vh
-		padding:
+		padding: 
 			top: $gutter-20 * 2
-			bottom: $gutter-20 * 2
+			bottom: $gutter-20/2
 			  
 		@include push--auto
 		background-color: $main-bg

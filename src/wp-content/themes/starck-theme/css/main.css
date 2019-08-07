@@ -158,23 +158,26 @@ img {
   background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7);
 }
 
+#container {
+  padding: 10px;
+}
+
 .bounded {
   max-width: 1000px;
-  padding: 0 10px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.align-left, #site-header .branding-left {
+.align-left {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
 }
 
-.align-center, #site-header .branding-center {
+.align-center {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -183,13 +186,13 @@ img {
           align-items: center;
 }
 
-.align-right, #site-header .branding-right {
+.align-right {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
   -webkit-box-align: end;
       -ms-flex-align: end;
-          align-items: end;
+          align-items: flex-end;
 }
 
 html {
@@ -213,16 +216,10 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
   background-color: white;
-}
-
-#site-header #container.bounded {
-  max-width: 980px;
-  padding: 10px;
 }
 
 #site-header.branding-right #container {
@@ -251,13 +248,13 @@ body {
   display: flex;
 }
 
-#site-header .branding-center a {
+#site-header .branding.align-center a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-#site-header .branding-right {
+#site-header .branding.align-right {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
       -ms-flex-direction: row-reverse;
@@ -292,18 +289,19 @@ body {
   max-width: 200px;
 }
 
-#site-header .branding .site-title {
+#site-header .branding #branding-title {
   margin: auto 0;
   padding: 0 10px;
 }
 
-#site-header .branding .site-title a {
+#site-header .branding #branding-title .site-title {
   margin: 0;
+  line-height: 1;
   font-size: 30px;
   text-transform: uppercase;
 }
 
-#site-header .branding .site-title a:hover {
+#site-header .branding #branding-title a:hover {
   color: #69c;
 }
 
@@ -322,23 +320,14 @@ body {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: auto;
-}
-
-#site-header.nav-above-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: column-reverse;
-          flex-direction: column-reverse;
+  padding-bottom: 10px;
 }
 
 #site-header.nav-inline-header.branding-center #site-menu {
   margin-top: 10px;
 }
 
-#site-header #site-menu {
+#site-menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -347,15 +336,15 @@ body {
   background-color: #69c;
 }
 
-#site-header #site-menu.float-right {
+#site-menu.float-right {
   width: auto;
 }
 
-#site-header #site-menu.float-left {
+#site-menu.float-left {
   width: auto;
 }
 
-#site-header #site-menu .menu {
+#site-menu .menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -365,44 +354,38 @@ body {
   overflow: hidden;
 }
 
-#site-header #site-menu.left li {
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-}
-
-#site-header #site-menu.center li {
+#site-menu.center-aligned li {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-#site-header #site-menu.right li {
+#site-menu.right-aligned li {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
-          justify-content: end;
+          justify-content: flex-end;
 }
 
-#site-header #site-menu ul {
+#site-menu ul {
   width: 100%;
   margin: 0;
   padding: 0;
   height: 40px;
 }
 
-#site-header #site-menu ul li {
+#site-menu ul li {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-#site-header #site-menu ul li a {
+#site-menu ul li a {
   margin: 0 20px;
   color: white;
   line-height: 40px;
 }
 
-#site-header #site-menu ul li:hover {
+#site-menu ul li:hover {
   background-color: #8cb3d9;
 }
 
@@ -421,7 +404,7 @@ main #container {
   height: 100%;
   min-height: 100vh;
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
   background-color: white;

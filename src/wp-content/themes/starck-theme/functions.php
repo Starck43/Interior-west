@@ -262,20 +262,6 @@ function starck_has_logo_site_branding() {
 	return false;
 }
 
-
-if ( ! function_exists( 'starck_get_navigation_location' ) ) {
-	/**
-	 * Get the location of the navigation and filter it.
-	 *
-	 * @since 1.3.41
-	 *
-	 * @return string The primary menu location.
-	 */
-	function starck_get_navigation_location() {
-		return apply_filters( 'starck_navigation_location', starck_get_option( 'nav_position_setting' ) );
-	}
-}
-
 if ( ! function_exists( 'starck_widgets_init' ) ) {
 	add_action( 'widgets_init', 'starck_widgets_init' );
 	/**
@@ -310,7 +296,6 @@ if ( ! function_exists( 'starck_widgets_init' ) ) {
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/defaults.php';
 require get_template_directory() . '/inc/markup.php';
-require get_template_directory() . '/inc/deprecated.php'; //????? Нужен ли
 
 
 if ( ! function_exists( 'starck_content_width' ) ) {
@@ -364,13 +349,7 @@ if ( ! function_exists( 'starck_get_layout' ) ) {
 		if ( is_single() ) {
 			$layout = starck_get_option( 'single_layout_setting' );
 		} else
-		if ( is_singular() ) {
-			$layout_meta = get_post_meta( get_the_ID(), '_sidebar-layout-meta', true );
-			if ( $layout_meta ) {
-				$layout = $layout_meta;
-			}
-		} else
-		$layout = starck_get_option( 'layout_setting' );
+			$layout = starck_get_option( 'layout_setting' );
 
 		return apply_filters( 'starck_sidebar_layout', $layout );
 	}
@@ -407,23 +386,3 @@ function add_default_sidebar_widget( $area ) {
 	<?php
 }
 
-if ( ! function_exists( 'starck_get_footer_widgets' ) ) {
-	/**
-	 * Get the footer widgets for the current page
-	 *
-	 * @return int The number of footer widgets.
-	 */
-	function starck_get_footer_widgets() {
-		$widgets = starck_get_option( 'footer_widget_setting' );
-
-		if ( is_singular() ) {
-			$widgets_meta = get_post_meta( get_the_ID(), '_footer-widget-meta', true );
-
-			if ( $widgets_meta || '0' === $widgets_meta ) {
-				$widgets = $widgets_meta;
-			}
-		}
-
-		return apply_filters( 'starck_footer_widgets', $widgets );
-	}
-}

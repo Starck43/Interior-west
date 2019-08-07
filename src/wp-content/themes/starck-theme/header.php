@@ -12,9 +12,19 @@
 <body <?php body_class(); ?>>
 
 	<header id="site-header" <?php starck_header_class(); ?>>
+		<?php 
+		$nav_position = starck_get_option( 'nav_position_setting' );
+		if ( 'above' == $nav_position ) { 
+		?>
+			<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
+				<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+			</nav>
+		<?php
+		}
+		?>
 
 		<!-- container -->
-		<div id="container" <?php echo "class=" . starck_get_option( 'header_bound_setting' ); ?>>
+		<div id="container" class="header-container">
 			<?php
 			$custom_header = get_custom_header();
 			if ( ! empty( $custom_header->attachment_id ) ) {
@@ -36,8 +46,8 @@
 				}
 				?>
 				<!-- header title -->
-				<div id="branding-title" class="site-title">
-					<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '<h1>'; } ?>
+				<div id="branding-title">
+					<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '<h1 class="site-title">'; } ?>
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" rel="home"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a>
 					<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '</h1>'; } ?>
 					<div class="site-description"><?php bloginfo( 'description' ); ?></div>
@@ -50,33 +60,34 @@
 				<div id="site-search" <?php starck_search_class(); ?>><?php get_search_form(); ?></div>
 			<?php
 			}
-
-		if ( 'inline' !== starck_get_option( 'nav_position_setting' ) ) { 
-		?>
-		</section>
+			?>
+			<?php 
+			if ( 'inline' == $nav_position ) { 
+			?>
+				<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
+					<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+				</nav>
+			<?php
+			}
+			?>
+			</section>
 		</div>
 		<!-- end container -->
-		<?php
-		}
-		?>
-			<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
-				<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
-			</nav>
-		<?php 
-		if ( 'inline' === starck_get_option( 'nav_position_setting' ) ) { 
-		?>
-		</section>
-		</div>
-		<!-- end container -->
-		<?php
-		}
-		?>
 	</header>
+	<?php 
+	if ( 'under' == $nav_position ) { 
+	?>
+		<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
+			<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+		</nav>
+	<?php
+	}
+	?>
 
 	<!-- main -->
 	<main id="main" <?php starck_main_class(); ?> role="main">
 		<!-- container -->
-		<div id="container" <?php echo "class=" . starck_get_option( 'main_bound_setting' ); ?>>
+		<div id="container" class="main-container">
 
 			<header id="main-header">
 			</header>

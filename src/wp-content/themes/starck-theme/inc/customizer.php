@@ -2,18 +2,42 @@
 /**
  * Builds our Customizer controls.
  *
- * @package starck
+ * @package Starcktheme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+if ( ! function_exists( 'starck_sanitize_choices' ) ) {
+	/**
+	 * Sanitize choices.
+	 *
+	 * @since 1.3.24
+	 */
+	function starck_sanitize_choices( $input, $setting ) {
+		// Ensure input is a slug
+		$input = sanitize_key( $input );
 
-add_action( 'customize_register', 'starck_set_customizer_helpers', 1 );
-function starck_set_customizer_helpers() {
-	require_once trailingslashit( get_template_directory() ) . 'inc/customizer-helpers.php';
+		// Get list of choices from the control
+		// associated with the setting
+		$choices = $setting->manager->get_control( $setting->id )->choices;
+
+		// If the input is a valid key, return it;
+		// otherwise, return the default
+		return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
+	}
 }
+
+if ( ! function_exists( 'starck_sanitize_checkbox' ) ) {
+	/**
+	 * Sanitize checkbox values.
+	 */
+	function starck_sanitize_checkbox( $checked ) {
+		return ( ( isset( $checked ) && true == $checked ) ? true : false );
+	}
+}
+
 
 if ( ! function_exists( 'starck_customize_register' ) ) {
 	add_action( 'customize_register', 'starck_customize_register' );
@@ -25,17 +49,6 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 	function starck_customize_register( $wp_customize ) {
 		$defaults = starck_get_defaults();
 
-		require_once trailingslashit( get_template_directory() ) . 'inc/customizer-helpers.php';
-
-
-		if ( method_exists( $wp_customize, 'register_control_type' ) ) {
-			$wp_customize->register_control_type( 'Starck_Customize_Misc_Control' );
-			$wp_customize->register_control_type( 'Starck_Range_Slider_Control' );
-		}
-
-		if ( method_exists( $wp_customize, 'register_section_type' ) ) {
-			$wp_customize->register_section_type( 'Starck_Upsell_Section' );
-		}
 
 /*
  * Examples
@@ -62,7 +75,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			)
  *
  */
-		// Создаем панель в настройках темы
+// Adding a new custom panel in the Theme settings
 		if ( class_exists( 'WP_Customize_Panel' ) ) {
 			if ( ! $wp_customize->get_panel( 'starck_layout_panel' ) ) {
 				$wp_customize->add_panel( 'starck_layout_panel', array(
@@ -71,13 +84,13 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				) );
 			}
 		}
-		
-// Layout container
+
+//Header
 		$wp_customize->add_section(
-			'starck_layout_container',
+			'starck_layout_header',
 			array(
-				'title' =>  __( 'Container', 'starck' ),
-				'priority' => 10,
+				'title' => __( 'Header', 'starck' ),
+				'priority' => 20,
 				'panel' => 'starck_layout_panel',
 			)
 		);
@@ -96,95 +109,13 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			array(
 				'type' => 'select',
 				'label' => __( 'Header container', 'starck' ),
-				'section' => 'starck_layout_container',
+				'section' => 'starck_layout_header',
 				'choices' => array(
 					'full-width' => __( 'Full-width', 'starck' ),
 					'bounded' => __( 'Bounded', 'starck' ),
 				),
 				'settings' => 'starck_settings[header_bound_setting]',
-				'priority' => 10,
-			)
-		);
-
-		$wp_customize->add_setting(
-			'starck_settings[nav_bound_setting]',
-			array(
-				'default' => $defaults['nav_bound_setting'],
-				'type' => 'option',
-				'sanitize_callback' => 'starck_sanitize_choices',
-			)
-		);
-
-		$wp_customize->add_control(
-			'starck_settings[nav_bound_setting]',
-			array(
-				'type' => 'select',
-				'label' => __( 'Navigation container', 'starck' ),
-				'section' => 'starck_layout_container',
-				'choices' => array(
-					'full-width' => __( 'Full-width', 'starck' ),
-					'bounded' => __( 'Bounded', 'starck' ),
-				),
-				'settings' => 'starck_settings[nav_bound_setting]',
-				'priority' => 20,
-			)
-		);
-
-		$wp_customize->add_setting(
-			'starck_settings[main_bound_setting]',
-			array(
-				'default' => $defaults['main_bound_setting'],
-				'type' => 'option',
-				'sanitize_callback' => 'starck_sanitize_choices',
-			)
-		);
-
-		$wp_customize->add_control(
-			'starck_settings[main_bound_setting]',
-			array(
-				'type' => 'select',
-				'label' => __( 'Main container', 'starck' ),
-				'section' => 'starck_layout_container',
-				'choices' => array(
-					'full-width' => __( 'Full-width', 'starck' ),
-					'bounded' => __( 'Bounded', 'starck' ),
-				),
-				'settings' => 'starck_settings[main_bound_setting]',
-				'priority' => 30,
-			)
-		);
-
-		$wp_customize->add_setting(
-			'starck_settings[footer_bound_setting]',
-			array(
-				'default' => $defaults['footer_bound_setting'],
-				'type' => 'option',
-				'sanitize_callback' => 'starck_sanitize_choices',
-			)
-		);
-
-		$wp_customize->add_control(
-			'starck_settings[footer_bound_setting]',
-			array(
-				'type' => 'select',
-				'label' => __( 'Footer container', 'starck' ),
-				'section' => 'starck_layout_container',
-				'choices' => array(
-					'full-width' => __( 'Full-width', 'starck' ),
-					'bounded' => __( 'Bounded', 'starck' ),
-				),
-				'settings' => 'starck_settings[footer_bound_setting]',
-				'priority' => 40,
-			)
-		);
-
-//Header
-		$wp_customize->add_section(
-			'starck_layout_header',
-			array(
-				'title' => __( 'Header', 'starck' ),
-				'priority' => 20,
-				'panel' => 'starck_layout_panel',
+				'priority' => 5,
 			)
 		);
 
@@ -297,6 +228,30 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
+			'starck_settings[nav_bound_setting]',
+			array(
+				'default' => $defaults['nav_bound_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[nav_bound_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Navigation container', 'starck' ),
+				'section' => 'starck_layout_navigation',
+				'choices' => array(
+					'full-width' => __( 'Full-width', 'starck' ),
+					'bounded' => __( 'Bounded', 'starck' ),
+				),
+				'settings' => 'starck_settings[nav_bound_setting]',
+				'priority' => 5,
+			)
+		);
+
+		$wp_customize->add_setting(
 			'starck_settings[nav_position_setting]',
 			array(
 				'default' => $defaults['nav_position_setting'],
@@ -346,13 +301,47 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			)
 		);
 
+// Main content
+		$wp_customize->add_section(
+			'starck_layout_content',
+			array(
+				'title' =>  __( 'Content', 'starck' ),
+				'priority' => 40,
+				'panel' => 'starck_layout_panel',
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[main_bound_setting]',
+			array(
+				'default' => $defaults['main_bound_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[main_bound_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Main container', 'starck' ),
+				'section' => 'starck_layout_content',
+				'choices' => array(
+					'full-width' => __( 'Full-width', 'starck' ),
+					'bounded' => __( 'Bounded', 'starck' ),
+				),
+				'settings' => 'starck_settings[main_bound_setting]',
+				'priority' => 5,
+			)
+		);
+
 
 // Sidebar
 		$wp_customize->add_section(
 			'starck_layout_sidebars',
 			array(
 				'title' => __( 'Sidebars', 'starck' ),
-				'priority' => 40,
+				'priority' => 50,
 				'panel' => 'starck_layout_panel',
 			)
 		);
@@ -406,7 +395,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'priority' => 20,
 			)
 		);
-//
+
 		$wp_customize->add_setting(
 			'starck_settings[single_layout_setting]',
 			array(
@@ -437,8 +426,32 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_layout_footer',
 			array(
 				'title' => __( 'Footer', 'starck' ),
-				'priority' => 50,
+				'priority' => 60,
 				'panel' => 'starck_layout_panel',
+			)
+		);
+		
+		$wp_customize->add_setting(
+			'starck_settings[footer_bound_setting]',
+			array(
+				'default' => $defaults['footer_bound_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[footer_bound_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Footer container', 'starck' ),
+				'section' => 'starck_layout_footer',
+				'choices' => array(
+					'full-width' => __( 'Full-width', 'starck' ),
+					'bounded' => __( 'Bounded', 'starck' ),
+				),
+				'settings' => 'starck_settings[footer_bound_setting]',
+				'priority' => 5,
 			)
 		);
 
@@ -501,7 +514,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			array(
 				'default' => $defaults['back_to_top'],
 				'type' => 'option',
-				'sanitize_callback' => 'starck_sanitize_choices',
+				'sanitize_callback' => 'starck_sanitize_checkbox',
 			)
 		);
 
@@ -511,14 +524,29 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'type' => 'checkbox',
 				'label' => __( 'Back to Top Button', 'starck' ),
 				'section' => 'starck_layout_footer',
-/*				'choices' => array(
-					'enable' => __( 'Enable', 'starck' ),
-					'' => __( 'Disable', 'starck' ),
-				),*/
 				'settings' => 'starck_settings[back_to_top]',
 				'priority' => 50,
 			)
 		);
 
+	}
+}
+
+if ( ! function_exists( 'starck_customizer_live_preview' ) ) {
+	add_action( 'customize_preview_init', 'starck_customizer_live_preview', 100 );
+	/**
+	 * Add custom live preview scripts
+	 */
+	function starck_customizer_live_preview() {
+
+		wp_enqueue_script( 'starck-themecustomizer', trailingslashit( get_template_directory_uri() ) . 'inc/js/customizer-live-preview.js', array( 'customize-preview' ), STARCK_VERSION, true );
+
+		wp_localize_script( 'starck-themecustomizer', 'starck_live_preview', array(
+			'mobile' => apply_filters( 'starck_mobile_media_query', '(max-width:768px)' ),
+			'tablet' => apply_filters( 'starck_tablet_media_query', '(min-width: 769px) and (max-width: 1024px)' ),
+			'desktop' => apply_filters( 'starck_desktop_media_query', '(min-width:1025px)' ),
+			'contentLeft' => 40,
+			'contentRight' => 40,
+		) );
 	}
 }
