@@ -43,19 +43,36 @@
 					<div class="site-description"><?php bloginfo( 'description' ); ?></div>
 				</div>
 			</section>
+			<section id="header-content" <?php echo 'class=align-' . ( "right" === starck_get_option( 'branding_alignment' ) ? 'left' : 'right') ?>>
 			<?php
 			if ( starck_get_option( 'header_search' ) && 'center' !== starck_get_option( 'branding_alignment' ) ) {	
 			?>
 				<div id="site-search" <?php starck_search_class(); ?>><?php get_search_form(); ?></div>
 			<?php
 			}
-			?>
+
+		if ( 'inline' !== starck_get_option( 'nav_position_setting' ) ) { 
+		?>
+		</section>
+		</div>
+		<!-- end container -->
+		<?php
+		}
+		?>
 			<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
 				<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
 			</nav>
+		<?php 
+		if ( 'inline' === starck_get_option( 'nav_position_setting' ) ) { 
+		?>
+		</section>
 		</div>
 		<!-- end container -->
+		<?php
+		}
+		?>
 	</header>
+
 	<!-- main -->
 	<main id="main" <?php starck_main_class(); ?> role="main">
 		<!-- container -->

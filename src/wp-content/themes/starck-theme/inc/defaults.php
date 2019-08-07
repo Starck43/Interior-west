@@ -18,26 +18,26 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 	function starck_get_defaults() {
 		return apply_filters( 'starck_option_defaults',
 			array(
-				'header_bound_setting' => 'wide-full', //'bounded'
-				'top_bar_layout_setting' => 'right', //'left', 'no-top-bar'
-				'logo_width' => '',
+				'header_bound_setting' => 'full-width', //'bounded'
+				'top_bar_layout_setting' => 'enabled', //'disabled'
+				//'logo_width' => '',
 				'branding_alignment' => 'left', //'left','center','right'
 				'branding_vertical' => false,
 				'header_search' => true,
-				'nav_bound_setting' =>  'wide-full', //'bounded'
+				'nav_bound_setting' =>  'full-width', //'bounded'
 				'nav_position_setting' => 'under', //'inline', 'above', 'under'
 				'nav_alignment' => 'center', //'left', 'right'
-				'nav_search' => true,
-				'menu_appearence_action' => 'click', //'hover'
-				'menu_appearence_direction' => 'left', //'down'
-				'main_bound_setting' => 'bounded', //'wide-full'
+				//'nav_search' => true,
+				//'menu_appearence_action' => 'click', //'hover'
+				//'menu_appearence_direction' => 'left', //'down'
+				'main_bound_setting' => 'bounded', //full-width'
 				'layout_setting' => 'right-sidebar',
 				'blog_layout_setting' => 'right-sidebar',
 				'single_layout_setting' => 'right-sidebar',
-				'footer_bound_setting' => 'wide-full', //'bounded'
+				'footer_bound_setting' => 'full-width', //'bounded'
 				'footer_widget_setting' => '1',
-				'footer_alignment' => 'center',
-				'back_to_top' => '',
+				'footer_alignment' => 'center', //'left', 'right'
+				'back_to_top' => true,
 
 			)
 		);

@@ -129,9 +129,10 @@ if ( ! function_exists( 'starck_header_classes' ) ) {
 	 * Adds custom classes to the header.
 	 */
 	function starck_header_classes( $merged_class ) {
-		$classes[] = 'header';
+		$classes[] = 'site-header';
 
-		$classes[] = starck_get_option( 'header_bound_setting' );
+		$classes[] = 'branding-' . starck_get_option( 'branding_alignment' );
+		$classes[] = 'nav-' . starck_get_option( 'nav_position_setting' ) . '-header';
 
 		
 		return starck_merge_classes($classes, $merged_class);
@@ -152,12 +153,12 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 		$nav_position = starck_get_option( 'nav_position_setting' );
 		$branding_alignment = starck_get_option( 'branding_alignment' );
 		
-		if ( 'inline' === $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
+		if ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
 			$classes[] = 'float-' . ( ( 'left' === $branding_alignment ) ? 'right' : 'left' );
 		} else
 			$classes[] = $nav_position . '-header';
 
-		$classes[] = 'align-' . esc_attr( starck_get_option( 'nav_alignment' ) );
+		$classes[] = esc_attr( starck_get_option( 'nav_alignment' ) );
 
 		return starck_merge_classes($classes, $merged_class);
 	}

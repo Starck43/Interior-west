@@ -57,8 +57,8 @@ define('SECURE_AUTH_SALT', '3(s[s1$#KtIbhz4teh1[W|w8gk#!|k<9Ol60Q;Gq,,b XYyEyxht
 define('LOGGED_IN_SALT',   '2kRQJ[K]d8mB)@_df:h/ke+sb$s$6Cy+?a3+>YLxTGrut]YTH%cVOUI7Hj6*iXP|');
 define('NONCE_SALT',       'G6LH: o!>%u4)^3>frEh h_(OwzeQ#gX:vXUvbc=EDl4vNh Gj_4a|F+ urtD{WH');
 
-//define('WP_SITEURL', 'http://start-web.loc/');
-//define('WP_HOME', 'http://start-web.loc/wordpress');
+//define('WP_SITEURL', 'http://start-web/');
+//define('WP_HOME', 'http://start-web/wordpress');
 
 // Для разработчиков: Режим отладки WordPress. В обычном режиме false
 define('WP_DEBUG', false);

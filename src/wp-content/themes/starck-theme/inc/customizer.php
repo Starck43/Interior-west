@@ -83,41 +83,270 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'starck_settings[container_width]', // section id
+			'starck_settings[header_bound_setting]',
 			array(
-				'default' => $defaults['container_width'],
+				'default' => $defaults['header_bound_setting'],
 				'type' => 'option',
-				'sanitize_callback' => 'starck_sanitize_integer',
-				'transport' => 'postMessage',
+				'sanitize_callback' => 'starck_sanitize_choices',
 			)
 		);
 
 		$wp_customize->add_control(
-			new Starck_Range_Slider_Control(
-				$wp_customize,
-				'starck_settings[container_width]', // section id
-				array(
-					'type' => 'starck-range-slider',
-					'label' =>  __( 'Container Width', 'starck' ),
-					'section' => 'starck_layout_container',
-					'settings' => array(
-						'desktop' => 'starck_settings[container_width]',
-					),
-					'choices' => array(
-						'desktop' => array(
-							'min' => 900,
-							'max' => 1920,
-							'step' => 50,
-							'edit' => true,
-							'unit' => 'px',
-						),
-					),
-					'priority' => 0,
-				)
+			'starck_settings[header_bound_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Header container', 'starck' ),
+				'section' => 'starck_layout_container',
+				'choices' => array(
+					'full-width' => __( 'Full-width', 'starck' ),
+					'bounded' => __( 'Bounded', 'starck' ),
+				),
+				'settings' => 'starck_settings[header_bound_setting]',
+				'priority' => 10,
 			)
 		);
 
-		
+		$wp_customize->add_setting(
+			'starck_settings[nav_bound_setting]',
+			array(
+				'default' => $defaults['nav_bound_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[nav_bound_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Navigation container', 'starck' ),
+				'section' => 'starck_layout_container',
+				'choices' => array(
+					'full-width' => __( 'Full-width', 'starck' ),
+					'bounded' => __( 'Bounded', 'starck' ),
+				),
+				'settings' => 'starck_settings[nav_bound_setting]',
+				'priority' => 20,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[main_bound_setting]',
+			array(
+				'default' => $defaults['main_bound_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[main_bound_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Main container', 'starck' ),
+				'section' => 'starck_layout_container',
+				'choices' => array(
+					'full-width' => __( 'Full-width', 'starck' ),
+					'bounded' => __( 'Bounded', 'starck' ),
+				),
+				'settings' => 'starck_settings[main_bound_setting]',
+				'priority' => 30,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[footer_bound_setting]',
+			array(
+				'default' => $defaults['footer_bound_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[footer_bound_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Footer container', 'starck' ),
+				'section' => 'starck_layout_container',
+				'choices' => array(
+					'full-width' => __( 'Full-width', 'starck' ),
+					'bounded' => __( 'Bounded', 'starck' ),
+				),
+				'settings' => 'starck_settings[footer_bound_setting]',
+				'priority' => 40,
+			)
+		);
+
+//Header
+		$wp_customize->add_section(
+			'starck_layout_header',
+			array(
+				'title' => __( 'Header', 'starck' ),
+				'priority' => 20,
+				'panel' => 'starck_layout_panel',
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[top_bar_layout_setting]',
+			array(
+				'default' => $defaults['top_bar_layout_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[top_bar_layout_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Top Bar appearence', 'starck' ),
+				'section' => 'starck_layout_header',
+				'choices' => array(
+					'enabled' => __( 'Enabled', 'starck' ),
+					'disabled' => __( 'Disabled', 'starck' ),
+				),
+				'settings' => 'starck_settings[top_bar_layout_setting]',
+				'priority' => 10,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[branding_alignment]',
+			array(
+				'default' => $defaults['branding_alignment'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[branding_alignment]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Branding alignment', 'starck' ),
+				'section' => 'starck_layout_header',
+				'choices' => array(
+					'left' => __( 'Left', 'starck' ),
+					'center' => __( 'Center', 'starck' ),
+					'right' => __( 'Right', 'starck' ),
+				),
+				'settings' => 'starck_settings[branding_alignment]',
+				'priority' => 20,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[branding_vertical]',
+			array(
+				'default' => $defaults['branding_vertical'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[branding_vertical]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Branding position', 'starck' ),
+				'section' => 'starck_layout_header',
+				'choices' => array(
+					false => __( 'Horizontal', 'starck' ),
+					true => __( 'Vertical', 'starck' ),
+				),
+				'settings' => 'starck_settings[branding_vertical]',
+				'priority' => 30,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[header_search]',
+			array(
+				'default' => $defaults['header_search'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[header_search]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Search field in Header', 'starck' ),
+				'section' => 'starck_layout_header',
+				'choices' => array(
+					true => __( 'Enabled', 'starck' ),
+					false => __( 'Disabled', 'starck' ),
+				),
+				'settings' => 'starck_settings[header_search]',
+				'priority' => 40,
+			)
+		);
+
+
+//Navigation
+		$wp_customize->add_section(
+			'starck_layout_navigation',
+			array(
+				'title' => __( 'Navigation', 'starck' ),
+				'priority' => 30,
+				'panel' => 'starck_layout_panel',
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[nav_position_setting]',
+			array(
+				'default' => $defaults['nav_position_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[nav_position_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Navigation position', 'starck' ),
+				'section' => 'starck_layout_navigation',
+				'choices' => array(
+					'inline' => __( 'Inline Header', 'starck' ),
+					'under' => __( 'Below Header', 'starck' ),
+					'above' => __( 'Above Header', 'starck' ),
+				),
+				'settings' => 'starck_settings[nav_position_setting]',
+				'priority' => 10,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[nav_alignment]',
+			array(
+				'default' => $defaults['nav_alignment'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[nav_alignment]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Navigation alignment', 'starck' ),
+				'section' => 'starck_layout_navigation',
+				'choices' => array(
+					'left' => __( 'Left', 'starck' ),
+					'center' => __( 'Center', 'starck' ),
+					'right' => __( 'Right', 'starck' ),
+				),
+				'settings' => 'starck_settings[nav_alignment]',
+				'priority' => 20,
+			)
+		);
+
+
 // Sidebar
 		$wp_customize->add_section(
 			'starck_layout_sidebars',
@@ -144,13 +373,12 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'label' => __( 'Sidebar Layout', 'starck' ),
 				'section' => 'starck_layout_sidebars',
 				'choices' => array(
-					'left-sidebar' => __( 'Sidebar / Content', 'starck' ),
-					'right-sidebar' => __( 'Content / Sidebar', 'starck' ),
-					//'sidebar' => __( 'Sidebar / Content', 'starck' ),
-					'no-sidebar' => __( 'Content (no sidebars)', 'starck' ),
+					'left-sidebar' => __( 'Sidebar | Content', 'starck' ),
+					'right-sidebar' => __( 'Content | Sidebar', 'starck' ),
+					'no-sidebar' => __( 'Only content', 'starck' ),
 				),
 				'settings' => 'starck_settings[layout_setting]',
-				'priority' => 30,
+				'priority' => 10,
 			)
 		);
 
@@ -170,13 +398,12 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'label' => __( 'Blog Sidebar Layout', 'starck' ),
 				'section' => 'starck_layout_sidebars',
 				'choices' => array(
-					'left-sidebar' => __( 'Sidebar / Content', 'starck' ),
-					'right-sidebar' => __( 'Content / Sidebar', 'starck' ),
-					//'sidebar' => __( 'Sidebar / Content', 'starck' ),
-					'no-sidebar' => __( 'Content (no sidebars)', 'starck' ),
+					'left-sidebar' => __( 'Sidebar | Content', 'starck' ),
+					'right-sidebar' => __( 'Content | Sidebar', 'starck' ),
+					'no-sidebar' => __( 'Only content', 'starck' ),
 				),
 				'settings' => 'starck_settings[blog_layout_setting]',
-				'priority' => 35,
+				'priority' => 20,
 			)
 		);
 //
@@ -196,13 +423,12 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'label' => __( 'Single Post Sidebar Layout', 'starck' ),
 				'section' => 'starck_layout_sidebars',
 				'choices' => array(
-					'left-sidebar' => __( 'Sidebar / Content', 'starck' ),
-					'right-sidebar' => __( 'Content / Sidebar', 'starck' ),
-					//'sidebar' => __( 'Sidebar / Content', 'starck' ),
-					'no-sidebar' => __( 'Content (no sidebars)', 'starck' ),
+					'left-sidebar' => __( 'Sidebar | Content', 'starck' ),
+					'right-sidebar' => __( 'Content | Sidebar', 'starck' ),
+					'no-sidebar' => __( 'Only content', 'starck' ),
 				),
 				'settings' => 'starck_settings[single_layout_setting]',
-				'priority' => 36,
+				'priority' => 30,
 			)
 		);
 		
@@ -239,14 +465,14 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 
 				),
 				'settings' => 'starck_settings[footer_widget_setting]',
-				'priority' => 45,
+				'priority' => 10,
 			)
 		);
 
 		$wp_customize->add_setting(
-			'starck_settings[footer_bar_alignment]',
+			'starck_settings[footer_alignment]',
 			array(
-				'default' => $defaults['footer_bar_alignment'],
+				'default' => $defaults['footer_alignment'],
 				'type' => 'option',
 				'sanitize_callback' => 'starck_sanitize_choices',
 				'transport' => 'postMessage',
@@ -254,18 +480,18 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 		);
 
 		$wp_customize->add_control(
-			'starck_settings[footer_bar_alignment]',
+			'starck_settings[footer_alignment]',
 			array(
 				'type' => 'select',
-				'label' => __( 'Footer Bar Alignment', 'starck' ),
+				'label' => __( 'Footer alignment', 'starck' ),
 				'section' => 'starck_layout_footer',
 				'choices' => array(
 					'left' => __( 'Left','starck' ),
 					'center' => __( 'Center','starck' ),
 					'right' => __( 'Right','starck' ),
 				),
-				'settings' => 'starck_settings[footer_bar_alignment]',
-				'priority' => 46,
+				'settings' => 'starck_settings[footer_alignment]',
+				'priority' => 20,
 				//'active_callback' => 'starck_is_footer_bar_active',
 			)
 		);
@@ -282,13 +508,13 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 		$wp_customize->add_control(
 			'starck_settings[back_to_top]',
 			array(
-				'type' => 'select',
+				'type' => 'checkbox',
 				'label' => __( 'Back to Top Button', 'starck' ),
 				'section' => 'starck_layout_footer',
-				'choices' => array(
+/*				'choices' => array(
 					'enable' => __( 'Enable', 'starck' ),
 					'' => __( 'Disable', 'starck' ),
-				),
+				),*/
 				'settings' => 'starck_settings[back_to_top]',
 				'priority' => 50,
 			)
