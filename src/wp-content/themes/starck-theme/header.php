@@ -11,20 +11,23 @@
 
 <body <?php body_class(); ?>>
 
-	<header id="site-header" <?php starck_header_class(); ?>>
+	<header id="site-header" <?php starck_header_class('site-header'); ?>>
 		<?php 
+		if ( 'enabled' === starck_get_option( 'top_bar_layout_setting' ) ) {
+			starck_get_top_bar();
+		}
 		$nav_position = starck_get_option( 'nav_position_setting' );
 		if ( 'above' == $nav_position ) { 
 		?>
-			<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
+			<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
 				<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
 			</nav>
 		<?php
 		}
 		?>
 
-		<!-- container -->
-		<div id="container" class="header-container">
+		<!-- header-container -->
+		<div id="header-container" class="<?php echo 'container branding-' . starck_get_option( 'branding_alignment' ); ?>">
 			<?php
 			$custom_header = get_custom_header();
 			if ( ! empty( $custom_header->attachment_id ) ) {
@@ -33,7 +36,7 @@
 				<?php
 			}
 			?>
-			<section id="branding" <?php starck_branding_class('branding'); ?>>
+			<section id="branding" <?php starck_branding_class('site-branding'); ?>>
 				<?php
 				$custom_logo_id = get_theme_mod( 'custom_logo' );
 				if ( $custom_logo_id ) {
@@ -64,7 +67,7 @@
 			<?php 
 			if ( 'inline' == $nav_position ) { 
 			?>
-				<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
+				<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
 					<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
 				</nav>
 			<?php
@@ -77,7 +80,7 @@
 	<?php 
 	if ( 'under' == $nav_position ) { 
 	?>
-		<nav id="site-menu" <?php starck_navigation_class(); ?> role="navigation">
+		<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
 			<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
 		</nav>
 	<?php
@@ -85,9 +88,9 @@
 	?>
 
 	<!-- main -->
-	<main id="main" <?php starck_main_class(); ?> role="main">
-		<!-- container -->
-		<div id="container" class="main-container">
+	<main id="main" <?php starck_main_class('main'); ?> role="main">
+		<!-- main container -->
+		<div id="main-container" class="container">
 
 			<header id="main-header">
 			</header>

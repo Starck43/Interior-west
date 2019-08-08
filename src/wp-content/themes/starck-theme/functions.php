@@ -63,80 +63,10 @@ function starck_setup() {
 	add_theme_support( 'editor-color-palette', array() );
 	//add_theme_support( 'woocommerce' );
 	
-	
-/**
- * Add custom header classes to <header> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_header_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_header_class", $merged_class );
-}
 
-/**
- * Add custom branding classes to <id="branding"> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_branding_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_branding_class", $merged_class );
-}
-
-/**
- * Add custom search classes to <id="search"> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_search_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_search_class", $merged_class );
-}
-
-/**
- * Add custom menu classes to <nav> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_navigation_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_navigation_class", $merged_class );
-}
-
-/**
- * Add custom main classes to <main> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_main_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_main_class", $merged_class );
-}
-
-/**
- * Add custom content classes to <section id='content'> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_content_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_content_class", $merged_class );
-}
-
-/**
- * Add custom sidebar classes to <aside id='main-sidebar'> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_sidebar_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_sidebar_class", $merged_class );
-}
-
-/**
- * Add custom footer classes to <footer> element.
- *
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_footer_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_footer_class", $merged_class );
-}
 	global $content_width;
-	if ( ! isset( $content_width ) ) { $content_width = 1200; }
+	if ( ! isset( $content_width ) ) { $content_width = 1920; }
+
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu', 'starck' ),
 	) );
@@ -271,19 +201,18 @@ if ( ! function_exists( 'starck_widgets_init' ) ) {
 		$widgets = array(
 			'sidebar' => __( 'Sidebar', 'starck' ),
 			'header' => __( 'Header', 'starck' ),
-			'footer-1' => __( 'Footer Widget 1', 'starck' ),
-			'footer-2' => __( 'Footer Widget 2', 'starck' ),
-			'footer-3' => __( 'Footer Widget 3', 'starck' ),
-			'footer-bar' => __( 'Footer Bar','starck' ),
 			'top-bar' => __( 'Top Bar','starck' ),
+			'footer-1' => __( 'Footer 1', 'starck' ),
+			'footer-2' => __( 'Footer 2', 'starck' ),
+			'footer-3' => __( 'Footer 3', 'starck' ),
 		);
 
 		foreach ( $widgets as $id => $name ) {
 			register_sidebar( array(
 				'name'          => $name,
 				'id'            => $id,
-				'before_widget' => '<aside id="%1$s" class="widget inner-padding %2$s">',
-				'after_widget'  => '</aside>',
+				'before_widget' => '<section id="%1$s" class="widget">',
+				'after_widget'  => '</section>',
 				'before_title'  => apply_filters( 'starck_start_widget_title', '<h2 class="widget-title">' ),
 				'after_title'   => apply_filters( 'starck_end_widget_title', '</h2>' ),
 			) );
@@ -297,27 +226,69 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/defaults.php';
 require get_template_directory() . '/inc/markup.php';
 
+	
+/**
+ * Add custom header classes to <header> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_header_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_header_class", $merged_class );
+}
 
-if ( ! function_exists( 'starck_content_width' ) ) {
-	add_action( 'wp', 'starck_content_width' );
-	/**
-	 * Set the $content_width depending on layout of current page
-	 * Hook into "wp" so we have the correct layout setting from starck_get_layout()
-	 * Hooking into "after_setup_theme" doesn't get the correct layout setting
-	 */
-	function starck_content_width() {
-		global $content_width;
+/**
+ * Add custom branding classes to <id="branding"> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_branding_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_branding_class", $merged_class );
+}
 
-		$container_width = starck_get_option( 'container_width' );
-		$sidebar_width = apply_filters( 'starck_sidebar_width', '25' );
-		$layout = starck_get_layout();
+/**
+ * Add custom search classes to <id="search"> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_search_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_search_class", $merged_class );
+}
 
-		if ( 'sidebar' == $layout ) {
-			$content_width = $container_width * ( ( 100 - $sidebar_width ) / 100 );
-		} elseif ( 'no-sidebar' == $layout ) {
-			$content_width = $container_width;
-		}
-	}
+/**
+ * Add custom menu classes to <nav> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_navigation_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_navigation_class", $merged_class );
+}
+
+/**
+ * Add custom main classes to <main> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_main_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_main_class", $merged_class );
+}
+
+/**
+ * Add custom content classes to <section id='content'> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_content_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_content_class", $merged_class );
+}
+
+/**
+ * Add custom sidebar classes to <aside id='main-sidebar'> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_sidebar_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_sidebar_class", $merged_class );
+}
+
+/**
+ * Add custom footer classes to <footer> element.
+ * @param string|array $merged_class. Classes to add to the class list.
+ */
+function starck_footer_class( $merged_class = '' ) {
+	return apply_filters( "starck_add_footer_class", $merged_class );
 }
 
 
@@ -355,12 +326,11 @@ if ( ! function_exists( 'starck_get_layout' ) ) {
 	}
 }
 
-
-if ( ! function_exists( 'get_starck_sidebar' ) ) {
+if ( ! function_exists( 'starck_get_sidebar' ) ) {
 	/**
-	 * Construct sidebar
+	 * Construct Sidebar
 	 */
-	function get_starck_sidebar() {
+	function starck_get_sidebar() {
 		$layout = starck_get_layout();
 
 		// If sidebar, show it.
@@ -370,19 +340,57 @@ if ( ! function_exists( 'get_starck_sidebar' ) ) {
 	}
 }
 
-function add_default_sidebar_widget( $area ) {
+if ( ! function_exists( 'starck_get_top_bar' ) ) {
+	/**
+	 * Construct Top Bar
+	 */
+	function starck_get_top_bar() {	
+		if ( ! is_active_sidebar( 'top-bar' ) ) { return; }
+		?>
+		<div id="top-bar" class="container">
+			<?php dynamic_sidebar( 'top-bar' ); ?>
+		</div>
+		<?php 
+	}
+}
 
+if ( ! function_exists( 'starck_get_footer_widgets' ) ) {
+	/**
+	 * Build our footer widgets.
+	 */
+	function starck_get_footer_widgets( $widgets ) {
+
+		// If no footer widgets exist, we don't need to continue.
+		if (
+			! is_active_sidebar( 'footer-1' ) &&
+			! is_active_sidebar( 'footer-2' ) &&
+			! is_active_sidebar( 'footer-3' ) )
+		{
+			return;
+		}
+		?>
+
+		<div id="footer-widgets" class="site footer-widgets">
+			<?php
+			if ( $widgets >= 1 ) { starck_add_footer_widget( 1 ); }
+			if ( $widgets >= 2 ) { starck_add_footer_widget( 2 ); }
+			if ( $widgets >= 3 ) { starck_add_footer_widget( 3 ); }
+			?>
+		</div>
+		<?php
+	}
+}
+
+
+/**
+ * Build every footer widget.
+ * @param int $widget_width The width class of our widget.
+ * @param int $widget The ID of our widget.
+ */
+function starck_add_footer_widget( $widget ) {
 	?>
-	<div id="search" class="search-widget">
-		<?php get_search_form(); ?>
-	</div>
-
-	<div id="archives" class="widget">
-		<h2 class="widget-title"><?php esc_html_e( 'Archives', 'starck' ); ?></h2>
-		<ul>
-			<?php wp_get_archives( array( 'type' => 'monthly' ) ); ?>
-		</ul>
+	<div class="footer-widget-<?php echo absint( $widget ); ?>">
+		<?php dynamic_sidebar( 'footer-' . absint( $widget ) ); ?>
 	</div>
 	<?php
 }
-

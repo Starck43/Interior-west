@@ -58,7 +58,7 @@ img
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
 
-#container
+.container
 	padding: $gutter-20/2
 	
 .bounded
@@ -91,90 +91,75 @@ body
 	overflow-x: hidden
 	
 #site-header
-	#container
-		display: flex
-		//padding: $gutter-20/2 0
-		//padding-top: $gutter-20/2
-		//margin-bottom: $gutter-20/2
-		justify-content: space-between
-		background-color: $main-bg
+	background-color: $main-bg
 	
-	&.branding-right
-		#container
+	#header-container
+		display: flex
+		justify-content: space-between
+	
+		&.branding-right
 			flex-direction: row-reverse
 			
-	&.branding-center
-		#container
+		&.branding-center
 			flex-direction: column
 										
-	.branding
-		display: flex
-		a
+		#branding
 			display: flex
-
-		&-left
-			//@extend .align-left
-
-		&.align-center
-			//@extend .align-center
 			a
-				justify-content: center
-
-		&.align-right
-			//@extend .align-right
-			flex-direction: row-reverse
+				display: flex
 
 
-			//justify-content: center
-		&.align-vertical
-			flex-direction: column
-			a
-				justify-content: center
+			&.align-center
+				margin-bottom: $gutter-20/2
+				a
+					justify-content: center
+
+			&.align-right
+				flex-direction: row-reverse
+
+
+			&.align-vertical
+				flex-direction: column
+				a
+					justify-content: center
+					
+				#branding-logo
+					@include push--auto
+					
+				#branding-title
+					@include push--auto 
+
 				
 			#branding-logo
-				@include push--auto
-				
+				margin: auto 0
+				//padding: 0 $gutter-20/2
+				max-width: 200px
+
 			#branding-title
-				@include push--auto 
+				margin: auto 0
+				padding: 0 $gutter-20/2
 
-			
-		.site-logo
-			//float: left
-			margin: auto 0
-			//padding: 0 $gutter-20/2
-			max-width: 200px
+				.site-title
+					margin: 0
+					line-height: 1
+					font-size: 30px
+					text-transform: uppercase 
+				a
+					&:hover
+							color: $link-color
 
-		#branding-title
-			//float: left
-			margin: auto 0
-			padding: 0 $gutter-20/2
-
-			.site-title
-				margin: 0
-				line-height: 1
-				font-size: 30px
-				text-transform: uppercase 
-			a
-				&:hover
-						color: $link-color
-
-
-	#header-content
-		display: flex
-		flex-direction: column
-
-		#site-search
+		#header-content
 			display: flex
-			margin-bottom: auto 
-			padding-bottom: $gutter-20/2
-			//margin: 0 $gutter-20/2 $gutter-20/2
+			flex-direction: column
 
-	&.nav-inline-header
-		&.branding-center
-			#site-menu
-				margin-top: $gutter-20/2
+			#site-search
+				display: flex
+				margin-bottom: auto 
+				padding-bottom: $gutter-20/2
+				//margin: 0 $gutter-20/2 $gutter-20/2
+
 		
-#site-menu
+#header-nav
 	display: flex
 	width: 100%
 	margin-top: auto
@@ -185,18 +170,18 @@ body
 	
 	&.float-left
 		width: auto
-	
+
 	.menu
 		display: flex
 		position: relative
 		width: 100%
 		height: $nav-height
 		overflow: hidden	
-		
+
 	&.center-aligned
 		li
 			justify-content: center
-	
+
 	&.right-aligned
 		li
 			justify-content: flex-end
@@ -212,6 +197,7 @@ body
 			a
 				margin: 0 $gutter-20
 				color: $menu-link-color
+				text-transform: uppercase
 				line-height: $nav-height
 				
 			&:hover
@@ -222,34 +208,39 @@ body
 main
 	clear: both
 	@include push--auto
-
-	#main-header
-		padding: $gutter-20 0
-		display: none //если нет контента
-
-	#container
+	
+	&.left-sidebar
+		#main-container
+			flex-direction: row-reverse 
+			
+	#main-container
+		display: flex
 		height: 100%
 		min-height: 100vh
 		padding: 
-			top: $gutter-20 * 2
+			top: 0
 			bottom: $gutter-20/2
-			  
 		@include push--auto
 		background-color: $main-bg
+			  
+		#main-header
+			padding: $gutter-20 0
+			display: none //если нет контента
 		
 		#content
 			float: left
-			width: $content-width
+			width: 100%
 			padding: 0 $gutter-20
 			background-color: $content-bg
 			box-sizing: border-box
 			
-			&.left-sidebar
-				float: right
+			&.left-aligned
 				width: $content-width
+				margin-right: $gutter-20/2
 				
-			&.no-sidebar
-				width: 100%
+			&.right-aligned
+				margin-left: $gutter-20/2
+
 		
 		#main-sidebar
 			width: 25%
@@ -261,10 +252,16 @@ main
 
 				
 footer	
-	#container
-		background-color: $footer-bg
+	#footer-container
+		background: $footer-bg
 		//color: #FFF
-		padding:  $gutter-20 / 2
+		#footer-widgets
+			padding: $gutter-20 / 2
+		
+		#copyright
+			background: white
+			padding: $gutter-20 / 2
+			text-align: center
 
 	
 	 

@@ -77,7 +77,7 @@ if ( ! function_exists( 'starck_header_classes' ) ) {
 	 * Adds custom classes to the header.
 	 */
 	function starck_header_classes( $merged_class ) {
-		$classes[] = 'site-header';
+		//$classes[] = 'site-header';
 
 		$classes[] = starck_get_option( 'header_bound_setting' );
 
@@ -89,6 +89,20 @@ if ( ! function_exists( 'starck_header_classes' ) ) {
 }
 
 
+if ( ! function_exists( 'starck_branding_classes' ) ) {
+	add_filter( 'starck_add_branding_class', 'starck_branding_classes' );
+	/**
+	 * Adds custom classes to the branding.	 
+	 */
+	function starck_branding_classes( $merged_class ) {
+
+		$classes[] = (starck_get_option( 'branding_vertical' ) ? 'align-vertical' : '');
+		$classes[] = 'align-' . starck_get_option( 'branding_alignment' );
+
+		return starck_merge_classes($classes, $merged_class);
+	}
+}
+
 if ( ! function_exists( 'starck_navigation_classes' ) ) {
 	add_filter( 'starck_add_navigation_class', 'starck_navigation_classes' );
 	/**
@@ -99,30 +113,15 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 		
 		$nav_position = starck_get_option( 'nav_position_setting' );
 		$branding_alignment = starck_get_option( 'branding_alignment' );
-		
+
+		if ( 'inline' == $nav_position) {
+			$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); }
+
 		if ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
 			$classes[] = 'float-' . ( ( 'left' === $branding_alignment ) ? 'right' : 'left' );
-		} else
-		{
-			$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) );
-			$classes[] = $nav_position . '-header';
-		}
-		
+		} else $classes[] = $nav_position . '-header';
+
 		$classes[] = esc_attr( starck_get_option( 'nav_alignment' ) ) . '-aligned';
-
-		return starck_merge_classes($classes, $merged_class);
-	}
-}
-
-if ( ! function_exists( 'starck_branding_classes' ) ) {
-	add_filter( 'starck_add_branding_class', 'starck_branding_classes' );
-	/**
-	 * Adds custom classes to the branding.	 
-	 */
-	function starck_branding_classes( $merged_class ) {
-
-		$classes[] = (starck_get_option( 'branding_vertical' ) ? 'align-vertical' : '');
-		$classes[] = 'align-' . starck_get_option( 'branding_alignment' );
 
 		return starck_merge_classes($classes, $merged_class);
 	}
@@ -154,10 +153,13 @@ if ( ! function_exists( 'starck_main_classes' ) ) {
 	 * Adds custom classes to the main.
 	 */
 	function starck_main_classes( $merged_class ) {
-		$classes[] = 'main';
+		//$classes[] = 'main';
 
 		$classes[] = starck_get_option( 'main_bound_setting' ); //'bounded', 'wide-full'
 		//$classes[] = starck_get_option( 'header_layout_setting' );
+
+		// Get the sidebar layout
+		$classes[] = starck_get_layout();
 
 		return starck_merge_classes($classes, $merged_class);
 	}
@@ -170,11 +172,16 @@ if ( ! function_exists( 'starck_content_classes' ) ) {
 	 * Adds custom classes to the content container.
 	 */
 	function starck_content_classes( $merged_class ) {
-
 		$classes[] = 'main-content';
 
-		// Get the sidebar layout
-		$classes[] = starck_get_layout();
+		$sidebar_layout = starck_get_layout();
+
+		if ('left-sidebar' == $sidebar_layout) {
+			$classes[] = 'right-aligned';
+		} else 
+		if ('right-sidebar' == $sidebar_layout) {
+			$classes[] = 'left-aligned';
+		}
 
 		return starck_merge_classes($classes, $merged_class);
 	}
@@ -201,7 +208,7 @@ if ( ! function_exists( 'starck_footer_classes' ) ) {
 	 * Adds custom classes to the footer.
 	 */
 	function starck_footer_classes( $merged_class ) {
-		$classes[] = 'site-footer';
+		//$classes[] = 'site-footer';
 
 		$classes[] = starck_get_option( 'footer_bound_setting' );
 		//$classes[] = starck_get_option( 'footer_layout_setting' );

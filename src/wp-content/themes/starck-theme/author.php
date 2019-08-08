@@ -17,6 +17,6 @@
 
 	</section>
 
-	<?php get_starck_sidebar(); ?>
+	<?php starck_get_sidebar(); ?>
 
 <?php get_footer(); ?>
