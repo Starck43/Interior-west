@@ -103,6 +103,10 @@ input:required:valid, textarea:required:valid {
   border-color: green;
 }
 
+p {
+  margin: 0;
+}
+
 a {
   text-decoration: none;
   font-weight: bold;
@@ -196,7 +200,7 @@ img {
 }
 
 html {
-  background-color: rgba(83, 140, 198, 0.1);
+  background-color: #c6d9ec;
 }
 
 body {
@@ -208,12 +212,35 @@ body {
   min-width: 320px;
   position: relative;
   margin: 0;
-  background-color: rgba(102, 153, 204, 0.1);
+  background-color: #d9e6f2;
   overflow-x: hidden;
 }
 
 #site-header {
   background-color: white;
+}
+
+#site-header #top-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 0 10px;
+}
+
+#site-header #top-bar .widget {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin: 10px 0 auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
 }
 
 #site-header #header-container {
@@ -447,7 +474,7 @@ main #main-container #main-sidebar {
   float: left;
   padding: 10px;
   background-color: white;
-  border: 1px solid rgba(102, 153, 204, 0.1);
+  border: 1px solid #d9e6f2;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -456,12 +483,30 @@ footer #footer-container {
   background: #69c;
 }
 
-footer #footer-container #footer-widgets {
-  padding: 10px;
+footer #footer-container .footer-widgets {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 0 10px;
+}
+
+footer #footer-container .footer-widgets .widget {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  margin: 10px 0 auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
 }
 
 footer #footer-container #copyright {
-  background: white;
   padding: 10px;
   text-align: center;
 }

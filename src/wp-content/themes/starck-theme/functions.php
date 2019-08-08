@@ -389,7 +389,7 @@ if ( ! function_exists( 'starck_get_footer_widgets' ) ) {
  */
 function starck_add_footer_widget( $widget ) {
 	?>
-	<div class="footer-widget-<?php echo absint( $widget ); ?>">
+	<div class="widget footer-widget-<?php echo absint( $widget ); ?>">
 		<?php dynamic_sidebar( 'footer-' . absint( $widget ) ); ?>
 	</div>
 	<?php
