@@ -114,7 +114,7 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 		$nav_position = starck_get_option( 'nav_position_setting' );
 		$branding_alignment = starck_get_option( 'branding_alignment' );
 
-		if ( 'inline' == $nav_position) {
+		if ( 'inline' !== $nav_position) {
 			$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); }
 
 		if ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {

@@ -96,17 +96,22 @@ body
 	background-color: $main-bg
 
 	#top-bar
+		background-color: $body-bg
 		display: flex
-		justify-content: space-around
-		padding: 0 $gutter-20 / 2
+		padding: 
+			left: 0
+			right: 0
 		
 		.widget
-			display: flex
 			width: 100%
-			margin:  $gutter-20 / 2 0 auto
-			justify-content: center
-			align-items: start
-							
+			margin:  0 $gutter-20 / 2 auto
+			&:nth-child(n)
+				text-align: center
+			&:first-child
+				text-align: left
+			&:last-child
+				text-align: right
+										
 	#header-container
 		display: flex
 		justify-content: space-between
@@ -232,7 +237,7 @@ main
 		height: 100%
 		min-height: 100vh
 		padding: 
-			top: 0
+			top: $gutter-20/2
 			bottom: $gutter-20/2
 		@include push--auto
 		background-color: $main-bg
@@ -271,15 +276,17 @@ footer
 		.footer-widgets
 
 			display: flex
-			justify-content: space-around
+			//justify-content: space-around
 			padding: 0 $gutter-20 / 2	 
 			
 			.widget
-				display: flex
+				//display: flex
 				width: 100%
 				margin:  $gutter-20 / 2 0 auto
-				justify-content: center
-				align-items: start
+				//justify-content: center
+				//align-items: start
+				table
+					margin: auto 
 
 		#copyright
 			//background: $body-bg
