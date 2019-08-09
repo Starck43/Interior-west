@@ -10,7 +10,13 @@
 </head>
 
 <body <?php body_class(); ?>>
-
+	<?php 
+	$menu_args = array( 
+		'theme_location' => 'primary',
+		'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="burger-menu" class="menu-icon">&#9776;</div>',
+		//'container' => ''
+	)
+	?>
 	<header id="site-header" <?php starck_header_class('site-header'); ?>>
 		<?php 
 		if ( 'enabled' === starck_get_option( 'top_bar_layout_setting' ) ) {
@@ -20,7 +26,7 @@
 		if ( 'above' == $nav_position ) { 
 		?>
 			<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-				<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+				<?php wp_nav_menu( $menu_args ); ?>
 			</nav>
 		<?php
 		}
@@ -68,7 +74,7 @@
 			if ( 'inline' == $nav_position ) { 
 			?>
 				<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-					<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+					<?php wp_nav_menu( $menu_args ); ?>
 				</nav>
 			<?php
 			}
@@ -81,7 +87,7 @@
 	if ( 'under' == $nav_position ) { 
 	?>
 		<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-			<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+			<?php wp_nav_menu( $menu_args ); ?>
 		</nav>
 	<?php
 	}

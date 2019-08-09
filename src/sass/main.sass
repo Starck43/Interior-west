@@ -37,7 +37,7 @@ a
 	 	color: $link-color-hover
 li
 	list-style-type: none /* Убираем глобально маркеры */
-	transition: 300ms all ease
+
 	
 img
 	width: 100%
@@ -183,19 +183,13 @@ body
 	width: 100%
 	margin-top: auto
 	background-color: $nav-bg
-
+	
 	&.float-right
 		width: auto
 	
 	&.float-left
 		width: auto
 
-	.menu
-		display: flex
-		position: relative
-		width: 100%
-		height: $nav-height
-		overflow: hidden	
 
 	&.center-aligned
 		li
@@ -204,8 +198,18 @@ body
 	&.right-aligned
 		li
 			justify-content: flex-end
+			
+	.menu-top-container
+		display: flex
 		
+		.menu-icon
+			margin: auto
+			font-size: 1.5em
+		
+			
 	ul
+		display: flex
+		position: relative
 		width: 100%
 		margin: 0
 		padding: 0
@@ -213,15 +217,32 @@ body
 		
 		li
 			display: flex
+			transition: 300ms all ease
+			&:hover
+				background-color:  lighten($nav-bg, 10%)
+			
 			a
 				margin: 0 $gutter-20
 				color: $menu-link-color
 				text-transform: uppercase
 				line-height: $nav-height
-				
-			&:hover
 				//border-bottom: 3px solid $menu-link-color
-				background-color:  lighten($nav-bg, 10%)
+		&.responsive
+			height: 500px
+
+				
+	&.inline-header
+		background-color: $header-bg
+		li
+			transition: none
+			&:hover			
+				background-color: inherit
+
+			a
+				color: $text-color	
+				&:hover
+					transition:  100ms all ease
+					border-bottom: 3px solid $theme-color 
 
 		
 main
@@ -277,14 +298,21 @@ footer
 
 			display: flex
 			//justify-content: space-around
-			padding: 0 $gutter-20 / 2	 
+			padding: $gutter-20 / 2	 
 			
-			.widget
+			.footer-widget
 				//display: flex
 				width: 100%
-				margin:  $gutter-20 / 2 0 auto
+				margin:  0 0 auto
 				//justify-content: center
 				//align-items: start
+				&:nth-child(n)
+					text-align: center
+				&:first-child
+					text-align: left
+				&:last-child
+					text-align: right
+
 				table
 					margin: auto 
 

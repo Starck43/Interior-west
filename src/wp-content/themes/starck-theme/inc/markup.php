@@ -115,9 +115,11 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 		$branding_alignment = starck_get_option( 'branding_alignment' );
 
 		if ( 'inline' !== $nav_position) {
-			$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); }
+			$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); 
+		}
 
 		if ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
+			$classes[] = $nav_position . '-header';
 			$classes[] = 'float-' . ( ( 'left' === $branding_alignment ) ? 'right' : 'left' );
 		} else $classes[] = $nav_position . '-header';
 
@@ -174,13 +176,15 @@ if ( ! function_exists( 'starck_content_classes' ) ) {
 	function starck_content_classes( $merged_class ) {
 		$classes[] = 'main-content';
 
-		$sidebar_layout = starck_get_layout();
+		if (is_active_sidebar( 'sidebar' )) {
 
-		if ('left-sidebar' == $sidebar_layout) {
-			$classes[] = 'right-aligned';
-		} else 
-		if ('right-sidebar' == $sidebar_layout) {
-			$classes[] = 'left-aligned';
+			$sidebar_layout = starck_get_layout();
+			if ('left-sidebar' == $sidebar_layout) {
+				$classes[] = 'right-aligned';
+			} else 
+			if ('right-sidebar' == $sidebar_layout) {
+				$classes[] = 'left-aligned';
+			}
 		}
 
 		return starck_merge_classes($classes, $merged_class);
