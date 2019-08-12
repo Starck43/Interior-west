@@ -12,8 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! function_exists( 'starck_sanitize_choices' ) ) {
 	/**
 	 * Sanitize choices.
-	 *
-	 * @since 1.3.24
 	 */
 	function starck_sanitize_choices( $input, $setting ) {
 		// Ensure input is a slug
@@ -120,6 +118,30 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
+			'starck_settings[header_widget_setting]',
+			array(
+				'default' => $defaults['header_widget_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[header_widget_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Header widget', 'starck' ),
+				'section' => 'starck_layout_header',
+				'choices' => array(
+					'enabled' => __( 'Enabled', 'starck' ),
+					'disabled' => __( 'Disabled', 'starck' ),
+				),
+				'settings' => 'starck_settings[header_widget_setting]',
+				'priority' => 10,
+			)
+		);
+
+		$wp_customize->add_setting(
 			'starck_settings[top_bar_layout_setting]',
 			array(
 				'default' => $defaults['top_bar_layout_setting'],
@@ -135,11 +157,11 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'label' => __( 'Top Bar appearence', 'starck' ),
 				'section' => 'starck_layout_header',
 				'choices' => array(
-					'enabled' => __( 'Enabled', 'starck' ),
-					'disabled' => __( 'Disabled', 'starck' ),
+					true => __( 'Enabled', 'starck' ),
+					false => __( 'Disabled', 'starck' ),
 				),
 				'settings' => 'starck_settings[top_bar_layout_setting]',
-				'priority' => 10,
+				'priority' => 15,
 			)
 		);
 
@@ -189,30 +211,6 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				),
 				'settings' => 'starck_settings[branding_vertical]',
 				'priority' => 30,
-			)
-		);
-
-		$wp_customize->add_setting(
-			'starck_settings[header_search]',
-			array(
-				'default' => $defaults['header_search'],
-				'type' => 'option',
-				'sanitize_callback' => 'starck_sanitize_choices',
-			)
-		);
-
-		$wp_customize->add_control(
-			'starck_settings[header_search]',
-			array(
-				'type' => 'select',
-				'label' => __( 'Search field in Header', 'starck' ),
-				'section' => 'starck_layout_header',
-				'choices' => array(
-					true => __( 'Enabled', 'starck' ),
-					false => __( 'Disabled', 'starck' ),
-				),
-				'settings' => 'starck_settings[header_search]',
-				'priority' => 40,
 			)
 		);
 
@@ -267,9 +265,10 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'label' => __( 'Navigation position', 'starck' ),
 				'section' => 'starck_layout_navigation',
 				'choices' => array(
-					'inline' => __( 'Inline Header', 'starck' ),
-					'under' => __( 'Below Header', 'starck' ),
-					'above' => __( 'Above Header', 'starck' ),
+					'inline' => __( 'Inline Logo', 'starck' ),
+					'above' => __( 'Above Logo', 'starck' ),
+					'below' => __( 'Below Logo', 'starck' ),
+					'under' => __( 'Under Header', 'starck' ),
 				),
 				'settings' => 'starck_settings[nav_position_setting]',
 				'priority' => 10,
@@ -298,6 +297,31 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				),
 				'settings' => 'starck_settings[nav_alignment]',
 				'priority' => 20,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[nav_search_setting]',
+			array(
+				'default' => $defaults['nav_search_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[nav_search_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Search icon in navigation', 'starck' ),
+				'section' => 'starck_layout_navigation',
+				'choices' => array(
+					'front' => __( 'In front of menu', 'starck' ),
+					'behind' => __( 'Behind of menu', 'starck' ),
+					'disabled' => __( 'Disabled', 'starck' ),
+				),
+				'settings' => 'starck_settings[nav_search_setting]',
+				'priority' => 30,
 			)
 		);
 

@@ -22,11 +22,12 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				//'logo_width' => '',
 				'branding_alignment' => 'left', //'left','center','right'
 				'branding_vertical' => false,
-				'header_search' => true,
+				'header_widget_setting' => 'enabled', //'disabled'
+				//'header_search' => true,
 				'nav_bound_setting' =>  'full-width', //'bounded'
-				'nav_position_setting' => 'under', //'inline', 'above', 'under'
+				'nav_position_setting' => 'under', //'inline', 'above', 'below', under'
 				'nav_alignment' => 'center', //'left', 'right'
-				//'nav_search' => true,
+				'nav_search_setting' => 'front', //'behind', 'disabled'
 				//'menu_appearence_action' => 'click', //'hover'
 				//'menu_appearence_direction' => 'left', //'down'
 				'main_bound_setting' => 'bounded', //full-width'

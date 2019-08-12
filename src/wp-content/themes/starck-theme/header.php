@@ -10,38 +10,42 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<?php 
-	$menu_args = array( 
+	<?php
+	$primary_args = array( 
 		'theme_location' => 'primary',
-		'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="burger-menu" class="menu-icon">&#9776;</div>',
+		//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="menu-icon" class="burger-menu">&#9776;</div>',
 		//'container' => ''
-	)
+	);
+	$secondary_args = array( 
+		'theme_location' => 'secondary',
+		//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+		//'container' => ''
+	);
 	?>
 	<header id="site-header" <?php starck_header_class('site-header'); ?>>
 		<?php 
 		if ( 'enabled' === starck_get_option( 'top_bar_layout_setting' ) ) {
 			starck_get_top_bar();
 		}
-		$nav_position = starck_get_option( 'nav_position_setting' );
-		if ( 'above' == $nav_position ) { 
-		?>
-			<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-				<?php wp_nav_menu( $menu_args ); ?>
-			</nav>
-		<?php
-		}
+		$custom_header = get_custom_header();
+		if ( ! empty( $custom_header->attachment_id ) ) {
+			$header_img_style = ' style="background-image: url(' . $custom_header->url . ')"';
+		} else $header_img_style = '';
 		?>
 
 		<!-- header-container -->
-		<div id="header-container" class="<?php echo 'container branding-' . starck_get_option( 'branding_alignment' ); ?>">
-			<?php
-			$custom_header = get_custom_header();
-			if ( ! empty( $custom_header->attachment_id ) ) {
-				?>
-				<img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />
-				<?php
-			}
+		<div id="header-container" class="<?php echo 'container branding-' . starck_get_option( 'branding_alignment' ); ?>" <?php echo $header_img_style; ?>>
+			<?php 
+			$nav_position = starck_get_option( 'nav_position_setting' );
+			if ( in_array($nav_position, ['above', 'below']) ) { 
 			?>
+				<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
+					<?php wp_nav_menu( $primary_args ); ?>
+					<?php wp_nav_menu( $secondary_args ); ?>
+				</nav>
+			<?php
+			}
+			?>		
 			<section id="branding" <?php starck_branding_class('site-branding'); ?>>
 				<?php
 				$custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -62,23 +66,31 @@
 					<div class="site-description"><?php bloginfo( 'description' ); ?></div>
 				</div>
 			</section>
+
 			<section id="header-content" <?php echo 'class=align-' . ( "right" === starck_get_option( 'branding_alignment' ) ? 'left' : 'right') ?>>
-			<?php
-			if ( starck_get_option( 'header_search' ) && 'center' !== starck_get_option( 'branding_alignment' ) ) {	
-			?>
-				<div id="site-search" <?php starck_search_class(); ?>><?php get_search_form(); ?></div>
-			<?php
-			}
-			?>
-			<?php 
-			if ( 'inline' == $nav_position ) { 
-			?>
-				<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-					<?php wp_nav_menu( $menu_args ); ?>
-				</nav>
-			<?php
-			}
-			?>
+				<?php 
+				$nav_search_position = starck_get_option( 'nav_search_setting' );
+				if ('front' == $nav_search_position) {
+					echo '<div id="search-icon" class="search"></div>';
+				}
+				if ( 'inline' == $nav_position ) { 
+				?>
+					<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
+						<?php wp_nav_menu( $primary_args ); ?>
+						<?php wp_nav_menu( $secondary_args ); ?>
+					</nav>
+				<?php
+				}
+				if ('behind' == $nav_search_position) {
+					echo '<div id="search-icon" class="search"></div>';
+				}
+
+				if ( starck_get_option( 'header_widget_setting' )) {
+					starck_get_header_widget();
+				}
+				?>
+				<div id="menu-icon" class="burger-menu">&#9776;</div>
+				<div id="site-search" <?php starck_search_class('search'); ?>><?php get_search_form(); ?></div>
 			</section>
 		</div>
 		<!-- end container -->
@@ -87,7 +99,8 @@
 	if ( 'under' == $nav_position ) { 
 	?>
 		<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-			<?php wp_nav_menu( $menu_args ); ?>
+			<?php wp_nav_menu( $primary_args ); ?>
+			<?php wp_nav_menu( $secondary_args ); ?>
 		</nav>
 	<?php
 	}

@@ -31,7 +31,7 @@ p
 	margin: 0
 a
 	text-decoration: none
-	font-weight: bold
+	//font-weight: bold
 	color: $link-color
 	&:hover
 	 	color: $link-color-hover
@@ -70,15 +70,15 @@ img
 
 .align-left
 	justify-content: flex-start
-	align-items: flex-start
+	//align-items: flex-start
 	
 .align-center
 	justify-content: center		
-	align-items: center
+	//align-items: center
 
 .align-right
 	justify-content: flex-end
-	align-items: flex-end
+	//align-items: flex-end
 
 html
 	background-color: darken($body-bg,5%)
@@ -115,96 +115,100 @@ body
 	#header-container
 		display: flex
 		justify-content: space-between
+
 	
-		&.branding-right
-			flex-direction: row-reverse
-			
-		&.branding-center
-			flex-direction: column
+	&.branding-right
+		flex-direction: row-reverse
+		
+	&.branding-center
+		flex-direction: column
 										
-		#branding
+	#branding
+		display: flex
+		margin: 0 0 auto
+		a
 			display: flex
+
+
+		&.align-center
+			margin-bottom: $gutter-20/2
 			a
-				display: flex
+				justify-content: center
+
+		&.align-right
+			flex-direction: row-reverse
 
 
-			&.align-center
-				margin-bottom: $gutter-20/2
-				a
-					justify-content: center
+		&.align-vertical
+			flex-direction: column
 
-			&.align-right
-				flex-direction: row-reverse
-
-
-			&.align-vertical
-				flex-direction: column
-				a
-					justify-content: center
-					
-				#branding-logo
-					@include push--auto
-					
-				#branding-title
-					@include push--auto 
-
+			a
+				justify-content: center
 				
 			#branding-logo
-				margin: auto 0
-				//padding: 0 $gutter-20/2
-				max-width: 200px
-
+				@include push--auto
+				
 			#branding-title
-				margin: auto 0
-				padding: 0 $gutter-20/2
+				@include push--auto 
 
-				.site-title
-					margin: 0
-					line-height: 1
-					font-size: 30px
-					text-transform: uppercase 
-				a
-					&:hover
-							color: $link-color
+			
+		#branding-logo
+			margin: auto 0
+			//padding: 0 $gutter-20/2
+			max-width: 200px
 
+		#branding-title
+			margin: auto 0
+			padding: 0 $gutter-20/2
+
+			.site-title
+				margin: 0
+				line-height: 1
+				font-size: 30px
+				text-transform: uppercase 
+			a
+				&:hover
+						color: $link-color
+	&.nav-below-logo
+		#header-container
+			flex-wrap: wrap-reverse
+
+	&.nav-above-logo
+		#header-container
+			flex-wrap: wrap
+			
+		#header-nav
+			margin-bottom: $gutter-20/2 
+			
+	&.nav-inline-logo
 		#header-content
 			display: flex
-			flex-direction: column
+			flex-wrap: wrap
+			//flex-direction: column
 
-			#site-search
-				display: flex
-				margin-bottom: auto 
-				padding-bottom: $gutter-20/2
-				//margin: 0 $gutter-20/2 $gutter-20/2
-
+	#menu-icon
+		@extend #search-icon
+		background-color: #FFF 
+		
+	#search-icon
+		@include push--auto
+		padding: 0 $gutter-20/2 
+		font-size: 1.5em
+		height: 40px
+		line-height: 40px
+		display: none
+		
+	#site-search
+		display: none
 		
 #header-nav
 	display: flex
 	width: 100%
-	margin-top: auto
-	background-color: $nav-bg
+	//margin-top: auto
 	
-	&.float-right
-		width: auto
-	
-	&.float-left
-		width: auto
-
-
-	&.center-aligned
-		li
-			justify-content: center
-
-	&.right-aligned
-		li
-			justify-content: flex-end
-			
 	.menu-top-container
 		display: flex
-		
-		.menu-icon
-			margin: auto
-			font-size: 1.5em
+		width: 100%
 		
 			
 	ul
@@ -217,32 +221,50 @@ body
 		
 		li
 			display: flex
-			transition: 300ms all ease
-			&:hover
-				background-color:  lighten($nav-bg, 10%)
-			
-			a
-				margin: 0 $gutter-20
-				color: $menu-link-color
-				text-transform: uppercase
-				line-height: $nav-height
-				//border-bottom: 3px solid $menu-link-color
-		&.responsive
-			height: 500px
-
-				
-	&.inline-header
-		background-color: $header-bg
-		li
 			transition: none
 			&:hover			
 				background-color: inherit
 
 			a
-				color: $text-color	
+				margin: 0 $gutter-20
+				text-transform: uppercase
+				line-height: $nav-height
+				color: $menu-link-color //$text-color	
 				&:hover
 					transition:  100ms all ease
 					border-bottom: 3px solid $theme-color 
+
+		&.responsive
+			height: 500px
+
+	&.float-right
+		width: auto
+	
+	&.float-left
+		width: auto
+
+
+	&.center-aligned
+		ul
+			justify-content: center
+
+	&.right-aligned
+		ul
+			justify-content: flex-end
+			
+	&.below-logo
+
+
+	&.nav-under-header
+		background-color: $nav-bg //$header-bg
+		li
+			transition: 300ms all ease
+			&:hover
+				background-color:  lighten($nav-bg, 10%)
+			
+			a
+				color: $menu-link-color
+				//border-bottom: 3px solid $menu-link-color
 
 		
 main
@@ -289,6 +311,7 @@ main
 			background-color: $sidebar-bg 
 			border: 1px solid $border-color
 			box-sizing: border-box
+
 		
 footer	
 	#footer-container
