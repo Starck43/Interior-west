@@ -355,7 +355,31 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 					'bounded' => __( 'Bounded', 'starck' ),
 				),
 				'settings' => 'starck_settings[main_bound_setting]',
-				'priority' => 5,
+				'priority' => 10,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[breadcrumbs_setting]',
+			array(
+				'default' => $defaults['breadcrumbs_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[breadcrumbs_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Breadcrumbs', 'starck' ),
+				'section' => 'starck_layout_content',
+				'choices' => array(
+					true => __( 'Enabled', 'starck' ),
+					false => __( 'Disabled', 'starck' ),
+				),
+				'settings' => 'starck_settings[breadcrumbs_setting]',
+				'priority' => 20,
 			)
 		);
 

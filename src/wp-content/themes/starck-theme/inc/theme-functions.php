@@ -392,3 +392,49 @@ function starck_add_footer_widget( $widget ) {
 	</div>
 	<?php
 }
+
+function starck_breadcrumbs() {	
+	if ( starck_get_option( 'breadcrumbs_setting' ) ) {
+
+		$separator = '<span class="breadcrumbs_separator"> / </span>'; // разделитель между "крошками"
+		$breadcrumb_active_class = '';
+		$breadcrumb_before = '<span class="breadcrumb' . $breadcrumb_active_class . '" itemscope itemtype="https://data-vocabulary.org/Breadcrumb">';
+		$breadcrumb_after = '</span>';
+
+		echo '<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
+			echo $breadcrumb_before;
+			?>
+				<a href="/" itemprop="url">
+					<span itemprop="title">Главная</span>
+				</a>
+				<?php
+				
+			echo $breadcrumb_after; //<!-- </span> -->
+			
+			echo $separator;
+
+			$categories = get_the_category();
+			if ($categories[0]) {
+
+				echo $breadcrumb_before;
+				?>
+					<a href="<?php get_category_link($categories[0]->term_id ); ?>" itemprop="url">
+						<span itemprop="title"><?php $categories[0]->name; ?></span>
+					</a>
+					<?php
+
+				echo $breadcrumb_after; //<!-- </span> -->
+
+				echo $separator;
+			}
+
+			$breadcrumb_active_class = ' active';
+			echo $breadcrumb_before;
+			?>
+				<span itemprop="title"><?php the_title(); ?></span>
+			<?php
+			echo $breadcrumb_after; //<!-- </span> -->
+		
+		echo '</div>';
+	}
+}

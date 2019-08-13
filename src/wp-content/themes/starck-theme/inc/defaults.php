@@ -18,12 +18,11 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 		return apply_filters( 'starck_option_defaults',
 			array(
 				'header_bound_setting' => 'full-width', //'bounded'
-				'top_bar_layout_setting' => 'enabled', //'disabled'
+				'top_bar_layout_setting' => false, //true
 				//'logo_width' => '',
 				'branding_alignment' => 'left', //'left','center','right'
 				'branding_vertical' => false,
 				'header_widget_setting' => 'enabled', //'disabled'
-				//'header_search' => true,
 				'nav_bound_setting' =>  'full-width', //'bounded'
 				'nav_position_setting' => 'under', //'inline', 'above', 'below', under'
 				'nav_alignment' => 'center', //'left', 'right'
@@ -31,6 +30,8 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				//'menu_appearence_action' => 'click', //'hover'
 				//'menu_appearence_direction' => 'left', //'down'
 				'main_bound_setting' => 'bounded', //full-width'
+				'single_header_background' => 'front-page-only', //'all-pages'
+				'breadcrumbs_setting' => true, //false
 				'layout_setting' => 'right-sidebar',
 				'blog_layout_setting' => 'right-sidebar',
 				'single_layout_setting' => 'right-sidebar',

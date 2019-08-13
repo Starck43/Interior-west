@@ -1,7 +1,9 @@
 <?php get_header(); ?>
 
 	<section id="content" <?php starck_content_class(); ?>>
-
+	
+		<?php starck_breadcrumbs(); ?>
+		
 		<header class="category-header">
 			<h1 class="entry-title"><?php single_term_title(); ?></h1>
 			<div class="archive-meta"><?php if ( '' != the_archive_description() ) { echo esc_html( the_archive_description() ); } ?></div>
