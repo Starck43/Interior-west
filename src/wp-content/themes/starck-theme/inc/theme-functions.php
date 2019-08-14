@@ -7,11 +7,8 @@ function starck_setup() {
 
 	//добавление фонового изображения через настройки темы
 	add_theme_support( 'custom-background', array(
-		'default-color'          => '',
-		//'default-image'          => '',
+		'default-color'          => '#fff',
 		'wp-head-callback'       => '_custom_background_cb',
-		'admin-head-callback'    => '',
-		'admin-preview-callback' => ''
 	) );
 
 	add_theme_support( 'custom-header', array(
@@ -19,10 +16,14 @@ function starck_setup() {
 		'height'				=> 1080,
 		'flex-height'			=> true,
 		'flex-width'			=> true,
-		'default-text-color'	=> 'white',
-		'header-text'			=> true,
+		'default-repeat'		=> 'no-repeat',
+		'default-position-x'	=> 'center',
+		'default-attachment'	=> 'fixed',		
+		'default-text-color'	=> '#eee',
+		//'header-text'			=> true,
 		'uploads'				=> true,
-		'default-image'			=> get_template_directory() . '/img/header.jpg',
+		'default-image'			=>  get_stylesheet_directory_uri() . '/img/header.jpg',
+		'wp-head-callback'       => '',
 	) );
 
 	//добавление опции установки логотипа через настройки темы
@@ -32,7 +33,7 @@ function starck_setup() {
 		'flex-width'  => true,
 		'flex-height' => true,
 		'uploads' 	  => true,
-		'default-image' => get_template_directory() . '/img/logo.png',
+		'default-image' => get_stylesheet_directory_uri() . '/img/logo.png',
 		'header-text' => array( 'site-title', 'site-description' )
 	) );
 
@@ -172,7 +173,7 @@ if ( ! function_exists( 'starck_get_link_url' ) ) {
 /**
  * Check if the logo and site branding are active.
  *
- */
+
 function starck_has_logo_site_branding() {
 	if ( get_theme_mod( 'custom_logo' ) && !starck_get_option( 'hide_title' ) ) {
 		return true;
@@ -180,6 +181,7 @@ function starck_has_logo_site_branding() {
 		return false;
 	}
 }
+ */
 
 if ( ! function_exists( 'starck_widgets_init' ) ) {
 	add_action( 'widgets_init', 'starck_widgets_init' );
@@ -393,48 +395,12 @@ function starck_add_footer_widget( $widget ) {
 	<?php
 }
 
+
 function starck_breadcrumbs() {	
+
 	if ( starck_get_option( 'breadcrumbs_setting' ) ) {
 
-		$separator = '<span class="breadcrumbs_separator"> / </span>'; // разделитель между "крошками"
-		$breadcrumb_active_class = '';
-		$breadcrumb_before = '<span class="breadcrumb' . $breadcrumb_active_class . '" itemscope itemtype="https://data-vocabulary.org/Breadcrumb">';
-		$breadcrumb_after = '</span>';
+		get_template_part( 'breadcrumbs' ); 
 
-		echo '<div class="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">';
-			echo $breadcrumb_before;
-			?>
-				<a href="/" itemprop="url">
-					<span itemprop="title">Главная</span>
-				</a>
-				<?php
-				
-			echo $breadcrumb_after; //<!-- </span> -->
-			
-			echo $separator;
-
-			$categories = get_the_category();
-			if ($categories[0]) {
-
-				echo $breadcrumb_before;
-				?>
-					<a href="<?php get_category_link($categories[0]->term_id ); ?>" itemprop="url">
-						<span itemprop="title"><?php $categories[0]->name; ?></span>
-					</a>
-					<?php
-
-				echo $breadcrumb_after; //<!-- </span> -->
-
-				echo $separator;
-			}
-
-			$breadcrumb_active_class = ' active';
-			echo $breadcrumb_before;
-			?>
-				<span itemprop="title"><?php the_title(); ?></span>
-			<?php
-			echo $breadcrumb_after; //<!-- </span> -->
-		
-		echo '</div>';
 	}
 }

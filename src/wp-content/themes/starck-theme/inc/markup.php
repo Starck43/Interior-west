@@ -3,7 +3,7 @@
  * HTML markup.
  *
  * @package Starcktheme
- * @since 1.0.3
+ * @since 1.0.4
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

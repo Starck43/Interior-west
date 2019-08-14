@@ -336,6 +336,53 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
+			'starck_settings[content_header_setting]',
+			array(
+				'default' => $defaults['content_header_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_choices',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[content_header_setting]',
+			array(
+				'type' => 'select',
+				'label' => __( 'Content header appearence', 'starck' ),
+				'section' => 'starck_layout_content',
+				'choices' => array(
+					'front-page' => __( 'Only front page', 'starck' ),
+					'all-pages' => __( 'All pages', 'starck' ),
+					'disabled' => __( 'Disabled', 'starck' ),
+				),
+				'settings' => 'starck_settings[content_header_setting]',
+				'priority' => 5,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[content_header_background]',
+			array(
+				'default' => $defaults['content_header_background'],
+				'type' => 'option',
+				'sanitize_callback' => 'esc_url_raw',
+			)
+		);
+
+		$wp_customize->add_control(
+			new WP_Customize_Image_Control(
+				$wp_customize,
+				'starck_settings[content_header_background]',
+				array(
+					'label' => __( 'Header background image', 'starck' ),
+					'section' => 'starck_layout_content',
+					'settings' => 'starck_settings[content_header_background]',
+					'priority' => 7,
+				)
+			)
+		);
+
+		$wp_customize->add_setting(
 			'starck_settings[main_bound_setting]',
 			array(
 				'default' => $defaults['main_bound_setting'],
@@ -351,7 +398,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'label' => __( 'Main container', 'starck' ),
 				'section' => 'starck_layout_content',
 				'choices' => array(
-					'full-width' => __( 'Full-width', 'starck' ),
+					'full-width' => __( 'Full width', 'starck' ),
 					'bounded' => __( 'Bounded', 'starck' ),
 				),
 				'settings' => 'starck_settings[main_bound_setting]',

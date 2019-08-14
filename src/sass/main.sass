@@ -42,6 +42,13 @@ li
 img
 	width: 100%
 	height: auto
+
+.header-background
+	height: 100%
+	background-size: cover
+	background-repeat: no-repeat
+	background-position: 50% 0%
+	background-attachment: fixed
 	
 .grid
 	display: grid
@@ -56,6 +63,17 @@ img
 		display: block
 		> div
 			padding: $gutter-20/2 0
+
+.button
+	margin: 10px auto
+	width: max-content
+	padding: 10px 20px
+	color: white
+	background-color: transparentize(#FFF,0.8)  
+	border: 1px solid $theme-color
+	border-radius: 5px
+	text-transform: uppercase
+	
 
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
 	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
@@ -218,6 +236,7 @@ body
 		margin: 0
 		padding: 0
 		height: $nav-height
+		background-color: $theme-color 
 		
 		li
 			display: flex
@@ -232,7 +251,7 @@ body
 				color: $menu-link-color //$text-color	
 				&:hover
 					transition:  100ms all ease
-					border-bottom: 3px solid $theme-color 
+					border-bottom: 3px solid white
 
 		&.responsive
 			height: 500px
@@ -256,15 +275,6 @@ body
 
 
 	&.nav-under-header
-		background-color: $nav-bg //$header-bg
-		li
-			transition: 300ms all ease
-			&:hover
-				background-color:  lighten($nav-bg, 10%)
-			
-			a
-				color: $menu-link-color
-				//border-bottom: 3px solid $menu-link-color
 
 		
 main
@@ -275,6 +285,16 @@ main
 		#main-container
 			flex-direction: row-reverse 
 			
+	#main-header
+		padding: $gutter-20 0
+
+		.header-container
+			width: 50%
+			//height: 100vh
+			margin: auto
+			padding-top: $gutter-30 * 2
+			color: #FFF 
+	
 	#main-container
 		display: flex
 		height: 100%
@@ -285,9 +305,6 @@ main
 		@include push--auto
 		background-color: $main-bg
 			  
-		#main-header
-			padding: $gutter-20 0
-			display: none //если нет контента
 		
 		#content
 			float: left

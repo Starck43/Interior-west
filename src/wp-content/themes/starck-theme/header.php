@@ -18,23 +18,25 @@
 	);
 	$secondary_args = array( 
 		'theme_location' => 'secondary',
-		//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul>',
-		//'container' => ''
+		'fallback_cb' => '__return_empty_string', // show additional menu only if it exists
 	);
+
+	$custom_header = get_custom_header();
+	if ( ! empty( $custom_header->attachment_id ) ) {
+		$header_img_attr = sprintf(' style="background-image: url(%s)"', $custom_header->url);
+		$background_class = 'header-background';
+	}
+
 	?>
-	<header id="site-header" <?php starck_header_class('site-header'); ?>>
+	<header id="site-header" <?php starck_header_class(['site-header',$background_class]); echo $header_img_attr; ?>>
 		<?php 
 		if ( 'enabled' === starck_get_option( 'top_bar_layout_setting' ) ) {
 			starck_get_top_bar();
 		}
-		$custom_header = get_custom_header();
-		if ( ! empty( $custom_header->attachment_id ) ) {
-			$header_img_style = ' style="background-image: url(' . $custom_header->url . ')"';
-		} else $header_img_style = '';
 		?>
 
 		<!-- header-container -->
-		<div id="header-container" class="<?php echo 'container branding-' . starck_get_option( 'branding_alignment' ); ?>" <?php echo $header_img_style; ?>>
+		<div id="header-container" class="<?php echo 'container branding-' . starck_get_option( 'branding_alignment' ); ?>">
 			<?php 
 			$nav_position = starck_get_option( 'nav_position_setting' );
 			if ( in_array($nav_position, ['above', 'below']) ) { 
@@ -108,8 +110,27 @@
 
 	<!-- main -->
 	<main id="main" <?php starck_main_class('main'); ?> role="main">
+
+		<?php 
+		$header_setting = starck_get_option( 'content_header_setting' );
+		if ( 'disabled' !== $header_setting ) {
+
+			$main_header_background_url = starck_get_option( 'content_header_background' );
+
+			if ( ! empty( $main_header_background_url ) ) {
+				$header_attr = sprintf('class="header-background" style="background-image: url(%s)"', $main_header_background_url);
+			} else $header_attr = '';
+
+			if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) || 
+				 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_single() || is_page() || is_archive() ) ) ) {
+
+		?>
+				<header id="main-header" <?php echo $header_attr; ?>>
+					<div class="header-container"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p><div class="button">Подробнее</div></div>
+				</header>
+		<?php 
+			}
+		}
+		?>
 		<!-- main container -->
 		<div id="main-container" class="container">
-
-			<header id="main-header">
-			</header>

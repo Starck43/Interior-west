@@ -30,7 +30,8 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				//'menu_appearence_action' => 'click', //'hover'
 				//'menu_appearence_direction' => 'left', //'down'
 				'main_bound_setting' => 'bounded', //full-width'
-				'single_header_background' => 'front-page-only', //'all-pages'
+				'content_header_setting' => 'front-page', //'all-pages', 'disabled' ????????????
+				'content_header_background' => '',
 				'breadcrumbs_setting' => true, //false
 				'layout_setting' => 'right-sidebar',
 				'blog_layout_setting' => 'right-sidebar',

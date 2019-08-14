@@ -125,6 +125,14 @@ img {
   height: auto;
 }
 
+.header-background {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+  background-attachment: fixed;
+}
+
 .grid {
   display: -ms-grid;
   display: grid;
@@ -153,6 +161,19 @@ img {
   .grid > div {
     padding: 10px 0;
   }
+}
+
+.button {
+  margin: 10px auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 10px 20px;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid #69c;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
 
 .parent {
@@ -394,6 +415,7 @@ body {
   margin: 0;
   padding: 0;
   height: 40px;
+  background-color: #69c;
 }
 
 #header-nav ul li {
@@ -418,7 +440,7 @@ body {
 #header-nav ul li a:hover {
   -webkit-transition: 100ms all ease;
   transition: 100ms all ease;
-  border-bottom: 3px solid #69c;
+  border-bottom: 3px solid white;
 }
 
 #header-nav ul.responsive {
@@ -445,23 +467,6 @@ body {
           justify-content: flex-end;
 }
 
-#header-nav.nav-under-header {
-  background-color: #69c;
-}
-
-#header-nav.nav-under-header li {
-  -webkit-transition: 300ms all ease;
-  transition: 300ms all ease;
-}
-
-#header-nav.nav-under-header li:hover {
-  background-color: #8cb3d9;
-}
-
-#header-nav.nav-under-header li a {
-  color: white;
-}
-
 main {
   clear: both;
   margin-left: auto;
@@ -475,6 +480,17 @@ main.left-sidebar #main-container {
           flex-direction: row-reverse;
 }
 
+main #main-header {
+  padding: 20px 0;
+}
+
+main #main-header .header-container {
+  width: 50%;
+  margin: auto;
+  padding-top: 60px;
+  color: #FFF;
+}
+
 main #main-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -486,11 +502,6 @@ main #main-container {
   margin-left: auto;
   margin-right: auto;
   background-color: white;
-}
-
-main #main-container #main-header {
-  padding: 20px 0;
-  display: none;
 }
 
 main #main-container #content {
