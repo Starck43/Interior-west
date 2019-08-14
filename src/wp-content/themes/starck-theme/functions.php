@@ -4,22 +4,29 @@
 
 //$home_url = get_home_url( null, 'wp-admin/', 'https' ); //Example.com: https://example.com/wp-admin/
 $home_url = get_stylesheet_directory_uri(); // for theme-child URL //get_home_url();
-$main_css_file = '/main.min.css';
-if ( !file_exists( $home_url . '/css' . $main_css_file )) $main_css_file = '/main.css';
+$main_css_file = 'main.min.css';
+if ( !file_exists( dirname( __FILE__ ) . '/css/' . $main_css_file )) $main_css_file = 'main.css';
 
 
 // STYLES registry
-wp_enqueue_style( 'starck-styles', $home_url . '/css' . $main_css_file);
-wp_enqueue_style( 'vendors-styles', $home_url . '/css/vendors.min.css');
+wp_enqueue_style( 'starck-styles', $home_url . '/css/' . $main_css_file);
+if ( file_exists( dirname( __FILE__ ) . '/css/vendors.min.css' )) {
+	wp_enqueue_style( 'vendors-styles', $home_url . '/css/vendors.min.css');
+}
 // !!! Check for dublicates of the styles below in /css/vendors.css via @import
 //wp_enqueue_style( 'magnific-popup', $home_url . '/plugins/magnific-popup/dist/magnific-popup.css');
 //wp_enqueue_style( 'font-awesome-styles', $home_url . '/plugins/awesome/css/font-awesome.min.css');
 
 // SCRIPTS registry
-add_action( 'starck_enqueue_scripts', 'starck_scripts_add' );
+add_action( 'wp_enqueue_scripts', 'starck_scripts_add' );
 function starck_scripts_add() {
-	wp_enqueue_script('my_custom_scripts', $home_url . '/js/custom.min.js');
-	wp_enqueue_script('vendors_scripts', $home_url . '/js/vendors.min.js');
+	$home_url = get_template_directory_uri();
+	if ( file_exists( dirname( __FILE__ ) . '/js/vendors.min.js' )) {
+		wp_enqueue_script('vendors_scripts', $home_url . '/js/vendors.min.js');
+	}
+	if ( file_exists( dirname( __FILE__ ) . '/js/custom.min.js' )) {
+		wp_enqueue_script('my_custom_scripts', $home_url . '/js/custom.min.js');
+	}
 }
 
 //!-- END ENQUEUE PARENT ACTION

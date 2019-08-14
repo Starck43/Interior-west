@@ -1,7 +1,6 @@
 /*
  * Adding vendors JS library.
  * Example: // @requires filename.js
- * @requires ../../node_modules/jquery/dist/jquery.min.js
  *
  * Alternative way to add vendors scripts is to use 'wp_enqueue_script()' function in functions.php of your active theme.
  * All scripts in folder src/js will be included in vendors.js excepting file custom.js.

@@ -87,7 +87,7 @@ gulp.task('scripts', function() {
 // Запускается тогда, когда добавляются сторонние скрипты в src/js и формируется общий файл vendors.min.js
 gulp.task('vendors-scripts', function() {
     return gulp.src([ // Берем нужные библиотеки вендорных скриптов
-        //'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save-dev jquery)
+        'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save-dev jquery)
         path.src+'js/*.js', // Vendors scripts.
         '!'+path.src+'js/*custom*.js'
     ])

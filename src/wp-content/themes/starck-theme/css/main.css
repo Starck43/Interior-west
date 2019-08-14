@@ -130,7 +130,6 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 0%;
-  background-attachment: fixed;
 }
 
 .grid {
@@ -174,6 +173,7 @@ img {
   border: 1px solid #69c;
   border-radius: 5px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .parent {
