@@ -208,6 +208,10 @@ img {
           justify-content: flex-end;
 }
 
+.hidden {
+  display: none;
+}
+
 html {
   background-color: #c6d9ec;
 }

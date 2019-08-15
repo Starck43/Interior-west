@@ -23,7 +23,13 @@
 		</div>
 		<!-- end container -->
 
-		<?php wp_footer(); ?>
+		<?php 
+		
+		starck_back_to_top();
+
+		wp_footer();
+		
+		?>
 
 	</footer>
 

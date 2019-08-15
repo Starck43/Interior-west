@@ -32,3 +32,4 @@ function starck_scripts_add() {
 //!-- END ENQUEUE PARENT ACTION
 
 require get_template_directory() . '/inc/theme-functions.php'; // Include main theme functions
+require get_template_directory() . '/inc/hide-title.php'; // Include Hide title plugin

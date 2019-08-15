@@ -2,17 +2,24 @@
 
 	<header class="entry-header">
 
-		<?php if ( is_singular() ) {
-			echo '<h1 class="entry-title">';
+		<?php 
+		if (get_post_meta( $post->ID, 'starck-hide-title', true )) $hidden_class = ' hidden';
+
+		if ( is_singular() ) {
+			echo '<h1 class="entry-title' . $hidden_class . '">';
 		} else {
-			echo '<h2 class="entry-title">';
-		} ?>
+			echo '<h2 class="entry-title' . $hidden_class . '">';
+		}
+		?>
+
 		<a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>" rel="bookmark"><?php the_title(); ?></a>
 		<?php if ( is_singular() ) {
 			echo '</h1>';
 		} else {
 			echo '</h2>';
-		} ?>
+		} 
+		?>
+
 	</header>
 
 	<?php edit_post_link(); ?>

@@ -292,9 +292,7 @@ function starck_get_option( $option ) {
 		return;
 	}
 
-	$options = wp_parse_args(
-		get_option( 'starck_settings', array() ), $defaults
-	);
+	$options = wp_parse_args( get_option( 'starck_settings', array() ), $defaults );
 
 	return $options[ $option ];
 }
@@ -403,4 +401,23 @@ function starck_breadcrumbs() {
 		get_template_part( 'breadcrumbs' ); 
 
 	}
+}
+
+function starck_back_to_top() {
+	$options = wp_parse_args( get_option( 'starck_settings', array() ), starck_get_defaults() );
+
+	if ( !$options['back_to_top'] ) {
+		return;
+	}
+
+	echo sprintf(
+		'<div id="back-to-top"><a title="%1$s" rel="nofollow" href="#" class="back-to-top" style="opacity:0;visibility:hidden;" data-scroll-speed="%2$s" data-start-scroll="%3$s">
+			<span class="%4$s">^</span>
+		</a></div>',
+		esc_attr__( 'Scroll back to top', 'starck' ),
+		400,
+		100,
+		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa-angle-up' ) ),
+
+	);
 }
