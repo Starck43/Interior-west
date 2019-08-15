@@ -3,7 +3,7 @@
 // https://github.com/Hoffffi/JQuery-Background-Image-Scroll
 
 (function($){
-  $.fn.bgscroll=function(options){
+  $.fn.bgParallax = function(options){
     var x=$.extend({
 		bgpositionx: 50, // x позиция фонового изображения, от 0 до 100, размерность в %, 50 - означает по центру
 		direction: "bottom", // направление bottom или top

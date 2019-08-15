@@ -410,14 +410,15 @@ function starck_back_to_top() {
 		return;
 	}
 
-	echo sprintf(
-		'<div id="back-to-top"><a title="%1$s" rel="nofollow" href="#" class="back-to-top" style="opacity:0;visibility:hidden;" data-scroll-speed="%2$s" data-start-scroll="%3$s">
-			<span class="%4$s">^</span>
-		</a></div>',
-		esc_attr__( 'Scroll back to top', 'starck' ),
-		400,
-		100,
-		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa-angle-up' ) ),
+	echo trim(preg_replace('/\s{2,}/', ' ', sprintf(
 
-	);
+		'<div id="back-to-top">
+			<a title="%1$s" rel="nofollow" href="#" class="back-to-top">
+				<span class="%2$s"></span>
+			</a>
+		</div>',
+		esc_attr__( 'Scroll back to top', 'starck' ),
+		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa fa-angle-up' ) )
+
+	)));
 }

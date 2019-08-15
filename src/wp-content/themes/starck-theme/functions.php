@@ -10,9 +10,8 @@ if ( !file_exists( dirname( __FILE__ ) . '/css/' . $main_css_file )) $main_css_f
 
 // STYLES registry
 wp_enqueue_style( 'starck-styles', $home_url . '/css/' . $main_css_file);
-if ( file_exists( dirname( __FILE__ ) . '/css/vendors.min.css' )) {
-	wp_enqueue_style( 'vendors-styles', $home_url . '/css/vendors.min.css');
-}
+wp_enqueue_style( 'vendors-styles', $home_url . '/css/vendors.min.css');
+
 // !!! Check for dublicates of the styles below in /css/vendors.css via @import
 //wp_enqueue_style( 'magnific-popup', $home_url . '/plugins/magnific-popup/dist/magnific-popup.css');
 //wp_enqueue_style( 'font-awesome-styles', $home_url . '/plugins/awesome/css/font-awesome.min.css');
