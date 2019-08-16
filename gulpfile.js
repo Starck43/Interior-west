@@ -1,6 +1,6 @@
 /*
  * Gulpfile.js
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Stanislav Shabalin
  */
 
@@ -87,7 +87,7 @@ gulp.task('scripts', function() {
 // Запускается тогда, когда добавляются сторонние скрипты в src/js и формируется общий файл vendors.min.js
 gulp.task('vendors-scripts', function() {
     return gulp.src([ // Берем нужные библиотеки вендорных скриптов
-        'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save-dev jquery)
+        'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save jquery)
         path.src+'js/*.js', // Vendors scripts.
         '!'+path.src+'js/*custom*.js'
     ])
@@ -157,6 +157,6 @@ gulp.task('rsync', function() {
 });
 
 //Дефолтный таск для запуска процессов слежения за изменениями кода. Выполняется командой Gulp без параметров
-gulp.task('default', gulp.parallel('browser-sync', 'watch'));
+gulp.task('default', gulp.parallel('vendors-styles', 'vendors-scripts', 'browser-sync', 'watch'));
 
 
