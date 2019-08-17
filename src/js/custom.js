@@ -14,13 +14,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 		$('.back-to-top').topBtnToggle({
 			scrollTrigger: 400,
+			//debug: true,
 		});
 	  
 	});
 
 	$('.back-to-top').on('click', function (e) {
 		
-		var scrollSpeed = 500; // скорость задержки перемещения наверх (в миллисекундах)
+		var scrollSpeed = 700; // скорость задержки перемещения наверх (в миллисекундах)
 		
 		e.preventDefault();
 		$('html,body').animate({

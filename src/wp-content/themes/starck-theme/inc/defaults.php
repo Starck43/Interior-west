@@ -32,6 +32,7 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				'main_bound_setting' => 'bounded', //full-width'
 				'content_header_setting' => 'front-page', //'all-pages', 'disabled' ????????????
 				'content_header_background' => '',
+				'content_header_gallery' => '',
 				'breadcrumbs_setting' => true, //false
 				'layout_setting' => 'right-sidebar',
 				'blog_layout_setting' => 'right-sidebar',

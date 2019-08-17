@@ -17,7 +17,7 @@
 				this.removeClass('show');
 			}
 			
-			if( btn.debug )console.log('scroll Y: '+scrollTop+'px');
+			if( btn.debug ) {console.log('scroll Y: '+scrollTop+'px');}
 		}
 	}
 }(jQuery));

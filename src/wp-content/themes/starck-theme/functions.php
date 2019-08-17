@@ -19,16 +19,16 @@ wp_enqueue_style( 'vendors-styles', $home_url . '/css/vendors.min.css');
 // SCRIPTS registry
 add_action( 'wp_enqueue_scripts', 'starck_scripts_add' );
 function starck_scripts_add() {
+
 	$home_url = get_template_directory_uri();
 	if ( file_exists( dirname( __FILE__ ) . '/js/vendors.min.js' )) {
 		wp_enqueue_script('vendors_scripts', $home_url . '/js/vendors.min.js');
 	}
 	if ( file_exists( dirname( __FILE__ ) . '/js/custom.min.js' )) {
-		wp_enqueue_script('my_custom_scripts', $home_url . '/js/custom.min.js');
+		wp_enqueue_script('my_custom_scripts', $home_url . '/js/custom.min.js', array('jquery'));
 	}
 }
-
 //!-- END ENQUEUE PARENT ACTION
 
 require get_template_directory() . '/inc/theme-functions.php'; // Include main theme functions
-require get_template_directory() . '/inc/hide-title.php'; // Include Hide title plugin
+require get_template_directory() . '/inc/meta-controls.php'; // Include custom meta in pages (i.e. header gallery or hide title)

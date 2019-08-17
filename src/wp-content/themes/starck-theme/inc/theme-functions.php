@@ -1,6 +1,21 @@
 <?php
 define( 'STARCK_VERSION', '1.0.4' );
 
+ /* Add the media uploader script */
+add_action('admin_enqueue_scripts', 'media_upload_enqueue');
+function media_upload_enqueue() {
+	//global $type_post;
+    //if( in_array($type_post, ['post','page']) ) {
+		if (function_exists('wp_enqueue_media')) {
+			wp_enqueue_media();
+		}
+		if ( file_exists( dirname( __FILE__ ) . '/js/media-upload.js' )) {
+			wp_enqueue_script('media_admin_scripts', get_template_directory_uri() . '/inc/js/media-upload.js', array('jquery'));
+		}
+	//}
+}
+
+
 add_action( 'after_setup_theme', 'starck_setup' );
 function starck_setup() {
 	load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
@@ -63,28 +78,28 @@ add_action( 'wp_footer', 'starck_footer_scripts' );
 function starck_footer_scripts() {
 	?>
 	<script>
-	jQuery(document).ready(function ($) {
-	var deviceAgent = navigator.userAgent.toLowerCase();
-	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
-	$("html").addClass("ios");
-	$("html").addClass("mobile");
-	}
-	if (navigator.userAgent.search("MSIE") >= 0) {
-	$("html").addClass("ie");
-	}
-	else if (navigator.userAgent.search("Chrome") >= 0) {
-	$("html").addClass("chrome");
-	}
-	else if (navigator.userAgent.search("Firefox") >= 0) {
-	$("html").addClass("firefox");
-	}
-	else if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
-	$("html").addClass("safari");
-	}
-	else if (navigator.userAgent.search("Opera") >= 0) {
-	$("html").addClass("opera");
-	}
-	});
+		jQuery(document).ready(function ($) {
+			var deviceAgent = navigator.userAgent.toLowerCase();
+			if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
+				$("html").addClass("ios");
+				$("html").addClass("mobile");
+			}
+			if (navigator.userAgent.search("MSIE") >= 0) {
+				$("html").addClass("ie");
+			}
+			else if (navigator.userAgent.search("Chrome") >= 0) {
+				$("html").addClass("chrome");
+			}
+			else if (navigator.userAgent.search("Firefox") >= 0) {
+				$("html").addClass("firefox");
+			}
+			else if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
+				$("html").addClass("safari");
+			}
+			else if (navigator.userAgent.search("Opera") >= 0) {
+				$("html").addClass("opera");
+			}
+		});
 	</script>
 	<?php
 }
@@ -418,7 +433,7 @@ function starck_back_to_top() {
 			</a>
 		</div>',
 		esc_attr__( 'Scroll back to top', 'starck' ),
-		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa fa-angle-up' ) )
+		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa fa-chevron-up' ) )
 
 	)));
 }

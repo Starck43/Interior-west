@@ -101,6 +101,7 @@ img
 
 .hidden
 	display: none
+
 	
 html
 	background-color: darken($body-bg,5%)
@@ -368,19 +369,24 @@ footer
 	.back-to-top
 		$btn-size: 30px
 		position: fixed
+		display: flex
+		align-items: center
+		justify-content: center
 		bottom: $btn-size * -1.2
 		right: $gutter-20
 		width: $btn-size
 		height: $btn-size
-		text-align: center
-		line-height: 100%
-		font-size: $btn-size
+		font-size: $btn-size / 2
 		background: transparentize($theme-color, 0.9)
 		color: darken($theme-color, 20%)
 		border: 1px solid darken($theme-color, 20%)
-		border-radius: 3px
+		border-radius: $btn-size / 1.5
 		transition: all 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
 		z-index: 9999
+		&:hover
+			color: lighten($theme-color, 100%)		
+			background: $theme-color
+			border-color: $theme-color
 		&.show
 			bottom: $btn-size * 1.5
 
