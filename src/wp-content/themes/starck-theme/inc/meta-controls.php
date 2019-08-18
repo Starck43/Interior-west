@@ -58,7 +58,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			wp_nonce_field( $this->gallery_slug . '_dononce', $this->gallery_slug . '_noncename' );
 			$gallery = get_post_meta( $post->ID, $this->gallery_slug );
 			//$gallery = explode("|", $images_str);
-			echo '<div class="gallery-block">';
+			echo '<div class="gallery-block" style="cursor:pointer;">';
 			if ($gallery) {
 				foreach ($gallery as $value) {
 					echo '<div class="gallery-image"><img src="' . $value . '" />';
@@ -105,12 +105,18 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			$new = $_POST[ $this->gallery_slug ];
 
 			if ( $old != $new ) {
-				if ( $old ) { delete_post_meta( $post_ID, $this->gallery_slug ); }
+				if ( $old ) { 
+					delete_post_meta( $post_ID, $this->gallery_slug ); 
+					//update_option( 'content_header_gallery', 'disabled', true );
+				}
 				if ( $new ) {
 					for ( $i = 0; $i < count($new); $i++) {
 						add_post_meta( $post_ID, $this->gallery_slug, $new[$i] ); 
 					}
-				}
+/*					if ( count($new) > 1 ) {
+						update_option( 'content_header_gallery', 'gallery', true );
+					} else update_option( 'content_header_gallery', 'image', true );
+*/				}
 			}
 
 			return $post_ID;

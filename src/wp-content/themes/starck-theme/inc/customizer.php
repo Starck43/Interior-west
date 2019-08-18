@@ -383,29 +383,6 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 		);
 
 		$wp_customize->add_setting(
-			'starck_settings[content_header_gallery]',
-			array(
-				//'default' => $defaults['content_header_gallery'],
-				'type' => 'option',
-				'sanitize_callback' => 'esc_url_raw',
-			)
-		);
-
-		$wp_customize->add_control(
-			new WP_Customize_Media_Control(
-				$wp_customize,
-				'starck_settings[content_header_gallery]',
-				array(
-					'label' => __( 'Header gallery', 'starck' ),
-					'section' => 'starck_layout_content',
-					'settings' => 'starck_settings[content_header_gallery]',
-					'mime_type' => 'image',
-					'priority' => 8,
-				)
-			)
-		);
-
-		$wp_customize->add_setting(
 			'starck_settings[main_bound_setting]',
 			array(
 				'default' => $defaults['main_bound_setting'],

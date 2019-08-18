@@ -30,9 +30,9 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				//'menu_appearence_action' => 'click', //'hover'
 				//'menu_appearence_direction' => 'left', //'down'
 				'main_bound_setting' => 'bounded', //full-width'
-				'content_header_setting' => 'front-page', //'all-pages', 'disabled' ????????????
+				'content_header_setting' => 'front-page', //'all-pages', 'disabled'
 				'content_header_background' => '',
-				'content_header_gallery' => '',
+				'content_header_gallery' => 'gallery', //'image', 'disabled'
 				'breadcrumbs_setting' => true, //false
 				'layout_setting' => 'right-sidebar',
 				'blog_layout_setting' => 'right-sidebar',

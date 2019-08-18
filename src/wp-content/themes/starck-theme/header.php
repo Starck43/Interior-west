@@ -114,21 +114,76 @@
 		<?php 
 		$header_setting = starck_get_option( 'content_header_setting' );
 		if ( 'disabled' !== $header_setting ) {
+			global $post;
+			$header_attr = '';
+			$main_header_background = starck_get_option( 'content_header_background' );
+			//$main_header_gallery = starck_get_option( 'content_header_gallery' );
+			$gallery = get_post_meta( $post->ID, 'gallery-image' );
 
-			$main_header_background_url = starck_get_option( 'content_header_background' );
+			if ( $main_header_background && count($gallery) < 2 ) {
+				$header_attr = sprintf('class="header-background" style="background-image: url(%s)"', $main_header_background);
+				?>
+				<script type="text/javascript">
+					$(window).scroll(function(){
+						// preset parallax for header background
+						$('.header-background').bgParallax({
+							speed: 0.25,
+						});
+					});
+				</script>
+				<?php
+			} 
 
-			if ( ! empty( $main_header_background_url ) ) {
-				$header_attr = sprintf('class="header-background" style="background-image: url(%s)"', $main_header_background_url);
-			} else $header_attr = '';
 
 			if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) || 
 				 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_single() || is_page() || is_archive() ) ) ) {
 
-		?>
+				?>  
 				<header id="main-header" <?php echo $header_attr; ?>>
-					<div class="header-container"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p><div class="button">Подробнее</div></div>
+					<?php
+					if ( $gallery ) {
+						?>
+						<div class="jcarousel-wrapper">
+							<div class="jcarousel">
+								<ul>
+									<?php
+									foreach ($gallery as $value)
+										echo '<li style="background: url('.$value.');"></li>';
+									?>
+								</ul>
+							</div>
+							<a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+							<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+							<p class="jcarousel-pagination"></p>
+						</div>
+						<script type="text/javascript">
+							function create() {
+								$('.jcarousel').jcarousel({
+									wrap: 'circular',
+									animation:   800,
+									//transitions: true,
+
+								});
+							}
+
+							$(function() {
+								create();
+								$('.jcarousel').jcarouselAutoscroll({
+									autostart: false,
+									interval:  5000,
+									//target: '-=1',
+								});
+							});
+						</script>
+						<?php					
+					}
+					?>
+					<div class="header-container">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p>
+						<div class="button">Подробнее</div>
+					</div>
 				</header>
-		<?php 
+				<?php 
 			}
 		}
 		?>

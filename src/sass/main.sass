@@ -5,6 +5,7 @@
 @import vars
 @import mixins
 @import fonts
+@import jcarousel
 
 //@for $h from 1 to 5
 
@@ -291,14 +292,21 @@ main
 			flex-direction: row-reverse 
 			
 	#main-header
+		position: relative
+		min-height: 200px 
 		padding: $gutter-20 0
 
 		.header-container
+			position: absolute
+			top: 0
+			bottom: 0
+			right: 0
+			left: 0
 			width: 50%
 			//height: 100vh
 			margin: auto
 			padding-top: $gutter-30 * 2
-			color: #FFF 
+			color: #FFF
 	
 	#main-container
 		display: flex
