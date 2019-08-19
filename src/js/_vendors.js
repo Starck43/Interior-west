@@ -1,14 +1,21 @@
 /*
- * Adding vendors JS library.
- * Example: @requires filename.js
+ * Including vendors JS libraries.
+ * @version 1.0.4
+ *
+ * Example:
+ * //@requires ..\..\node_modules\jquery\dist\jquery.min.js
+ *
+ * modernizr.js needs for using CSS-transition method in jcarousel plugin (see more: https://modernizr.com)
+ * @requires modernizr\css-transitions.min.js
  *
  * Slider jCarousel including
- * @requires ..\plugins\jcarousel\modernizr.js
- * @requires ..\plugins\jcarousel\jquery.jcarousel.min.js
- * @requires ..\plugins\jcarousel\jcarousel.transitions.js
+ * @requires ..\..\node_modules\jcarousel\dist\jquery.jcarousel.min.js
+ *
+ * Swipe function for jCarousel above
+ * @requires ..\..\node_modules\jcarouselSwipe\dist\jquery.jcarousel-swipe.min.js
  *
  * Alternative way to add vendors scripts is to use 'wp_enqueue_script()' function in functions.php of your active theme.
- * All scripts in folder src/js will be included in vendors.js excepting file custom.js.
- * Both js-files as custom.js and vendors.js are included in functions.php by wp_enqueue_script() function.
+ * All scripts in folder src/js will be included in vendors.js excepting custom.js file.
+ * Both scripts as custom.js and vendors.js are included in functions.php by wp_enqueue_script() function.
  */
 

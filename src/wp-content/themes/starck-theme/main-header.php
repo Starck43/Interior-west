@@ -53,12 +53,26 @@ if ( $main_header_background && count($gallery) < 2 ) {
 
 
 			$(function() {
-				$('.jcarousel').jcarousel({
-					wrap: 'circular',
-					animation:   800,
-					//transitions: true,
-
+				$('.jcarousel')
+					.jcarousel({
+						wrap: 'circular',
+						animation:   800,
+						transitions: Modernizr.csstransitions ? {
+							transforms:   Modernizr.csstransforms,
+							transforms3d: Modernizr.csstransforms3d,
+							easing:       'ease'
+						} : false
+					})
+					.jcarouselSwipe();
+				
+				$('.jcarousel-control-prev').jcarouselControl({
+					target: '-=1'
 				});
+
+				$('.jcarousel-control-next').jcarouselControl({
+					target: '+=1'
+				});
+
 				$('.jcarousel').jcarouselAutoscroll({
 					autostart: false,
 					interval:  5000,
