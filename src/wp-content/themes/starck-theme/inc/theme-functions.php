@@ -437,3 +437,15 @@ function starck_back_to_top() {
 
 	)));
 }
+
+function starck_main_header() {	
+
+	$header_setting = starck_get_option( 'content_header_setting' );
+
+	if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) || 
+		 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_single() || is_page() || is_archive() ) ) ) {
+
+		get_template_part( 'main','header' ); 
+
+	}
+}
