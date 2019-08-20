@@ -18,7 +18,7 @@ $main_header_background = starck_get_option( 'content_header_background' );
 $gallery = get_post_meta( $post->ID, 'gallery-image' );
 
 if ( $main_header_background && count($gallery) < 2 ) {
-	$header_class = sprintf('class="header-background" style="background-image: url(%s)"', $main_header_background);
+	$header_class = sprintf('class="header-background paralax" style="background-image: url(%s)"', $main_header_background);
 
 } 
 
@@ -32,7 +32,7 @@ if ( $main_header_background && count($gallery) < 2 ) {
 				<ul>
 					<?php
 					foreach ($gallery as $value)
-						echo '<li class="header-background" style="background-image: url('.$value.');"></li>';
+						echo '<li class="header-background parallax" style="background-image: url('.$value.');"></li>';
 					?>
 				</ul>
 			</div>

@@ -13,9 +13,10 @@ document.addEventListener("DOMContentLoaded", function() {
 			//debug: true,
 		});
 
-		if ( $('main').find('.header-background').length > 0 ) {
+		if ( $('body').has('.parallax').length ) {
 			// preset parallax for header background
-			$('.header-background').bgParallax({
+			$('.parallax').bgParallax({
+				bgpositionY: 50,
 				speed: 0.5,
 			});
   		}
@@ -34,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-			if ( $('main').find('.jcarousel .header-background').length > 0 ) {
+			if ( bg_class = $('.jcarousel').has('.header-background').length ) {
+
 				$('.jcarousel')
 					.jcarousel({
 						wrap: 'circular',
@@ -59,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					//$('.jcarousel .li').html(carousel.last);
 				}
 
-				if ( $('.jcarousel-wrapper').find('.jcarousel-control').length > 0 ) {
+				if ( $('.jcarousel-wrapper').has('.jcarousel-control').length ) {
 					
 					$('.jcarousel-control.prev')
 						.on('jcarouselcontrol:active', function() {
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 				}
 
-				if ( $('.jcarousel-wrapper').find('.jcarousel-pagination').length > 0 ) {
+				if ( $('.jcarousel-wrapper').has('.jcarousel-pagination').length ) {
 					$('.jcarousel-pagination')
 						.on('jcarouselpagination:active', 'a', function() {
 							$(this).addClass('active');
