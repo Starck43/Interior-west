@@ -146,7 +146,6 @@
 .jcarousel-wrapper .jcarousel-pagination {
   position: absolute;
   width: 100%;
-  left: 10px;
   bottom: 10px;
   background-color: transparent;
   text-align: center;
@@ -631,13 +630,12 @@ main #main-header {
 
 main #main-header .header-container {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 30px;
+  bottom: 30px;
   right: 0;
   left: 0;
   width: 50%;
   margin: auto;
-  padding-top: 60px;
   color: #FFF;
 }
 

@@ -31,8 +31,11 @@ if ( $main_header_background && count($gallery) < 2 ) {
 			<div class="jcarousel">
 				<ul>
 					<?php
-					foreach ($gallery as $value)
-						echo '<li class="header-background parallax" style="background-image: url('.$value.');"></li>';
+					$i = 1;
+					foreach ($gallery as $value) {
+						//$i++;
+						echo sprintf('<li slide="%1$s" class="header-background parallax" style="background-image: url(%2$s);"></li>',$i++,$value);
+					}
 					?>
 				</ul>
 			</div>
