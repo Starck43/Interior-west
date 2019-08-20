@@ -20,6 +20,7 @@
     if($(window).scrollTop()>b && $(window).scrollTop()<c){
       var d=($(window).scrollTop()-b)/(c-b)*100*x.speed;
       "top"==x.direction&&(d=100-d),d>x.max&&(d=x.max),d<x.min&&(d=x.min);
+	  d = d + x.bgpositionx;
       if(x.debug)console.log('scroll Y: '+$(window).scrollTop()+'px | background position Y: '+d+'%');
     }
     return this.css({

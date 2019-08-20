@@ -2,6 +2,15 @@
  * Миксины
  */
 
+@mixin font($f-name, $f-style, $f-weight, $f-url)
+  @font-face
+    font-family: $f-name
+    font-style: $f-style
+    font-weight: $f-weight
+    font-display: auto
+    src: url($f-url) format('woff2')
+
+
 //Автоматическое центрирование
 @mixin push--auto 
 	margin:

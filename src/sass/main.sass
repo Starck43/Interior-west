@@ -5,7 +5,7 @@
 @import vars
 @import mixins
 @import fonts
-@import jcarousel
+@import jcarousel/jcarousel
 
 //@for $h from 1 to 5
 
@@ -294,7 +294,7 @@ main
 	#main-header
 		position: relative
 		min-height: 200px 
-		padding: $gutter-20 0
+		//padding: $gutter-20 0
 
 		.header-container
 			position: absolute
@@ -317,13 +317,14 @@ main
 			bottom: $gutter-20/2
 		@include push--auto
 		background-color: $main-bg
-			  
+		.breadcrumbs
+			margin-bottom: $gutter-20 * 2 	  
 		
 		#content
 			float: left
 			width: 100%
 			padding: 0 $gutter-20
-			background-color: $content-bg
+			//background-color: $content-bg
 			box-sizing: border-box
 			
 			&.left-aligned

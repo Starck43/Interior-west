@@ -19,16 +19,7 @@ $gallery = get_post_meta( $post->ID, 'gallery-image' );
 
 if ( $main_header_background && count($gallery) < 2 ) {
 	$header_class = sprintf('class="header-background" style="background-image: url(%s)"', $main_header_background);
-	?>
-	<script type="text/javascript">
-		$(window).scroll( function() {
-			// preset parallax for header background
-			$('.header-background').bgParallax({
-				speed: 0.25,
-			});
-		});
-	</script>
-	<?php
+
 } 
 
 ?>  
@@ -41,45 +32,15 @@ if ( $main_header_background && count($gallery) < 2 ) {
 				<ul>
 					<?php
 					foreach ($gallery as $value)
-						echo '<li style="background: url('.$value.');"></li>';
+						echo '<li class="header-background" style="background-image: url('.$value.');"></li>';
 					?>
 				</ul>
 			</div>
-			<a href="#" class="jcarousel-control-prev">&lsaquo;</a>
-			<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+			<a href="#" class="jcarousel-control prev"><span class="fa fa-chevron-left"></span></a>
+			<a href="#" class="jcarousel-control next"><span class="fa fa-chevron-right"></span></a>
 			<p class="jcarousel-pagination"></p>
 		</div>
-		<script type="text/javascript">
 
-
-			$(function() {
-				$('.jcarousel')
-					.jcarousel({
-						wrap: 'circular',
-						animation:   800,
-						transitions: Modernizr.csstransitions ? {
-							transforms:   Modernizr.csstransforms,
-							transforms3d: Modernizr.csstransforms3d,
-							easing:       'ease'
-						} : false
-					})
-					.jcarouselSwipe();
-				
-				$('.jcarousel-control-prev').jcarouselControl({
-					target: '-=1'
-				});
-
-				$('.jcarousel-control-next').jcarouselControl({
-					target: '+=1'
-				});
-
-				$('.jcarousel').jcarouselAutoscroll({
-					autostart: false,
-					interval:  5000,
-					//target: '-=1',
-				});
-			});
-		</script>
 		<?php					
 	}
 	?>

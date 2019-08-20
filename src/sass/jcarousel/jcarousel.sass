@@ -1,0 +1,26 @@
+@import vars
+@import jcarousel-controls
+@import jcarousel-pagination
+
+.jcarousel-wrapper
+	position: relative
+	width: $carousel-w
+	height: $carousel-h
+	margin: 0 auto
+	//@include border-radius(10px)
+	//@include box-shadow(rgba(0,0,0,.3) 2px 2px 10px)
+	.jcarousel 
+		position: relative
+		overflow: hidden
+
+		ul
+			position: relative
+			width: 20000em
+			margin: 0
+			padding: 0
+			li
+				width: $carousel-w
+				height: $carousel-h
+				float: left
+				background-position: 50% 50% /* Положение фона */
+				background-repeat: no-repeat /* Отменяем повторение фона */
