@@ -35,21 +35,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-			if ( bg_class = $('.jcarousel').has('.header-background').length ) {
+			if ( $('.jcarousel').has('.header-background').length ) {
 
-				$('.jcarousel')
-				
+				$('.jcarousel')		
 					.on('jcarousel:reloadend', function(event, carousel) {
-						var li = $(this).jcarousel('target');
-						li.addClass('active');
+						$(this).jcarousel('target').addClass('active');
 					})
 					.on('jcarousel:visibleout', 'li', function() {
-						var li = $(this);
-						li.removeClass('active');
+						$(this).removeClass('active');
 					})
 					.on('jcarousel:visiblein', 'li', function() {
-						var li = $(this);
-						li.addClass('active');
+						$(this).addClass('active');
 					})
 					.jcarousel({
 						wrap: 'circular',
@@ -67,13 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
 					interval:  5000,
 					//target: '-=1',
 				});
-
-				function trigger(carousel, state) { 
-					//index = carousel.index(carousel.last);
-					console.log(':'+carousel.target);
-					//var target = $('.jcarousel').jcarousel('target'); 
-					//$('.jcarousel .li').html(carousel.last);
-				}
 
 				if ( $('.jcarousel-wrapper').has('.jcarousel-control').length ) {
 					

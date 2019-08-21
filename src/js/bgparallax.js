@@ -5,8 +5,8 @@
 (function($){
   $.fn.bgParallax = function(options){
     var x=$.extend({
-		bgpositionX: 50, // x позиция фонового изображения, от 0 до 100, размерность в %, 50 - означает по центру
-		bgpositionY: 50, //(this.css('background-position-y').replace('%', ''))
+		bgpositionX: 50, // x позиция фонового изображения, от 0 до 100, размерность в %
+		bgpositionY: 50, // y позиция (this.css('background-position-y').replace('%', ''))
     direction: "bottom", // направление bottom или top
 		debug: false, // Режим отладки
 		min: 0, // минимальное положение (в %) на которое может смещаться фон
@@ -24,7 +24,7 @@
       "top"==x.direction&&(d=100-d),d>x.max&&(d=x.max),d<x.min&&(d=x.min);
       if(x.debug)console.log('scroll Y: '+$(window).scrollTop()+'px | background position Y: '+d+'%');
     }
-    return this.css({
+    return this.closest('.active').css({
         backgroundPosition: x.bgpositionX+'% '+d+'%'
     });
   };
