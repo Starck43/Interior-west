@@ -26,6 +26,8 @@ if ( $main_header_background && count($gallery) < 2 ) {
 
 ?>  
 <header id="main-header" <?php echo $header_class; ?>>
+	
+
 	<?php
 	if ( $gallery ) {
 		?>
@@ -49,10 +51,10 @@ if ( $main_header_background && count($gallery) < 2 ) {
 		<?php					
 	}
 	?>
-	<div class="header-container">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p>
-		<div class="button">Подробнее</div>
-	</div>
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p>
+	<div id="main-header-link"><div class="button">Подробнее</div></div>
+
 </header>
 <?php 
 

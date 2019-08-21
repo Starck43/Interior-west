@@ -40,9 +40,23 @@
 	@if $lh
 		line-height: $lh 
 
+
+
+@mixin slide-up($name, $delay:0, $duration:1s, $animation:ease, $shift-x:0, $shift-y:0 )
+  animation: sliding-#{$name} $delay $duration $animation forwards
+  
+  @keyframes sliding-#{$name}
+    0%
+      opacity: 0
+
+    100%
+      transform: translate($shift-x, $shift-y)
+      opacity: 1
+
+
 // Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 
 // чтобы поддерживать соотношение. Пример: @include responsive-ratio(16,9)
-@mixin responsive-ratio($x,$y, $pseudo:false)
+@mixin responsive-ratio($x, $y, $pseudo:false)
 	$padding: unquote(( $y / $x )*100+'%')
 	@if $pseudo
 		&::before

@@ -5,7 +5,10 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	
+
+	$('#main-header').addClass('visible');
+
+
 	$(window).scroll(function(){
 
 		$('.back-to-top').topBtnToggle({

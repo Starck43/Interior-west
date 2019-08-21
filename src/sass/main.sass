@@ -5,15 +5,21 @@
 @import vars
 @import mixins
 @import fonts
+@import buttons
 @import jcarousel/jcarousel
 
 //@for $h from 1 to 5
+//@each $align in left, center, right
 
-//добавляется командой @extend %align-{center|left|right} для позиционирования элементов в блоке
-@each $align in left, center, right
-	%align-#{$align}
-		text-align: #{$align}
-	
+
+@keyframes main-header-content
+	0%
+		opacity: 0
+
+	100%
+		transform: translate(-50%, -250px)
+		opacity: 1
+
 
 ::placeholder
 	color: #666
@@ -65,17 +71,6 @@ img
 		display: block
 		> div
 			padding: $gutter-20/2 0
-
-.button
-	margin: 10px auto
-	width: max-content
-	padding: 10px 20px
-
-	@include font-settings(false, $button-text-color, $base-font-size*0.8, uppercase, 500, false)
-	background-color: $button-bg
-	border: 1px solid $theme-color
-	border-radius: 5px
-	cursor: pointer
 	
 
 .parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
@@ -295,17 +290,26 @@ main
 		position: relative
 		min-height: 200px 
 		//padding: $gutter-20 0
+		//height: 100vh
+		overflow: hidden
+			
+		&.visible
+			p
+				position: absolute
+				width: 50%
+				left: 50%
+				color: #FFF
+				padding: $gutter-20 $gutter-20 $gutter-20 * 4
+				background: transparentize($theme-color, 0.5)
+				transform: translate(-50%, 0)
+				@include slide-up(description, 1s, 1.5s, ease-in-out, -50%, -350px )
 
-		.header-container
-			position: absolute
-			top: $gutter-30
-			right: 0
-			left: 0
-			width: 50%
-			//height: 100vh
-			margin: auto
-			color: #FFF
-	
+			#main-header-link
+				position: absolute
+				left: 50%
+				transform: translate(-50%, 0)
+				@include slide-up(link, 1.5s, 1.5s, ease-in-out, -50%, -230px )
+
 	#main-container
 		display: flex
 		height: 100%
