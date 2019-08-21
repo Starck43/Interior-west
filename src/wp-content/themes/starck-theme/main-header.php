@@ -15,7 +15,9 @@ $header_class = '';
 
 $main_header_background = starck_get_option( 'content_header_background' );
 //$main_header_gallery = starck_get_option( 'content_header_gallery' );
-$gallery = get_post_meta( $post->ID, 'gallery-image' );
+$gallery 			= get_post_meta( $post->ID, 'gallery-image' );
+$gallery_scroll 	= ( 'on' === get_post_meta( $post->ID, 'gallery-autoscroll', true )) ? 'true' : 'false';
+$gallery_pagination = ( 'on' === get_post_meta( $post->ID, 'gallery-pagination', true )) ? 'true' : 'false';
 
 if ( $main_header_background && count($gallery) < 2 ) {
 	$header_class = sprintf('class="header-background paralax" style="background-image: url(%s)"', $main_header_background);
@@ -28,7 +30,7 @@ if ( $main_header_background && count($gallery) < 2 ) {
 	if ( $gallery ) {
 		?>
 		<div class="jcarousel-wrapper">
-			<div class="jcarousel">
+			<div class="jcarousel" data-jcarouselautoscroll="<?php echo $gallery_scroll ?>">
 				<ul>
 					<?php
 					$i = 1;
@@ -41,7 +43,7 @@ if ( $main_header_background && count($gallery) < 2 ) {
 			</div>
 			<a href="#" class="jcarousel-control prev"><span class="fa fa-chevron-left"></span></a>
 			<a href="#" class="jcarousel-control next"><span class="fa fa-chevron-right"></span></a>
-			<p class="jcarousel-pagination"></p>
+			<p class="jcarousel-pagination" data-jcarouselpagination ="<?php echo $gallery_pagination ?>"></p>
 		</div>
 
 		<?php					

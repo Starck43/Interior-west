@@ -21,19 +21,22 @@ document.addEventListener('DOMContentLoaded', function() {
 				$('.gallery-block').append(html);
 			}
 
-/*			if (attachment.length > 0) {
-				var url_list = (attachment.map(({ url }) => url).join('|'));
-				$('#gallery-images-url').val(url_list); //Record value to hidden input field
-			}
-			console.log(url_list);
 
-*/		}).open();
+			toggleSliderAttr(Boolean(attachment.length),'checkbox');
+
+
+		}).open();
 
 	});
 
 	$('.gallery-del-image').on('click', function (e) {
 		e.preventDefault();
-		//$(this).closest('.gallery-image').remove();
 		$(this).parents('.gallery-image').remove();
+		toggleSliderAttr(Boolean($('.gallery-image').length));	
 	});
+
+	function toggleSliderAttr(isImg = false, value = 'hidden') {
+		if (isImg) { $('label.gallery-scroll, label.gallery-pagination').show(); }
+		else { $('label.gallery-scroll, label.gallery-pagination').hide(); }
+	}
 });

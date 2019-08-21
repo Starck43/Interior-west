@@ -20,13 +20,38 @@ $container_max-w: 1000px
 $sidebar-width: 25%
 $content-width: 100% - $sidebar-width
 $nav-height: 40px
-//fonts
-$text-size: 14px
-$H1: 26px
-$H2: 22px
-$H3: 20px
-$H4: 18px
-$H5: 16px
+
+/* TYPOGRAPHY */
+$base-font-family: Arial, Helvetica, sans-serif
+$base-font-size: 1rem
+$base-line-height: 1.25em
+
+h1 
+	font: normal bold 2em/1.1 $base-font-family
+	margin: 0 0 0.5em 0
+
+
+h2  
+	font: normal bold 1.75em/1.1 $base-font-family
+	margin: 0 0 0.5em 0
+
+
+h3 
+	font: normal bold 1.5em/1.1 $base-font-family
+	margin: 0 0 0.5em 0
+
+
+h4 
+	font: normal bold 1.33em/1.1 $base-font-family
+	margin: 0 0 0.5em 0
+
+
+h5 
+	font: normal bold 1.2em/1.1 $base-font-family
+	margin: 0 0 0.5em 0
+
+
+
 
 //colors
 $theme-color: #69c
@@ -37,11 +62,13 @@ $content-bg: darken(white, 20%)
 $sidebar-bg: $main-bg
 $nav-bg: $theme-color
 $footer-bg: $theme-color
-$text-color: #333
+$base-text-color: #333
 $page-title-color: orange
 $menu-link-color: white
 $link-color: $theme-color
 $link-color-hover: lighten($link-color, 10%) //darken($link-color, 20%)
+$button-text-color: #FFF
+$button-bg: transparentize($theme-color, 0.8)
 $border-color: $body-bg
 $accent: orange
 

@@ -9,7 +9,7 @@
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 				<header class="entry-header">
-					<?php if (get_post_meta( $post->ID, 'starck-hide-title', true )) $hidden_class = ' hidden'; ?>
+					<?php if (get_post_meta( $post->ID, 'hide-title', true )) $hidden_class = ' hidden'; ?>
 					<h1 class="entry-title <?php echo $hidden_class ?>"><?php the_title(); ?></h1> <?php edit_post_link(); ?>
 				</header>
 

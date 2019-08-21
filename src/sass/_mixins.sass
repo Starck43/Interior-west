@@ -3,12 +3,12 @@
  */
 
 @mixin font($f-name, $f-style, $f-weight, $f-url)
-  @font-face
-    font-family: $f-name
-    font-style: $f-style
-    font-weight: $f-weight
-    font-display: auto
-    src: url($f-url) format('woff2')
+	@font-face
+		font-family: $f-name
+		font-style: $f-style
+		font-weight: $f-weight
+		font-display: auto
+		src: url($f-url) format('woff2')
 
 
 //Автоматическое центрирование
@@ -23,22 +23,22 @@
 	display: $display
 	position: $pos
 
-@function active_font($font)
-	$active_font: sans-serif
-	@if $font
-    $active_font: $font + ', ' + $active_font 
-	@return $active_font
 
-@mixin font-settings($font:false, $colour:false, $size:false, $weight:false, $lh:false)
-	font-family: active_font($font), Helvetica, Arial
+@mixin font-settings($font:false, $colour:false, $size:false, $case:false, $weight:false, $lh:false)
+	@if $font
+		font-family: $font + ', ' + $base-font-family
+	@else
+		font-family: $base-font-family
 	@if $size
-    font-size: $size 
+		font-size: $size 
 	@if $colour
-    color: $colour 
+		color: $colour 
+  @if $case
+    text-transform: $case 
 	@if $weight
-    font-weight: $weight 
+		font-weight: $weight 
 	@if $lh
-    line-height: $lh 
+		line-height: $lh 
 
 // Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 
 // чтобы поддерживать соотношение. Пример: @include responsive-ratio(16,9)
@@ -53,33 +53,30 @@
 		padding-top: $padding
 
 //миксин создает треугольники. Задаются цвет, размер и направление
-/*@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false)
-  @include pseudo($pos: $position)
-  width: 0
-  height: 0
-  @if $round 
-    border-radius: 3px
-  
-  @if $direction == down 
-    border-left: $size solid transparent
-    border-right: $size solid transparent
-    border-top: $size solid $color
-    margin-top: (0 - round( $size / 2.5 ))
-   @else if $direction == up 
-    border-left: $size solid transparent
-    border-right: $size solid transparent
-    border-bottom: $size solid $color
-    margin-bottom: 0 - round( $size / 2.5 )
-   @else if $direction == right 
-    border-top: $size solid transparent
-    border-bottom: $size solid transparent
-    border-left: $size solid $color
-    margin-right: -$size
-   @else if  $direction == left 
-    border-top: $size solid transparent
-    border-bottom: $size solid transparent
-    border-right: $size solid $color
-    margin-left: -$size
-  */
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false)
+	@include pseudo($pos: $position)
+	width: 0
+	height: 0
+	@if $round 
+		border-radius: 3px
+	@if $direction == down 
+		border-left: $size solid transparent
+		border-right: $size solid transparent
+		border-top: $size solid $color
+		margin-top: (0 - round( $size / 2.5 ))
+	@else if $direction == up 
+		border-left: $size solid transparent
+		border-right: $size solid transparent
+		border-bottom: $size solid $color
+		margin-bottom: 0 - round( $size / 2.5 )
+	@else if $direction == right 
+		border-top: $size solid transparent
+		border-bottom: $size solid transparent
+		border-left: $size solid $color
+		margin-right: -$size
+	@else if  $direction == left 
+		border-top: $size solid transparent
+		border-bottom: $size solid transparent
+		border-right: $size solid $color
+		margin-left: -$size
 
-//

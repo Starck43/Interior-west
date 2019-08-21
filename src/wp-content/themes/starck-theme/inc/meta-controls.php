@@ -13,6 +13,8 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
     	private $title_slug = 'hide-title';
     	private $gallery_slug = 'gallery-image';
+    	private $gallery_scroll = 'gallery-autoscroll';
+    	private $gallery_pagination = 'gallery-pagination';
     	private $screen = array( 'post', 'page' );
 
         /**
@@ -55,11 +57,20 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
 		function gallery_metabox_callback( $post ){
 
-			wp_nonce_field( $this->gallery_slug . '_dononce', $this->gallery_slug . '_noncename' );
-			$gallery = get_post_meta( $post->ID, $this->gallery_slug );
-			//$gallery = explode("|", $images_str);
+			wp_nonce_field( $this->gallery_slug . '_dononce', 		$this->gallery_slug . '_noncename' );
+			wp_nonce_field( $this->gallery_scroll . '_dononce', 	$this->gallery_scroll . '_noncename' );
+			wp_nonce_field( $this->gallery_pagination . '_dononce', $this->gallery_pagination . '_noncename' );
+
+			$gallery 			= get_post_meta( $post->ID, $this->gallery_slug );
+			$gallery_scroll 	= get_post_meta( $post->ID, $this->gallery_scroll, true );
+			$gallery_pagination = get_post_meta( $post->ID, $this->gallery_pagination, true );
+
+			if ( (bool)$gallery_scroll ) 	{ $scroll_checked = 'checked="checked"'; }
+			if ( (bool)$gallery_pagination ){ $pagination_checked = 'checked="checked"'; }
+
 			echo '<div class="gallery-block" style="cursor:pointer;">';
 			if ($gallery) {
+
 				foreach ($gallery as $value) {
 					echo '<div class="gallery-image"><img src="' . $value . '" />';
 					echo '<a class="gallery-del-image" href="#">удалить</a>';
@@ -68,23 +79,35 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 				}
 			}
 			echo '</div>';
-			?>
-			
-    		<input type="button" id="upload-button" class="button" value="Добавить фото" />
-    		</div>
-			<?php
+			echo '<div><input type="button" id="upload-button" class="button" value="Добавить фото" /></div>';
+			echo sprintf('<label class="gallery-scroll" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Режим слайдшоу</label>',
+							(($gallery) ? 'block' : 'none'),
+							$this->gallery_scroll,
+							$scroll_checked
+						);
+			echo sprintf('<label class="gallery-pagination" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Индикатор слайдов</label>',
+							(($gallery) ? 'block' : 'none'),
+							$this->gallery_pagination,
+							$pagination_checked
+						);
 
 		}
 
 
-		function save_meta( $post_ID ){
+		function save_meta( $post_ID ) {
 
 			if ( ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
-				|| ( null === ( $_POST[ $this->title_slug . '_noncename' ] && $_POST[ $this->gallery_slug . '_noncename' ] )) 
-				|| ( !wp_verify_nonce( $_POST[ $this->title_slug . '_noncename' ], $this->title_slug . '_dononce' ) && 
-					!wp_verify_nonce( $_POST[ $this->gallery_slug . '_noncename' ], $this->gallery_slug . '_dononce' )) ) {
-				return $post_ID;
-			}
+				||  !(		$_POST[ $this->title_slug . '_noncename' ]
+						 && $_POST[ $this->gallery_slug . '_noncename' ]
+						 && $_POST[ $this->gallery_scroll . '_noncename' ]
+						 && $_POST[ $this->gallery_pagination . '_noncename' ]
+					) 
+				|| 	!(		wp_verify_nonce( $_POST[ $this->title_slug . '_noncename' ], 		$this->title_slug . '_dononce' )
+						 && wp_verify_nonce( $_POST[ $this->gallery_slug . '_noncename' ], 		$this->gallery_slug . '_dononce' )
+						 && wp_verify_nonce( $_POST[ $this->gallery_scroll . '_noncename' ], 	$this->gallery_scroll . '_dononce' )
+						 && wp_verify_nonce( $_POST[ $this->gallery_pagination . '_noncename' ],$this->gallery_pagination . '_dononce' )
+					) 
+				) { return $post_ID; }
 
 			//Update Title meta
 			$old = get_post_meta( $post_ID, $this->title_slug, true );
@@ -113,10 +136,35 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 					for ( $i = 0; $i < count($new); $i++) {
 						add_post_meta( $post_ID, $this->gallery_slug, $new[$i] ); 
 					}
-/*					if ( count($new) > 1 ) {
-						update_option( 'content_header_gallery', 'gallery', true );
-					} else update_option( 'content_header_gallery', 'image', true );
-*/				}
+				}
+			}
+
+			//Update Gallery autoscroll meta
+			(string)$old = '';
+			(string)$new = '';
+			$old = get_post_meta( $post_ID, $this->gallery_scroll, true );
+			$new = $_POST[ $this->gallery_scroll ];
+
+			if ( $old != $new ) {
+				if ( $new ) { 
+					add_post_meta( $post_ID, $this->gallery_scroll, $new, true ); 
+				} else {
+					delete_post_meta( $post_ID, $this->gallery_scroll );
+				}
+			}
+
+			//Update Gallery pagination meta
+			(string)$old = '';
+			(string)$new = '';
+			$old = get_post_meta( $post_ID, $this->gallery_pagination, true );
+			$new = $_POST[ $this->gallery_pagination ];
+
+			if ( $old != $new ) {
+				if ( $new ) { 
+					add_post_meta( $post_ID, $this->gallery_pagination, $new, true ); 
+				} else {
+					delete_post_meta( $post_ID, $this->gallery_pagination );
+				}
 			}
 
 			return $post_ID;
@@ -128,6 +176,9 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
 			delete_post_meta( $post_ID, $this->title_slug );
 			delete_post_meta( $post_ID, $this->gallery_slug );
+			delete_post_meta( $post_ID, $this->gallery_scroll );
+			delete_post_meta( $post_ID, $this->gallery_pagination );
+			
 			return $post_ID;
 
 		} // delete_meta
