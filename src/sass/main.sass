@@ -12,15 +12,6 @@
 //@each $align in left, center, right
 
 
-@keyframes main-header-content
-	0%
-		opacity: 0
-
-	100%
-		transform: translate(-50%, -250px)
-		opacity: 1
-
-
 ::placeholder
 	color: #666
 
@@ -99,7 +90,9 @@ img
 .hidden
 	display: none
 
-	
+.visible
+	opacity: 1
+
 html
 	background-color: darken($body-bg,5%)
 
@@ -335,6 +328,13 @@ main
 				
 			&.right-aligned
 				margin-left: $gutter-20/2
+			
+			article
+				opacity: 0
+				transition: all 1s ease
+				transform: translate(0, 100%)
+				&.visible
+					@include visible-on-scroll(opacity)
 
 		
 		#main-sidebar
@@ -348,7 +348,9 @@ main
 		
 footer	
 	#footer-container
+		overflow: hidden
 		background: $footer-bg
+		font-size: 0.8em 
 		//color: #FFF
 		.footer-widgets
 
@@ -376,6 +378,11 @@ footer
 			//background: $body-bg
 			padding: $gutter-20 / 2
 			text-align: center
+			opacity: 0
+			transition: all 1500ms ease
+			transform: translate(0, 100%)
+			&.visible
+				@include visible-on-scroll(opacity)
 
 	.back-to-top
 		$btn-size: 30px

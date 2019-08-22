@@ -53,7 +53,14 @@
       transform: translate($shift-x, $shift-y)
       opacity: 1
 
-
+@mixin visible-on-scroll($action:display, $shift-x:0, $shift-y:0)
+  transform: translate($shift-x, $shift-y)
+  
+  @if $action = opacity
+    #{$action}: 1
+  @else
+      display: block
+  
 // Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 
 // чтобы поддерживать соотношение. Пример: @include responsive-ratio(16,9)
 @mixin responsive-ratio($x, $y, $pseudo:false)

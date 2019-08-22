@@ -5,11 +5,14 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-
+	// Adding class after full DOM loading for applying CSS animation
 	$('#main-header').addClass('visible');
-
-
+	
 	$(window).scroll(function(){
+
+		visibleClassToggle('article');
+		visibleClassToggle('#copyright');
+		
 
 		$('.back-to-top').topBtnToggle({
 			scrollTrigger: 400,
