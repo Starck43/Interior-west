@@ -90,9 +90,6 @@ img
 .hidden
 	display: none
 
-.visible
-	opacity: 1
-
 html
 	background-color: darken($body-bg,5%)
 
@@ -286,22 +283,28 @@ main
 		//height: 100vh
 		overflow: hidden
 			
+		&-link
+			position: absolute
+			left: 50%
+			opacity: 0
+			transform: translate(-50%, -230px)
+
+		&-excerpt
+			position: absolute
+			width: 50%
+			left: 50%
+			color: #FFF
+			padding: $gutter-20 $gutter-20 $gutter-20 * 4
+			background: transparentize($theme-color, 0.5)
+			transform: translate(-50%, 0)
+			
 		&.visible
-			p
-				position: absolute
-				width: 50%
-				left: 50%
-				color: #FFF
-				padding: $gutter-20 $gutter-20 $gutter-20 * 4
-				background: transparentize($theme-color, 0.5)
-				transform: translate(-50%, 0)
-				@include slide-up(description, 1s, 1.5s, ease-in-out, -50%, -350px )
+			#main-header-excerpt
+				@include animation(header-excerpt, 1s, 1.5s, ease-in-out, -50%, -350px)
 
 			#main-header-link
-				position: absolute
-				left: 50%
-				transform: translate(-50%, 0)
-				@include slide-up(link, 1.5s, 1.5s, ease-in-out, -50%, -230px )
+				@include animation(header-link, 2.5s, 2s, ease-in-out, -50%, -230px)
+
 
 	#main-container
 		display: flex
@@ -331,10 +334,9 @@ main
 			
 			article
 				opacity: 0
-				transition: all 1s ease
-				transform: translate(0, 100%)
+				transform: translate(0, 50%)
 				&.visible
-					@include visible-on-scroll(opacity)
+					@include animation(article, 0s, 0.8s, ease, 0, 0 )
 
 		
 		#main-sidebar
@@ -382,7 +384,8 @@ footer
 			transition: all 1500ms ease
 			transform: translate(0, 100%)
 			&.visible
-				@include visible-on-scroll(opacity)
+				@include animation(copyright, 0.5s, 1s, ease-in-out, 0, 0)
+
 
 	.back-to-top
 		$btn-size: 30px

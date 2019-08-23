@@ -52,7 +52,9 @@ if ( $main_header_background && count($gallery) < 2 ) {
 	}
 	?>
 
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p>
+	<div id="main-header-excerpt">
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p>
+	</div>
 	<div id="main-header-link"><div class="button">Подробнее</div></div>
 
 </header>

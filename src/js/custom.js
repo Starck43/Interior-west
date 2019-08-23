@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	$(window).scroll(function(){
 
-		visibleClassToggle('article');
-		visibleClassToggle('#copyright');
+		visibleClassToggle('article','no-fade','no-toggle', 0); //viewport.js
+		//visibleClassToggle('#copyright');
 		
 
 		$('.back-to-top').topBtnToggle({

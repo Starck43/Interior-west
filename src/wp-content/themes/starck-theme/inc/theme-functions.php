@@ -5,7 +5,7 @@ define( 'STARCK_VERSION', '1.0.4' );
 add_action('admin_enqueue_scripts', 'media_upload_enqueue');
 function media_upload_enqueue() {
 	//global $type_post;
-    //if( in_array($type_post, ['post','page']) ) {
+	//if( in_array($type_post, ['post','page']) ) {
 		if (function_exists('wp_enqueue_media')) {
 			wp_enqueue_media();
 		}
