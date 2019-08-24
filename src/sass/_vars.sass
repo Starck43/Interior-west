@@ -21,7 +21,32 @@ $sidebar-width: 25%
 $content-width: 100% - $sidebar-width
 $nav-height: 40px
 
-/* TYPOGRAPHY */
+//colors
+$theme-color: #69c
+$body-bg: white
+$header-bg: white
+$top-bar-bg: $header-bg
+$main-bg: darken(white, 5%)
+$content-bg: transparent
+$sidebar-bg: $main-bg
+$nav-bg: $theme-color
+$footer-bg: $theme-color
+$base-border-color: #555
+$base-text-color: #333
+$page-title-color: orange
+$nav-bg: $header-bg
+$menu-link-color: $theme-color
+$link-color: $theme-color
+$link-color-hover: lighten($link-color, 10%) //darken($link-color, 20%)
+$button-text-color: $base-text-color
+$button-text-hover: white
+$border-color: $body-bg
+$preloader-bg: white
+$preloader-color: $theme-color
+$accent: orange
+
+//opacify($theme-color, 0.5)
+//transparentize($theme-color, 0.3)/* TYPOGRAPHY */
 $base-font-family: Arial, Helvetica, sans-serif
 $base-font-size: 1rem
 $base-line-height: 1.25em
@@ -29,6 +54,7 @@ $base-line-height: 1.25em
 h1 
 	font: normal bold 2em/1.1 $base-font-family
 	margin: 0 0 0.5em 0
+	color: $page-title-color 
 
 
 h2  
@@ -51,26 +77,4 @@ h5
 	margin: 0 0 0.5em 0
 
 
-
-
-//colors
-$theme-color: #69c
-$body-bg: lighten($theme-color, 30%)
-$main-bg: white
-$header-bg: $main-bg
-$content-bg: darken(white, 20%)
-$sidebar-bg: $main-bg
-$nav-bg: $theme-color
-$footer-bg: $theme-color
-$base-text-color: #333
-$page-title-color: orange
-$menu-link-color: white
-$link-color: $theme-color
-$link-color-hover: lighten($link-color, 10%) //darken($link-color, 20%)
-$button-text-color: #FFF
-$border-color: $body-bg
-$accent: orange
-
-//opacify($theme-color, 0.5)
-//transparentize($theme-color, 0.3)
 

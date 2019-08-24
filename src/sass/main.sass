@@ -5,29 +5,16 @@
 @import vars
 @import mixins
 @import fonts
-@import buttons
+@import controls
 @import jcarousel/jcarousel
 
 //@for $h from 1 to 5
 //@each $align in left, center, right
 
 
-::placeholder
-	color: #666
-
-::selection //когд выделяем текст на странице
-	background-color: $accent
-	color: #fff
-
-input, textarea
-	outline: none
-	&:focus:required:invalid
-		border-color: red
-	&:required:valid
-		border-color: green
 p
 	margin: 0 0 $base-line-height 0
-	letter-spacing: 1px
+	letter-spacing: 0px
 	
 a
 	text-decoration: none
@@ -39,7 +26,7 @@ li
 	list-style-type: none /* Убираем глобально маркеры */
 
 
-img
+%img
 	width: 100%
 	height: auto
 
@@ -89,23 +76,46 @@ img
 
 .hidden
 	display: none
+	
+.visible
+	opacity: 1
+	
+#preloader
+	position: fixed
+	left: 0
+	right: 0
+	top: 0
+	bottom: 0
+	background-color: $preloader-bg
+
+	z-index: 10000
+	i
+		position: absolute
+		left: 50%
+		top: 50%
+		transform: translate(-50%, -50%)
+		font-size: 3em
+		color: $preloader-color
+		
 
 html
 	background-color: darken($body-bg,5%)
 
 body
 	@include font-settings(Roboto, $base-text-color, $base-font-size, normal, 300, $base-line-height)
-	min-width: 320px
 	position: relative
+	min-width: 320px
 	margin: 0
 	background-color: $body-bg
 	overflow-x: hidden
 	
 #site-header
-	background-color: $main-bg
-
+	background-color: $header-bg
+	img
+		@extend %img
+		
 	#top-bar
-		background-color: $body-bg
+		background-color: $top-bar-bg
 		display: flex
 		padding: 
 			left: 0
@@ -227,7 +237,7 @@ body
 		margin: 0
 		padding: 0
 		height: $nav-height
-		background-color: $theme-color 
+		background-color: $nav-bg 
 		
 		li
 			display: flex
@@ -238,11 +248,11 @@ body
 			a
 				margin: 0 $gutter-20
 				@include font-settings(false, $menu-link-color, $base-font-size*0.8, uppercase, 300, $nav-height)
-				letter-spacing: 1px
+				letter-spacing: 0px
 	
 				&:hover
-					transition:  100ms all ease
-					border-bottom: 3px solid white
+					transition:  300ms all ease
+					border-bottom: 3px solid $theme-color
 
 		&.responsive
 			height: 500px
@@ -288,6 +298,8 @@ main
 			left: 50%
 			opacity: 0
 			transform: translate(-50%, -230px)
+			.button
+				color: #FFF 
 
 		&-excerpt
 			position: absolute
@@ -316,13 +328,16 @@ main
 		@include push--auto
 		background-color: $main-bg
 		.breadcrumbs
-			margin-bottom: $gutter-20 * 2 	  
-		
+			margin-bottom: $gutter-20 * 2
+			font-size: .8em   
+		img
+			@extend %img
+			
 		#content
 			float: left
 			width: 100%
 			padding: 0 $gutter-20
-			//background-color: $content-bg
+			background-color: $content-bg
 			box-sizing: border-box
 			
 			&.left-aligned
@@ -331,8 +346,8 @@ main
 				
 			&.right-aligned
 				margin-left: $gutter-20/2
-			
-			article
+
+			.page
 				opacity: 0
 				transform: translate(0, 50%)
 				&.visible

@@ -10,6 +10,8 @@
 </head>
 
 <body <?php body_class(); ?>>
+	<!-- Preloader -->
+	<div id="preloader"><i class="fa fa-spinner fa-spin"></i></div>
 	<?php
 	$primary_args = array( 
 		'theme_location' => 'primary',

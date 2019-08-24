@@ -1,4 +1,5 @@
 var isElemVisible = function(el) {
+
 	const { top, height, bottom } = el.getBoundingClientRect(); 
 	const screenHeight = document.documentElement.clientHeight;
 	var el = el.parentNode;
@@ -13,20 +14,25 @@ var isElemVisible = function(el) {
 	return ((screenHeight - top) / height).toFixed(2);
 };
 
-var visibleClassToggle = function(selector, modeIn, modeOut, offset) {
-	const elem = document.querySelector(selector);
-	var factor = isElemVisible(elem);
-	factor -= (offset > 0 && offset <= 1 ) ? offset : 0;
-	//console.log(toggle_offset);
-	if ( factor >= 0 ) { 
-		if (!elem.classList.contains('visible')) elem.classList.add('visible');
-		if (elem.classList.contains('visible') && modeIn === 'fade' && (factor+offset) <= 1 ) {
-			var offset_factor = (factor*(1+offset)+offset*offset).toFixed(2);
-			elem.style.opacity = (offset_factor <= 1) ? offset_factor : 1;
+var addVisibleClass = function(selector, offset, modeIn, hideDown) {
+	for (var i = 0; i < selector.length; ++i) {
+		var elem = selector[i];
+		if (elem) {
+			var factor = isElemVisible(elem); // 1 - fully visible, 0 - element is on the bottom of viewport
+			if (factor > 0) {
+				factor -= (offset > 0 && offset <= 1 ) ? offset : 0;
+				//console.log(toggle_offset);
+				if  ( factor > 0 && !elem.classList.contains('visible')) elem.classList.add('visible');
+				if  (elem.classList.contains('visible') && modeIn === 'fadeIn' && 
+					(factor+offset) <= 1 ) {
+					var opacity = (factor*(1+offset)+offset*offset).toFixed(2);
+					elem.style.opacity = (opacity <= 1) ? opacity : 1;
+				}
+			} else 
+			if ( hideDown === 'hideOnScrollDown' && elem.classList.contains('visible') ) { 
+				elem.classList.remove('visible');
+				if (modeIn === 'fadeIn') { elem.style.opacity = 0; }
+			}
 		}
-	}
-	if ( modeOut === 'toggle' && ( factor < 0 ) && elem.classList.contains('visible') ) { 
-		elem.classList.remove('visible');
-		elem.style.opacity = 0;
 	}
 }

@@ -1,17 +1,22 @@
 /*
  * Custom scripts library
  *
+ * @version 1.0.5
  */
 
 document.addEventListener("DOMContentLoaded", function() {
 
+	$.when( $('#preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
+		.done( function() { 
+			$('body').fadeIn();
+			$('#preloader').removeClass(); 
+	});		
 	// Adding class after full DOM loading for applying CSS animation
 	$('#main-header').addClass('visible');
 	
-	$(window).scroll(function(){
-
-		visibleClassToggle('article','no-fade','no-toggle', 0); //viewport.js
-		//visibleClassToggle('#copyright');
+	$(window).scroll(function() {
+		addVisibleClass(content.querySelectorAll('article'), 0, 'fadeIn'); //viewport.js
+		addVisibleClass(copyright);
 		
 
 		$('.back-to-top').topBtnToggle({

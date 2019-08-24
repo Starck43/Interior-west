@@ -1,10 +1,14 @@
+<?php 
+
 /*
  * The template for displaying search results
  *
  * @author: S.Shabalin
  */
 
-<?php get_header(); ?>
+get_header();
+
+?>
 
 	<section id="content" class="search" role="main">
 

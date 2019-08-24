@@ -33,12 +33,12 @@ function starck_setup() {
 		'flex-width'			=> true,
 		'default-repeat'		=> 'no-repeat',
 		'default-position-x'	=> 'center',
-		'default-attachment'	=> 'fixed',		
+		'default-attachment'	=> 'fixed',
 		'default-text-color'	=> '#eee',
 		//'header-text'			=> true,
 		'uploads'				=> true,
 		'default-image'			=>  get_stylesheet_directory_uri() . '/img/header.jpg',
-		'wp-head-callback'       => '',
+		'wp-head-callback'		=> '',
 	) );
 
 	//добавление опции установки логотипа через настройки темы
