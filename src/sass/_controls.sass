@@ -1,4 +1,4 @@
-@import vars
+//Control selectors
 
 ::placeholder
 	color: #666
@@ -8,15 +8,13 @@
 	color: #fff
 
 input, textarea
+	width: 100%
 	border-radius: 3px 
 	border: 1px solid $base-border-color 
 	outline: none
 	&:focus:required:invalid
 		border-color: red
-	&:focus
-		border-color: $theme-color		
-	width: 100%
-
+	
 input[type="checkbox"]
 	width: auto
 input

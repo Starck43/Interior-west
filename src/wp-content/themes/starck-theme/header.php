@@ -64,9 +64,9 @@
 				?>
 				<!-- header title -->
 				<div id="branding-title">
-					<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '<h1 class="site-title">'; } ?>
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" rel="home"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a>
-					<?php if ( is_front_page() || is_home() || is_front_page() && is_home() ) { echo '</h1>'; } ?>
+					<h1 class="site-title">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" rel="home"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a>
+					</h1>
 					<div class="site-description"><?php bloginfo( 'description' ); ?></div>
 				</div>
 			</section>

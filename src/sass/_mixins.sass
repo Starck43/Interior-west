@@ -1,7 +1,4 @@
-/*
- * Миксины
- */
-
+// mixins
 @mixin font($f-name, $f-style, $f-weight, $f-url)
 	@font-face
 		font-family: $f-name
@@ -9,7 +6,6 @@
 		font-weight: $f-weight
 		font-display: auto
 		src: url($f-url) format('woff2')
-
 
 //Автоматическое центрирование
 @mixin push--auto 
@@ -23,7 +19,6 @@
 	display: $display
 	position: $pos
 
-
 @mixin font-settings($font:false, $colour:false, $size:false, $case:false, $weight:false, $lh:false)
 	@if $font
 		font-family: $font + ', ' + $base-font-family
@@ -33,8 +28,8 @@
 		font-size: $size 
 	@if $colour
 		color: $colour 
-  @if $case
-	text-transform: $case 
+	@if $case
+		text-transform: $case 
 	@if $weight
 		font-weight: $weight 
 	@if $lh
@@ -48,8 +43,6 @@
 	animation: animation-#{$name} $duration $delay $animation both
 	
 	@keyframes animation-#{$name}
-		0%
-			//opacity: 0
 		100%
 			transform: translate($shift-x, $shift-y)
 			opacity: 1

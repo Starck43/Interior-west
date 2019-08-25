@@ -15,7 +15,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
     	private $gallery_slug = 'gallery-image';
     	private $gallery_scroll = 'gallery-autoscroll';
     	private $gallery_pagination = 'gallery-pagination';
-    	private $screen = array( 'post', 'page' );
+    	private $screen = array( 'post', 'page', 'single' );
 
         /**
         * PHP 5 Constructor
@@ -112,7 +112,6 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			//Update Title meta
 			$old = get_post_meta( $post_ID, $this->title_slug, true );
 			$new = $_POST[ $this->title_slug ];
-
 			if ( $old != $new ) {
 				if ( $new ) { 
 					add_post_meta( $post_ID, $this->title_slug, $new, true ); 

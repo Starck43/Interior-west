@@ -34,7 +34,6 @@ function starck_setup() {
 		'default-repeat'		=> 'no-repeat',
 		'default-position-x'	=> 'center',
 		'default-attachment'	=> 'fixed',
-		'default-text-color'	=> '#eee',
 		//'header-text'			=> true,
 		'uploads'				=> true,
 		'default-image'			=>  get_stylesheet_directory_uri() . '/img/header.jpg',
@@ -72,36 +71,6 @@ function starck_setup() {
 		'secondary' => __( 'Secondary Menu', 'starck' ),
 	) );
 
-}
-
-add_action( 'wp_footer', 'starck_footer_scripts' );
-function starck_footer_scripts() {
-	?>
-	<script>
-		jQuery(document).ready(function ($) {
-			var deviceAgent = navigator.userAgent.toLowerCase();
-			if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
-				$("html").addClass("ios");
-				$("html").addClass("mobile");
-			}
-			if (navigator.userAgent.search("MSIE") >= 0) {
-				$("html").addClass("ie");
-			}
-			else if (navigator.userAgent.search("Chrome") >= 0) {
-				$("html").addClass("chrome");
-			}
-			else if (navigator.userAgent.search("Firefox") >= 0) {
-				$("html").addClass("firefox");
-			}
-			else if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
-				$("html").addClass("safari");
-			}
-			else if (navigator.userAgent.search("Opera") >= 0) {
-				$("html").addClass("opera");
-			}
-		});
-	</script>
-	<?php
 }
 
 add_filter( 'document_title_separator', 'starck_document_title_separator' );

@@ -1,0 +1,170 @@
+// Header styles
+#site-header
+	background-color: $header-bg
+	img
+		@extend %img
+		
+	#top-bar
+		background-color: $top-bar-bg
+		display: flex
+		padding: 
+			left: 0
+			right: 0
+		
+		.widget
+			width: 100%
+			margin:  0 $gutter-20 / 2 auto
+			&:nth-child(n)
+				text-align: center
+			&:first-child
+				text-align: left
+			&:last-child
+				text-align: right
+										
+	#header-container
+		display: flex
+		justify-content: space-between
+
+	
+	&.branding-right
+		flex-direction: row-reverse
+		
+	&.branding-center
+		flex-direction: column
+										
+	#branding
+		display: flex
+		margin: 0 0 auto
+
+
+		&.align-center
+			margin-bottom: $gutter-20/2
+			a
+				justify-content: center
+
+		&.align-right
+			flex-direction: row-reverse
+
+
+		&.align-vertical
+			flex-direction: column
+
+			a
+				justify-content: center
+				
+			#branding-logo,
+			#branding-title
+				@include push--auto 
+
+			
+		#branding-logo
+			margin: auto 0
+			//padding: 0 $gutter-20/2
+			max-width: 200px
+
+		#branding-title
+			margin: auto 0
+			padding: 0 $gutter-20/2
+			a
+				display: flex
+
+			.site-title
+				margin: 0
+				line-height: 1
+				font-size: 2em
+				text-transform: uppercase
+			.site-description
+				font-size: 1em 
+
+	&.nav-below-logo
+		#header-container
+			flex-wrap: wrap-reverse
+
+	&.nav-above-logo
+		#header-container
+			flex-wrap: wrap
+			
+		#header-nav
+			margin-bottom: $gutter-20/2 
+			
+	&.nav-inline-logo
+		#header-content
+			display: flex
+			flex-wrap: wrap
+			//flex-direction: column
+
+	#menu-icon
+		@extend #search-icon
+		background-color: #FFF 
+		
+	#search-icon
+		@include push--auto
+		padding: 0 $gutter-20/2 
+		font-size: 1.5em
+		height: 40px
+		line-height: 40px
+		display: none
+		
+	#site-search
+		display: none
+		
+// Navigation styles	
+#header-nav
+	display: flex
+	width: 100%
+	//margin-top: auto
+	
+	.menu-top-container
+		display: flex
+		width: 100%
+		
+			
+	ul
+		display: flex
+		position: relative
+		width: 100%
+		margin: 0
+		padding: 0
+		height: $nav-height
+		background-color: $nav-bg 
+		
+		li
+			display: flex
+			transition: none
+			&:hover			
+				background-color: inherit
+
+			a
+				margin: 0 $gutter-20
+				@include font-settings(false, $menu-link-color, 0.8rem, uppercase, 300, $nav-height)
+				letter-spacing: 0px
+	
+				&:hover
+					transition:  300ms all ease
+					border-bottom: 3px solid $theme-color
+
+		&.responsive
+			height: 500px
+
+	&.float-right
+		width: auto
+	
+	&.float-left
+		width: auto
+
+
+	&.center-aligned
+		ul
+			justify-content: center
+
+	&.right-aligned
+		ul
+			justify-content: flex-end
+			
+	&.below-logo
+
+
+	&.nav-under-header
+
+// <!-- End Navigation -->
+// <!-- End Header -->

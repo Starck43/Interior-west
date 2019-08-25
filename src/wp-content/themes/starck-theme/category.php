@@ -1,4 +1,9 @@
-<?php get_header(); ?>
+<?php
+/*
+* @package Starck-theme 
+*/
+
+ get_header(); ?>
 
 	<section id="content" <?php starck_content_class(); ?>>
 	

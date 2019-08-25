@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php 
+/*
+ * Template name: Single Post
+ */
+get_header(); ?>
 
 	<section id="content" <?php starck_content_class(); ?>>
 	
@@ -13,6 +17,7 @@
 
 	</section>
 
-	<?php starck_get_sidebar(); ?>
+	<?php starck_get_sidebar();
 
-<?php get_footer(); ?>
+get_footer(); 
+?>

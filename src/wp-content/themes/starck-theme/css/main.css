@@ -1,36 +1,29 @@
-@charset "UTF-8";
-/*
- * Custom Sass
- */
 h1 {
-  font: normal bold 2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
+  font: normal bold 2rem/1.1 Arial, Helvetica, sans-serif;
+  margin: 0 0 0.5rem 0;
   color: orange;
 }
 
 h2 {
-  font: normal bold 1.75em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
+  font: normal bold 1.75rem/1.1 Arial, Helvetica, sans-serif;
+  margin: 0 0 0.5rem 0;
 }
 
 h3 {
-  font: normal bold 1.5em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
+  font: normal bold 1.5rem/1.1 Arial, Helvetica, sans-serif;
+  margin: 0 0 0.5rem 0;
 }
 
 h4 {
-  font: normal bold 1.33em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
+  font: normal bold 1.33rem/1.1 Arial, Helvetica, sans-serif;
+  margin: 0 0 0.5rem 0;
 }
 
 h5 {
-  font: normal bold 1.2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
+  font: normal bold 1.2rem/1.1 Arial, Helvetica, sans-serif;
+  margin: 0 0 0.5rem 0;
 }
 
-/*
- * Миксины
- */
 @font-face {
   font-family: "Roboto";
   font-style: normal;
@@ -100,32 +93,6 @@ h5 {
   font-weight: 900;
 }
 
-h1 {
-  font: normal bold 2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-  color: orange;
-}
-
-h2 {
-  font: normal bold 1.75em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h3 {
-  font: normal bold 1.5em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h4 {
-  font: normal bold 1.33em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h5 {
-  font: normal bold 1.2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
 ::-webkit-input-placeholder {
   color: #666;
 }
@@ -157,18 +124,14 @@ h5 {
 }
 
 input, textarea {
+  width: 100%;
   border-radius: 3px;
   border: 1px solid #555;
   outline: none;
-  width: 100%;
 }
 
 input:focus:required:invalid, textarea:focus:required:invalid {
   border-color: red;
-}
-
-input:focus, textarea:focus {
-  border-color: #69c;
 }
 
 input[type="checkbox"] {
@@ -193,7 +156,7 @@ input[type="submit"] {
   width: max-content;
   padding: 0 20px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.8rem;
+  font-size: 12px;
   color: #333;
   text-transform: uppercase;
   font-weight: 500;
@@ -212,59 +175,7 @@ input[type="submit"]:hover {
   color: white;
 }
 
-h1 {
-  font: normal bold 2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-  color: orange;
-}
-
-h2 {
-  font: normal bold 1.75em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h3 {
-  font: normal bold 1.5em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h4 {
-  font: normal bold 1.33em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h5 {
-  font: normal bold 1.2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h1 {
-  font: normal bold 2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-  color: orange;
-}
-
-h2 {
-  font: normal bold 1.75em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h3 {
-  font: normal bold 1.5em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h4 {
-  font: normal bold 1.33em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h5 {
-  font: normal bold 1.2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-/*  PREV NEXT BUTTONS  */
+/*  jCarousel Prev Next Buttons Styles  */
 .jcarousel-wrapper .jcarousel-control {
   position: absolute;
   display: block;
@@ -305,33 +216,7 @@ h5 {
   color: #FFF;
 }
 
-h1 {
-  font: normal bold 2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-  color: orange;
-}
-
-h2 {
-  font: normal bold 1.75em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h3 {
-  font: normal bold 1.5em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h4 {
-  font: normal bold 1.33em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-h5 {
-  font: normal bold 1.2em/1.1 Arial, Helvetica, sans-serif;
-  margin: 0 0 0.5em 0;
-}
-
-/*  PAGINATION  */
+/*  jCarousel Pagination Styles */
 .jcarousel-wrapper .jcarousel-pagination {
   position: absolute;
   width: 100%;
@@ -391,7 +276,7 @@ h5 {
 }
 
 p {
-  margin: 0 0 1.25em 0;
+  margin: 0 0 1.25rem 0;
   letter-spacing: 0px;
 }
 
@@ -511,6 +396,7 @@ li {
 
 html {
   background-color: #f2f2f2;
+  font-size: 15px;
 }
 
 body {
@@ -519,7 +405,7 @@ body {
   color: #333;
   text-transform: normal;
   font-weight: 300;
-  line-height: 1.25em;
+  line-height: 1.25rem;
   position: relative;
   min-width: 320px;
   margin: 0;
@@ -587,12 +473,6 @@ body {
   margin: 0 0 auto;
 }
 
-#site-header #branding a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 #site-header #branding.align-center {
   margin-bottom: 10px;
 }
@@ -623,11 +503,7 @@ body {
           justify-content: center;
 }
 
-#site-header #branding.align-vertical #branding-logo {
-  margin-left: auto;
-  margin-right: auto;
-}
-
+#site-header #branding.align-vertical #branding-logo,
 #site-header #branding.align-vertical #branding-title {
   margin-left: auto;
   margin-right: auto;
@@ -643,15 +519,21 @@ body {
   padding: 0 10px;
 }
 
+#site-header #branding #branding-title a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 #site-header #branding #branding-title .site-title {
   margin: 0;
   line-height: 1;
-  font-size: 30px;
+  font-size: 2em;
   text-transform: uppercase;
 }
 
-#site-header #branding #branding-title a:hover {
-  color: #69c;
+#site-header #branding #branding-title .site-description {
+  font-size: 1em;
 }
 
 #site-header.nav-below-logo #header-container {
@@ -821,8 +703,6 @@ main #main-header.visible #main-header-excerpt {
 }
 
 @-webkit-keyframes animation-header-excerpt {
-  0% {
-  }
   100% {
     -webkit-transform: translate(-50%, -350px);
             transform: translate(-50%, -350px);
@@ -831,8 +711,6 @@ main #main-header.visible #main-header-excerpt {
 }
 
 @keyframes animation-header-excerpt {
-  0% {
-  }
   100% {
     -webkit-transform: translate(-50%, -350px);
             transform: translate(-50%, -350px);
@@ -846,8 +724,6 @@ main #main-header.visible #main-header-link {
 }
 
 @-webkit-keyframes animation-header-link {
-  0% {
-  }
   100% {
     -webkit-transform: translate(-50%, -230px);
             transform: translate(-50%, -230px);
@@ -856,8 +732,6 @@ main #main-header.visible #main-header-link {
 }
 
 @keyframes animation-header-link {
-  0% {
-  }
   100% {
     -webkit-transform: translate(-50%, -230px);
             transform: translate(-50%, -230px);
@@ -913,8 +787,6 @@ main #main-container #content .page.visible {
 }
 
 @-webkit-keyframes animation-article {
-  0% {
-  }
   100% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -923,8 +795,6 @@ main #main-container #content .page.visible {
 }
 
 @keyframes animation-article {
-  0% {
-  }
   100% {
     -webkit-transform: translate(0, 0);
             transform: translate(0, 0);
@@ -982,33 +852,10 @@ footer #footer-container #copyright {
   opacity: 0;
   -webkit-transition: all 1500ms ease;
   transition: all 1500ms ease;
-  -webkit-transform: translate(0, 100%);
-          transform: translate(0, 100%);
 }
 
 footer #footer-container #copyright.visible {
-  -webkit-animation: animation-copyright 1s 0.5s ease-in-out both;
-          animation: animation-copyright 1s 0.5s ease-in-out both;
-}
-
-@-webkit-keyframes animation-copyright {
-  0% {
-  }
-  100% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
-    opacity: 1;
-  }
-}
-
-@keyframes animation-copyright {
-  0% {
-  }
-  100% {
-    -webkit-transform: translate(0, 0);
-            transform: translate(0, 0);
-    opacity: 1;
-  }
+  opacity: 1;
 }
 
 footer .back-to-top {

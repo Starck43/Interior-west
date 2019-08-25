@@ -3,7 +3,7 @@
  *
  * @version 1.0.5
  */
-
+ 
 document.addEventListener("DOMContentLoaded", function() {
 
 	$.when( $('#preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
@@ -16,7 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 	$(window).scroll(function() {
 		addVisibleClass(content.querySelectorAll('article'), 0, 'fadeIn'); //viewport.js
-		addVisibleClass(copyright);
+		addVisibleClass(document.body.querySelectorAll('#copyright'));
+		//console.log('elem T: '+copyright.getBoundingClientRect().top);
+		//console.log('elem length: '+document.lastElementChild.querySelectorAll('#copyright').length);
 		
 
 		$('.back-to-top').topBtnToggle({
@@ -125,6 +127,27 @@ document.addEventListener("DOMContentLoaded", function() {
 				})
 				.jcarouselPagination();
 		} else $('.jcarousel-pagination').remove();
+	}
+	//Add agent to HTML selector
+	var deviceAgent = navigator.userAgent.toLowerCase();
+	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
+		$("html").addClass("ios");
+		$("html").addClass("mobile");
+	}
+	if (navigator.userAgent.search("MSIE") >= 0) {
+		$("html").addClass("ie");
+	}
+	else if (navigator.userAgent.search("Chrome") >= 0) {
+		$("html").addClass("chrome");
+	}
+	else if (navigator.userAgent.search("Firefox") >= 0) {
+		$("html").addClass("firefox");
+	}
+	else if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) {
+		$("html").addClass("safari");
+	}
+	else if (navigator.userAgent.search("Opera") >= 0) {
+		$("html").addClass("opera");
 	}
 
 });

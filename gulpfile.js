@@ -80,7 +80,7 @@ gulp.task('scripts', function() {
     return gulp.src([path.src+'js/custom*.js'])
     //.pipe(sourcemaps.init()) // Инициализируем sourcemap
     .pipe(concat('custom.min.js')) // Объединяем в один файл
-    .pipe(uglify()) // Minify js (opt.)
+    //.pipe(uglify()) // Сжимаем JS файл
     //.pipe(sourcemaps.write()) // Пропишем карты
     .pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта
@@ -89,7 +89,7 @@ gulp.task('scripts', function() {
 // Запускается тогда, когда добавляются сторонние скрипты в src/js и формируется общий файл vendors.min.js
 gulp.task('vendors-scripts', function() {
     return gulp.src([ // Берем нужные библиотеки вендорных скриптов
-			'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save jquery)
+			//'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save jquery)
 			path.src+'js/*.js', // Vendors scripts.
 			'!'+path.src+'js/_custom*.js'
 		])
@@ -97,7 +97,7 @@ gulp.task('vendors-scripts', function() {
       pattern: /\* @requires [\s-]*(.*\.js)/g
     })).on('error', function(err) {console.log(err.message)})
     .pipe(concat('vendors.min.js')) // Объединяем в один файл
-    .pipe(uglify()) // Сжимаем JS файл
+    //.pipe(uglify()) // Сжимаем JS файл
 	.pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта
 });

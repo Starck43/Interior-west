@@ -1,0 +1,86 @@
+// Main styles
+main
+	clear: both
+	@include push--auto
+	
+	&.left-sidebar
+		#main-container
+			flex-direction: row-reverse 
+			
+	#main-header
+		position: relative
+		min-height: 200px 
+		//padding: $gutter-20 0
+		//height: 100vh
+		overflow: hidden
+			
+		&-link
+			position: absolute
+			left: 50%
+			opacity: 0
+			transform: translate(-50%, -230px)
+			.button
+				color: #FFF 
+
+		&-excerpt
+			position: absolute
+			width: 50%
+			left: 50%
+			color: #FFF
+			padding: $gutter-20 $gutter-20 $gutter-20 * 4
+			background: transparentize($theme-color, 0.5)
+			transform: translate(-50%, 0)
+			
+		&.visible
+			#main-header-excerpt
+				@include animation(header-excerpt, 1s, 1.5s, ease-in-out, -50%, -350px)
+
+			#main-header-link
+				@include animation(header-link, 2.5s, 2s, ease-in-out, -50%, -230px)
+
+
+	#main-container
+		display: flex
+		height: 100%
+		min-height: 100vh
+		padding: 
+			top: $gutter-20/2
+			bottom: $gutter-20/2
+		@include push--auto
+		background-color: $main-bg
+		.breadcrumbs
+			margin-bottom: $gutter-20 * 2
+			font-size: .8em   
+		img
+			@extend %img
+			
+		#content
+			float: left
+			width: 100%
+			padding: 0 $gutter-20
+			background-color: $content-bg
+			box-sizing: border-box
+			
+			&.left-aligned
+				width: $content-width
+				margin-right: $gutter-20/2
+				
+			&.right-aligned
+				margin-left: $gutter-20/2
+
+			.page
+				opacity: 0
+				transform: translate(0, 50%)
+				&.visible
+					@include animation(article, 0s, 0.8s, ease, 0, 0 )
+
+		
+		#main-sidebar
+			width: 25%
+			float: left
+			padding: $gutter-20/2
+			background-color: $sidebar-bg 
+			border: 1px solid $border-color
+			box-sizing: border-box
+
+// <!-- End Main -->
