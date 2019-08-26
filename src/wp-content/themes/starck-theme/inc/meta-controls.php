@@ -2,7 +2,7 @@
 /*
 Plugin Name: Page Layout Controls
 Description: Allows to hide the title on single pages and posts via edit mode 
-			 and build Gallery for #Main-Header.
+			 and build Gallery for posts and pages.
 Version: 1.0.1
 Author: S.Shabalin
 */
@@ -72,7 +72,8 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			if ($gallery) {
 
 				foreach ($gallery as $value) {
-					echo '<div class="gallery-image"><img src="' . $value . '" />';
+					$url = wp_get_attachment_image_url(absint($value) );
+					echo '<div class="gallery-image"><img src="' . $url . '" />';
 					echo '<a class="gallery-del-image" href="#">удалить</a>';
 					echo '<input type="hidden" name="gallery-image[]" value="' . $value . '">';
 					echo '</div>';

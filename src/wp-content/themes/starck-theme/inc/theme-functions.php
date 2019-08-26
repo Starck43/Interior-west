@@ -62,7 +62,7 @@ function starck_setup() {
 
 	set_post_thumbnail_size( 300, 300 ); // размер миниатюры поста по умолчанию
 	//add_image_size( 'category-thumb', 300, 9999 ); // 300 в ширину и без ограничения в высоту
-	//add_image_size( 'homepage-thumb', 300, 200, true ); // Кадрирование изображения
+	add_image_size( 'mini-thumbnail', 80, 80, true ); // Кадрирование изображения
 
 	global $content_width;
 	if ( ! isset( $content_width ) ) { $content_width = 1920; }
@@ -415,7 +415,7 @@ function starck_main_header() {
 	$header_setting = starck_get_option( 'content_header_setting' );
 
 	if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) || 
-		 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_single() || is_page() || is_archive() ) ) ) {
+		 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_page() || is_archive() ) ) ) {
 
 		get_template_part( 'main','header' ); 
 

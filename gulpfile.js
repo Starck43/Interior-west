@@ -132,7 +132,7 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
         // tunnel: true, tunnel: 'projectname', // Demonstration page: http://projectname.localtunnel.me
         notify: false, // Отключаем уведомления
         online: false, // Work offline without internet connection
-		//open: true, // open browser on start 
+		open: false, // open browser on start 
     });
 });
 

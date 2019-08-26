@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				html = '<div class="gallery-image"><img src="' + attachment[i]['sizes']['thumbnail']['url'] + '" />'+
 				'<a class="gallery-del-image" href="#">удалить</a><input type="hidden" name="gallery-image[]" value="' + 
-				attachment[i]['url'] + '"></div>';
+				attachment[i]['id'] + '"></div>';
 				$('.gallery-block').append(html);
 			}
 

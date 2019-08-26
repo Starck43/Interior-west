@@ -20,7 +20,8 @@ if ($gallery || $main_header_background ) {
 	$count_gallery = ($gallery) ? count($gallery) : 0;
 	if ( $count_gallery == 1 || $main_header_background ) {
 		if ($count_gallery == 1) {
-			$image_url = $gallery[0];
+			$image_url = wp_get_attachment_image_url(absint($gallery[0]), 'full' );
+;
 		} elseif ( $main_header_background ) {
 			$image_url = $main_header_background;
 		} 
@@ -41,7 +42,7 @@ if ($gallery || $main_header_background ) {
 						$i = 1;
 						foreach ($gallery as $value) {
 							//$i++;
-							echo sprintf('<li slide="%1$s" class="header-background parallax" style="background-image: url(%2$s);"></li>',$i++,$value);
+							echo sprintf('<li slide="%1$s" class="header-background parallax" style="background-image: url(%2$s);"></li>',$i++,wp_get_attachment_image_url(absint($value), 'full' ));
 						}
 						?>
 					</ul>
