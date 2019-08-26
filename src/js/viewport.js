@@ -18,7 +18,7 @@ var addVisibleClass = function(selectors, offset, modeIn, hideDown) {
 	for (var i = 0; i < selectors.length; ++i) {
 		var elem = selectors[i];
 		if (elem) {
-			var factor = isElemVisible(elem); // 1 - fully visible, 0 - element is on the bottom of viewport
+			var factor = isElemVisible(elem); // 1 - fully visible, 0 - element's top is on the bottom of viewport
 				//console.log(elem.classList);
 				//console.log(factor);
 			if (factor > 0) {
@@ -28,6 +28,8 @@ var addVisibleClass = function(selectors, offset, modeIn, hideDown) {
 					(factor+offset) <= 1 ) {
 					var opacity = (factor*(1+offset)+offset*offset).toFixed(2);
 					elem.style.opacity = (opacity <= 1) ? opacity : 1;
+				} else if (elem.classList.contains('visible') && modeIn !== 'fadeIn') {
+					elem.style.opacity = 1;
 				}
 			} else 
 			if ( hideDown === 'hideOnScrollDown' && elem.classList.contains('visible') ) { 

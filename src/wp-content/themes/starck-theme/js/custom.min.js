@@ -15,11 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
 	$('#main-header').addClass('visible');
 	
 	$(window).scroll(function() {
-		addVisibleClass(content.querySelectorAll('article'), 0, 'fadeIn'); //viewport.js
+		addVisibleClass(document.body.querySelectorAll('article'), 0); //viewport.js
 		addVisibleClass(document.body.querySelectorAll('#copyright'));
-		//console.log('elem T: '+copyright.getBoundingClientRect().top);
-		//console.log('elem length: '+document.lastElementChild.querySelectorAll('#copyright').length);
-		
 
 		$('.back-to-top').topBtnToggle({
 			scrollTrigger: 400,

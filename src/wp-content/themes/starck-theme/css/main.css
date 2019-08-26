@@ -293,7 +293,7 @@ li {
   list-style-type: none;
 }
 
-#site-header img, main #main-container img {
+#site-header img {
   width: 100%;
   height: auto;
 }

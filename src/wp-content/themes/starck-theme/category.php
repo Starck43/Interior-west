@@ -5,7 +5,7 @@
 
  get_header(); ?>
 
-	<section id="content" <?php starck_content_class(); ?>>
+	<section id="content" <?php starck_content_class('category'); ?>>
 	
 		<?php starck_breadcrumbs(); ?>
 		

@@ -1,16 +1,24 @@
-<?php get_header(); ?>
+<?php 
+/*
 
-	<section id="content" <?php starck_content_class('index'); ?>>
+ * The template for portfolio
+ *
+ * @package Starck-theme 
+
+   Template Name: Portfolio Template
+   Template Post Type: page
+ */
+ 
+get_header(); ?>
+
+	<section id="content" <?php starck_content_class('portfolio'); ?>>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 			<?php get_template_part( 'entry' ); ?>
 		<?php endwhile;?>
 
 		<?php get_template_part( 'nav', 'below' );
-		
-		if ( comments_open() || get_comments_number() ) {
-			comments_template();
-		}
+
 		?>
 
 	</section>

@@ -1,5 +1,5 @@
 <?php
-define( 'STARCK_VERSION', '1.0.4' );
+define( 'STARCK_VERSION', '1.0.5' );
 
  /* Add the media uploader script */
 add_action('admin_enqueue_scripts', 'media_upload_enqueue');
@@ -10,7 +10,7 @@ function media_upload_enqueue() {
 			wp_enqueue_media();
 		}
 		if ( file_exists( dirname( __FILE__ ) . '/js/media-upload.js' )) {
-			wp_enqueue_script('media_admin_scripts', get_template_directory_uri() . '/inc/js/media-upload.js', array('jquery'));
+			wp_enqueue_script('media_admin_scripts', get_template_directory_uri() . '/inc/js/media-upload.js', array('jquery'), true);
 		}
 	//}
 }
@@ -59,13 +59,11 @@ function starck_setup() {
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'editor-color-palette', array() );
 	//add_theme_support( 'woocommerce' );
+
 	set_post_thumbnail_size( 300, 300 ); // размер миниатюры поста по умолчанию
-
-
-if ( function_exists( 'add_image_size' ) ) {
 	//add_image_size( 'category-thumb', 300, 9999 ); // 300 в ширину и без ограничения в высоту
 	//add_image_size( 'homepage-thumb', 300, 200, true ); // Кадрирование изображения
-}
+
 	global $content_width;
 	if ( ! isset( $content_width ) ) { $content_width = 1920; }
 
