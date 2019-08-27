@@ -40,30 +40,3 @@ function starck_scripts_add() {
 
 require_once get_template_directory() . '/inc/theme-functions.php'; // Include main theme functions
 require_once get_template_directory() . '/inc/meta-controls.php'; // Include custom meta in pages (i.e. header gallery or hide title)
-
-## Какой шаблон используется в текущий момент
-add_filter( 'wp_header', 'output_current_template' );
-function output_current_template( $template ){
-	if ( is_admin() ) { global $template; print_r($template); }
-	return $template; 
-} 
-
-// фильтр передает переменную $template - путь до файла шаблона.
-// Изменяя этот путь мы изменяем файл шаблона.
-add_filter('template_include', 'template_parts',99);
-function template_parts( $template ) {
-
-	// если текущая страница со слагом portfolio, используем файл шаблона page-portfolio.php
-	$cur_page = sprintf('page-%s.php', get_post(get_queried_object_id())->post_name );
-	// проверяем папку на наличие искомых шаблонов
-	$path = get_template_directory() . '/template-parts/';
-	$files = scandir($path);
-
-	if( in_array($cur_page,$files) ){
-
-		return $path . $cur_page;
-	}
-
-	return $template;
-
-}

@@ -40,6 +40,7 @@
     "acorn": "^6.3.0",
     "bootstrap": "^4.3.1",
     "fs-extra": "^8.1.0",
+    "in-view": "^0.6.1",
     "jcarousel": "^0.3.9",
     "jcarouselSwipe": "^0.3.4",
     "jquery": "^3.4.1",

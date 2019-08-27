@@ -55,7 +55,10 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 	 * Adds custom classes to the array of body classes.
 	 */
 	function starck_body_classes( $classes ) {
-
+		global $template;
+		$template = basename($template, '.php');
+		$template = array_pop(explode('-',$template));
+        $classes[] = $template;
 		$classes[] = 'nav-' . starck_get_option( 'nav_position_setting' ) . '-header';
 		$classes[] = starck_get_layout();
 		

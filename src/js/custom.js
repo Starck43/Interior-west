@@ -13,7 +13,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	});		
 	// Adding class after full DOM loading for applying CSS animation
 	$('#main-header').addClass('visible');
+/*
+	inView('.someSelector')
+		.on('enter', el => {
+			el.style.opacity =1;
+		})
+		.on('exit', el => {
+			el.style.opacity = 0.5;
+		});
 	
+*/
 	$(window).scroll(function() {
 		addVisibleClass(document.body.querySelectorAll('article'), 0); //viewport.js
 		addVisibleClass(document.body.querySelectorAll('#copyright'));

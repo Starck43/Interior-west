@@ -11,7 +11,7 @@
  
 get_header(); ?>
 
-	<section id="content" <?php starck_content_class('portfolio'); ?>>
+	<section id="content" <?php starck_content_class('projects'); ?>>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 			<?php get_template_part( 'entry' ); ?>
