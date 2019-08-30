@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				.jcarouselPagination();
 		} else $('.jcarousel-pagination').remove();
 	}
+	
 	//Add agent to HTML selector
 	var deviceAgent = navigator.userAgent.toLowerCase();
 	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {

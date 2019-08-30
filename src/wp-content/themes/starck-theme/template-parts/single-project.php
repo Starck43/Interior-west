@@ -22,17 +22,30 @@ global $post;
 			the_content();
 			?>
 			<div class="gallery-wrapper">
-				<div id="gallery">
+				<figure id="gallery" class="gallery grid">
 					<?php 
 					foreach ($gallery as $value) {
-						$image = wp_get_attachment_image_src( absint($value), 'medium' );
-						$full_image = wp_get_attachment_image_url( absint($value), 'full' );
+						$value = absint($value);
+						$image = wp_get_attachment_metadata( $value );
+						$thumb = $image['sizes']['medium']['file'];
+						$image_ratio = $image['height']/$image['width']*100;
+						$full_image = $image['file'];
+						$title =  get_the_title( $value );
+						$caption = wp_get_attachment_caption( $value );
 						?>
-						<img src="<?php echo $image[0] ?>" width="<?php echo $image[1] ?>" height="<?php echo $image[2] ?>" data-fullsrc="<?php echo $full_image ?>" alt=""/>
+						<a href="<?php echo $full_image ?>">
+							<div class="img-container" style="padding-top: <?php echo $image_ratio.'%' ?>">
+								<img class="img lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $thumb; ?>" data-srcset="<?php echo wp_get_attachment_image_srcset( $value, 'medium' ); ?>" alt="Gallery"/>
+								<div class="img-details">
+									<div><h3><?php echo $title; ?></h3></div>
+									<div><?php echo $caption; ?></div>
+								</div>
+							</div>
+						</a>
 							<?php 
 						}
 					?>				
-				</div>
+				</figure>
 			</div>
 			<?php
 		} else {

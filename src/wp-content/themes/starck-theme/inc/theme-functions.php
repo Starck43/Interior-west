@@ -79,9 +79,10 @@ function starck_setup() {
 	add_theme_support( 'editor-color-palette', array() );
 	//add_theme_support( 'woocommerce' );
 
+	add_image_size( 'category-thumb', 300, 9999 ); // 450 в ширину и без ограничения в высоту
+	add_image_size( 'portfolio', 600, 9999 ); // 450 в ширину и без ограничения в высоту
+	add_image_size( 'mini-thumbnail', 100, 100, true ); // Кадрирование изображения
 	set_post_thumbnail_size( 300, 300 ); // размер миниатюры поста по умолчанию
-	//add_image_size( 'category-thumb', 300, 9999 ); // 300 в ширину и без ограничения в высоту
-	add_image_size( 'mini-thumbnail', 80, 80, true ); // Кадрирование изображения
 
 	global $content_width;
 	if ( ! isset( $content_width ) ) { $content_width = 1920; }

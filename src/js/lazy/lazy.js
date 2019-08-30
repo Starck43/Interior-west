@@ -27,37 +27,40 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 		lazyImages.forEach(function(lazyImage) {
 			lazyImageObserver.observe(lazyImage);
-		});
-
-	let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
-		entries.forEach(function(entry) {
-			if (entry.isIntersecting) {
-				entry.target.classList.add('visible');
-				lazyBackgroundObserver.unobserve(entry.target);
+			lazyImage.onload = function(){
+				this.classList.add('loaded'); //for transition effect
 			}
 		});
-	});
-	lazyBackgrounds.forEach(function(lazyBackground) {
-		lazyBackgroundObserver.observe(lazyBackground);
-	});
 
-	let lazyBackgroundDataObserver = new IntersectionObserver(function(entries, observer) {
-		entries.forEach(function(entry) {
-			if (entry.isIntersecting) {
-				let lazyBackgroundData = entry.target;
-				lazyBackgroundData.style.backgroundImage = 'url(' + lazyBackgroundData.dataset.bg + ')';
-				lazyBackgroundDataObserver.unobserve(lazyBackgroundData);
-			}
+		let lazyBackgroundObserver = new IntersectionObserver(function(entries, observer) {
+			entries.forEach(function(entry) {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					lazyBackgroundObserver.unobserve(entry.target);
+				}
+			});
 		});
-	});
-	lazyBackgroundsData.forEach(function(lazyBackgroundData) {
-		lazyBackgroundDataObserver.observe(lazyBackgroundData);
-	});
+		lazyBackgrounds.forEach(function(lazyBackground) {
+			lazyBackgroundObserver.observe(lazyBackground);
+		});
+
+		let lazyBackgroundDataObserver = new IntersectionObserver(function(entries, observer) {
+			entries.forEach(function(entry) {
+				if (entry.isIntersecting) {
+					let lazyBackgroundData = entry.target;
+					lazyBackgroundData.style.backgroundImage = 'url(' + lazyBackgroundData.dataset.bg + ')';
+					lazyBackgroundDataObserver.unobserve(lazyBackgroundData);
+				}
+			});
+		});
+		lazyBackgroundsData.forEach(function(lazyBackgroundData) {
+			lazyBackgroundDataObserver.observe(lazyBackgroundData);
+		});
 
 	} else {
 
 		// Fallback
-
+/*
 		lazyImages.forEach(function(lazyImage) {
 			lazyImage.src = lazyImage.dataset.src;
 			lazyImage.srcset = lazyImage.dataset.srcset;
@@ -69,6 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			lazyBackgroundData.style.backgroundImage = 'url(' + lazyBackgroundData.dataset.bg + ')';
 		});
 
-	}
+*/	}
 
 });

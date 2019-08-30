@@ -37,10 +37,6 @@ li
 	list-style-type: none /* Убираем глобально маркеры */
 
 
-%img
-	width: 100%
-	height: auto
-
 .header-background
 	background-size: cover
 	background-repeat: no-repeat
@@ -50,24 +46,57 @@ li
 .grid
 	display: grid
 	grid-gap: $gutter-20
-	grid-template-columns: 1fr 1fr
-	grid-template-areas: "left right"
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
+	//grid-template-columns: 1fr 1fr
+	//grid-template-areas: "left right"
+	margin: 0
+	
 	> div:first-child
 		grid-area: left
 	> div:last-child
 		grid-area: right
+
 	+media-breakpoint-down(xs)
-		display: block
-		> div
-			padding: $gutter-20/2 0
+		//display: block
+		grid-gap: $gutter-20/2
 	
 
-.parent // Lazy Load Placeholder Generator: https://webdesign-master.ru/services/lazy/
-	background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
+.gallery
+	// Lazy Load Placeholder built by HTML generator (https://webdesign-master.ru/services/lazy/)
+	//background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
+	.img-container
+		position: relative
+		padding-top: 100%
+		background-color: darken($main-bg, 5%)
+		img
+			position: absolute
+			top: 0
+			left: 0
+			transition: opacity 500ms ease-in
+			opacity: 0
+			
+			&.loaded
+				opacity: 1
+
+		.img-details
+			position: absolute
+			left: 0
+			bottom: 0
+			width: 100%
+			padding: $gutter-20/2 0
+			color: $base-text-color 
+			background-color: transparentize(#FFF, 0.1) 
+			div
+				padding: 0 $gutter-20/4
+				
+			
 
 .container
 	padding: $gutter-20/2
-	
+	img
+		width: 100%
+		height: auto
+		
 .bounded
 	max-width: $container_max_w
 	//padding: 0 $gutter-20/2

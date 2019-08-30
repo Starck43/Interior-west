@@ -34,7 +34,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
 			add_meta_box( $this->title_slug, 'Title', array( $this, 'title_metabox_callback' ), $screen, 'side', 'default' );
 
-			add_meta_box( $this->gallery_slug, 'Gallery', array( $this, 'gallery_metabox_callback' ), $screen, 'side', 'default' );
+			add_meta_box( $this->gallery_slug, 'Gallery', array( $this, 'gallery_metabox_callback' ), $screen, 'advanced', 'default' );
 
 		}
 
