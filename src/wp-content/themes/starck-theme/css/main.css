@@ -293,6 +293,11 @@ li {
   list-style-type: none;
 }
 
+.gallery-image-container img, #site-header #branding #branding-logo img {
+  width: 100%;
+  height: auto;
+}
+
 .header-background {
   background-size: cover;
   background-repeat: no-repeat;
@@ -321,13 +326,20 @@ li {
   }
 }
 
-.gallery .img-container {
+.gallery-image {
+  position: relative;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.gallery-image-container {
   position: relative;
   padding-top: 100%;
   background-color: #e6e6e6;
 }
 
-.gallery .img-container img {
+.gallery-image-container img {
   position: absolute;
   top: 0;
   left: 0;
@@ -336,12 +348,11 @@ li {
   opacity: 0;
 }
 
-.gallery .img-container img.loaded {
+.gallery-image-container img.loaded {
   opacity: 1;
 }
 
-.gallery .img-container .img-details {
-  position: absolute;
+.gallery-image-details {
   left: 0;
   bottom: 0;
   width: 100%;
@@ -350,17 +361,42 @@ li {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.gallery .img-container .img-details div {
+.gallery-image-details div {
   padding: 0 5px;
+}
+
+.gallery-image-popup {
+  position: fixed;
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: default;
+  z-index: 1;
+}
+
+.gallery-image-popup .close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  width: 30px;
+  height: 30px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .container {
   padding: 10px;
-}
-
-.container img {
-  width: 100%;
-  height: auto;
 }
 
 .bounded {

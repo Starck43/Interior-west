@@ -10,6 +10,9 @@
 
 // Bootstrap compatible gutter variable => $gutter
 
+// Lazy Load Placeholder built by HTML generator (https://webdesign-master.ru/services/lazy/)
+//background-image: url(data:image/gifbase64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
+
 @import vars
 @import mixins
 @import fonts
@@ -36,7 +39,10 @@ a
 li
 	list-style-type: none /* Убираем глобально маркеры */
 
-
+%img
+	width: 100%
+	height: auto
+	
 .header-background
 	background-size: cover
 	background-repeat: no-repeat
@@ -46,6 +52,7 @@ li
 .grid
 	display: grid
 	grid-gap: $gutter-20
+	//column-count: 1
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
 	//grid-template-columns: 1fr 1fr
 	//grid-template-areas: "left right"
@@ -62,24 +69,29 @@ li
 	
 
 .gallery
-	// Lazy Load Placeholder built by HTML generator (https://webdesign-master.ru/services/lazy/)
-	//background-image: url(data:image/gif;base64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
-	.img-container
+	&-image
 		position: relative
-		padding-top: 100%
-		background-color: darken($main-bg, 5%)
-		img
-			position: absolute
-			top: 0
-			left: 0
-			transition: opacity 500ms ease-in
-			opacity: 0
-			
-			&.loaded
-				opacity: 1
+		//display: inline-block
+		//width: 100%
+		height: max-content
+		
+		&-container
+			position: relative
+			padding-top: 100%
+			background-color: darken($main-bg, 5%)
+			img
+				position: absolute
+				top: 0
+				left: 0
+				transition: opacity 500ms ease-in
+				opacity: 0
+				@extend %img
+				
+				&.loaded
+					opacity: 1
 
-		.img-details
-			position: absolute
+		&-details
+			//position: absolute
 			left: 0
 			bottom: 0
 			width: 100%
@@ -88,14 +100,38 @@ li
 			background-color: transparentize(#FFF, 0.1) 
 			div
 				padding: 0 $gutter-20/4
-				
+		&-popup
+			position: fixed
+			display: none
+			left: 0
+			top: 0
+			width: 100%
+			height: 100vh
+			//object-fit: contain
+			background-size: contain
+			background-repeat: no-repeat
+			background-position: 50% 50%
+			background-color: rgba(black,.9) 
+			cursor: default
+			z-index: 1 
+			.close
+				position: absolute
+				top: 15px
+				right: 35px
+				width: 30px
+				height: 30px
+				color: #f1f1f1
+				font-size: 40px
+				font-weight: bold
+				transition: 0.3s
+				cursor: pointer
+				z-index: 2 
+
 			
 
 .container
 	padding: $gutter-20/2
-	img
-		width: 100%
-		height: auto
+
 		
 .bounded
 	max-width: $container_max_w

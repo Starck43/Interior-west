@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				bgpositionY: 50, //it must be the same background-position value in css 
 				speed: 0.5,
 			});
-  		}
+		}
 	});
 
 	$('.back-to-top').on('click', function (e) {
@@ -134,7 +134,33 @@ document.addEventListener("DOMContentLoaded", function() {
 				.jcarouselPagination();
 		} else $('.jcarousel-pagination').remove();
 	}
-	
+
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	//var img = document.getElementById('myImg');
+	//var modalImg = document.getElementById("img01");
+	//var captionText = document.getElementById("caption");
+	$('.gallery-image').bind('click', function (e) {
+		e.preventDefault();
+		if ($(this).children('.gallery-image-popup').css('display') == 'none') {
+			$(this).children('.gallery-image-popup').fadeIn();
+		} else 
+			$(this).children('.gallery-image-popup').fadeOut();
+		//modalImg.src = this.src;
+		//captionText.innerHTML = this.alt;
+	});
+
+	$('.gallery-image-popup .close').on('click', function () {
+		$(this).closest('.gallery-image-popup').fadeOut();
+		return false;
+	});
+
+	$('.gallery-image').keydown( function (e) {
+		if (e.which == 27)
+			$(this).children('.gallery-image-popup').fadeOut();
+		//alert('esc');
+	});
+
 	//Add agent to HTML selector
 	var deviceAgent = navigator.userAgent.toLowerCase();
 	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
