@@ -293,7 +293,8 @@ li {
   list-style-type: none;
 }
 
-.gallery-image-container img, #site-header #branding #branding-logo img {
+.gallery-image-container img,
+.portfolio-image-container img, #site-header #branding #branding-logo img {
   width: 100%;
   height: auto;
 }
@@ -326,20 +327,28 @@ li {
   }
 }
 
-.gallery-image {
+.portfolio {
+  display: inline-block;
+  width: 100%;
+}
+
+.gallery-image,
+.portfolio-image {
   position: relative;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
 }
 
-.gallery-image-container {
+.gallery-image-container,
+.portfolio-image-container {
   position: relative;
   padding-top: 100%;
   background-color: #e6e6e6;
 }
 
-.gallery-image-container img {
+.gallery-image-container img,
+.portfolio-image-container img {
   position: absolute;
   top: 0;
   left: 0;
@@ -348,11 +357,13 @@ li {
   opacity: 0;
 }
 
-.gallery-image-container img.loaded {
+.gallery-image-container img.loaded,
+.portfolio-image-container img.loaded {
   opacity: 1;
 }
 
-.gallery-image-details {
+.gallery-image-details,
+.portfolio-image-details {
   left: 0;
   bottom: 0;
   width: 100%;
@@ -361,11 +372,13 @@ li {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.gallery-image-details div {
+.gallery-image-details div,
+.portfolio-image-details div {
   padding: 0 5px;
 }
 
-.gallery-image-popup {
+.gallery-image-popup,
+.portfolio-image-popup {
   position: fixed;
   display: none;
   left: 0;
@@ -380,7 +393,8 @@ li {
   z-index: 1;
 }
 
-.gallery-image-popup .close {
+.gallery-image-popup .close,
+.portfolio-image-popup .close {
   position: absolute;
   top: 15px;
   right: 35px;

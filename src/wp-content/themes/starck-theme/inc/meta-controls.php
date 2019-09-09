@@ -15,7 +15,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
     	private $gallery_slug = 'gallery-image';
     	private $gallery_scroll = 'gallery-autoscroll';
     	private $gallery_pagination = 'gallery-pagination';
-    	private $screen = array( 'post', 'page' );
+    	private $screen = array( 'post', 'page', 'projects' );
 
         /**
         * PHP 5 Constructor

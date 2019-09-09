@@ -40,3 +40,4 @@ function starck_scripts_add() {
 
 require_once get_template_directory() . '/inc/theme-functions.php'; // Include main theme functions
 require_once get_template_directory() . '/inc/meta-controls.php'; // Include custom meta in pages (i.e. header gallery or hide title)
+require_once get_template_directory() . '/inc/projects_layout.php'; // Include Projects Post Layout

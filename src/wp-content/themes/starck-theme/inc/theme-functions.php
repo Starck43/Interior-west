@@ -15,26 +15,6 @@ function media_upload_enqueue() {
 	//}
 }
 
-
-// фильтр передает переменную $template - путь до файла шаблона.
-// Изменяя этот путь мы изменяем файл шаблона.
-add_filter('template_include', 'template_parts',99);
-function template_parts( $template ) {
-
-	// если текущая страница со слагом portfolio, используем файл шаблона page-portfolio.php
-	$page_slug = get_post(get_queried_object_id())->post_name;
-	if ('porfolio' === $page_slug) { $page_slug = 'projects'; }
-
-	// проверяем папку на наличие искомых шаблонов
-	if ( $project_template = locate_template('template-parts/page-' . $page_slug . '.php') ) {
-		var_dump($project_template);
-		return $project_template;
-	}
-
-	return $template;
-
-}
-
 add_action( 'after_setup_theme', 'starck_setup' );
 function starck_setup() {
 	load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
@@ -72,7 +52,7 @@ function starck_setup() {
 
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'automatic-feed-links' );
-	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails', array('projects') );
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link', 'status' ) );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 	add_theme_support( 'align-wide' );

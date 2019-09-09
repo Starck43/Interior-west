@@ -5,10 +5,10 @@ add_action('init', 'setup_projects_cpt');
 //Creating Custom Post types for Projects
 function setup_projects_cpt(){
     $labels = array(
-        'name' => _x('Projects', 'post type general name'),
-        'singular_name' => _x('Project', 'post type singular name'),
-        'add_new' => _x('Add New', 'Project'),
-        'add_new_item' => __('Add New Project'),
+        'name' => _x('Проекты', 'post type general name'),
+        'singular_name' => _x('Проект', 'post type singular name'),
+        'add_new' => _x('Добавить', 'Project'),
+        'add_new_item' => __('Добавить новый проект'),
         'edit_item' => __('Edit Project'),
         'new_item' => __('New Project'),
         'all_items' => __('All Projects'),
@@ -25,7 +25,7 @@ function setup_projects_cpt(){
         'rewrite' => array('slug' => 'projects'),
         'public' => true,
         'menu_position' => 5,
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields', 'post-formats'),
         'has_archive' => true,
         'taxonomies' => array(''),
         'menu_icon' => 'dashicons-admin-multisite', //Find the appropriate dashicon here: https://developer.wordpress.org/resource/dashicons/
@@ -41,7 +41,7 @@ function projects_taxonomy() {
         'projects',        //post type name
         array(  
             'hierarchical' => true,  
-            'label' => 'Рубрики',  //Label Displayed in the Admin when creating a new project
+            'label' => 'Рубрики проектов',  //Label Displayed in the Admin when creating a new project
             'query_var' => true,
             'rewrite' => array(
                 'slug' => 'projects', // This controls the base slug that will display before each term
