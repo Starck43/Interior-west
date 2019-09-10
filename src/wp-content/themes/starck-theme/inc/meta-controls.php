@@ -68,25 +68,25 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			if ( (bool)$gallery_scroll ) 	{ $scroll_checked = 'checked="checked"'; }
 			if ( (bool)$gallery_pagination ){ $pagination_checked = 'checked="checked"'; }
 
-			echo '<div class="gallery-block" style="cursor:pointer;">';
+			echo '<div class="postbox-gallery-block" style="cursor:pointer;">';
 			if ($gallery) {
 
 				foreach ($gallery as $value) {
 					$url = wp_get_attachment_image_url(absint($value) );
-					echo '<div class="gallery-image"><img src="' . $url . '" />';
-					echo '<a class="gallery-del-image" href="#">удалить</a>';
+					echo '<div class="postbox-gallery-image"><img src="' . $url . '" />';
+					echo '<a class="gallery-del-image" href="#">x</a>';
 					echo '<input type="hidden" name="gallery-image[]" value="' . $value . '">';
 					echo '</div>';
 				}
 			}
 			echo '</div>';
 			echo '<div><input type="button" id="upload-button" class="button" value="Добавить фото" /></div>';
-			echo sprintf('<label class="gallery-scroll" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Режим слайдшоу</label>',
+			echo sprintf('<label class="postbox-gallery-scroll" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Режим слайдшоу</label>',
 							(($gallery) ? 'block' : 'none'),
 							$this->gallery_scroll,
 							$scroll_checked
 						);
-			echo sprintf('<label class="gallery-pagination" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Индикатор слайдов</label>',
+			echo sprintf('<label class="postbox-gallery-pagination" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Индикатор слайдов</label>',
 							(($gallery) ? 'block' : 'none'),
 							$this->gallery_pagination,
 							$pagination_checked

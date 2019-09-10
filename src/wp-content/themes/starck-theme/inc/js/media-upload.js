@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			for (var i = 0; i < attachment.length; i++) {
 
-				html = '<div class="gallery-image"><img src="' + attachment[i]['sizes']['thumbnail']['url'] + '" />'+
-				'<a class="gallery-del-image" href="#">удалить</a><input type="hidden" name="gallery-image[]" value="' + 
+				html = '<div class="postbox-gallery-image"><img src="' + attachment[i]['sizes']['thumbnail']['url'] + '" />'+
+				'<a class="gallery-del-image" href="#">x</a><input type="hidden" name="gallery-image[]" value="' + 
 				attachment[i]['id'] + '"></div>';
-				$('.gallery-block').append(html);
+				$('.postbox-gallery-block').append(html);
 			}
 
 
@@ -31,12 +31,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	$('.gallery-del-image').on('click', function (e) {
 		e.preventDefault();
-		$(this).parents('.gallery-image').remove();
-		toggleSliderAttr(Boolean($('.gallery-image').length));	
+		$(this).parents('.postbox-gallery-image').remove();
+		toggleSliderAttr(Boolean($('.postbox-gallery-image').length));	
 	});
 
 	function toggleSliderAttr(isImg = false, value = 'hidden') {
-		if (isImg) { $('label.gallery-scroll, label.gallery-pagination').show(); }
-		else { $('label.gallery-scroll, label.gallery-pagination').hide(); }
+		if (isImg) { $('label.postbox-gallery-scroll, label.postbox-gallery-pagination').show(); }
+		else { $('label.postbox-gallery-scroll, label.postbox-gallery-pagination').hide(); }
 	}
 });

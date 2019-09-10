@@ -58,7 +58,6 @@ function starck_setup() {
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'editor-color-palette', array() );
 	//add_theme_support( 'woocommerce' );
-	add_post_type_support( 'projects', 'post-formats', array( 'gallery', 'image' ) );
 
 	add_image_size( 'category-thumb', 300, 9999 ); // 450 в ширину и без ограничения в высоту
 	add_image_size( 'portfolio', 600, 9999 ); // 450 в ширину и без ограничения в высоту
@@ -204,6 +203,7 @@ if ( ! function_exists( 'starck_widgets_init' ) ) {
 require_once trailingslashit( dirname( __FILE__ ) ) . 'customizer.php';
 require_once trailingslashit( dirname( __FILE__ ) ) . 'defaults.php';
 require_once trailingslashit( dirname( __FILE__ ) ) . 'markup.php';
+require_once trailingslashit( dirname( __FILE__ ) ) . 'post-thumbnails.php';
 
 
 //Theme functions define
