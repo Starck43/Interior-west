@@ -454,7 +454,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[layout_setting]',
 			array(
 				'type' => 'select',
-				'label' => __( 'Sidebar Layout', 'starck' ),
+				'label' => __( 'Page Sidebar Layout', 'starck' ),
 				'section' => 'starck_layout_sidebars',
 				'choices' => array(
 					'left-sidebar' => __( 'Sidebar | Content', 'starck' ),

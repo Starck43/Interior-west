@@ -1,18 +1,12 @@
-<?php 
+<?php get_header(); ?>
 
-get_header(); 
-
-$header_class = get_post_meta( $post->ID, 'hide-title', true ) ? 'hidden' : '';
-
-?>
-
-	<section id="content" <?php starck_content_class(); ?>>
+	<section id="content" <?php starck_content_class('blog'); ?>>
 	
 		<?php starck_breadcrumbs(); ?>
 		
-		<header class="category-header">
-			<h1 class="entry-title <?php echo $header_class ?>"><?php single_term_title(); ?></h1>
-			<div class="archive-meta"><?php if ( '' != the_archive_description() ) { echo esc_html( the_archive_description() ); } ?></div>
+		<header class="blog-header">
+			<h1 class="blog-header-title <?php echo $header_class ?>"><?php single_term_title(); ?></h1>
+			<div class="blog-header-meta"><?php if ( '' != the_archive_description() ) { echo esc_html( the_archive_description() ); } ?></div>
 		</header>
 
 		<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>

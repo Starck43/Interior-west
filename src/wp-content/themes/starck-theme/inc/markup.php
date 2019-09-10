@@ -185,10 +185,10 @@ if ( ! function_exists( 'starck_content_classes' ) ) {
 
 			$sidebar_layout = starck_get_layout();
 			if ('left-sidebar' == $sidebar_layout) {
-				$classes[] = 'right-aligned';
+				$classes[] = 'float-right';
 			} else 
 			if ('right-sidebar' == $sidebar_layout) {
-				$classes[] = 'left-aligned';
+				$classes[] = 'float-left';
 			}
 		}
 

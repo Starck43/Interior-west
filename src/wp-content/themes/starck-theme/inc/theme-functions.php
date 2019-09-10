@@ -53,11 +53,12 @@ function starck_setup() {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'post-thumbnails', array('projects') );
-	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link', 'status' ) );
+	add_theme_support( 'post-formats', array( 'aside', 'image', 'gallery', 'video', 'quote', 'link', 'status' ) );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'editor-color-palette', array() );
 	//add_theme_support( 'woocommerce' );
+	add_post_type_support( 'projects', 'post-formats', array( 'gallery', 'image' ) );
 
 	add_image_size( 'category-thumb', 300, 9999 ); // 450 в ширину и без ограничения в высоту
 	add_image_size( 'portfolio', 600, 9999 ); // 450 в ширину и без ограничения в высоту
@@ -75,6 +76,7 @@ function starck_setup() {
 	) );
 
 }
+
 
 add_filter( 'document_title_separator', 'starck_document_title_separator' );
 function starck_document_title_separator( $sep ) {
