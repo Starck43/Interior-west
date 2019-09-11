@@ -37,7 +37,7 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 	return gulp.src(path.src+'sass/**/*.sass')
 	// Пример: gulp.src('src/sass/*.+(sass|scss)')
 	// Пример: gulp.src(['src/sass/**/*.sass','!src/sass/libs.sass'])  ! - кроме styles.sass
-	//.pipe(sourcemaps.init()) //инициализируем soucemap
+	.pipe(sourcemaps.init()) //инициализируем soucemap
 	.pipe(sass({ outputStyle: 'expanded' })) //  Опция { outputStyle: 'expanded' } развертывает все унификации
 	/*
 		файлы с подчеркиванием не участвуют в компиляции, например, _part.sass. 
@@ -48,7 +48,7 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 		grid: true,
 		overrideBrowserslist: ['last 2 versions']
 	})) // Создаем префиксы
-	//.pipe(sourcemaps.write()) //пропишем sourcemap
+	.pipe(sourcemaps.write()) //пропишем sourcemap
 	.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 	.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
 });
@@ -91,7 +91,7 @@ gulp.task('vendors-scripts', function() {
     return gulp.src([ // Берем нужные библиотеки вендорных скриптов
 			//'node_modules/jquery/dist/jquery.min.js', // jQuery plug-in (npm i --save jquery)
 			path.src+'js/*.js', // Vendors scripts.
-			'!'+path.src+'js/_custom*.js'
+			'!'+path.src+'js/custom*.js'
 		])
     .pipe(jsRequires({ // подключаем внешние скрипты, если они прописаны в заголовке файлов через @requires
       pattern: /\* @requires [\s-]*(.*\.js)/g

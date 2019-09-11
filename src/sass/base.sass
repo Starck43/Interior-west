@@ -121,6 +121,10 @@ li
 			background-color: transparentize(#FFF, 0.1) 
 			div
 				padding: 0 $gutter-20/4
+ 
+	&-caption
+		display: none
+			
 		&-popup
 			position: fixed
 			display: none
@@ -148,7 +152,12 @@ li
 				cursor: pointer
 				z-index: 2 
 
-			
+	
+#gallery-lightbox-image
+	position: fixed
+	z-index: 9999
+	-ms-touch-action: none
+	touch-action: none			
 
 .container
 	padding: $gutter-20/2

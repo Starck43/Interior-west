@@ -1,6 +1,6 @@
 /*
  * Including vendors JS libraries.
- * @version 1.0.4
+ * @version 1.0.5
  *
  * Example:
  * //@requires ..\..\node_modules\jquery\dist\jquery.min.js
@@ -10,6 +10,9 @@
  *
  * lazy.js - lazy loading inline images in HTML (see more: https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video/)
  * @requires lazy\lazy.js
+ *
+ * Slider photoSwipe including
+ * @requires lightbox\imagelightbox.js
  *
  * Slider jCarousel including
  * @requires ..\..\node_modules\jcarousel\dist\jquery.jcarousel.min.js

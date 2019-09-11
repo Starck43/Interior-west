@@ -21,29 +21,3 @@ function posts_custom_columns($column_name, $id) {
 		} else echo 'No Image';
 	}
 }
-
-add_action('admin_head', 'thumb_styles');
-function thumb_styles() {
-	echo '<style>
-		.column-post_thumb {width: 80px;}
-		.postbox-gallery-image {
-			position: relative;
-			display: inline-block;
-			margin: 0.5%;
-			max-width: 9%;
-		}
-		.postbox-gallery-image img {width: 100%; height: auto;}
-		.postbox-gallery-image .gallery-del-image {
-			position: absolute; 
-			right: 4px; 
-			top: 4px;
-			border-radius: 50%;
-			background: rgba(255,255,255,.8);
-			width: 20px;
-			height: 20px;
-			text-align: center;
-			font-size: 15px;
-		}
-		#gallery-image .button {margin: 5px 0 10px;}
-	</style>';
-}

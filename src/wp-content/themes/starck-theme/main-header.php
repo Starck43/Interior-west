@@ -51,15 +51,24 @@ if ($gallery || $main_header_background ) {
 				<a href="#" class="jcarousel-control next"><span class="fa fa-chevron-right"></span></a>
 				<p class="jcarousel-pagination" data-jcarouselpagination ="<?php echo $gallery_pagination ?>"></p>
 			</div>
-
 			<?php					
 		}
-		?>
 
-		<div id="main-header-excerpt">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat, fuga aliquid iusto beatae harum ipsa officiis ad ipsam sequi voluptatibus minima dolore hic delectus, eos alias nemo excepturi consequatur inventore.</p>
-		</div>
-		<div id="main-header-link"><div class="button">Подробнее</div></div>
+		$gallery_caption = get_post_meta( $page_id, 'gallery-caption', true );
+		$gallery_caption_link = get_post_meta( $page_id, 'gallery-caption-link', true );
+
+		if ( $gallery_caption ) {
+			?>
+			<div id="main-header-excerpt">
+				<p><?php echo $gallery_caption ?></p>
+			</div>
+			<?php
+		}
+
+		if ( $gallery_caption_link ) {
+		?>
+		<a id="main-header-link" href="<?php echo esc_url($gallery_caption_link) ?>"><div class="button">Подробнее</div></a>
+		<?php } ?>
 
 	</header>
 	<?php

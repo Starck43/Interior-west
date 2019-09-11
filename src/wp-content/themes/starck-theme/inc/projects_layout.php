@@ -7,7 +7,7 @@ function setup_projects_cpt(){
 	$labels = array(
 		'name' => _x('Проекты', 'post type general name'),
 		'singular_name' => _x('Проект', 'post type singular name'),
-		'add_new' => _x('Добавить', 'Project'),
+		'add_new' => _x('Добавить проект', 'Project'),
 		'add_new_item' => __('Добавить новый проект'),
 		'edit_item' => __('Изменить проект'),
 		'new_item' => __('Новый проект'),

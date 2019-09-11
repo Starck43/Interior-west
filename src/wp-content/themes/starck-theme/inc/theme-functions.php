@@ -1,6 +1,35 @@
 <?php
 define( 'STARCK_VERSION', '1.0.5' );
 
+
+add_action('admin_head', 'add_custom_admin_styles');
+function add_custom_admin_styles() {
+	echo '<style>
+		.column-post_thumb {width: 80px;}
+		#gallery-image .button {margin: 5px 0 20px;}
+		.postbox-gallery-block {cursor: pointer;}
+		.postbox-gallery-image {
+			position: relative;
+			display: inline-block;
+			margin: 0 1% 1% 0;
+			max-width: 9%;
+		}
+		.postbox-gallery-image img {width: 100%; height: auto;}
+		.postbox-gallery-image .gallery-del-image {
+			position: absolute; 
+			right: 4px; 
+			top: 4px;
+			border-radius: 2px;
+			background: rgba(255,255,255,.8);
+			width: 20px;
+			height: 20px;
+			text-align: center;
+			font-size: 12px;
+		}
+		.postbox-gallery-caption, .postbox-gallery-caption-link {padding-top: 20px;}
+	</style>';
+}
+
  /* Add the media uploader script */
 add_action('admin_enqueue_scripts', 'media_upload_enqueue');
 function media_upload_enqueue() {

@@ -136,11 +136,27 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 
+	$( '#gallery a' ).imageLightbox(
+	{
+		selector:       'id="gallery-lightbox-image"',   // string;
+		allowedTypes:   'png|jpg|jpeg|gif',     // string;
+		animationSpeed: 250,                    // integer;
+		preloadNext:    true,                   // bool;            silently preload the next image
+		enableKeyboard: true,                   // bool;            enable keyboard shortcuts (arrows Left/Right and Esc)
+		quitOnEnd:      false,                  // bool;            quit after viewing the last image
+		quitOnImgClick: false,                  // bool;            quit when the viewed image is clicked
+		quitOnDocClick: true,                   // bool;            quit when anything but the viewed image is clicked
+		onStart:        false,                  // function/bool;   calls function when the lightbox starts
+		onEnd:          false,                  // function/bool;   calls function when the lightbox quits
+		onLoadStart:    false,                  // function/bool;   calls function when the image load begins
+		onLoadEnd:      false                   // function/bool;   calls function when the image finishes loading
+	});
+
 	// Get the image and insert it inside the modal - use its "alt" text as a caption
 	//var img = document.getElementById('myImg');
 	//var modalImg = document.getElementById("img01");
 	//var captionText = document.getElementById("caption");
-	$('.gallery-image').bind('click', function (e) {
+/*	$('.gallery-image').bind('click', function (e) {
 		e.preventDefault();
 		if ($(this).children('.gallery-image-popup').css('display') == 'none') {
 			$(this).children('.gallery-image-popup').fadeIn();
@@ -160,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			$(this).children('.gallery-image-popup').fadeOut();
 		//alert('esc');
 	});
-
+*/
 	//Add agent to HTML selector
 	var deviceAgent = navigator.userAgent.toLowerCase();
 	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
