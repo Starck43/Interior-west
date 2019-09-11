@@ -5,3 +5,5 @@
 /src/wordpress/
 !/src/wordpress/search-replace-db
 /src/wp-content/uploads/
+/start-web.sublime-workspace
+/src/wp-content/plugins/

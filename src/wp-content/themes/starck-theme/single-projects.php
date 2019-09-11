@@ -32,18 +32,16 @@ global $post;
 						$title =  get_the_title( $post_id );
 						$caption = wp_get_attachment_caption( $post_id );
 						?>
-						<figure>
-							<a id="gallery-image" class="gallery-image" href="<?php echo $full_image ?>" data-imagelightbox="a">
-								<div class="gallery-image-container" style="padding-top: <?php echo $image_ratio.'%' ?>">
-									<img class="image lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $thumb; ?>" data-srcset="<?php echo wp_get_attachment_image_srcset( $post_id, 'medium' ); ?>" alt="Gallery"/>
-								</div>
-								<div class="gallery-image-details">
-									<div><h3><?php echo $title; ?></h3></div>
-									<div><?php echo $caption; ?></div>
-								</div>
-							</a>
-							<div class="gallery-caption"><?php echo $caption; ?></div>
-						</figure>
+						<a id="gallery-image" class="gallery-image" href="<?php echo $full_image ?>" data-imagelightbox="g">
+							<div class="gallery-image-container" style="padding-top: <?php echo $image_ratio.'%' ?>">
+								<img class="image lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $thumb; ?>" data-srcset="<?php echo wp_get_attachment_image_srcset( $post_id, 'medium' ); ?>" alt="Gallery"/>
+							</div>
+							<div class="gallery-image-details">
+								<div><h3><?php echo $title; ?></h3></div>
+								<div><?php echo $caption; ?></div>
+							</div>
+						</a>
+						<div class="gallery-caption"><?php echo $caption; ?></div>
 						<?php 
 						}
 					?>				

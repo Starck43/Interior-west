@@ -52,7 +52,6 @@ li
 .grid
 	display: grid
 	grid-gap: $gutter-20
-	//column-count: 1
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
 	//grid-template-columns: 1fr 1fr
 	//grid-template-areas: "left right"
@@ -68,10 +67,18 @@ li
 		grid-gap: $gutter-20/2
 
 .portfolio
-	display: inline-block
+	display: block
 	width: 100%
+	margin-bottom: $gutter-20
+	column-count: 2
 
 	&-image
+		display: inline-block
+		width: 100%
+		margin-top: $gutter-20
+		page-break-inside: avoid
+		break-inside: avoid
+		
 		&-meta
 			position: absolute
 			display: flex
@@ -94,7 +101,7 @@ li
 .portfolio
 	&-image
 		position: relative
-		height: max-content
+		height: auto
 		
 		&-container
 			position: relative
@@ -124,40 +131,22 @@ li
  
 	&-caption
 		display: none
-			
-		&-popup
-			position: fixed
-			display: none
-			left: 0
-			top: 0
-			width: 100%
-			height: 100vh
-			//object-fit: contain
-			background-size: contain
-			background-repeat: no-repeat
-			background-position: 50% 50%
-			background-color: rgba(black,.9) 
-			cursor: default
-			z-index: 1 
-			.close
-				position: absolute
-				top: 15px
-				right: 35px
-				width: 30px
-				height: 30px
-				color: #f1f1f1
-				font-size: 40px
-				font-weight: bold
-				transition: 0.3s
-				cursor: pointer
-				z-index: 2 
 
 	
 #gallery-lightbox-image
 	position: fixed
-	z-index: 9999
 	-ms-touch-action: none
-	touch-action: none			
+	touch-action: none
+		
+.gallery-modal
+	position: fixed
+	display: none
+	top: 0
+	bottom: 0
+	right: 0
+	left: 0
+	background-color: lighten(black, 20%)
+	z-index: 9999
 
 .container
 	padding: $gutter-20/2

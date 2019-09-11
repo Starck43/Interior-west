@@ -32,6 +32,5 @@
 		?>
 
 	</footer>
-	<div class="modal-popup"></div>
 </body>
 </html>

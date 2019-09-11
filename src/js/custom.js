@@ -136,47 +136,26 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 
-	$( '#gallery a' ).imageLightbox(
-	{
+	$( '#gallery a' ).imageLightbox({	
 		selector:       'id="gallery-lightbox-image"',   // string;
-		allowedTypes:   'png|jpg|jpeg|gif',     // string;
-		animationSpeed: 250,                    // integer;
-		preloadNext:    true,                   // bool;            silently preload the next image
-		enableKeyboard: true,                   // bool;            enable keyboard shortcuts (arrows Left/Right and Esc)
-		quitOnEnd:      false,                  // bool;            quit after viewing the last image
-		quitOnImgClick: false,                  // bool;            quit when the viewed image is clicked
-		quitOnDocClick: true,                   // bool;            quit when anything but the viewed image is clicked
-		onStart:        false,                  // function/bool;   calls function when the lightbox starts
-		onEnd:          false,                  // function/bool;   calls function when the lightbox quits
-		onLoadStart:    false,                  // function/bool;   calls function when the image load begins
-		onLoadEnd:      false                   // function/bool;   calls function when the image finishes loading
+		animationSpeed: 200,   // integer;
+		quitOnEnd:      true, // bool; quit after viewing the last image
+		quitOnImgClick: false, // bool; quit when the viewed image is clicked
+		quitOnDocClick: true,  // bool; quit when anything but the viewed image is clicked
+		onStart:        function() {	// function/bool;
+							$('<div class="gallery-modal"></div>').appendTo( 'body' );
+							//$('.gallery-modal').append('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left" style="display: block;"></button>');
+							//$('.gallery-modal').append('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-right" style="display: block;"></button>');
+							$('.gallery-modal').fadeIn(200);
+						},
+		onEnd:          function() { // function/bool;
+							$('.gallery-modal').remove();
+						},
+		onLoadStart:    false, // function/bool;
+		onLoadEnd:      false // function/bool;
 	});
 
-	// Get the image and insert it inside the modal - use its "alt" text as a caption
-	//var img = document.getElementById('myImg');
-	//var modalImg = document.getElementById("img01");
-	//var captionText = document.getElementById("caption");
-/*	$('.gallery-image').bind('click', function (e) {
-		e.preventDefault();
-		if ($(this).children('.gallery-image-popup').css('display') == 'none') {
-			$(this).children('.gallery-image-popup').fadeIn();
-		} else 
-			$(this).children('.gallery-image-popup').fadeOut();
-		//modalImg.src = this.src;
-		//captionText.innerHTML = this.alt;
-	});
 
-	$('.gallery-image-popup .close').on('click', function () {
-		$(this).closest('.gallery-image-popup').fadeOut();
-		return false;
-	});
-
-	$('.gallery-image').keydown( function (e) {
-		if (e.which == 27)
-			$(this).children('.gallery-image-popup').fadeOut();
-		//alert('esc');
-	});
-*/
 	//Add agent to HTML selector
 	var deviceAgent = navigator.userAgent.toLowerCase();
 	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {

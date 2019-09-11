@@ -136,7 +136,7 @@
 					.attr( 'src', target.attr( 'href' ) )
 					.on( 'load', function()
 					{
-						image.appendTo( 'body' );
+						image.appendTo( '.gallery-modal' );
 						setImage();
 
 						var params = { 'opacity': 1 };
