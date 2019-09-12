@@ -135,27 +135,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else $('.jcarousel-pagination').remove();
 	}
 
-
-	$( '#gallery a' ).imageLightbox({	
-		selector:       'id="gallery-lightbox-image"',   // string;
-		animationSpeed: 200,   // integer;
-		quitOnEnd:      true, // bool; quit after viewing the last image
-		quitOnImgClick: false, // bool; quit when the viewed image is clicked
-		quitOnDocClick: true,  // bool; quit when anything but the viewed image is clicked
-		onStart:        function() {	// function/bool;
-							$('<div class="gallery-modal"></div>').appendTo( 'body' );
-							//$('.gallery-modal').append('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-left" style="display: block;"></button>');
-							//$('.gallery-modal').append('<button type="button" class="imagelightbox-arrow imagelightbox-arrow-right" style="display: block;"></button>');
-							$('.gallery-modal').fadeIn(200);
-						},
-		onEnd:          function() { // function/bool;
-							$('.gallery-modal').remove();
-						},
-		onLoadStart:    false, // function/bool;
-		onLoadEnd:      false // function/bool;
-	});
-
-
 	//Add agent to HTML selector
 	var deviceAgent = navigator.userAgent.toLowerCase();
 	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {

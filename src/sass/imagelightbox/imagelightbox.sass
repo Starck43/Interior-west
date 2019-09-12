@@ -1,0 +1,184 @@
+@import vars
+@import ../mixins
+
+/* IMAGE LIGHTBOX SELECTOR */
+
+#imagelightbox
+	cursor: pointer
+	position: fixed
+	z-index: 10000
+
+	-ms-touch-action: none
+	touch-action: none
+
+	-webkit-box-shadow: 0 0 3.125em rgba( 0, 0, 0, .75 )/* 50 */
+	box-shadow: 0 0 3.125em rgba( 0, 0, 0, .75 )/* 50 */
+
+
+
+/* ACTIVITY INDICATION */
+#imagelightbox-loading
+	&::before
+		content: '@'
+		
+/* OVERLAY */
+#imagelightbox-overlay
+	background-color: rgba( 255, 255, 255, .9 )
+	position: fixed
+	z-index: 9998
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+
+
+/* "CLOSE" BUTTON */
+#imagelightbox-close
+	width: 2.5em/* 40 */
+	height: 2.5em/* 40 */
+	text-align: left
+	background-color: #666
+	border-radius: 50%
+	position: fixed
+	z-index: 10002
+	top: 2.5em/* 40 */
+	right: 2.5em/* 40 */
+	-webkit-transition: color .3s ease
+	transition: color .3s ease
+
+	&:hover,
+	&:focus
+		background-color: #111
+
+	&:before,
+	&:after
+		width: 2px
+		background-color: #fff
+		content: ''
+		position: absolute
+		top: 20%
+		bottom: 20%
+		left: 50%
+		margin-left: -1px
+	
+	&:before
+		transform: rotate( 45deg )
+	
+	&:after
+		transform: rotate( -45deg )
+	
+
+
+/* CAPTION */
+
+#imagelightbox-caption
+	text-align: center
+	color: #fff
+	background-color: #666
+	position: fixed
+	z-index: 10001
+	left: 0
+	right: 0
+	bottom: 0
+	padding: 0.625em/* 10 */
+
+
+
+/* NAVIGATION */
+
+#imagelightbox-nav
+	//background-color: rgba( 0, 0, 0, .5 )
+	//border-radius: 20px
+	position: fixed
+	z-index: 10001
+	left: 50%
+	bottom: 3.75em /* 60 */
+	padding: 0.313em /* 5 */
+	transform: translateX( -50% )
+
+	& .button
+		width: 0.7em
+		height: 0.7em
+		background-color: transparent
+		border: 1px solid #fff
+		border-radius: 50%
+		display: inline-block
+		margin: 0 0.313em/* 5 */
+		padding: 0
+	
+		&.active
+			background-color: #fff
+	
+
+
+/* ARROWS */
+
+.imagelightbox-arrow
+	position: fixed
+	display: flex
+	width: 3.75em/* 60 */
+	height: 7.5em/* 120 */
+	top: 50%
+	justify-content: center
+	align-items: center
+	opacity: 0
+	background-color: rgba( 0, 0, 0, .5 )
+	@include animation(gallery-arrows, 0.5s, 0s, ease, forwards, In, 0, -50%)
+	z-index: 10001
+	
+	&:hover,
+	&:focus
+		background-color: rgba( 0, 0, 0, .75 )
+	&:active
+		background-color: #111
+
+	&.prev
+		left: 0
+		transform: translate(-100%, -50%)
+
+	&.next
+		right: 0
+		transform: translate(100%, -50%)
+	
+	.icon
+		font-size: 2em
+		
+
+#imagelightbox-loading,
+#imagelightbox-overlay,
+#imagelightbox-close,
+#imagelightbox-caption,
+#imagelightbox-nav
+	@include animation(fade-in, .2s, 0s, linear, forwards, In)
+	
+
+@media only screen and (max-width: 41.250em) /* 660 */
+
+	#imagelightbox-close
+		top: 1.25em/* 20 */
+		right: 1.25em/* 20 */
+	
+	#imagelightbox-nav
+		bottom: 1.25em/* 20 */
+	
+
+	.imagelightbox-arrow
+	
+		width: 2.5em/* 40 */
+		height: 3.75em/* 60 */
+		margin-top: -2.75em/* 30 */
+	
+		&.prev
+			left: 1.25em/* 20 */ 
+		&.next
+			right: 1.25em/* 20 */ 
+
+
+@media only screen and (max-width: 20em) /* 320 */
+
+	.imagelightbox
+		&.prev
+			left: 0
+		&.next
+			right: 0
+

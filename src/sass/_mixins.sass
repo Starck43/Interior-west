@@ -37,15 +37,20 @@
 
 
 
-@mixin animation($name, $delay:0, $duration:1s, $animation:ease, $x:0, $y:0)
+@mixin animation($name, $duration:0.2s, $delay:0s, $animation:ease, $fill-mode:forwards, $fade:no-fade, $x:0, $y:0)
 	$shift-x: $x !global
 	$shift-y: $y !global
-	animation: animation-#{$name} $duration $delay $animation both
+	animation: animation-#{$name} $duration $delay $animation $fill-mode
 	
 	@keyframes animation-#{$name}
-		100%
+		from
+			@if $fade != no-fade
+				opacity: if($fade == In, 0, 1)
+
+		to
 			transform: translate($shift-x, $shift-y)
-			opacity: 1
+			@if $fade != no-fade
+				opacity: if($fade == Out, 0, 1)
 
   
 // Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 

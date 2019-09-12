@@ -11,8 +11,9 @@
  * lazy.js - lazy loading inline images in HTML (see more: https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video/)
  * @requires lazy\lazy.js
  *
- * Slider photoSwipe including
- * @requires lightbox\imagelightbox.js
+ * Lightbox for Gallery viewing
+ * @requires ..\plugins\imageLightbox\imagelightbox.js
+ * @requires ..\plugins\imageLightbox\imagelightbox.controls.js
  *
  * Slider jCarousel including
  * @requires ..\..\node_modules\jcarousel\dist\jquery.jcarousel.min.js

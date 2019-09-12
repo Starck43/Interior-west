@@ -33,10 +33,10 @@ main
 			
 		&.visible
 			#main-header-excerpt
-				@include animation(header-excerpt, 1s, 1.5s, ease-in-out, -50%, -350px)
+				@include animation(header-excerpt, 1.5s, 1s, ease-in-out, both, no-fade, -50%, -350px)
 
 			#main-header-link
-				@include animation(header-link, 2.5s, 2s, ease-in-out, -50%, -230px)
+				@include animation(header-link, 2s, 2.5s, ease-in-out, both, no-fade, -50%, -230px)
 
 
 	#main-container
@@ -70,7 +70,7 @@ main
 				opacity: 0
 				transform: translate(0, 50%)
 				&.visible
-					@include animation(article, 0s, 0.8s, ease, 0, 0 )
+					@include animation(article, 0.8s, 0, ease, both, no-fade, 0, 0 )
 
 		
 		#main-sidebar

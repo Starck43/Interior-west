@@ -457,7 +457,7 @@ function starck_back_to_top() {
 			</a>
 		</div>',
 		esc_attr__( 'Scroll back to top', 'starck' ),
-		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa fa-chevron-up' ) )
+		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa arrow-up' ) )
 
 	)));
 }

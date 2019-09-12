@@ -34,7 +34,7 @@ gulp.task('message', async function() { // Вывод любой информа�
 
 
 gulp.task('styles', function() { // таск 'styles' обработает все файлы *.sass, вложенные в любые подпапки
-	return gulp.src(path.src+'sass/**/*.sass')
+	return gulp.src(path.src+'sass/*.sass')
 	// Пример: gulp.src('src/sass/*.+(sass|scss)')
 	// Пример: gulp.src(['src/sass/**/*.sass','!src/sass/libs.sass'])  ! - кроме styles.sass
 	.pipe(sourcemaps.init()) //инициализируем soucemap
@@ -140,7 +140,7 @@ gulp.task('watch', function() { //таск слежения изменений �
     gulp.watch([path.src+'sass/**/*.sass'], gulp.parallel('styles')); // Наблюдение за sass файлами в папке sass
     gulp.watch([path.src+'css/*.css', '!'+path.src+'css/main.css'], gulp.parallel('vendors-styles')); // Наблюдение за вендорными css файлами в папке _src
     gulp.watch([path.src+'js/custom.js'], gulp.parallel('scripts')); // Наблюдение за главным JS файлом
-    gulp.watch([path.src+'js/**/*.js', '!'+path.src+'js/custom*.js'], gulp.parallel('vendors-scripts')); // Наблюдение за сторонней библиотекой JS файлов
+    gulp.watch([path.src+'js/**/*.js', '!'+path.src+'js/custom*.js', path.src+'plugins/**/*.js'], gulp.parallel('vendors-scripts')); // Наблюдение за сторонней библиотекой JS файлов
     gulp.watch([path.dest+'**/*.html', path.dest+'**/*.php'], gulp.parallel('php')); // Наблюдение за HTML файлами в корне проекта
 });
 

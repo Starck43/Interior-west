@@ -47,8 +47,8 @@ if ($gallery || $main_header_background ) {
 						?>
 					</ul>
 				</div>
-				<a href="#" class="jcarousel-control prev"><span class="fa fa-chevron-left"></span></a>
-				<a href="#" class="jcarousel-control next"><span class="fa fa-chevron-right"></span></a>
+				<a href="#" class="jcarousel-control prev"><i class="fa arrow-left"></i></a>
+				<a href="#" class="jcarousel-control next"><i class="fa arrow-right"></i></a>
 				<p class="jcarousel-pagination" data-jcarouselpagination ="<?php echo $gallery_pagination ?>"></p>
 			</div>
 			<?php					
