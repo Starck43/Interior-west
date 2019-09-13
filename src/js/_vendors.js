@@ -12,8 +12,8 @@
  * @requires lazy\lazy.js
  *
  * Lightbox for Gallery viewing
- * @requires ..\plugins\imageLightbox\imagelightbox.js
- * @requires ..\plugins\imageLightbox\imagelightbox.controls.js
+ * @requires ..\plugins\imageGallery\gallerylightbox.js
+ * @requires ..\plugins\imageGallery\gallerylightbox.controls.js
  *
  * Slider jCarousel including
  * @requires ..\..\node_modules\jcarousel\dist\jquery.jcarousel.min.js

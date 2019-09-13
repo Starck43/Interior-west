@@ -32,7 +32,7 @@ global $post;
 						$title =  get_the_title( $post_id );
 						$caption = wp_get_attachment_caption( $post_id );
 						?>
-						<a id="gallery-image" class="gallery-image" href="<?php echo $full_image ?>" data-imagelightbox="g">
+						<a id="gallery-image" class="gallery-image" href="<?php echo $full_image ?>">
 							<div class="gallery-image-container" style="padding-top: <?php echo $image_ratio.'%' ?>">
 								<img class="image lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $thumb; ?>" data-srcset="<?php echo wp_get_attachment_image_srcset( $post_id, 'medium' ); ?>" alt="Gallery"/>
 							</div>

@@ -1,4 +1,4 @@
-// ImageLightbox controls
+// gallery-lightbox controls
 
 $( function()
 {
@@ -7,11 +7,11 @@ $( function()
 
 		activityIndicatorOn = function()
 		{
-			$( '<div id="imagelightbox-loading"><div></div></div>' ).appendTo( 'body' );
+			$( '<div id="gallery-lightbox-loading"><div></div></div>' ).appendTo( 'body' );
 		},
 		activityIndicatorOff = function()
 		{
-			$( '#imagelightbox-loading' ).remove();
+			$( '#gallery-lightbox-loading' ).remove();
 		},
 
 
@@ -19,11 +19,11 @@ $( function()
 
 		overlayOn = function()
 		{
-			$( '<div id="imagelightbox-overlay"></div>' ).appendTo( 'body' );
+			$( '<div id="gallery-lightbox-overlay"></div>' ).appendTo( 'body' );
 		},
 		overlayOff = function()
 		{
-			$( '#imagelightbox-overlay' ).remove();
+			$( '#gallery-lightbox-overlay' ).remove();
 		},
 
 
@@ -31,17 +31,17 @@ $( function()
 
 		closeButtonOn = function( instance )
 		{
-			$( '<div class="close-button" id="imagelightbox-close" title="Закрыть"></div>' )
+			$( '<div class="close-button" id="gallery-lightbox-close" title="Закрыть"></div>' )
 			.appendTo( 'body' )
 			.on( 'click touchend', function() {
 				$( this ).remove(); 
-				instance.quitImageLightbox(); 
+				instance.quit_gallerylightbox(); 
 				return false;
 			});
 		},
 
 		closeButtonOff = function() {
-			$( '#imagelightbox-close' ).remove();
+			$( '#gallery-lightbox-close' ).remove();
 		},
 
 
@@ -52,8 +52,8 @@ $( function()
 			var images = $( selector );
 			if( images.length )
 			{
-				var nav = $( '<div id="imagelightbox-nav"></div>' )
-					.appendTo( '#imagelightbox-container' )
+				var nav = $( '<div id="gallery-lightbox-nav"></div>' )
+					.appendTo( '#gallery-lightbox-container' )
 					.on( 'click touchend', function() { return false; });
 
 				for( var i = 0; i < images.length; i++ )
@@ -63,8 +63,8 @@ $( function()
 					.on( 'click touchend', function()
 					{
 						var $this = $( this );
-						if( images.eq( $this.index() ).attr( 'href' ) != $( '#imagelightbox' ).attr( 'src' ) )
-							instance.switchImageLightbox( $this.index() );
+						if( images.eq( $this.index() ).attr( 'href' ) != $( '#gallery-lightbox' ).attr( 'src' ) )
+							instance.switch_gallerylightbox( $this.index() );
 
 						navItems.removeClass( 'active' );
 						navItems.eq( $this.index() ).addClass( 'active' );
@@ -76,13 +76,13 @@ $( function()
 		},
 		navigationUpdate = function( selector )
 		{
-			var items = $( '#imagelightbox-nav .nav-dot' );
+			var items = $( '#gallery-lightbox-nav .nav-dot' );
 			items.removeClass( 'active' );
-			items.eq( $( selector ).filter( '[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"]' ).index( selector ) ).addClass( 'active' );
+			items.eq( $( selector ).filter( '[href="' + $( '#gallery-lightbox' ).attr( 'src' ) + '"]' ).index( selector ) ).addClass( 'active' );
 		},
 		navigationOff = function()
 		{
-			$( '#imagelightbox-nav' ).remove();
+			$( '#gallery-lightbox-nav' ).remove();
 		},
 
 
@@ -90,8 +90,8 @@ $( function()
 
 		arrowsOn = function( instance, selector )
 		{
-			var $arrows = $('<a href="#" class="imagelightbox-arrow prev"><i class="fa icon arrow-left"></i></a>'+
-							'<a href="#" class="imagelightbox-arrow next"><i class="fa icon arrow-right"></i></a>' );
+			var $arrows = $('<a href="#" class="gallery-lightbox-arrow prev"><i class="fa icon arrow-left"></i></a>'+
+							'<a href="#" class="gallery-lightbox-arrow next"><i class="fa icon arrow-right"></i></a>' );
 
 			$arrows.appendTo( 'body' );
 
@@ -100,30 +100,30 @@ $( function()
 				e.preventDefault();
 
 				var $this	= $( this ),
-					$target	= $( selector + '[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"]' ),
-					index	= $target.index( selector );
+					$target	= $( selector + '[href="' + $( '#gallery-lightbox' ).attr( 'src' ) + '"]' ),
+					index	= $target.index( selector ),
+					direction = null;
 
 				if( $this.hasClass( 'prev' ) )
 				{
-					index = index - 1;
-					if( !$( selector ).eq( index ).length )
-						index = $( selector ).length;
+					direction = 'left';
+					index = index - 1; //if the previous image is out of range it will go to the last one automatically
 				}
 				else
 				if( $this.hasClass( 'next' ) )
 				{
+					direction = 'right';
 					index = index + 1;
-					if( !$( selector ).eq( index ).length )
-						index = 0;
+					if( !$( selector ).eq( index ).length ) index = 0; //if the next image is out of range then go to the first one
 				}
 
-				instance.switchImageLightbox( index );
+				instance.switch_gallerylightbox( index, direction );
 				return false;
 			});
 		},
 		arrowsOff = function()
 		{
-			$( '.imagelightbox-arrow' ).remove();
+			$( '.gallery-lightbox-arrow' ).remove();
 		},
 
 
@@ -131,27 +131,27 @@ $( function()
 
 		captionOn = function()
 		{
-			var description = $( 'a[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"] img' ).attr( 'alt' );
+			var description = $( 'a[href="' + $( '#gallery-lightbox' ).attr( 'src' ) + '"] img' ).attr( 'alt' );
 			if( description.length > 0 )
-				$( '<div id="imagelightbox-caption">' + description + '</div>' ).appendTo( '#imagelightbox-container' );
+				$( '<div id="gallery-lightbox-caption">' + description + '</div>' ).appendTo( '#gallery-lightbox-container' );
 		},
 		captionOff = function()
 		{
-			$( '#imagelightbox-caption' ).remove();
+			$( '#gallery-lightbox-caption' ).remove();
 		};
 
 
 	var el = '#gallery a';
-	var lightbox = $( el ).imageLightbox({	
+	var gallery = $( el ).gallerylightbox({	
 		animationSpeed: 200,   // integer;
 		quitOnEnd:      true,  // bool; quit after viewing the last image
 		quitOnImgClick: false, // bool; quit when the viewed image is clicked
 		quitOnDocClick: true,  // bool; quit when anything but the viewed image is clicked
 		onStart:		function() { 
 							overlayOn(); 
-							closeButtonOn( lightbox );
-							arrowsOn( lightbox, el ); 
-							navigationOn( lightbox, el );
+							closeButtonOn( gallery );
+							arrowsOn( gallery, el ); 
+							navigationOn( gallery, el );
 						},
 		onEnd:			function() { 
 							overlayOff(); 

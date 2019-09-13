@@ -3,7 +3,7 @@
 
 /* IMAGE LIGHTBOX SELECTOR */
 
-#imagelightbox-container
+#gallery-lightbox-container
 	cursor: pointer
 	position: fixed
 	z-index: 10000
@@ -20,12 +20,12 @@
 
 
 /* ACTIVITY INDICATION */
-#imagelightbox-loading
+#gallery-lightbox-loading
 	&::before
 		content: '@'
 		
 /* OVERLAY */
-#imagelightbox-overlay
+#gallery-lightbox-overlay
 	background-color: rgba( 255, 255, 255, .9 )
 	position: fixed
 	z-index: 9998
@@ -36,7 +36,7 @@
 
 
 /* "CLOSE" BUTTON */
-#imagelightbox-close
+#gallery-lightbox-close
 	width: 2.5em/* 40 */
 	height: 2.5em/* 40 */
 	text-align: left
@@ -79,7 +79,7 @@
 
 /* NAVIGATION */
 
-#imagelightbox-nav
+#gallery-lightbox-nav
 	//background-color: rgba( 0, 0, 0, .5 )
 	//border-radius: 20px
 	position: fixed
@@ -109,7 +109,7 @@
 
 /* ARROWS */
 
-.imagelightbox-arrow
+.gallery-lightbox-arrow
 	position: fixed
 	display: flex
 	width: $nav-control-w
@@ -142,7 +142,7 @@
 
 /* CAPTION */
 
-#imagelightbox-caption
+#gallery-lightbox-caption
 	text-align: center
 	color: $nav-color-link 
 	background-color: transparentize( $nav-color, .5 )
@@ -154,23 +154,23 @@
 	padding: 0.625em/* 10 */
 
 
-#imagelightbox-loading,
-#imagelightbox-overlay,
-#imagelightbox-close,
-#imagelightbox-caption
+#gallery-lightbox-loading,
+#gallery-lightbox-overlay,
+#gallery-lightbox-close,
+#gallery-lightbox-caption
 	@include animation(gallery-fade, .2s, 0s, linear, forwards, In)
 
 @media only screen and (max-width: 41.250em) /* 660 */
 
-	#imagelightbox-close
+	#gallery-lightbox-close
 		top: 1.25em/* 20 */
 		right: 1.25em/* 20 */
 	
-	#imagelightbox-nav
+	#gallery-lightbox-nav
 		bottom: 1.25em/* 20 */
 	
 
-	.imagelightbox-arrow
+	.gallery-lightbox-arrow
 	
 		width: 2.5em/* 40 */
 		height: 3.75em/* 60 */
@@ -184,7 +184,7 @@
 
 @media only screen and (max-width: 20em) /* 320 */
 
-	.imagelightbox
+	.gallery-lightbox
 		&.prev
 			left: 0
 		&.next
