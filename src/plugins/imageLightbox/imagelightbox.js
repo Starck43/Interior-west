@@ -54,7 +54,8 @@
 	{
 		var options	   = $.extend(
 						 {
-						 	selector:		'id="imagelightbox"',
+						 	container:		'imagelightbox-container', 
+						 	selector:		'imagelightbox',
 						 	animationSpeed:	250,
 						 	preloadNext:	true,
 						 	enableKeyboard:	true,
@@ -68,6 +69,7 @@
 						 },
 						 options ),
 
+			container	= $(),
 			targets		= $([]),
 			target		= $(),
 			image		= $(),
@@ -78,6 +80,7 @@
 
 			setImage = function()
 			{
+
 				if( !image.length ) return true;
 
 				var screenWidth	 = $( window ).width() * 0.8,
@@ -97,7 +100,7 @@
 						imageHeight	/= ratio;
 					}
 
-					image.css(
+					container.css(
 					{
 						'width':  imageWidth + 'px',
 						'height': imageHeight + 'px',
@@ -121,9 +124,9 @@
 						return false;
 					}
 					var params = { 'opacity': 0 };
-					if( isCssTransitionSupport ) cssTransitionTranslateX( image, ( 100 * direction ) - swipeDiff + 'px', options.animationSpeed / 1000 );
-					else params.left = parseInt( image.css( 'left' ) ) + 100 * direction + 'px';
-					image.animate( params, options.animationSpeed, function(){ removeImage(); });
+					if( isCssTransitionSupport ) cssTransitionTranslateX( container, ( 100 * direction ) - swipeDiff + 'px', options.animationSpeed / 1000 );
+					else params.left = parseInt( container.css( 'left' ) ) + 100 * direction + 'px';
+					container.animate( params, options.animationSpeed, function(){ removeImage(); });
 					swipeDiff = 0;
 				}
 
@@ -132,29 +135,31 @@
 
 				setTimeout( function()
 				{
-					image = $( '<img ' + options.selector + ' />' )
+
+					image = $( '<img id="' + options.selector + '" />' )
+					.appendTo( container )
 					.attr( 'src', target.attr( 'href' ) )
 					.on( 'load', function()
 					{
-						image.appendTo( 'body' );
 						setImage();
+						//image.appendTo( 'body' );
 
 						var params = { 'opacity': 1 };
 
-						image.css( 'opacity', 0 );
+						container.css( 'opacity', 0 );
 						if( isCssTransitionSupport )
 						{
-							cssTransitionTranslateX( image, -100 * direction + 'px', 0 );
-							setTimeout( function(){ cssTransitionTranslateX( image, 0 + 'px', options.animationSpeed / 1000 ) }, 50 );
+							cssTransitionTranslateX( container, -100 * direction + 'px', 0 );
+							setTimeout( function(){ cssTransitionTranslateX( container, 0 + 'px', options.animationSpeed / 1000 ) }, 50 );
 						}
 						else
 						{
-							var imagePosLeft = parseInt( image.css( 'left' ) );
+							var imagePosLeft = parseInt( container.css( 'left' ) );
 							params.left = imagePosLeft + 'px';
-							image.css( 'left', imagePosLeft - 100 * direction + 'px' );
+							container.css( 'left', imagePosLeft - 100 * direction + 'px' );
 						}
 
-						image.animate( params, options.animationSpeed, function()
+						container.animate( params, options.animationSpeed, function()
 						{
 							inProgress = false;
 							if( options.onLoadEnd !== false ) options.onLoadEnd();
@@ -192,7 +197,7 @@
 					.on( 'touchstart pointerdown MSPointerDown', function( e )
 					{
 						if( !wasTouched( e.originalEvent ) || options.quitOnImgClick ) return true;
-						if( isCssTransitionSupport ) imagePosLeft = parseInt( image.css( 'left' ) );
+						if( isCssTransitionSupport ) imagePosLeft = parseInt( container.css( 'left' ) );
 						swipeStart = e.originalEvent.pageX || e.originalEvent.touches[ 0 ].pageX;
 					})
 					.on( 'touchmove pointermove MSPointerMove', function( e )
@@ -201,8 +206,8 @@
 						e.preventDefault();
 						swipeEnd = e.originalEvent.pageX || e.originalEvent.touches[ 0 ].pageX;
 						swipeDiff = swipeStart - swipeEnd;
-						if( isCssTransitionSupport ) cssTransitionTranslateX( image, -swipeDiff + 'px', 0 );
-						else image.css( 'left', imagePosLeft - swipeDiff + 'px' );
+						if( isCssTransitionSupport ) cssTransitionTranslateX( container, -swipeDiff + 'px', 0 );
+						else container.css( 'left', imagePosLeft - swipeDiff + 'px' );
 					})
 					.on( 'touchend touchcancel pointerup pointercancel MSPointerUp MSPointerCancel', function( e )
 					{
@@ -215,8 +220,8 @@
 						}
 						else
 						{
-							if( isCssTransitionSupport ) cssTransitionTranslateX( image, 0 + 'px', options.animationSpeed / 1000 );
-							else image.animate({ 'left': imagePosLeft + 'px' }, options.animationSpeed / 2 );
+							if( isCssTransitionSupport ) cssTransitionTranslateX( container, 0 + 'px', options.animationSpeed / 1000 );
+							else container.animate({ 'left': imagePosLeft + 'px' }, options.animationSpeed / 2 );
 						}
 					});
 
@@ -233,12 +238,14 @@
 			quitLightbox = function()
 			{
 				if( !image.length ) return false;
-				image.animate({ 'opacity': 0 }, options.animationSpeed, function()
+				container.animate({ 'opacity': 0 }, options.animationSpeed, function()
 				{
 					removeImage();
 					inProgress = false;
 					if( options.onEnd !== false ) options.onEnd();
 				});
+				container.remove();
+				container = $();
 			},
 
 			addTargets = function( newTargets )
@@ -253,8 +260,12 @@
 					e.preventDefault();
 					if( inProgress ) return false;
 					inProgress = false;
-					if( options.onStart !== false ) options.onStart();
+					$.when( container = $( '<div id="' + options.container + '"></div>' ).appendTo( 'body' ) )
+					.done( function() { 
+						if( options.onStart !== false ) options.onStart();
+					});
 					target = $( this );
+					
 					loadImage();
 				});
 			};
@@ -265,7 +276,7 @@
 		{
 			$( document ).on( hasTouch ? 'touchend' : 'click', function( e )
 			{
-				if( image.length && !$( e.target ).is( image ) ) quitLightbox();
+				if( image.length && !$( e.target ).is( container ) ) quitLightbox();
 			});
 		}
 
@@ -294,6 +305,7 @@
 			{
 				var currentIndex = targets.index( target );
 				target = tmpTarget;
+				//if (index < 0) {index = targets.length - 1}
 				loadImage( index < currentIndex ? 'left' : 'right' );
 			}
 			return this;

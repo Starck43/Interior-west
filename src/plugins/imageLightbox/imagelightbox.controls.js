@@ -45,20 +45,6 @@ $( function()
 		},
 
 
-		// CAPTION
-
-		captionOn = function()
-		{
-			var description = $( 'a[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"] img' ).attr( 'alt' );
-			if( description.length > 0 )
-				$( '<div id="imagelightbox-caption">' + description + '</div>' ).appendTo( 'body' );
-		},
-		captionOff = function()
-		{
-			$( '#imagelightbox-caption' ).remove();
-		},
-
-
 		// NAVIGATION
 
 		navigationOn = function( instance, selector )
@@ -66,31 +52,31 @@ $( function()
 			var images = $( selector );
 			if( images.length )
 			{
-				var nav = $( '<div id="imagelightbox-nav"></div>' );
+				var nav = $( '<div id="imagelightbox-nav"></div>' )
+					.appendTo( '#imagelightbox-container' )
+					.on( 'click touchend', function() { return false; });
+
 				for( var i = 0; i < images.length; i++ )
-					nav.append( '<div class="button"></div>' );
+					nav.append( '<div class="nav-dot"></div>' );
 
-				nav.appendTo( 'body' );
-				nav.on( 'click touchend', function(){ return false; });
+				var navItems = nav.find( 'div' )
+					.on( 'click touchend', function()
+					{
+						var $this = $( this );
+						if( images.eq( $this.index() ).attr( 'href' ) != $( '#imagelightbox' ).attr( 'src' ) )
+							instance.switchImageLightbox( $this.index() );
 
-				var navItems = nav.find( '.button' );
-				navItems.on( 'click touchend', function()
-				{
-					var $this = $( this );
-					if( images.eq( $this.index() ).attr( 'href' ) != $( '#imagelightbox' ).attr( 'src' ) )
-						instance.switchImageLightbox( $this.index() );
+						navItems.removeClass( 'active' );
+						navItems.eq( $this.index() ).addClass( 'active' );
 
-					navItems.removeClass( 'active' );
-					navItems.eq( $this.index() ).addClass( 'active' );
-
-					return false;
-				})
-				.on( 'touchend', function(){ return false; });
+						return false;
+					})
+					.on( 'touchend', function() { return false; });
 			}
 		},
 		navigationUpdate = function( selector )
 		{
-			var items = $( '#imagelightbox-nav .button' );
+			var items = $( '#imagelightbox-nav .nav-dot' );
 			items.removeClass( 'active' );
 			items.eq( $( selector ).filter( '[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"]' ).index( selector ) ).addClass( 'active' );
 		},
@@ -138,7 +124,22 @@ $( function()
 		arrowsOff = function()
 		{
 			$( '.imagelightbox-arrow' ).remove();
+		},
+
+
+		// CAPTION
+
+		captionOn = function()
+		{
+			var description = $( 'a[href="' + $( '#imagelightbox' ).attr( 'src' ) + '"] img' ).attr( 'alt' );
+			if( description.length > 0 )
+				$( '<div id="imagelightbox-caption">' + description + '</div>' ).appendTo( '#imagelightbox-container' );
+		},
+		captionOff = function()
+		{
+			$( '#imagelightbox-caption' ).remove();
 		};
+
 
 	var el = '#gallery a';
 	var lightbox = $( el ).imageLightbox({	
@@ -146,13 +147,25 @@ $( function()
 		quitOnEnd:      true,  // bool; quit after viewing the last image
 		quitOnImgClick: false, // bool; quit when the viewed image is clicked
 		quitOnDocClick: true,  // bool; quit when anything but the viewed image is clicked
-		onStart:		function() { overlayOn(); closeButtonOn( lightbox ); arrowsOn( lightbox, el ); navigationOn( lightbox, el ); },
-		onEnd:			function() { overlayOff(); captionOff(); closeButtonOff(); arrowsOff(); activityIndicatorOff(); navigationOff(); },
-		onLoadStart: 	function() { captionOff(); activityIndicatorOn(); },
-		onLoadEnd:	 	function() { 
+		onStart:		function() { 
+							overlayOn(); 
+							closeButtonOn( lightbox );
+							arrowsOn( lightbox, el ); 
+							navigationOn( lightbox, el );
+						},
+		onEnd:			function() { 
+							overlayOff(); 
+							captionOff(); closeButtonOff(); 
+							arrowsOff(); 
+							activityIndicatorOff(); navigationOff(); 
+						},
+		onLoadStart: 	function() { 
+							captionOff(); 
+							activityIndicatorOn();
+						},
+		onLoadEnd:	 	function() {
 							captionOn(); 
 							activityIndicatorOff(); 
-							//$( '.imagelightbox-arrow' ).show();
 							navigationUpdate( el );
 						}
 	});

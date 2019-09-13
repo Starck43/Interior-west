@@ -3,16 +3,19 @@
 
 /* IMAGE LIGHTBOX SELECTOR */
 
-#imagelightbox
+#imagelightbox-container
 	cursor: pointer
 	position: fixed
 	z-index: 10000
 
 	-ms-touch-action: none
 	touch-action: none
+	img
+		width: 100%
+		height: auto
+		position: relative
 
-	-webkit-box-shadow: 0 0 3.125em rgba( 0, 0, 0, .75 )/* 50 */
-	box-shadow: 0 0 3.125em rgba( 0, 0, 0, .75 )/* 50 */
+	//box-shadow: 0 0 3em rgba( 0, 0, 0, .5 )
 
 
 
@@ -37,52 +40,42 @@
 	width: 2.5em/* 40 */
 	height: 2.5em/* 40 */
 	text-align: left
-	background-color: #666
+	//background-color: transparentize( $nav-color, .5 )
 	border-radius: 50%
 	position: fixed
 	z-index: 10002
-	top: 2.5em/* 40 */
-	right: 2.5em/* 40 */
-	-webkit-transition: color .3s ease
-	transition: color .3s ease
+	top: .5em
+	right: .5em
+	transition: all .5s ease
 
 	&:hover,
 	&:focus
-		background-color: #111
+		background-color: $nav-color
+		&::before
+			background-color: $nav-color-link
+			transform: rotate( -45deg )
+		&::after
+			background-color: $nav-color-link
+			transform: rotate( 45deg )
 
-	&:before,
-	&:after
-		width: 2px
-		background-color: #fff
+	&::before,
+	&::after
+		width: 4px
+		background-color: $nav-color
 		content: ''
 		position: absolute
 		top: 20%
 		bottom: 20%
 		left: 50%
 		margin-left: -1px
+		transition: transform .3s ease
+		transform-origin: center
 	
-	&:before
+	&::before
 		transform: rotate( 45deg )
-	
-	&:after
+	&::after
 		transform: rotate( -45deg )
 	
-
-
-/* CAPTION */
-
-#imagelightbox-caption
-	text-align: center
-	color: #fff
-	background-color: #666
-	position: fixed
-	z-index: 10001
-	left: 0
-	right: 0
-	bottom: 0
-	padding: 0.625em/* 10 */
-
-
 
 /* NAVIGATION */
 
@@ -94,9 +87,12 @@
 	left: 50%
 	bottom: 3.75em /* 60 */
 	padding: 0.313em /* 5 */
+	opacity: 0
+	//transition: all .5s ease
 	transform: translateX( -50% )
+	@include animation(gallery-nav, .2s, 0.5s, ease, forwards, In, -50%, 0)
 
-	& .button
+	& .nav-dot
 		width: 0.7em
 		height: 0.7em
 		background-color: transparent
@@ -116,21 +112,20 @@
 .imagelightbox-arrow
 	position: fixed
 	display: flex
-	width: 3.75em/* 60 */
-	height: 7.5em/* 120 */
+	width: $nav-control-w
+	height: $nav-control-h
 	top: 50%
 	justify-content: center
 	align-items: center
 	opacity: 0
-	background-color: rgba( 0, 0, 0, .5 )
-	@include animation(gallery-arrows, 0.5s, 0s, ease, forwards, In, 0, -50%)
+	background-color: transparentize( $nav-color, .5 )
+	@include animation(gallery-arrows, 0.2s, 0s, ease, forwards, In, 0, -50%)
 	z-index: 10001
 	
 	&:hover,
 	&:focus
-		background-color: rgba( 0, 0, 0, .75 )
-	&:active
-		background-color: #111
+		background-color: transparentize( $nav-color, .0 )
+
 
 	&.prev
 		left: 0
@@ -142,15 +137,28 @@
 	
 	.icon
 		font-size: 2em
-		
+		color: $nav-color-link 	
+
+
+/* CAPTION */
+
+#imagelightbox-caption
+	text-align: center
+	color: $nav-color-link 
+	background-color: transparentize( $nav-color, .5 )
+	position: fixed
+	z-index: 10001
+	left: 0
+	right: 0
+	bottom: 0
+	padding: 0.625em/* 10 */
+
 
 #imagelightbox-loading,
 #imagelightbox-overlay,
 #imagelightbox-close,
-#imagelightbox-caption,
-#imagelightbox-nav
-	@include animation(fade-in, .2s, 0s, linear, forwards, In)
-	
+#imagelightbox-caption
+	@include animation(gallery-fade, .2s, 0s, linear, forwards, In)
 
 @media only screen and (max-width: 41.250em) /* 660 */
 
