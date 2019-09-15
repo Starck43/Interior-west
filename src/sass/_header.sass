@@ -92,6 +92,10 @@
 			display: flex
 			flex-wrap: wrap
 			//flex-direction: column
+	&.bounded
+		.container
+			padding-left: 0
+			padding-right: 0
 
 	#menu-icon
 		@extend #search-icon
@@ -140,8 +144,8 @@
 				letter-spacing: 0px
 	
 				&:hover
-					transition:  300ms all ease
-					border-bottom: 3px solid $theme-color
+					transition:  200ms all linear
+					border-bottom: 3px solid $link-color-hover
 
 		&.responsive
 			height: 500px

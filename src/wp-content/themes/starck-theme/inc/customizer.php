@@ -269,6 +269,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 					'above' => __( 'Above Logo', 'starck' ),
 					'below' => __( 'Below Logo', 'starck' ),
 					'under' => __( 'Under Header', 'starck' ),
+					'sidebar' => __( 'Sidebar area', 'starck' ),
 				),
 				'settings' => 'starck_settings[nav_position_setting]',
 				'priority' => 10,

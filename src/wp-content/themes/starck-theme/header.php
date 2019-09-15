@@ -11,17 +11,8 @@
 
 <body <?php body_class(); ?>>
 	<!-- Preloader -->
-	<div id="preloader"><i class="fa fa-spinner fa-spin"></i></div>
+	<div id="dom-preloader" class="preloader"><i class="fa fa-spinner fa-spin"></i></div>
 	<?php
-	$primary_args = array( 
-		'theme_location' => 'primary',
-		//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="menu-icon" class="burger-menu">&#9776;</div>',
-		//'container' => ''
-	);
-	$secondary_args = array( 
-		'theme_location' => 'secondary',
-		'fallback_cb' => '__return_empty_string', // show additional menu only if it exists
-	);
 
 	$custom_header = get_custom_header();
 	if ( ! empty( $custom_header->attachment_id ) ) {
@@ -41,13 +32,8 @@
 		<div id="header-container" class="<?php echo 'container branding-' . starck_get_option( 'branding_alignment' ); ?>">
 			<?php 
 			$nav_position = starck_get_option( 'nav_position_setting' );
-			if ( in_array($nav_position, ['above', 'below']) ) { 
-			?>
-				<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-					<?php wp_nav_menu( $primary_args ); ?>
-					<?php wp_nav_menu( $secondary_args ); ?>
-				</nav>
-			<?php
+			if ( in_array($nav_position, ['above', 'below']) ) {
+				starck_get_navigation();
 			}
 			?>		
 			<section id="branding" <?php starck_branding_class('site-branding'); ?>>
@@ -78,12 +64,7 @@
 					echo '<div id="search-icon" class="search"></div>';
 				}
 				if ( 'inline' == $nav_position ) { 
-				?>
-					<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-						<?php wp_nav_menu( $primary_args ); ?>
-						<?php wp_nav_menu( $secondary_args ); ?>
-					</nav>
-				<?php
+					starck_get_navigation();
 				}
 				if ('behind' == $nav_search_position) {
 					echo '<div id="search-icon" class="search"></div>';
@@ -101,12 +82,7 @@
 	</header>
 	<?php 
 	if ( 'under' == $nav_position ) { 
-	?>
-		<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-			<?php wp_nav_menu( $primary_args ); ?>
-			<?php wp_nav_menu( $secondary_args ); ?>
-		</nav>
-	<?php
+		starck_get_navigation();
 	}
 	?>
 

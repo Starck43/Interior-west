@@ -117,16 +117,18 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 		$nav_position = starck_get_option( 'nav_position_setting' );
 		$branding_alignment = starck_get_option( 'branding_alignment' );
 
-		if ( 'inline' !== $nav_position) {
+		if ( !in_array( $nav_position, ['inline','sidebar'] ) ) {
 			$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); 
 		}
-
-		if ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
+		elseif ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
 			$classes[] = $nav_position . '-header';
 			$classes[] = 'float-' . ( ( 'left' === $branding_alignment ) ? 'right' : 'left' );
 		} else
 			$classes[] = 'nav-' . $nav_position . (('under' == $nav_position) ? '-header' : '-logo');
 
+		if ( 'sidebar' == $nav_position ) {
+			$classes[] = $nav_position;
+		}
 
 		$classes[] = esc_attr( starck_get_option( 'nav_alignment' ) ) . '-aligned';
 

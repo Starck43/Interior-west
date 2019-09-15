@@ -3,6 +3,9 @@ main
 	clear: both
 	@include push--auto
 	
+	&.bounded
+
+			
 	&.left-sidebar
 		#main-container
 			flex-direction: row-reverse 
@@ -48,6 +51,7 @@ main
 			bottom: $gutter-20/2
 		@include push--auto
 		background-color: $main-bg
+		
 		.breadcrumbs
 			margin-bottom: $gutter-20 * 2
 			font-size: .8em   
@@ -55,7 +59,7 @@ main
 		#content
 			float: left
 			width: 100%
-			padding: 0 $gutter-20
+			//padding: 0 $gutter-20
 			background-color: $content-bg
 			box-sizing: border-box
 			
@@ -80,5 +84,42 @@ main
 			background-color: $sidebar-bg 
 			border: 1px solid $border-color
 			box-sizing: border-box
+			
 
+.projects
+	&-header
+		margin-bottom: $gutter-20
+		
+	&-categories
+		display: flex
+		width: 100%
+		justify-content: space-around
+		padding: $gutter-20
+		margin: 0
+		li
+			padding: $gutter-20/2
+			border: 1px solid  $theme-color
+			border-radius: 3px  
+		
+.project
+	.container
+		padding: 0
+
+nav
+	.post-navigation
+		padding: $gutter-20 0
+		.screen-reader-text
+			display: none
+		.nav-links
+			display: inline-block
+			width: 100%
+			.nav-previous
+				float: left
+			.nav-next
+				float: right
+			div
+				padding: 5px 0 
+				&:hover
+					transition:  200ms all linear
+					border-bottom: 3px solid $link-color-hover
 // <!-- End Main -->

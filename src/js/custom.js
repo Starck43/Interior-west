@@ -6,10 +6,10 @@
  
 document.addEventListener("DOMContentLoaded", function() {
 
-	$.when( $('#preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
+	$.when( $('#dom-preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
 		.done( function() { 
 			$('body').fadeIn();
-			$('#preloader').removeClass(); 
+			$('#dom-preloader').remove(); 
 	});		
 	// Adding class after full DOM loading for applying CSS animation
 	$('#main-header').addClass('visible');

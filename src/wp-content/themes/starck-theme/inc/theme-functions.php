@@ -98,8 +98,6 @@ function starck_setup() {
 
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu', 'starck' ),
-	) );
-	register_nav_menus( array(
 		'secondary' => __( 'Secondary Menu', 'starck' ),
 	) );
 
@@ -187,6 +185,10 @@ if ( ! function_exists( 'starck_get_link_url' ) ) {
 	}
 }
 
+add_action ('wp_print_styles','remove_styles',100);
+function remove_styles() {				
+	wp_deregister_style('starck-theme-google-font'); 
+}
 /**
  * Check if the logo and site branding are active.
  *
@@ -217,8 +219,8 @@ if ( ! function_exists( 'starck_widgets_init' ) ) {
 
 		foreach ( $widgets as $id => $name ) {
 			register_sidebar( array(
-				'name'          => $name,
 				'id'            => $id,
+				'name'          => $name,
 				'before_widget' => '<section id="%1$s" class="widget">',
 				'after_widget'  => '</section>',
 				'before_title'  => apply_filters( 'starck_start_widget_title', '<h2 class="widget-title">' ),
@@ -228,6 +230,17 @@ if ( ! function_exists( 'starck_widgets_init' ) ) {
 	}
 }
 
+add_filter( 'widget_text', 'widget_execute_php', 99 );
+function widget_execute_php($widget_content)
+{
+	if (strpos($widget_content, '<' . '?') !== false) {
+		ob_start();
+		eval('?' . '>' . $widget_content);
+		$widget_content = ob_get_contents();
+		ob_end_clean();
+		}
+	return $widget_content;
+}
 
 add_filter('manage_posts_columns','posts_columns',5);
 add_filter('manage_posts_custom_column','posts_custom_columns',5,2);
@@ -430,6 +443,58 @@ function starck_add_footer_widget( $widget ) {
 		<?php dynamic_sidebar( 'footer-' . absint( $widget ) ); ?>
 	</div>
 	<?php
+}
+
+/**
+ * Construct Navigation menu (primary/secondary) 
+ */
+if ( ! function_exists( 'starck_get_navigation' ) ) {
+	/**
+	 * Build our navigation.
+	 */
+	function starck_get_navigation() {	
+		if ( ! has_nav_menu( 'primary' ) ) { return; }
+
+		$primary_args = array( 
+			'theme_location' => 'primary',
+			//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="menu-icon" class="burger-menu">&#9776;</div>',
+			//'container' => ''
+		);
+		/*
+		$secondary_args = array( 
+			'theme_location' => 'secondary',
+			'fallback_cb' => '__return_empty_string', // show additional menu only if it exists
+		);
+		*/
+		if ( 'sidebar' == $nav_position  ) {
+			add_action( 'dynamic_sidebar_before', 'starck_add_navigation_widget',  array( $this, 'sidebar' ), 10, 2 );
+		} else 
+		{	
+			?>
+			<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
+				<?php wp_nav_menu( $primary_args ); ?>
+				<?php //wp_nav_menu( $secondary_args ); ?>
+			</nav>
+			<?php
+		}
+	}
+}
+
+/**
+ * Add navigation widget to sidebar
+ */
+function starck_add_navigation_widget( $index, $has_widgets ) {
+
+ echo 'MENU';
+/*	
+	?>
+	<nav id="sidebar-nav" <?php starck_navigation_class(); ?> role="navigation">
+		<?php 
+		register_sidebar( array( 'id' => 'primary_menu') );
+		dynamic_sidebar( 'primary_menu' ); 
+		?>
+	</nav>
+	<?php*/
 }
 
 
