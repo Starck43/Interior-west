@@ -142,7 +142,8 @@ li
 		
 
 .container
-	padding: $gutter-30
+	padding-left: $gutter-30
+	padding-right: $gutter-30
 
 		
 .bounded
@@ -167,7 +168,10 @@ li
 	
 .visible
 	opacity: 1
-	
+
+.blur
+	filter: blur(7px) grayscale(0)
+
 .preloader
 	position: fixed
 	left: 0
@@ -188,6 +192,7 @@ li
 html
 	background-color: darken($body-bg,5%)
 	font-size: $base-font-size
+	-webkit-font-smoothing: antialiased
 
 body
 	@include font-settings(Roboto, $base-text-color, 1rem, normal, 300, $base-line-height)

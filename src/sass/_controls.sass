@@ -69,37 +69,37 @@ input[type="submit"]
 		top: 50%
 		transform: translateY(-50%)
 		transition-timing-function: cubic-bezier(.55,.055,.675,.19)
-		transition-duration: 75ms
+		transition-duration: 100ms
 
 		&::before
 			content: ""
 			@extend %burger-line
 			top: -10px
 			left: 0
-			transition: top 75ms ease .12s, opacity 75ms ease
+			transition: top 100ms ease 200ms, opacity 100ms ease
 			
 		&::after
 			content: ""
 			@extend %burger-line
 			bottom: -10px
 			left: 0
-			transition: bottom 75ms ease .12s, transform 75ms cubic-bezier(.55,.055,.675,.19)
+			transition: bottom 100ms ease 200ms, transform 100ms cubic-bezier(.55,.055,.675,.19)
 
-		&.active
-			.burger-inner
-				transition-delay: 120ms
-				transition-timing-function: cubic-bezier(.215,.61,.355,1)
-				transform: rotate(45deg)
+	&.active
+		.burger-inner
+			transition-delay: 200ms
+			transition-timing-function: cubic-bezier(.215,.61,.355,1)
+			transform: rotate(45deg)
+			
+			&::before
+				top: 0
+				opacity: 0
+				transition: top 100ms ease,opacity 100ms ease 200ms
 				
-				&::before
-					top: 0
-					opacity: 0
-					transition: top 75ms ease,opacity 75ms ease 120ms
-					
-				&::after
-					bottom: 0
-					transition: bottom 75ms ease,transform 75ms cubic-bezier(.215,.61,.355,1) 120ms
-					transform: rotate(-90deg)
+			&::after
+				bottom: 0
+				transition: bottom 100ms ease,transform 100ms cubic-bezier(.215,.61,.355,1) 200ms
+				transform: rotate(-90deg)
 
 		
 %burger-line

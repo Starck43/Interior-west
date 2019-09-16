@@ -1,5 +1,11 @@
-@import vars
 @import ../mixins
+
+//imageLightbox variables
+
+$nav-control-w: 3em
+$nav-control-h: 7em
+$nav-color: $theme-color
+$nav-color-link: #FFF
 
 /* IMAGE LIGHTBOX SELECTOR */
 
@@ -22,7 +28,7 @@
 /* ACTIVITY INDICATION */
 #gallery-lightbox-loading
 	&::before
-		content: '@'
+		content: ''
 		
 /* OVERLAY */
 #gallery-lightbox-overlay

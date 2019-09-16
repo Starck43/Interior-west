@@ -41,6 +41,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 
+	var burger = $('#nav-menu').on('click', function (e) {
+		burger.toggleClass('active');
+		 $('#menu-top').toggleClass('active');
+		 $('#main-header >div').toggleClass('blur');
+	});
+
 	$('.back-to-top').on('click', function (e) {
 		
 		var scrollSpeed = 700; // скорость задержки перемещения наверх (в миллисекундах)

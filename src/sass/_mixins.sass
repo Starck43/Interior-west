@@ -46,6 +46,7 @@
 		from
 			@if $fade != no-fade
 				opacity: if($fade == In, 0, 1)
+			//transform: translate($shift-x, $shift-y)
 
 		to
 			transform: translate($shift-x, $shift-y)

@@ -2,6 +2,7 @@
 main
 	clear: both
 	@include push--auto
+	overflow: hidden
 	
 	&.bounded
 
@@ -40,7 +41,8 @@ main
 
 			#main-header-link
 				@include animation(header-link, 2s, 2.5s, ease-in-out, both, no-fade, -50%, -230px)
-
+		div
+			transition: filter 600ms linear
 
 	#main-container
 		display: flex
@@ -72,9 +74,9 @@ main
 
 			.page
 				opacity: 0
-				transform: translate(0, 50%)
+				//transform: translate(0, 100%)
 				&.visible
-					@include animation(article, 0.8s, 0, ease, both, no-fade, 0, 0 )
+					@include animation(article, 0.8s, 0, ease, forwards, In, 0, 0 )
 
 		
 		#main-sidebar
