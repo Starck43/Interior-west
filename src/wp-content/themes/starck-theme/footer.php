@@ -32,5 +32,8 @@
 		?>
 
 	</footer>
+
+	<div id="site-search-modal" class="hidden"><?php get_search_form(); ?></div>
+
 </body>
 </html>

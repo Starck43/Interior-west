@@ -42,23 +42,92 @@ input[type="submit"]
 		color: $button-text-hover
 
 .icon
+	position: relative
+	display: inline-block
+	width: $icon-size
+	height: $icon-size
+	padding:  $gutter-20/2
+	margin: 0
+	background-color: transparent
+	opacity: 0.7
+	font-size: $icon-font-size
+	line-height: $icon-font-size
+	text-align: center
+	text-transform: none
+	overflow: visible
+	cursor: pointer
+	transition-timing-function: linear
+	transition-duration: 150ms
+	transition-property: opacity, filter
+					
+	&:hover
+		opacity: 1
+			
+.burger-icon	
+	.burger-inner
+		@extend %burger-line
+		top: 50%
+		transform: translateY(-50%)
+		transition-timing-function: cubic-bezier(.55,.055,.675,.19)
+		transition-duration: 75ms
+
+		&::before
+			content: ""
+			@extend %burger-line
+			top: -10px
+			left: 0
+			transition: top 75ms ease .12s, opacity 75ms ease
+			
+		&::after
+			content: ""
+			@extend %burger-line
+			bottom: -10px
+			left: 0
+			transition: bottom 75ms ease .12s, transform 75ms cubic-bezier(.55,.055,.675,.19)
+
+		&.active
+			.burger-inner
+				transition-delay: 120ms
+				transition-timing-function: cubic-bezier(.215,.61,.355,1)
+				transform: rotate(45deg)
+				
+				&::before
+					top: 0
+					opacity: 0
+					transition: top 75ms ease,opacity 75ms ease 120ms
+					
+				&::after
+					bottom: 0
+					transition: bottom 75ms ease,transform 75ms cubic-bezier(.215,.61,.355,1) 120ms
+					transform: rotate(-90deg)
+
+		
+%burger-line
+	position: absolute
+	width: $icon-size
+	height: 3px
+	border-radius: 3px
+	background-color: $base-text-color
 
 /* Font Awesome for a project */
 
-.fa-spinner:before 
+.fa-spinner::before 
 	content: "\f110" 
 
-.fa-angle-left:before
+.fa-angle-left::before
 	content: "\f104" 
 
-.arrow-down:before 
+.arrow-down::before 
 	content: "\f078" 
 
-.arrow-left:before 
+.arrow-left::before 
 	content: "\f053" 
 
-.arrow-right:before 
+.arrow-right::before 
 	content: "\f054" 
 
-.arrow-up:before 
-	content: "\f077" 
+.arrow-up::before 
+	content: "\f077"
+	
+.fa-search::before
+	content: "\f002"

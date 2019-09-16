@@ -22,17 +22,15 @@
 
 	?>
 	<header id="site-header" <?php starck_header_class(['site-header',$background_class]); echo $header_img_attr; ?>>
-		<?php 
-		if ( 'enabled' === starck_get_option( 'top_bar_layout_setting' ) ) {
-			starck_get_top_bar();
-		}
-		?>
+
+		<?php if ( 'enabled' === starck_get_option( 'top_bar_layout_setting' ) ) starck_get_top_bar(); ?>
 
 		<!-- header-container -->
 		<div id="header-container" class="<?php echo 'container branding-' . starck_get_option( 'branding_alignment' ); ?>">
-			<?php 
+			<?php
 			$nav_position = starck_get_option( 'nav_position_setting' );
 			if ( in_array($nav_position, ['above', 'below']) ) {
+				// navigation
 				starck_get_navigation();
 			}
 			?>		
@@ -57,29 +55,22 @@
 				</div>
 			</section>
 
-			<section id="header-content" <?php echo 'class=align-' . ( "right" === starck_get_option( 'branding_alignment' ) ? 'left' : 'right') ?>>
+			<section id="header-content"  <?php printf('class="align-%1$s %2$s"',
+													( "right" === starck_get_option( 'branding_alignment' ) ? 'left' : 'right'),
+													( starck_get_option( 'nav_burger' ) ?  'burger-menu' : '' )
+												); ?>>
 				<?php 
-				$nav_search_position = starck_get_option( 'nav_search_setting' );
-				if ('front' == $nav_search_position) {
-					echo '<div id="search-icon" class="search"></div>';
-				}
-				if ( 'inline' == $nav_position ) { 
-					starck_get_navigation();
-				}
-				if ('behind' == $nav_search_position) {
-					echo '<div id="search-icon" class="search"></div>';
-				}
-
-				if ( starck_get_option( 'header_widget_setting' )) {
+				if ( starck_get_option( 'header_widget_setting' ) )
 					starck_get_header_widget();
-				}
+
+				if ( 'inline' == $nav_position )
+					starck_get_navigation();
 				?>
-				<div id="menu-icon" class="burger-menu">&#9776;</div>
-				<div id="site-search" <?php starck_search_class('search'); ?>><?php get_search_form(); ?></div>
 			</section>
 		</div>
-		<!-- end container -->
+		<!-- end header container -->
 	</header>
+
 	<?php 
 	if ( 'under' == $nav_position ) { 
 		starck_get_navigation();

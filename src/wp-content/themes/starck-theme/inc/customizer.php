@@ -262,14 +262,14 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[nav_position_setting]',
 			array(
 				'type' => 'select',
-				'label' => __( 'Navigation position', 'starck' ),
+				'label' => __( 'Primary menu location', 'starck' ),
 				'section' => 'starck_layout_navigation',
 				'choices' => array(
 					'inline' => __( 'Inline Logo', 'starck' ),
 					'above' => __( 'Above Logo', 'starck' ),
 					'below' => __( 'Below Logo', 'starck' ),
 					'under' => __( 'Under Header', 'starck' ),
-					'sidebar' => __( 'Sidebar area', 'starck' ),
+					'none' => __( 'Disabled', 'starck' ),
 				),
 				'settings' => 'starck_settings[nav_position_setting]',
 				'priority' => 10,
@@ -301,30 +301,48 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			)
 		);
 
+
 		$wp_customize->add_setting(
 			'starck_settings[nav_search_setting]',
 			array(
 				'default' => $defaults['nav_search_setting'],
 				'type' => 'option',
-				'sanitize_callback' => 'starck_sanitize_choices',
+				'sanitize_callback' => 'starck_sanitize_checkbox',
 			)
 		);
 
 		$wp_customize->add_control(
 			'starck_settings[nav_search_setting]',
 			array(
-				'type' => 'select',
+				'type' => 'checkbox',
 				'label' => __( 'Search icon in navigation', 'starck' ),
 				'section' => 'starck_layout_navigation',
-				'choices' => array(
-					'front' => __( 'In front of menu', 'starck' ),
-					'behind' => __( 'Behind of menu', 'starck' ),
-					'disabled' => __( 'Disabled', 'starck' ),
-				),
 				'settings' => 'starck_settings[nav_search_setting]',
 				'priority' => 30,
 			)
 		);
+
+
+		$wp_customize->add_setting(
+			'starck_settings[nav_burger]',
+			array(
+				'default' => $defaults['nav_burger'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[nav_burger]',
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'Burger menu on desktop', 'starck' ),
+				'section' => 'starck_layout_navigation',
+				'settings' => 'starck_settings[nav_burger]',
+				'priority' => 40,
+			)
+		);
+				
 
 // Main content
 		$wp_customize->add_section(

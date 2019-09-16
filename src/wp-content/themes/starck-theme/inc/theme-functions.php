@@ -289,14 +289,6 @@ function starck_branding_class( $merged_class = '' ) {
 }
 
 /**
- * Add custom search classes to <id="search"> element.
- * @param string|array $merged_class. Classes to add to the class list.
- */
-function starck_search_class( $merged_class = '' ) {
-	return apply_filters( "starck_add_search_class", $merged_class );
-}
-
-/**
  * Add custom menu classes to <nav> element.
  * @param string|array $merged_class. Classes to add to the class list.
  */
@@ -390,6 +382,7 @@ if ( ! function_exists( 'starck_get_top_bar' ) ) {
 	function starck_get_top_bar() {	
 		if ( ! is_active_sidebar( 'top-bar' ) ) { return; }
 		?>
+		<!-- Top bar container -->
 		<div id="top-bar" class="container">
 			<?php dynamic_sidebar( 'top-bar' ); ?>
 		</div>
@@ -423,6 +416,7 @@ if ( ! function_exists( 'starck_get_footer_widgets' ) ) {
 		?>
 
 		<div id="footer-widgets" class="site footer-widgets">
+			<!-- footer-widgets -->
 			<?php
 			if ( $widgets >= 1 ) { starck_add_footer_widget( 1 ); }
 			if ( $widgets >= 2 ) { starck_add_footer_widget( 2 ); }
@@ -453,12 +447,16 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 	 * Build our navigation.
 	 */
 	function starck_get_navigation() {	
-		if ( ! has_nav_menu( 'primary' ) ) { return; }
+
+		if ( 'none' === starck_get_option( 'nav_position_setting' ) ) return;
+		if ( ! has_nav_menu( 'primary' ) ) return;
+		
+		$nav_burger = starck_get_option( 'nav_burger' );
 
 		$primary_args = array( 
 			'theme_location' => 'primary',
 			//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="menu-icon" class="burger-menu">&#9776;</div>',
-			//'container' => ''
+			'container' => ''
 		);
 		/*
 		$secondary_args = array( 
@@ -466,35 +464,20 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 			'fallback_cb' => '__return_empty_string', // show additional menu only if it exists
 		);
 		*/
-		if ( 'sidebar' == $nav_position  ) {
-			add_action( 'dynamic_sidebar_before', 'starck_add_navigation_widget',  array( $this, 'sidebar' ), 10, 2 );
-		} else 
-		{	
-			?>
-			<nav id="header-nav" <?php starck_navigation_class(); ?> role="navigation">
-				<?php wp_nav_menu( $primary_args ); ?>
-				<?php //wp_nav_menu( $secondary_args ); ?>
-			</nav>
-			<?php
-		}
-	}
-}
-
-/**
- * Add navigation widget to sidebar
- */
-function starck_add_navigation_widget( $index, $has_widgets ) {
-
- echo 'MENU';
-/*	
-	?>
-	<nav id="sidebar-nav" <?php starck_navigation_class(); ?> role="navigation">
-		<?php 
-		register_sidebar( array( 'id' => 'primary_menu') );
-		dynamic_sidebar( 'primary_menu' ); 
 		?>
-	</nav>
-	<?php*/
+		<nav id="header-nav" <?php starck_navigation_class( $nav_burger ? 'burger' : '' ); ?> role="navigation">
+			<?php
+			wp_nav_menu( $primary_args );
+			//wp_nav_menu( $secondary_args );
+			if ( starck_get_option( 'nav_search_setting' ) )
+				echo '<div id="nav-search" class="icon"><i class="fa fa-search"></i></div>';
+
+			$burger_class = sprintf(' class="icon burger-icon%s"', starck_get_option( 'nav_burger' ) ?  '' : ' hidden' );
+			?>
+			<div id="nav-menu"<?php echo $burger_class; ?>><div class="burger-inner"></div></div>
+		</nav>
+		<?php
+	}
 }
 
 
@@ -517,9 +500,7 @@ function starck_back_to_top() {
 	echo trim(preg_replace('/\s{2,}/', ' ', sprintf(
 
 		'<div id="back-to-top">
-			<a title="%1$s" rel="nofollow" href="#" class="back-to-top">
-				<span class="%2$s"></span>
-			</a>
+			<a title="%1$s" rel="nofollow" href="#" class="back-to-top"><i class="%2$s"></i></a>
 		</div>',
 		esc_attr__( 'Scroll back to top', 'starck' ),
 		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa arrow-up' ) )

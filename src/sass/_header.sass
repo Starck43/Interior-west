@@ -97,33 +97,42 @@
 			padding-left: 0
 			padding-right: 0
 
-	#menu-icon
-		@extend #search-icon
-		background-color: #FFF 
+	#nav-menu
+		margin-left: $gutter-20 
+		float: left
 		
-	#search-icon
-		@include push--auto
-		padding: 0 $gutter-20/2 
-		font-size: 1.5em
-		height: 40px
-		line-height: 40px
-		display: none
-		
-	#site-search
-		display: none
-		
+	#nav-search
+		@extend #nav-menu
+
+	#header-content
+		&.burger-menu
+			display: inline-block
+			.widget
+				float: left
+						
 // Navigation styles	
 #header-nav
 	display: flex
 	width: 100%
+	//align-items: center
 	//margin-top: auto
 	
-	.menu-top-container
-		display: flex
-		width: 100%
-		
+	&.burger
+		ul.menu
+			display: none
+			position: absolute
+			//left: 0
+			//right: 0
+			width: 100%
+			height: auto
+			@extend .bounded
+			flex-direction: column
+			align-items: center
+			justify-content: space-between
+			background-color: transparentize($nav-bg, 0.1)
+			z-index: 9999
 			
-	ul
+	ul.menu
 		display: flex
 		position: relative
 		width: 100%
@@ -158,6 +167,7 @@
 
 
 	&.center-aligned
+		justify-content: center
 		ul
 			justify-content: center
 

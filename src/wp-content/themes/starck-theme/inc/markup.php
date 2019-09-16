@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
 
  */
-function starck_merge_classes( $classes, $merged_class = '' ) {
+function starck_merge_classes( $classes = [], $merged_class = '' ) {
 
 	if ( ! empty( $merged_class ) ) {
 		if ( ! is_array( $merged_class ) ) {
@@ -106,6 +106,7 @@ if ( ! function_exists( 'starck_branding_classes' ) ) {
 	}
 }
 
+
 if ( ! function_exists( 'starck_navigation_classes' ) ) {
 	add_filter( 'starck_add_navigation_class', 'starck_navigation_classes' );
 	/**
@@ -113,48 +114,26 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 	 */
 	function starck_navigation_classes( $merged_class ) {
 		//$classes[] = 'top-menu';
-		
-		$nav_position = starck_get_option( 'nav_position_setting' );
-		$branding_alignment = starck_get_option( 'branding_alignment' );
+		if ( 'none' !== $nav_position ) {
+	
+			$nav_position = starck_get_option( 'nav_position_setting' );
+			$branding_alignment = starck_get_option( 'branding_alignment' );
 
-		if ( !in_array( $nav_position, ['inline','sidebar'] ) ) {
-			$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); 
-		}
-		elseif ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
-			$classes[] = $nav_position . '-header';
-			$classes[] = 'float-' . ( ( 'left' === $branding_alignment ) ? 'right' : 'left' );
-		} else
+			if ( 'inline' !== $nav_position )
+				$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); 
+
+			if ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
+				$classes[] = $nav_position . '-header';
+				$classes[] = 'float-' . ( ( 'left' === $branding_alignment ) ? 'right' : 'left' );
+			} else
 			$classes[] = 'nav-' . $nav_position . (('under' == $nav_position) ? '-header' : '-logo');
 
-		if ( 'sidebar' == $nav_position ) {
-			$classes[] = $nav_position;
+			$classes[] = esc_attr( starck_get_option( 'nav_alignment' ) ) . '-aligned';
 		}
-
-		$classes[] = esc_attr( starck_get_option( 'nav_alignment' ) ) . '-aligned';
-
 		return starck_merge_classes($classes, $merged_class);
 	}
 }
 
-if ( ! function_exists( 'starck_search_classes' ) ) {
-	add_filter( 'starck_add_search_class', 'starck_search_classes' );
-	/**
-	 * Adds custom classes to the search.	 
-	 */
-	function starck_search_classes( $merged_class ) {
-
-		switch ( starck_get_option( 'branding_alignment' ) ) {
-			case 'left':
-				$classes[] = 'align-right';
-			break;
-			case 'right':
-				$classes[] = 'align-left';
-			break;
-		}
-
-		return starck_merge_classes($classes, $merged_class);
-	}
-}
 
 if ( ! function_exists( 'starck_main_classes' ) ) {
 	add_filter( 'starck_add_main_class', 'starck_main_classes' );

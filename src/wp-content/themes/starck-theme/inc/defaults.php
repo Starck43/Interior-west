@@ -24,9 +24,9 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				'branding_vertical' => false,
 				'header_widget_setting' => 'enabled', //'disabled'
 				'nav_bound_setting' =>  'full-width', //'bounded'
-				'nav_position_setting' => 'under', //'inline', 'above', 'below', under, sidebar'
+				'nav_position_setting' => 'under', //'inline', 'above', 'below', under, none'
 				'nav_alignment' => 'center', //'left', 'right'
-				'nav_search_setting' => 'front', //'behind', 'disabled'
+				'nav_search_setting' => true, //false
 				//'menu_appearence_action' => 'click', //'hover'
 				//'menu_appearence_direction' => 'left', //'down'
 				'nav_burger' => false, //true, false
