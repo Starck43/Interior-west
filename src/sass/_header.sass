@@ -1,5 +1,6 @@
 // Header styles
 #site-header
+	height: $header-height
 	background-color: $header-bg
 
 	#top-bar
@@ -21,7 +22,6 @@
 										
 	#header-container
 		display: flex
-		height: $header-height
 		justify-content: space-between
 
 	
@@ -78,15 +78,15 @@
 				font-size: 1em 
 
 	&.nav-below-logo
+		height: #{strip-units($header-height) + strip-units($nav-height)}px
 		#header-container
 			flex-wrap: wrap-reverse
 
 	&.nav-above-logo
+		height: #{strip-units($header-height) + strip-units($nav-height)}px
 		#header-container
 			flex-wrap: wrap
-			
-		#header-nav
-			margin-bottom: $gutter-20/2 
+
 			
 	&.nav-inline-logo
 		#header-content
@@ -100,7 +100,7 @@
 
 	#nav-menu
 		margin-left: $gutter-20 
-		float: left
+		//float: left
 		
 	#nav-search
 		@extend #nav-menu
@@ -115,10 +115,13 @@
 #header-nav
 	display: flex
 	width: 100%
-	//align-items: center
+	height: $nav-height
+	align-items: center
 	//margin-top: auto
-	
+
 	&.burger
+		.nav-search
+			font-size: $icon-font-size 
 		ul.menu
 			//display: none
 			//opacity: 0
@@ -131,19 +134,21 @@
 			@extend .bounded
 			flex-direction: column
 			align-items: center
-			background-color: transparentize($theme-color, 0.2)
+			justify-content: space-evenly
+			background-color: transparentize($theme-color, 0.05)
 			transition: all 500ms ease-in
 			overflow: hidden
 			z-index: 9999
 			box-sizing: border-box
 			border-top: 0px solid transparentize($theme-color , 1)
+			backdrop-filter: blur(10px)
 			a
 				font-size: 1.5em
 				line-height: 2 
-				color: #FFF 
+				color: #FFF
 			&.active
-				height: $main-header-h
-				border-top: 3px solid transparentize($theme-color , 0.2)
+				height: calc-height($header-height, $nav-height, $top-bar-height)
+				border-top: 3px solid transparentize($theme-color , 0)
 			
 	ul.menu
 		display: flex
@@ -173,11 +178,10 @@
 			height: 500px
 
 	&.float-right
-		width: auto
+		//width: auto
 	
 	&.float-left
-		width: auto
-
+		//width: auto
 
 	&.center-aligned
 		justify-content: center
@@ -185,13 +189,18 @@
 			justify-content: center
 
 	&.right-aligned
+		justify-content: flex-end
 		ul
 			justify-content: flex-end
 			
 	&.below-logo
 
-
+	&.nav-above-logo
+			
 	&.nav-under-header
+		&.burger
+			ul.menu
+				margin-top: $nav-height 
 
 // <!-- End Navigation -->
 // <!-- End Header -->

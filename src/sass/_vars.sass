@@ -7,11 +7,12 @@ $grid-breakpoints: (xs: 320px, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
 // User variables:
 // sizes
 $container_max-w: 1000px
-$header-height: 6em
+$top-bar-height: 0px
+$header-height: 100px
 $sidebar-width: 25%
 $content-width: 100% - $sidebar-width
-$nav-height: 40px
-$main-header-h: 100vh - $header-height
+$nav-height: 50px
+//$main-header-height: calc(100vh - #{$header-height} - #{$nav-height} - #{$top-bar-height} )
 $icon-size: 30px
 
 //colors
@@ -45,7 +46,7 @@ $accent: orange
 $base-font-family: Arial, Helvetica, sans-serif
 $base-font-size: 15px
 $base-line-height: 1.25em
-$icon-font-size: 1.5em
+$icon-font-size: 23px
 
 h1 
 	font: normal bold 2em/1.1 $base-font-family

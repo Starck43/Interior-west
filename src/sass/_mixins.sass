@@ -7,12 +7,38 @@
 		font-display: auto
 		src: url($f-url) format('woff2')
 
+//Убираем единицы измерения у чисел
+@function strip-units($size)
+	$number: $size / ($size * 0 + 1)
+	@return $number
+
+@function em($pixels, $fontsize: $base-font-size)
+	$fontsize: $fontsize + 0px
+	@return ($pixels/$fontsize)*1em
+
+@function px($em, $fontsize: $base-font-size)
+	@return round(strip-units($em) * strip-units($fontsize))*1px
+
 //Автоматическое центрирование
 @mixin push--auto 
 	margin:
 		left: auto
 		right: auto
 
+//модальное окно в полный экран
+@mixin modal
+	position: absolute
+	left: 0
+	right: 0
+	top: 0
+	bottom: 0
+
+// Вычисляем высоту блока за вычетом видимых в области экрана
+// например: height: calc-height($header-height, $nav-height, $top-bar-height)
+@function calc-height($h1, $h2:0, $h3:0)
+	$h: strip-units($h1) + strip-units($h2) + strip-units($h3)
+	@return calc(100vh - #{$h}px )
+	
 //Для псевдоэлементов ::before и ::after
 @mixin pseudo($display: block, $pos: absolute, $content:'')
 	content: $content

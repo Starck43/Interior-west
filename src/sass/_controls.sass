@@ -43,22 +43,19 @@ input[type="submit"]
 
 .icon
 	position: relative
-	display: inline-block
+	display: flex
 	width: $icon-size
 	height: $icon-size
-	padding:  $gutter-20/2
+	padding: 5px
 	margin: 0
 	background-color: transparent
 	opacity: 0.7
-	font-size: $icon-font-size
-	line-height: $icon-font-size
+	font-size: 1.2em
 	text-align: center
 	text-transform: none
 	overflow: visible
 	cursor: pointer
-	transition-timing-function: linear
-	transition-duration: 150ms
-	transition-property: opacity, filter
+	transition: all 150ms linear
 					
 	&:hover
 		opacity: 1
@@ -67,38 +64,36 @@ input[type="submit"]
 	.burger-inner
 		@extend %burger-line
 		top: 50%
-		transform: translateY(-50%)
-		transition-timing-function: cubic-bezier(.55,.055,.675,.19)
-		transition-duration: 100ms
+		transform: translateY(-100%)
+		transition: all 100ms cubic-bezier(.55,.055,.675,.19)
 
 		&::before
 			content: ""
 			@extend %burger-line
 			top: -10px
 			left: 0
-			transition: top 100ms ease 200ms, opacity 100ms ease
+			transition: top 100ms ease 150ms, opacity 100ms ease
 			
 		&::after
 			content: ""
 			@extend %burger-line
 			bottom: -10px
 			left: 0
-			transition: bottom 100ms ease 200ms, transform 100ms cubic-bezier(.55,.055,.675,.19)
+			transition: bottom 100ms ease 150ms, transform 100ms cubic-bezier(.55,.055,.675,.19)
 
 	&.active
 		.burger-inner
-			transition-delay: 200ms
-			transition-timing-function: cubic-bezier(.215,.61,.355,1)
+			transition: all 150ms cubic-bezier(.215,.61,.355,1)
 			transform: rotate(45deg)
 			
 			&::before
 				top: 0
 				opacity: 0
-				transition: top 100ms ease,opacity 100ms ease 200ms
+				transition: top 100ms ease,opacity 100ms ease 150ms
 				
 			&::after
 				bottom: 0
-				transition: bottom 100ms ease,transform 100ms cubic-bezier(.215,.61,.355,1) 200ms
+				transition: bottom 100ms ease,transform 100ms cubic-bezier(.215,.61,.355,1) 150ms
 				transform: rotate(-90deg)
 
 		

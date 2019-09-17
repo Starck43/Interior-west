@@ -1,7 +1,8 @@
 // Main styles
 main
-	clear: both
+	position: relative
 	@include push--auto
+	clear: both
 	overflow: hidden
 	
 	&.bounded
@@ -13,7 +14,7 @@ main
 			
 	#main-header
 		position: relative
-		min-height: 200px 
+		//min-height: 200px 
 		//padding: $gutter-20 0
 		//height: 100vh
 		overflow: hidden
@@ -42,16 +43,16 @@ main
 			#main-header-link
 				@include animation(header-link, 2s, 2.5s, ease-in-out, both, no-fade, -50%, -230px)
 		div
-			transition: filter 600ms linear
+			transition-delay:  300ms 
 
 	#main-container
 		display: flex
 		height: 100%
 		//min-height: 100vh
+		@include push--auto
 		padding: 
 			top: $gutter-20/2
 			bottom: $gutter-20/2
-		@include push--auto
 		background-color: $main-bg
 		
 		.breadcrumbs
