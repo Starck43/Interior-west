@@ -47,6 +47,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		 //$('#main-header >div').toggleClass('blur');
 	});
 
+	$('#scroll-up').on('click', function (e) {
+		var hiddenElement = document.getElementById("main-container");
+		hiddenElement.scrollIntoView({block: "start", behavior: "smooth"});
+		$('#scroll-up').fadeOut(100).remove();
+	});
+	
 	$('.back-to-top').on('click', function (e) {
 		
 		var scrollSpeed = 700; // скорость задержки перемещения наверх (в миллисекундах)

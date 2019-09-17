@@ -66,7 +66,9 @@
 @mixin animation($name, $duration:0.2s, $delay:0s, $animation:ease, $fill-mode:forwards, $fade:no-fade, $x:0, $y:0)
 	$shift-x: $x !global
 	$shift-y: $y !global
-	animation: animation-#{$name} $duration $delay $animation $fill-mode
+	animation: animation-#{$name} $duration $delay $animation
+	animation-fill-mode: $fill-mode
+	@content
 	
 	@keyframes animation-#{$name}
 		from

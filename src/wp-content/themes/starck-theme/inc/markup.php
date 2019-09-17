@@ -59,7 +59,6 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 		$template = basename($template, '.php');
 		$template = array_pop(explode('-',$template));
         $classes[] = $template;
-		$classes[] = 'nav-' . starck_get_option( 'nav_position_setting' ) . '-header';
 		$classes[] = starck_get_layout();
 		
 		if ( starck_get_option( 'nav_search' ) ) { //вывод кнопки 'поиск' в верхнее меню
@@ -113,7 +112,7 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 	 * Adds custom classes to the navigation. 
 	 */
 	function starck_navigation_classes( $merged_class ) {
-		//$classes[] = 'top-menu';
+
 		if ( 'none' !== $nav_position ) {
 	
 			$nav_position = starck_get_option( 'nav_position_setting' );
@@ -141,10 +140,13 @@ if ( ! function_exists( 'starck_main_classes' ) ) {
 	 * Adds custom classes to the main.
 	 */
 	function starck_main_classes( $merged_class ) {
-		//$classes[] = 'main';
+
+		$nav_position = starck_get_option( 'nav_position_setting' );
 
 		$classes[] = starck_get_option( 'main_bound_setting' ); //'bounded', 'wide-full'
 		//$classes[] = starck_get_option( 'header_layout_setting' );
+
+		$classes[] = 'nav-' . $nav_position . (('under' == $nav_position) ? '-header' : '-logo');
 
 		// Get the sidebar layout
 		$classes[] = starck_get_layout();

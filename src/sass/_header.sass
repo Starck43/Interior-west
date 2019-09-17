@@ -59,7 +59,7 @@
 		#branding-logo
 			margin: auto 0
 			//padding: 0 $gutter-20/2
-			max-width: 200px
+			width: $logo-width 
 			img
 				@extend %img
 
@@ -92,14 +92,18 @@
 		#header-content
 			display: flex
 			flex-wrap: wrap
-			//flex-direction: column
+			flex-basis: 100%
+
 	&.bounded
 		.container
 			padding-left: 0
 			padding-right: 0
+			
+		ul.menu
+			@extend .bounded
 
 	#nav-menu
-		margin-left: $gutter-20 
+		margin-left: 10px
 		//float: left
 		
 	#nav-search
@@ -114,7 +118,7 @@
 // Navigation styles	
 #header-nav
 	display: flex
-	width: 100%
+	//width: 100%
 	height: $nav-height
 	align-items: center
 	//margin-top: auto
@@ -131,11 +135,10 @@
 			top: $header-height
 			height: 0
 			//width: 100%
-			@extend .bounded
 			flex-direction: column
 			align-items: center
 			justify-content: space-evenly
-			background-color: transparentize($theme-color, 0.05)
+			background-color: transparentize($theme-color, 0.3)
 			transition: all 500ms ease-in
 			overflow: hidden
 			z-index: 9999
@@ -183,12 +186,18 @@
 	&.float-left
 		//width: auto
 
+	&.left-aligned
+		margin-right: auto
+		
 	&.center-aligned
+		margin-right: auto
+		margin-left: auto
 		justify-content: center
 		ul
 			justify-content: center
 
 	&.right-aligned
+		margin-left: auto
 		justify-content: flex-end
 		ul
 			justify-content: flex-end

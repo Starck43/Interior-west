@@ -1,6 +1,8 @@
 // Main styles
 main
 	position: relative
+	width: 100% 
+	flex: auto
 	@include push--auto
 	clear: both
 	overflow: hidden
@@ -17,6 +19,7 @@ main
 		//min-height: 200px 
 		//padding: $gutter-20 0
 		//height: 100vh
+		height: calc-height($header-height, $nav-height, $top-bar-height)
 		overflow: hidden
 			
 		&-link
@@ -43,7 +46,23 @@ main
 			#main-header-link
 				@include animation(header-link, 2s, 2.5s, ease-in-out, both, no-fade, -50%, -230px)
 		div
-			transition-delay:  300ms 
+			transition-delay:  300ms
+
+		#scroll-up
+			position: absolute
+			width: 30px
+			height: 40px
+			bottom: 30px
+			left: 50%
+			transform: rotateX(-50%)
+			color: #FFF 
+			background-color: transparentize($theme-color, 0.5)
+			border: 1px solid white
+			border-radius: 15px
+			.icon
+				margin-top: 2px
+				@include animation(scroll-up, 1.5s, 1s, ease, none, no-fade, 0, 5px)
+					animation-iteration-count: infinite
 
 	#main-container
 		display: flex
@@ -87,7 +106,10 @@ main
 			background-color: $sidebar-bg 
 			border: 1px solid $border-color
 			box-sizing: border-box
-			
+
+	&.nav-inline-logo
+		#main-header
+			height: calc-height($header-height, $top-bar-height)
 
 .projects
 	&-header

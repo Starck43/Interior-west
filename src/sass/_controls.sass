@@ -46,13 +46,15 @@ input[type="submit"]
 	display: flex
 	width: $icon-size
 	height: $icon-size
-	padding: 5px
+	//padding: 5px
 	margin: 0
 	background-color: transparent
 	opacity: 0.7
 	font-size: 1.2em
 	text-align: center
 	text-transform: none
+	justify-content: center
+	align-items: center
 	overflow: visible
 	cursor: pointer
 	transition: all 150ms linear
@@ -123,6 +125,18 @@ input[type="submit"]
 
 .arrow-up::before 
 	content: "\f077"
+
+.fa-long-arrow-alt-down:before
+	content: "\f309"
+
+.fa-long-arrow-alt-left:before
+	content: "\f30a"
+
+.fa-long-arrow-alt-right:before
+	content: "\f30b"
+
+.fa-long-arrow-alt-up:before
+	content: "\f30c"
 	
 .fa-search::before
 	content: "\f002"

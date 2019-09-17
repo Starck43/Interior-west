@@ -2,23 +2,32 @@
 @import jcarousel-controls
 @import jcarousel-pagination
 
-.jcarousel-wrapper
-	position: relative
-	width: $carousel-w
-	height: $carousel-h
-	margin: 0 auto
-	//@include border-radius(10px)
-	//@include box-shadow(rgba(0,0,0,.3) 2px 2px 10px)
-	.jcarousel 
+main
+	.jcarousel-wrapper
 		position: relative
-		overflow: hidden
-
-		ul
+		margin: 0 auto
+		//@include border-radius(10px)
+		//@include box-shadow(rgba(0,0,0,.3) 2px 2px 10px)
+		.jcarousel 
 			position: relative
-			width: 20000em
-			margin: 0
-			padding: 0
-			li
-				width: $carousel-w
-				height: $carousel-h
-				float: left
+			overflow: hidden
+
+			ul
+				position: relative
+				width: 20000em
+				margin: 0
+				padding: 0
+				li
+					float: left
+
+	.jcarousel-wrapper, .jcarousel li
+		width: 100vw
+		height: calc-height($header-height, $nav-height, $top-bar-height)
+
+	&.nav-inline-logo
+		.jcarousel-wrapper, .jcarousel li
+			height: calc-height($header-height, $top-bar-height)
+
+	&.bounded
+		.jcarousel-wrapper, .jcarousel li
+			width: $container_max-w

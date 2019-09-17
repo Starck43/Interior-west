@@ -70,6 +70,8 @@ if ($gallery || $main_header_background ) {
 		<a id="main-header-link" href="<?php echo esc_url($gallery_caption_link) ?>"><div class="button">Подробнее</div></a>
 		<?php } ?>
 
+		<div id="scroll-up" alt="Пролистать"><i class="icon fa fa-long-arrow-alt-down"></i></div>
+
 	</header>
 	<?php
 }
