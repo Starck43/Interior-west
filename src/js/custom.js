@@ -7,24 +7,25 @@
 document.addEventListener("DOMContentLoaded", function() {
 
 	$.when( $('#dom-preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
-		.done( function() { 
-			$('body').fadeIn();
-			$('#dom-preloader').remove(); 
+	.done( function() { 
+		$('body').fadeIn();
+		$('#dom-preloader').remove(); 
 	});		
 	// Adding class after full DOM loading for applying CSS animation
 	$('#main-header').addClass('visible');
 /*
+// inView.js
 	inView('.someSelector')
 		.on('enter', el => {
 			el.style.opacity =1;
 		})
 		.on('exit', el => {
 			el.style.opacity = 0.5;
-		});
-	
+		});	
 */
+
 	$(window).scroll(function() {
-		addVisibleClass(document.body.querySelectorAll('article'), 0); //viewport.js
+		addVisibleClass(document.body.querySelectorAll('article')); //viewport.js
 		addVisibleClass(document.body.querySelectorAll('#copyright'));
 
 		$('.back-to-top').topBtnToggle({
@@ -43,25 +44,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	var burger = $('#nav-menu').on('click', function (e) {
 		burger.toggleClass('active');
-		 $('#menu-top').toggleClass('active');
-		 //$('#main-header >div').toggleClass('blur');
-	});
-
-	$('#scroll-up').on('click', function (e) {
-		var hiddenElement = document.getElementById("main-container");
-		hiddenElement.scrollIntoView({block: "start", behavior: "smooth"});
-		$('#scroll-up').fadeOut(100).remove();
+		$('#menu-top').toggleClass('active');
 	});
 	
-	$('.back-to-top').on('click', function (e) {
-		
-		var scrollSpeed = 700; // скорость задержки перемещения наверх (в миллисекундах)
-		
+	$( document ).on( 'keyup', function( e ) {
+		if( !burger.hasClass('active') ) return true;
 		e.preventDefault();
-		$('html,body').animate({
-			scrollTop: 0
-		}, scrollSpeed);
-		
+		if( e.keyCode == 27 ) burger.click();
+	});
+	
+	$('#scroll-up').on('click', function (e) {
+		var mc = document.body.querySelector('#main-container');
+		mc.scrollIntoView({block: "start", behavior: "smooth"});
+		$('#scroll-up').fadeOut(200).remove();
+	});
+
+	$('.back-to-top').on('click', function (e) {		
+		// 700 - скорость задержки перемещения наверх (в миллисекундах)
+		e.preventDefault();
+		$('html,body').animate({scrollTop: 0}, 700);		
 	});
 
 
@@ -147,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else $('.jcarousel-pagination').remove();
 	}
 
-	//Add agent to HTML selector
+	//Adding an agent to HTML selector
 	var deviceAgent = navigator.userAgent.toLowerCase();
 	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
 		$("html").addClass("ios");
