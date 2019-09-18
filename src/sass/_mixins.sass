@@ -63,17 +63,17 @@
 
 
 
-@mixin animation($name, $duration:0.2s, $delay:0s, $animation:ease, $fill-mode:forwards, $fade:no-fade, $x:0, $y:0)
+@mixin animation($name, $duration:0.2s, $delay:0, $animation:ease, $fill-mode:forwards, $fade:no-fade, $x:0, $y:0)
 	$shift-x: $x !global
 	$shift-y: $y !global
-	animation: animation-#{$name} $duration $delay $animation
+	animation: animation-#{$name} if($delay != 0, $duration $delay, $duration) $animation
 	animation-fill-mode: $fill-mode
 	@content
 	
 	@keyframes animation-#{$name}
 		from
 			@if $fade != no-fade
-				opacity: if($fade == In, 0, 1)
+				opacity: if($fade == Out, 1, 0)
 			//transform: translate($shift-x, $shift-y)
 
 		to
@@ -81,7 +81,17 @@
 			@if $fade != no-fade
 				opacity: if($fade == Out, 0, 1)
 
-  
+@mixin animation-delays($items, $start-delay:0ms, $between-delay:50ms)
+	@for $i from 0 through $items 
+		&:nth-child(#{$i + 1}) 
+			animation-delay: $start-delay+($between-delay*($i))
+
+
+@mixin transition-delays($items, $start-delay:0ms, $between-delay:50ms)
+	@for $i from 0 through $items 
+		&:nth-child(#{$i + 1}) 
+			transition-delay: $start-delay+($between-delay*($i))
+						
 // Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 
 // чтобы поддерживать соотношение. Пример: @include responsive-ratio(16,9)
 @mixin responsive-ratio($x, $y, $pseudo:false)

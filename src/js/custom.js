@@ -6,13 +6,14 @@
  
 document.addEventListener("DOMContentLoaded", function() {
 
+	// Adding class after full DOM loading for applying CSS animation
+	$('#main-header').addClass('visible');
+
 	$.when( $('#dom-preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
 	.done( function() { 
 		$('body').fadeIn();
 		$('#dom-preloader').remove(); 
 	});		
-	// Adding class after full DOM loading for applying CSS animation
-	$('#main-header').addClass('visible');
 /*
 // inView.js
 	inView('.someSelector')
@@ -45,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var burger = $('#nav-menu').on('click', function (e) {
 		burger.toggleClass('active');
 		$('#menu-top').toggleClass('active');
+		$('#scroll-up').toggleClass('hidden');
 	});
 	
 	$( document ).on( 'keyup', function( e ) {

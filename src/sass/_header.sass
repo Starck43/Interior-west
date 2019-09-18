@@ -1,5 +1,6 @@
 // Header styles
 #site-header
+	width: 100% 
 	height: $header-height
 	background-color: $header-bg
 
@@ -33,6 +34,7 @@
 										
 	#branding
 		display: flex
+		width: $logo-width
 		margin: $gutter-20/2 0 auto
 
 
@@ -59,7 +61,8 @@
 		#branding-logo
 			margin: auto 0
 			//padding: 0 $gutter-20/2
-			width: $logo-width 
+			width: auto 
+
 			img
 				@extend %img
 
@@ -92,7 +95,7 @@
 		#header-content
 			display: flex
 			flex-wrap: wrap
-			flex-basis: 100%
+			flex: auto
 
 	&.bounded
 		.container
@@ -118,7 +121,7 @@
 // Navigation styles	
 #header-nav
 	display: flex
-	//width: 100%
+	width: 100%
 	height: $nav-height
 	align-items: center
 	//margin-top: auto
@@ -135,24 +138,53 @@
 			top: $header-height
 			height: 0
 			//width: 100%
+			opacity: 0
 			flex-direction: column
 			align-items: center
 			justify-content: space-evenly
 			background-color: transparentize($theme-color, 0.3)
-			transition: all 500ms ease-in
+			transition: height 500ms ease-in, opacity 600ms ease-out
 			overflow: hidden
 			z-index: 9999
 			box-sizing: border-box
 			border-top: 0px solid transparentize($theme-color , 1)
 			backdrop-filter: blur(10px)
+
 			a
 				font-size: 1.5em
 				line-height: 2 
 				color: #FFF
+				letter-spacing: 1px
+				&:hover
+					border-bottom: none
+
+		
 			&.active
+				opacity: 1
 				height: calc-height($header-height, $nav-height, $top-bar-height)
 				border-top: 3px solid transparentize($theme-color , 0)
-			
+				li
+					transition: all 100ms ease-out
+					@include animation(menu-items, 300ms, 0, ease-in, both, In, 0, 0 )
+						transform: translate(0, -80px)
+					@include animation-delays(4, 700ms, -125ms)
+							
+					&.current-menu-item a
+						font-weight: bold
+					
+					&:hover
+						background-color: initial		
+						&::before,
+						&::after
+							content: ''
+							transform: translateY(0.5em) rotate(90deg) scaleY(0.4)
+
+						&::before
+							border-right: 4px solid #FFF 
+							
+						&::after
+							border-left: 4px solid #FFF 					
+
 	ul.menu
 		display: flex
 		position: relative
@@ -174,8 +206,8 @@
 				letter-spacing: 0px
 	
 				&:hover
-					transition:  200ms all linear
-					border-bottom: 3px solid $link-color-hover
+					transition:  100ms all ease-out
+					border-bottom: 4px solid $link-color-hover
 
 		&.responsive
 			height: 500px
@@ -186,27 +218,32 @@
 	&.float-left
 		//width: auto
 
-	&.left-aligned
+	&.align-left
 		margin-right: auto
 		
-	&.center-aligned
+	&.align-center
 		margin-right: auto
 		margin-left: auto
-		justify-content: center
 		ul
 			justify-content: center
 
-	&.right-aligned
+	&.align-right
 		margin-left: auto
-		justify-content: flex-end
 		ul
 			justify-content: flex-end
 			
+	&.inline-logo
+		width: auto
+		&.burger
+			ul.menu.active
+				height: calc-height($header-height, $top-bar-height)
+
+		 
 	&.below-logo
 
-	&.nav-above-logo
+	&.above-logo
 			
-	&.nav-under-header
+	&.under-header
 		&.burger
 			ul.menu
 				margin-top: $nav-height 

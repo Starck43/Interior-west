@@ -122,12 +122,11 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 				$classes[] = esc_attr( starck_get_option( 'nav_bound_setting' ) ); 
 
 			if ( 'inline' == $nav_position && in_array( $branding_alignment, ['left','right'] ) ) {
-				$classes[] = $nav_position . '-header';
 				$classes[] = 'float-' . ( ( 'left' === $branding_alignment ) ? 'right' : 'left' );
-			} else
-			$classes[] = 'nav-' . $nav_position . (('under' == $nav_position) ? '-header' : '-logo');
+			}
 
-			$classes[] = esc_attr( starck_get_option( 'nav_alignment' ) ) . '-aligned';
+			$classes[] = $nav_position . (('under' == $nav_position) ? '-header' : '-logo');
+			$classes[] = 'align-' . esc_attr( starck_get_option( 'nav_alignment' ) );
 		}
 		return starck_merge_classes($classes, $merged_class);
 	}
