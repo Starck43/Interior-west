@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		lazyImages.forEach(function(lazyImage) {
 			lazyImageObserver.observe(lazyImage);
 			lazyImage.onload = function(){
+				this.parentElement.classList.add('visible'); //for transition effect
 				this.classList.add('loaded'); //for transition effect
 			}
 		});

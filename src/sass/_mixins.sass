@@ -63,23 +63,22 @@
 
 
 
-@mixin animation($name, $duration:0.2s, $delay:0, $animation:ease, $fill-mode:forwards, $fade:no-fade, $x:0, $y:0)
-	$shift-x: $x !global
-	$shift-y: $y !global
-	animation: animation-#{$name} if($delay != 0, $duration $delay, $duration) $animation
-	animation-fill-mode: $fill-mode
+@mixin animation($name, $animation, $fade:no-fade, $x:0, $y:0, $x1:0, $y1:0)
+	animation: animation-#{$name} $animation
 	@content
 	
 	@keyframes animation-#{$name}
-		from
+		0%
 			@if $fade != no-fade
 				opacity: if($fade == Out, 1, 0)
-			//transform: translate($shift-x, $shift-y)
+			@if strip-units($x)+strip-units($y) != 0
+				transform: translate($x, $y)
 
-		to
-			transform: translate($shift-x, $shift-y)
+		50%,100%
 			@if $fade != no-fade
 				opacity: if($fade == Out, 0, 1)
+			@if strip-units($x1)+strip-units($y1) != 0
+				transform: translate($x1, $y1)
 
 @mixin animation-delays($items, $start-delay:0ms, $between-delay:50ms)
 	@for $i from 0 through $items 

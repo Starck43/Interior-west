@@ -165,8 +165,8 @@
 				border-top: 3px solid transparentize($theme-color , 0)
 				li
 					transition: all 100ms ease-out
-					@include animation(menu-items, 300ms, 0, ease-in, both, In, 0, 0 )
-						transform: translate(0, -80px)
+					@include animation(menu-items, 300ms ease-in both, In, 0, -80px )
+						//transform: translate(0, -80px)
 					@include animation-delays(4, 700ms, -125ms)
 							
 					&.current-menu-item a

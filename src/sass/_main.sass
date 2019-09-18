@@ -17,35 +17,44 @@ main
 		position: relative
 		//min-height: 200px 
 		//padding: $gutter-20 0
-		//height: 100vh
 		height: calc-height($header-height, $nav-height, $top-bar-height)
 		overflow: hidden
 			
-		&-link
-			position: absolute
-			left: 50%
-			opacity: 0
-			transform: translate(-50%, -230px)
-			.button
-				color: #FFF 
-
 		&-excerpt
 			position: absolute
 			width: 50%
+			height: 50% 
 			left: 50%
+			top: 50%
 			color: #FFF
 			padding: $gutter-20 $gutter-20 $gutter-20 * 4
-			background: transparentize($theme-color, 0.5)
-			transform: translate(-50%, 0)
+			background-color: transparentize($theme-color, 0.5)
+			opacity: 0
+			transition: opacity 1s 1s ease
+			transform: translate(-50%, -50%)
+			//backdrop-filter: blur(10px)
+			p
+				font-size: 2em
+				font-weight: 700
+
+		&-link
+			position: absolute
+			left: 50%
+			top: 50%
+			opacity: 0
+			transition: opacity 1s 2s ease
+			transform: translate(-50%, -50%)
+			.button
+				color: #FFF 
 			
 		&.visible
 			#main-header-excerpt
-				@include animation(header-excerpt, 1.5s, 1s, ease-in-out, both, no-fade, -50%, -350px)
+				opacity: 1
+				//@include animation(header-excerpt, 1.5s 1s ease-in-out both, no-fade, -50%, 0, -50%, -350px)
 
 			#main-header-link
-				@include animation(header-link, 2s, 2.5s, ease-in-out, both, no-fade, -50%, -230px)
-		div
-			transition-delay:  300ms
+				opacity: 1
+				//@include animation(header-link, 2s 2.5s ease-in-out both, In, -50%, 0, -50%, -230px)
 
 		#scroll-up
 			position: absolute
@@ -53,16 +62,20 @@ main
 			height: 40px
 			bottom: 30px
 			left: 50%
-			transform: translateX(-50%)
 			color: #FFF 
 			background-color: transparentize($theme-color, 0.5)
-			border: 1px solid white
+			//border: 1px solid white
 			border-radius: 15px
+			box-shadow: inset 0 0 0 1px $theme-color
+			transition: background-color 500ms ease
+			transform: translateX(-50%)
 			.icon
 				margin-top: 2px
 				width: auto
-				@include animation(scroll-up, 0.5s, 3s infinite, ease, backwards, no-fade, 0, 5px)
+				@include animation(scroll-up, 2s infinite ease, no-fade, 0, 0, 0, 5px)
 					//animation-iteration-count: infinite
+			&:hover
+				background: transparentize($theme-color, 0)
 
 	#main-container
 		display: flex
@@ -95,8 +108,8 @@ main
 			.page
 				opacity: 0
 				&.visible
-					@include animation(article, .8s, .5s, ease, both, In, 0, 0 )
-						transform: translate(0, 60%)
+					@include animation(article, 1s .2s ease-out both, In, 0, 100% )
+						//transform: translate(0, 60%)
 
 		
 		#main-sidebar
@@ -143,8 +156,10 @@ nav
 			.nav-next
 				float: right
 			div
-				padding: 5px 0 
+				padding: 5px 0
 				&:hover
 					transition:  200ms all linear
 					border-bottom: 3px solid $link-color-hover
+				.meta-nav
+					display: inline-block
 // <!-- End Main -->

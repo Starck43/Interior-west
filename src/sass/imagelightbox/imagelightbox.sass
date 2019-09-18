@@ -66,14 +66,15 @@ $nav-color-link: #FFF
 
 	&::before,
 	&::after
-		width: 4px
-		background-color: $nav-color
 		content: ''
 		position: absolute
+		width: 4px
 		top: 20%
 		bottom: 20%
 		left: 50%
 		margin-left: -1px
+		background-color: $nav-color
+		border-radius: 2px 
 		transition: transform .3s ease
 		transform-origin: center
 	
@@ -97,7 +98,7 @@ $nav-color-link: #FFF
 	z-index: 1
 	//transition: all .5s ease
 	transform: translateX( -50% )
-	@include animation(gallery-nav, .2s, 0.5s, ease, forwards, In, -50%, 0)
+	@include animation(gallery-nav, .2s 0.5s ease forwards, In, -50%, 0, -50%, 0)
 
 	& .nav-dot
 		width: 8px
@@ -124,15 +125,18 @@ $nav-color-link: #FFF
 	top: 50%
 	justify-content: center
 	align-items: center
-	opacity: 0
-	background-color: transparentize( $nav-color, .5 )
-	@include animation(gallery-arrows, 0.2s, 0s, ease, forwards, In, 0, -50%)
+	opacity: 0.7
+	background-color: $nav-color
+	transition: opacity 100ms ease
+	@include animation(gallery-arrows, 300ms 500ms ease-in forwards, no-fade, 0, 0, 0, -50%)
 	z-index: 10001
 	
 	&:hover,
 	&:focus
-		background-color: transparentize( $nav-color, .0 )
-
+		//background-color: transparentize( $nav-color, .0 )
+		opacity: 1
+		.icon
+			opacity: 1
 
 	&.prev
 		left: 0
@@ -152,7 +156,7 @@ $nav-color-link: #FFF
 #gallery-lightbox-caption
 	text-align: center
 	color: $nav-color-link 
-	background-color: transparentize( $nav-color, .5 )
+	background-color: transparentize( $nav-color, .3 )
 	position: fixed
 	z-index: 10001
 	left: 0
@@ -165,7 +169,7 @@ $nav-color-link: #FFF
 #gallery-lightbox-overlay,
 #gallery-lightbox-close,
 #gallery-lightbox-caption
-	@include animation(gallery-fade, .2s, 0s, linear, forwards, In)
+	@include animation(gallery-fade, 200ms 0s ease forwards, In)
 
 
 //@media only screen and (max-width: 320px)
