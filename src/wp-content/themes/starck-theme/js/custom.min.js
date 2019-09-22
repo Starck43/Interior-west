@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	// Adding class after full DOM loading for applying CSS animation
 	$('#main-header').addClass('visible');
-
 	$.when( $('#dom-preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
 	.done( function() { 
 		$('body').fadeIn();
@@ -68,7 +67,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 
-
+	if ( $('.jcarousel').length > 0 ) {
+		var j = $(".jcarousel-wrapper li");
+		if (j.length > 0) j.css("width", j.parents(".jcarousel-wrapper").css("width"));
+	}
+	
 	if ( $('.jcarousel').has('.header-background').length ) {
 
 		$('[data-jcarousel]').each(function() {

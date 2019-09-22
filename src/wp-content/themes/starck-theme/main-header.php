@@ -66,12 +66,17 @@ if ($gallery || $main_header_background ) {
 		}
 
 		if ( $gallery_caption_link ) {
+			?>
+			<a id="main-header-link" href="<?php echo home_url . '/' . esc_url($gallery_caption_link) ?>"><div class="button">Подробнее</div></a>
+			<?php 
+		}
+
+		if ( starck_get_option( 'scroll_up' ) ) {
+			?>
+			<div id="scroll-up" alt="Пролистать"><i class="icon fa fa-long-arrow-alt-down"></i></div>
+			<?php 
+		}
 		?>
-		<a id="main-header-link" href="<?php echo esc_url($gallery_caption_link) ?>"><div class="button">Подробнее</div></a>
-		<?php } ?>
-
-		<div id="scroll-up" alt="Пролистать"><i class="icon fa fa-long-arrow-alt-down"></i></div>
-
 	</header>
 	<?php
 }
