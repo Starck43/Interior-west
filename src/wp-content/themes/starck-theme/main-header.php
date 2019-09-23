@@ -67,7 +67,7 @@ if ($gallery || $main_header_background ) {
 
 		if ( $gallery_caption_link ) {
 			?>
-			<a id="main-header-link" href="<?php echo home_url . '/' . esc_url($gallery_caption_link) ?>"><div class="button">Подробнее</div></a>
+			<a id="main-header-link" href="<?php esc_url($gallery_caption_link) ?>"><div class="button">Подробнее</div></a>
 			<?php 
 		}
 

@@ -17,7 +17,9 @@ main
 		position: relative
 		//min-height: 200px 
 		//padding: $gutter-20 0
+		//width: 100% 
 		height: calc-height($header-height, $nav-height, $top-bar-height)
+		@include push--auto
 		overflow: hidden
 			
 		&-excerpt
@@ -35,7 +37,7 @@ main
 			//backdrop-filter: blur(10px)
 			p
 				font-size: 2em
-				font-weight: 700
+				line-height: 1.3
 
 		&-link
 			position: absolute

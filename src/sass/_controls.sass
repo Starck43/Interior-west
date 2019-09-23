@@ -57,7 +57,7 @@ input[type="submit"]
 	align-items: center
 	overflow: visible
 	cursor: pointer
-	transition: all 200ms ease
+	transition: opacity 200ms ease
 					
 	&:hover
 		opacity: 1
@@ -66,8 +66,8 @@ input[type="submit"]
 	.burger-inner
 		@extend %burger-line
 		top: 50%
-		transform: translateY(-100%)
-		transition: all 100ms cubic-bezier(.55,.055,.675,.19)
+		transform: translateY(-50%)
+		//transition: all 100ms cubic-bezier(.55,.055,.675,.19)
 
 		&::before
 			content: ""
