@@ -47,7 +47,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		$('#menu-top').toggleClass('active');
 		$('#scroll-up').toggleClass('hidden');
 	});
-	
+
+	var submenu_item = $('.menu-item-has-children a').on('click', function (e) {
+		e.preventDefault();
+		$(this).parent().toggleClass('collapsed');
+	});
+		
 	$( document ).on( 'keyup', function( e ) {
 		if( !burger.hasClass('active') ) return true;
 		e.preventDefault();
