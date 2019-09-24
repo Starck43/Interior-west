@@ -37,8 +37,8 @@ $content = $post->post_content;
 				'hierarchical' => 0,
 				'orderby' => 'name',
 				'show_count' => true,
-				'echo' => 0
-				//'show_option_all' => 'Все проекты',
+				'echo' => 0,
+				'show_option_all' => 'Все проекты',
 			);
 			$projects_cat = wp_list_categories($args);
 			if ($projects_cat) {
