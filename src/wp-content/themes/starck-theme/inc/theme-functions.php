@@ -456,6 +456,7 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 		$primary_args = array( 
 			'theme_location' => 'primary',
 			//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="menu-icon" class="burger-menu">&#9776;</div>',
+			'link_after' => '<i class="fa"></i>', // Add element icon after link for each menu item
 			'container' => ''
 		);
 		/*

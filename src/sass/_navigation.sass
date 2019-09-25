@@ -6,7 +6,27 @@
 	height: $nav-height
 	align-items: center
 	//margin-top: auto
-			
+
+	&:not(.burger)
+		li.menu-item-has-children
+			ul.sub-menu
+				position: absolute
+				display: table
+				top: 100%
+				margin-top: 5px 
+				padding: 0 20px
+				opacity: 0
+				border: 1px solid $menu-link-color
+				border-radius: 3px 
+				background-color: transparentize($nav-bg, 0.05)
+				transition: all 150ms ease-in-out
+				z-index: -1	
+							
+			&.collapsed
+				ul.sub-menu
+					opacity: 1
+					z-index: 2
+				
 	ul.menu
 		display: flex
 		position: relative
@@ -20,16 +40,55 @@
 			display: flex
 			transition: none
 			&:hover			
-				background-color: inherit
+				background-color: transparent
 
 			a
+				position: relative
 				margin: 0 $gutter-20
 				@include font-settings(false, $menu-link-color, $menu-font-size, uppercase, 300, $nav-height)
 				letter-spacing: 0px
-	
+				&::before
+					content: ''
+					position: absolute
+					display: block
+					top: 50%
+					right: 100%
+					margin-right: 5px 
+					background-color: $menu-link-color
+					transform: translateY(-50%)
+					opacity: 0
+
 				&:hover
-					transition:  100ms all ease-out
-					border-bottom: 4px solid $link-color-hover
+					&::before
+						opacity: 1
+						width: 3px
+						height: 2px
+						transition: all 100ms ease-in
+						border-left: 15px solid  $menu-link-color
+					
+							
+			&.menu-item-has-children
+				> a i::before
+					content: '\f078'
+					width: 10px
+					left: 100%
+					top: 50%
+					background-color: transparent 
+					margin-left: $burger-menu-font-size / 2
+
+					transition: all 500ms ease-in-out
+					//clip-path: polygon(0 80%, 80% 80%, 80% 0, 100% 0, 100% 100%, 0 100%)
+					//clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%)
+					//clip-path: polygon(8% 0, 50% 67%, 92% 0, 100% 20%, 50% 100%, 0 20%)
+					//transform: rotate(45deg) translateY(-100%) skew(-10deg,-10deg) !important
+
+										
+				&.collapsed
+					> a
+						i::before
+							content: '\f077'
+
+
 
 		&.responsive
 			height: 500px
@@ -40,12 +99,12 @@
 	&.align-center
 		margin-right: auto
 		margin-left: auto
-		ul
+		ul.menu
 			justify-content: center
 
 	&.align-right
 		margin-left: auto
-		ul
+		ul.menu
 			justify-content: flex-end
 			
 	&.inline-logo
@@ -61,20 +120,18 @@
 
 	&.burger
 		ul.menu
-			//display: none
-			//opacity: 0
 			position: absolute
 			left: 0
 			right: 0
 			top: $header-height
-			height: 0
 			//width: 100%
+			height: 0
 			opacity: 0
 			flex-direction: column
 			align-items: center
 			justify-content: space-evenly
 			background-color: transparentize($theme-color, 0.3)
-			transition: height 500ms ease-in, opacity 600ms ease-out
+			transition: height 500ms ease-out, opacity 300ms ease
 			z-index: 9999
 			box-sizing: border-box
 			border-top: 0px solid transparentize($theme-color , 1)
@@ -85,84 +142,54 @@
 				align-items: center
 				//flex-basis: 100% 
 				flex-grow: 1
-				background-color: initial		
 						
 				&.current-menu-item a
 					font-weight: bold
 
 				a
-					position: relative
 					margin: auto
 					font-size: $burger-menu-font-size
 					line-height: $burger-menu-font-size * 2
 					color: #FFF
 					letter-spacing: 1px
-					&::before,
-					&::after
-						position: absolute
-						display: block
-						transform: translateY(-100%)
-						
 					&::before
-						content: ''
-						top: 50%
-						right: 100%
-						margin-right: 5px 
-						background-color: #FFF 
-						//transform: translateY(0.5em) rotate(90deg) scaleY(0.4)
-						opacity: 0
-
+						background-color: #FFF							
 					&:hover
-						border-bottom: none
-
 						&::before
-							//content: ''
-							opacity: 1
-							width: 3px
-							height: 2px
-							transition: all 100ms ease-out
-							border-left: 15px solid #FFF 
-							//border-right: 5px solid transparent
-							
-				&.menu-item-has-children >a
-					&::after
-						content: '+'
-						//width: 30px
-						//height: 15px
-						left: 100%
-						top: auto 
-						margin-left: $burger-menu-font-size / 2
-
-						//clip-path: polygon(0 80%, 80% 80%, 80% 0, 100% 0, 100% 100%, 0 100%)
-						//clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%)
-						//clip-path: polygon(8% 0, 50% 67%, 92% 0, 100% 20%, 50% 100%, 0 20%)
-						//transform: rotate(45deg) translateY(-100%) skew(-10deg,-10deg) !important
-				
+							border-color: #FFF 
+					
 				ul.sub-menu
+					display: flex
 					padding: 0
 					height: 0
+					opacity: 0
+					transition: all 150ms ease-in-out
 					a
 						font-size: $burger-submenu-font-size
 						font-weight: normal
-						
+
 				&.collapsed
 					a
 						margin-bottom: 0
+							
 					ul.sub-menu
+						display: table
+						@include animation(sub-menu, 250ms ease-in both, In, 0, 80px )
 						margin-bottom: auto
-						height: auto 
+						height: 100%
 			
 			>li:not(:last-child)::after
 				content: ''
 				height: 1px
 				width: 30px
+				bottom: 0
 				background-color: #FFF
 
 			&.active
 				opacity: 1
 				height: calc-height($header-height, $nav-height, $top-bar-height)
 				border-top: 3px solid transparentize($theme-color , 0)
-				li
+				>li
 					@include animation(menu-items, 300ms ease-in both, In, 0, -80px )
 					//transform: translate(0, -80px)
 					@include animation-delays(4, 700ms, -125ms)
