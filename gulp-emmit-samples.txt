@@ -1,0 +1,24 @@
+Emmet:
+
+#member-$*3>a[href="member-$"]>img[src="img/"].member-photo.lazy.+span.link{some text}
+
+result:
+
+<div id="member-1">
+	<a href="member-1">
+		<img src="img/" alt="" class="member-photo lazy ">
+		<span class="link">some text</span>
+	</a>
+</div>
+<div id="member-3">
+	<a href="member-3">
+		<img src="img/" alt="" class="member-photo lazy ">
+		<span class="link">some text</span>
+	</a>
+</div>
+<div id="member-3">
+	<a href="member-3">
+		<img src="img/" alt="" class="member-photo lazy ">
+		<span class="link">some text</span>
+	</a>
+</div>
