@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		addVisibleClass(document.body.querySelectorAll('article')); //viewport.js
 		addVisibleClass(document.body.querySelectorAll('#copyright'));
 
-		$('.back-to-top').topBtnToggle({
-			scrollTrigger: 400,
+		$('#back-to-top').topBtnToggle({
+			scrollTrigger: 800,
 			//debug: true,
 		});
 
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		$('#scroll-up').fadeOut(200).remove();
 	});
 
-	$('.back-to-top').on('click', function (e) {		
+	$('#back-to-top').on('click', function (e) {		
 		// 700 - скорость задержки перемещения наверх (в миллисекундах)
 		e.preventDefault();
 		$('html,body').animate({scrollTop: 0}, 700);		
