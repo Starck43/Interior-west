@@ -491,23 +491,17 @@ function starck_breadcrumbs() {
 	}
 }
 
+
 function starck_back_to_top() {
 	$options = wp_parse_args( get_option( 'starck_settings', array() ), starck_get_defaults() );
 
-	if ( !$options['back_to_top'] ) {
-		return;
+	if ( starck_get_option('back_to_top') ) {
+		?>
+		<a id="back-to-top" title="Вернуться наверх" rel="nofollow" href="/"><i class="fa arrow-up"></i></a>
+		<?php
 	}
-
-	echo trim(preg_replace('/\s{2,}/', ' ', sprintf(
-
-		'<div id="back-to-top">
-			<a title="%1$s" rel="nofollow" href="#" class="back-to-top"><i class="%2$s"></i></a>
-		</div>',
-		esc_attr__( 'Scroll back to top', 'starck' ),
-		esc_attr( apply_filters( 'starck_back_to_top_icon', 'fa arrow-up' ) )
-
-	)));
 }
+
 
 function starck_main_header() {	
 
