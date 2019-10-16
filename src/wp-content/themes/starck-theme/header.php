@@ -2,10 +2,11 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php esc_attr( bloginfo( 'charset' ) ); ?>" />
-	<meta name="description" content="Starter web template for Wordpress">
-	<meta name="viewport" content="width=device-width" />
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<link rel="icon" href="img/favicon.png">
+	<link rel="icon" href="/img/favicon.png">
+	<link rel="apple-touch-icon" href="/img/apple-touch-favicon.png">
 	<?php wp_head(); ?>
 </head>
 

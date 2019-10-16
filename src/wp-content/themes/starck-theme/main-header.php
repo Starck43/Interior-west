@@ -15,19 +15,21 @@ $header_class = '';
 $main_header_background = starck_get_option( 'content_header_background' );
 $gallery = get_post_meta( $page_id, 'gallery-image' );
 
-if ($gallery || $main_header_background ) {
-
-	$count_gallery = ($gallery) ? count($gallery) : 0;
-	if ( $count_gallery == 1 || $main_header_background ) {
-		if ($count_gallery == 1) {
-			$image_url = wp_get_attachment_image_url(absint($gallery[0]), 'full' );
-;
-		} elseif ( $main_header_background ) {
-			$image_url = $main_header_background;
-		} 
-		$header_class = sprintf('class="header-background parallax" style="background-image: url(%s)"', $image_url);
-	}
-	?>  
+if ( !in_array( $main_header_appearence, ['disabled'] ) ) {
+	if ( $gallery || $main_header_background ) {
+		$count_gallery = ($gallery) ? count($gallery) : 0;
+		if ( $count_gallery == 1 || $main_header_background ) {
+			if ($count_gallery == 1) {
+				$image_url = wp_get_attachment_image_url(absint($gallery[0]), 'full' );
+	;
+			} elseif ( $main_header_background ) {
+				$image_url = $main_header_background;
+			} 
+			$header_class = sprintf('class="header-background parallax" style="background-image: url(%s)"', $image_url);
+		}
+	} else
+		$header_class = 'class="hidden"';
+	?>
 	<header id="main-header" <?php echo $header_class; ?>>
 
 		<?php

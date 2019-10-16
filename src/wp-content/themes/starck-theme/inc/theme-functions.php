@@ -1,10 +1,10 @@
 <?php
-define( 'STARCK_VERSION', '1.0.5' );
-
-
 add_action('admin_head', 'add_custom_admin_styles');
 function add_custom_admin_styles() {
 	echo '<style>
+		#wpcontent {height:auto;}
+		#wpfooter {position: relative;}
+		.wp-block {max-width: 1100px;}
 		.column-post_thumb {width: 80px;}
 		#gallery-image .button {margin: 5px 0 20px;}
 		.postbox-gallery-block {cursor: pointer;}
@@ -33,15 +33,14 @@ function add_custom_admin_styles() {
  /* Add the media uploader script */
 add_action('admin_enqueue_scripts', 'media_upload_enqueue');
 function media_upload_enqueue() {
-	//global $type_post;
-	//if( in_array($type_post, ['post','page']) ) {
-		if (function_exists('wp_enqueue_media')) {
-			wp_enqueue_media();
-		}
-		if ( file_exists( dirname( __FILE__ ) . '/js/media-upload.js' )) {
-			wp_enqueue_script('media_admin_scripts', get_template_directory_uri() . '/inc/js/media-upload.js', array('jquery'), true);
-		}
-	//}
+
+	if (function_exists('wp_enqueue_media')) {
+		wp_enqueue_media();
+	}
+	if ( file_exists( dirname( __FILE__ ) . '/js/media-upload.js' )) {
+		wp_enqueue_script('media_admin_scripts', get_template_directory_uri() . '/inc/js/media-upload.js', array('jquery'), true);
+	}
+
 }
 
 add_action( 'after_setup_theme', 'starck_setup' );
@@ -64,7 +63,7 @@ function starck_setup() {
 		'default-attachment'	=> 'fixed',
 		//'header-text'			=> true,
 		'uploads'				=> true,
-		'default-image'			=>  get_stylesheet_directory_uri() . '/img/header.jpg',
+		'default-image'			=>  '/img/header.jpg', //get_stylesheet_directory_uri() . 
 		'wp-head-callback'		=> '',
 	) );
 
@@ -75,7 +74,7 @@ function starck_setup() {
 		'flex-width'  => true,
 		'flex-height' => true,
 		'uploads' 	  => true,
-		'default-image' => get_stylesheet_directory_uri() . '/img/logo.png',
+		'default-image' => '/img/logo.png', //get_stylesheet_directory_uri() . 
 		'header-text' => array( 'site-title', 'site-description' )
 	) );
 
@@ -470,12 +469,17 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 			<?php
 			wp_nav_menu( $primary_args );
 			//wp_nav_menu( $secondary_args );
-			if ( starck_get_option( 'nav_search_setting' ) )
-				echo '<div id="nav-search" class="icon"><i class="fa fa-search"></i></div>';
-
-			$burger_class = sprintf(' class="icon burger-icon%s"', starck_get_option( 'nav_burger' ) ?  '' : ' hidden' );
+			if ( starck_get_option( 'nav_search_setting' ) ) {
 			?>
-			<div id="nav-menu"<?php echo $burger_class; ?>><div class="burger-inner"></div></div>
+				<div id="site-search-modal"><?php get_search_form(); ?></div>
+
+				<div id="nav-search"><i class="icon fa fa-search"></i></div>
+			<?php
+			}
+
+			$burger_class = sprintf(' class="icon burger-icon%s"', $nav_burger ?  ' visible' : '' );
+			?>
+			<div id="nav-burger"<?php echo $burger_class; ?>><div class="burger-inner"></div></div>
 		</nav>
 		<?php
 	}
@@ -497,7 +501,7 @@ function starck_back_to_top() {
 
 	if ( starck_get_option('back_to_top') ) {
 		?>
-		<a id="back-to-top" title="Вернуться наверх" rel="nofollow" href="/"><i class="fa arrow-up"></i></a>
+		<a id="back-to-top" title="Вернуться наверх" rel="nofollow" href="/"><i class="icon fa arrow-up"></i></a>
 		<?php
 	}
 }

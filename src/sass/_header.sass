@@ -4,14 +4,15 @@
 	width: 100% 
 	height: $header-height
 	background-color: $header-bg
-
+	z-index: 3
+	+media-breakpoint-down(xs)
+		height: $header-height-min
 	#top-bar
 		background-color: $top-bar-bg
 		display: flex
 		padding: 
 			left: 0
-			right: 0
-		
+			right: 0	
 		.widget
 			width: 100%
 			margin:  0 $gutter-20 / 2 auto
@@ -25,47 +26,20 @@
 	#header-container
 		display: flex
 		justify-content: space-between
-
-	
-	&.branding-right
-		flex-direction: row-reverse
-		
-	&.branding-center
-		flex-direction: column
-										
+		align-items: center
+									
 	#branding
 		display: flex
-		width: $logo-width
+		width: auto
 		margin: $gutter-20/2 0 auto
 
-
-		&.align-center
-			margin-bottom: $gutter-20/2
-			a
-				justify-content: center
-
-		&.align-right
-			flex-direction: row-reverse
-
-
-		&.align-vertical
-			flex-direction: column
-
-			a
-				justify-content: center
-				
-			#branding-logo,
-			#branding-title
-				@include push--auto 
-
-			
 		#branding-logo
 			margin: auto 0
 			//padding: 0 $gutter-20/2
-			width: auto 
-
-			img
-				@extend %img
+			max-width: $logo-width 
+			@include img-responsive
+			+media-breakpoint-down(xs)
+				max-width: $logo-width-min
 
 		#branding-title
 			margin: auto 0
@@ -80,14 +54,41 @@
 				text-transform: uppercase
 			.site-description
 				font-size: 1em 
+			
+		&.align-center
+			margin-bottom: $gutter-20/2
+			a
+				justify-content: center
 
+		&.align-right
+			flex-direction: row-reverse
+
+		&.align-vertical
+			flex-direction: column
+			a
+				justify-content: center
+				
+			#branding-logo,
+			#branding-title
+				@include push--auto 	
+
+	&.branding-right
+		flex-direction: row-reverse
+		
+	&.branding-center
+		flex-direction: column
+		
+	&.nav-above-logo,
 	&.nav-below-logo
 		height: #{strip-units($header-height) + strip-units($nav-height)}px
+		+media-breakpoint-down(xs)
+			height: #{strip-units($header-height-min) + strip-units($nav-height)}px
+
+	&.nav-below-logo
 		#header-container
 			flex-wrap: wrap-reverse
 
 	&.nav-above-logo
-		height: #{strip-units($header-height) + strip-units($nav-height)}px
 		#header-container
 			flex-wrap: wrap
 
@@ -114,6 +115,7 @@
 		@extend #nav-menu
 
 	#header-content
+		margin: auto 0
 		&.burger-menu
 			display: inline-block
 			.widget

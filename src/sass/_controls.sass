@@ -1,36 +1,36 @@
 //Control selectors
 
-::placeholder
-	color: #666
-
-::selection //когд выделяем текст на странице
-	background-color: $accent
-	color: #fff
-
 input, textarea
+	@include font-settings(false, $button-text-color, $base-font-size, false, 300, 1.3)
 	width: 100%
+	//margin-top: 3px
+	padding: 5px 10px
 	border-radius: 3px 
 	border: 1px solid $base-border-color 
 	outline: none
-	&:focus:required:invalid
-		border-color: red
+	resize: vertical
+	&:focus
+		border-color: $theme-color
+		outline-offset: 0
+	&:-webkit-autofill
+		box-shadow: inset 0 0 0 50px transparentize($theme-color, 0) !important /* Цвет фона */	d
 	
+input
+	line-height: 30px
+
 input[type="checkbox"]
 	width: auto
-input
-	line-height: 25px
 	
 .search-submit
 	visibility: hidden	
 	
 .button,
 input[type="submit"]
-	$button-h: 40px !global
 	position: relative
 	height: $button-h
-	line-height: $button-h   
+	line-height: 1
 	width: max-content
-	padding: 0 20px
+	padding: 0 $gutter-20
 	@include font-settings(false, $button-text-color, $base-font-size*0.8, uppercase, 500, false)
 	background-color: transparentize($theme-color, 1)
 	box-shadow: inset 0 0 0 1px $theme-color
@@ -41,7 +41,10 @@ input[type="submit"]
 		background-color: transparentize($theme-color, 0.5)
 		color: $button-text-hover
 
+
 .icon
+	//font-family: "fontello"
+	font-style: inherit 
 	position: relative
 	display: flex
 	width: $icon-size
@@ -61,6 +64,7 @@ input[type="submit"]
 					
 	&:hover
 		opacity: 1
+		//color: $theme-color 
 			
 .burger-icon	
 	.burger-inner
@@ -104,53 +108,59 @@ input[type="submit"]
 	width: $icon-size
 	height: 3px
 	border-radius: 3px
-	background-color: $base-text-color
+	background: $menu-icon-color
 
 #scroll-up
 	position: absolute
-	width: 26px
-	height: 40px
+	display: block
+	width: 30px
+	height: 45px
 	bottom: 30px
 	left: 50%
 	color: #FFF 
-	background-color: transparentize($theme-color, 0.5)
-	//border: 1px solid white
+	//background-color: transparentize($theme-color, 0.5)
+	transition: all 200ms ease
 	border-radius: 15px
-	box-shadow: inset 0 0 0 1px $theme-color
-	transition: background-color 500ms ease
 	transform: translateX(-50%)
+
 	.icon
 		margin-top: 2px
 		width: auto
-		@include animation(scroll-up, 2s infinite ease, no-fade, 0, 0, 0, 5px)
-			//animation-iteration-count: infinite
+		font-size: 1.6em 
+		@include animation(scroll-up, 1.3s infinite ease, no-fade, 0, -3px, 0, 6px)
 	&:hover
 		background: transparentize($theme-color, 0)
-
+		//border: 1px solid white
+		box-shadow: inset 0 0 0 1px $theme-color
 
 #back-to-top
-	$btn-size: $icon-size * 1.5
+	$btn-size: $icon-size * 1.2
 	position: fixed
 	display: flex
 	align-items: center
 	justify-content: center
 	bottom: $btn-size * -1.2
-	left: 60px
+	right: 60px
 	width: $btn-size
 	height: $btn-size
 	font-size: $icon-font-size
 	//background: transparentize($theme-color, 0.8)
 	color: darken($theme-color, 0%)
-	//border: 1px solid darken($theme-color, 0%)
+	border: 1px solid $theme-color
 	border-radius: $btn-size / 1.5
-	transition: all 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
+	transition: bottom 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
 	z-index: 9999
 	&:hover
+		transition: all 300ms linear
 		color: white
 		background: $theme-color
 		border-color: $theme-color
 	&.show
 		bottom: $btn-size * 1
+	+media-breakpoint-down(lg)
+		right: $gutter-20
+	+media-breakpoint-down(md)
+		right: $gutter-20 / 2
 		
 
 /* Font Awesome for a project */

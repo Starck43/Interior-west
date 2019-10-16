@@ -672,7 +672,7 @@ if ( ! function_exists( 'starck_customizer_live_preview' ) ) {
 	/**
 	 * Add custom live preview scripts
 	 */
-	function starck_customizer_live_preview() {
+/*	function starck_customizer_live_preview() {
 
 		wp_enqueue_script( 'starck-themecustomizer', trailingslashit( get_template_directory_uri() ) . 'inc/js/customizer-live-preview.js', array( 'customize-preview' ), STARCK_VERSION, true );
 
@@ -683,5 +683,5 @@ if ( ! function_exists( 'starck_customizer_live_preview' ) ) {
 			'contentLeft' => 40,
 			'contentRight' => 40,
 		) );
-	}
+	}*/
 }

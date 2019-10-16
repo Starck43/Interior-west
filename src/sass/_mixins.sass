@@ -1,11 +1,28 @@
 // mixins
-@mixin font($f-name, $f-style, $f-weight, $f-url)
+@mixin font($f-name, $f-style, $f-weight, $f-url, $url:none)
 	@font-face
 		font-family: $f-name
+		font-display: swap
 		font-style: $f-style
-		font-weight: $f-weight
-		font-display: auto
-		src: url($f-url) format('woff2')
+		@if $f-weight != 0
+			font-weight: $f-weight
+		src: url($f-url) if($url != none, #{','} $url format('woff2'), format('woff2'))
+	
+@mixin font-settings($font:false, $colour:false, $size:false, $case:false, $weight:false, $lh:false)
+	@if $font
+		font-family: "#{$font}",#{$default-fonts}
+	@else
+		font-family: $default-fonts
+	@if $size
+		font-size: $size 
+	@if $colour
+		color: $colour 
+	@if $case
+		text-transform: $case 
+	@if $weight
+		font-weight: $weight 
+	@if $lh
+		line-height: $lh 
 
 //Убираем единицы измерения у чисел
 @function strip-units($size)
@@ -38,29 +55,6 @@
 @function calc-height($h1, $h2:0, $h3:0)
 	$h: strip-units($h1) + strip-units($h2) + strip-units($h3)
 	@return calc(100vh - #{$h}px )
-	
-//Для псевдоэлементов ::before и ::after
-@mixin pseudo($display: block, $pos: absolute, $content:'')
-	content: $content
-	display: $display
-	position: $pos
-
-@mixin font-settings($font:false, $colour:false, $size:false, $case:false, $weight:false, $lh:false)
-	@if $font
-		font-family: $font + ', ' + $base-font-family
-	@else
-		font-family: $base-font-family
-	@if $size
-		font-size: $size 
-	@if $colour
-		color: $colour 
-	@if $case
-		text-transform: $case 
-	@if $weight
-		font-weight: $weight 
-	@if $lh
-		line-height: $lh 
-
 
 
 @mixin animation($name, $animation, $fade:no-fade, $x:0, $y:0, $x1:0, $y1:0)
@@ -71,13 +65,13 @@
 		0%
 			@if $fade != no-fade
 				opacity: if($fade == Out, 1, 0)
-			@if strip-units($x)+strip-units($y) != 0
+			@if strip-units($x)+strip-units($y)+strip-units($x1)+strip-units($y1) != 0
 				transform: translate($x, $y)
 
-		50%,100%
+		100%
 			@if $fade != no-fade
 				opacity: if($fade == Out, 0, 1)
-			@if strip-units($x1)+strip-units($y1) != 0
+			@if strip-units($x)+strip-units($y)+strip-units($x1)+strip-units($y1) != 0
 				transform: translate($x1, $y1)
 
 @mixin animation-delays($items, $start-delay:0ms, $between-delay:50ms)
@@ -131,3 +125,23 @@
 		border-right: $size solid $color
 		margin-left: -$size
 
+// Responsive image
+// Keep images from scaling beyond the width of their parents.
+@mixin img-responsive
+	img
+		max-width: 100%
+		height: auto
+
+// Retina image
+// Short retina mixin for setting background-image and -size.
+@mixin img-retina($file-1x, $file-2x, $width-1x, $height-1x)
+	background-image: url($file-1x)
+
+	// Autoprefixer takes care of adding -webkit-min-device-pixel-ratio and -o-min-device-pixel-ratio,
+	// but doesn't convert dppx=>dpi.
+	// There's no such thing as unprefixed min-device-pixel-ratio since it's nonstandard.
+	// Compatibility info: https://caniuse.com/#feat=css-media-resolution
+	@media only screen and (min-resolution: 192dpi), // IE9-11 don't support dppx
+	only screen and (min-resolution: 2dppx) // Standardized
+		background-image: url($file-2x)
+		background-size: $width-1x $height-1x

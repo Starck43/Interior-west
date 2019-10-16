@@ -2,8 +2,10 @@
 /.git/
 /**/Thumbs.db
 /**/*.DS_Store
+/resources/
+/backup/
 /src/wordpress/
+/src/wp-config.php
+/src/wp-content
+!/src/wp-content/themes/
 !/src/wordpress/search-replace-db
-/src/wp-content/uploads/
-/src/wp-content/plugins/
-/*.sublime-workspace

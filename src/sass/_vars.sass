@@ -1,20 +1,23 @@
-// Variables
-$gutter-20: 20px
-$gutter-30: 30px
 
 $grid-breakpoints: (xs: 320px, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
 
 // User variables:
 // sizes
+$gutter-20: 20px
+$gutter-30: 30px
 $container_max-w: 1000px
 $top-bar-height: 0px
 $header-height: 100px
-$logo-width: 25%
+$header-height-min: $header-height/2
+$logo-width: 200px
+$logo-width-min: 100px
 $sidebar-width: 25%
 $content-width: 100% - $sidebar-width
 $nav-height: 50px
+$footer-height: 20px
 //$main-header-height: calc(100vh - #{$header-height} - #{$nav-height} - #{$top-bar-height} )
 $icon-size: 30px
+$button-h: 40px
 
 //colors
 $theme-color: #69c
@@ -26,11 +29,14 @@ $content-bg: transparent
 $sidebar-bg: $main-bg
 $nav-bg: $theme-color
 $footer-bg: $theme-color
+$branding-link-color: white
+$base-shadow-color: #888
 $base-border-color: #555
 $base-text-color: #333
-$page-title-color: orange
+$page-title-color: $theme-color
 $nav-bg: $header-bg
-$menu-link-color: $theme-color
+$menu-link-color: $base-text-color
+$menu-icon-color: $base-text-color
 $link-color: $theme-color
 $link-color-hover: lighten($link-color, 10%) //darken($link-color, 20%)
 $button-text-color: $base-text-color
@@ -44,7 +50,8 @@ $accent: orange
 //transparentize($theme-color, 0.3)
 
 /* TYPOGRAPHY */
-$base-font-family: Arial, Helvetica, sans-serif
+$base-font-family: 'Roboto'
+$default-fonts: Arial, Helvetica, sans-serif
 $base-font-size: 15px
 $base-line-height: 1.25em
 $icon-font-size: 23px
@@ -52,28 +59,4 @@ $menu-font-size: 1em
 $burger-menu-font-size: 1.5em
 $burger-submenu-font-size: $burger-menu-font-size * 0.8
 
-h1 
-	font: normal bold 2em/1.1 $base-font-family
-	margin: 0 0 0.5em 0
-	color: $page-title-color 
-
-
-h2  
-	font: normal bold 1.75em/1.1 $base-font-family
-	margin: 1em 0
-
-
-h3 
-	font: normal bold 1.5em/1.1 $base-font-family
-	margin: 0 0 0.5em 0
-
-
-h4 
-	font: normal bold 1.33em/1.1 $base-font-family
-	margin: 0 0 0.5em 0
-
-
-h5 
-	font: normal bold 1.2em/1.1 $base-font-family
-	margin: 0 0 0.5em 0
 

@@ -1,18 +1,13 @@
 // Main styles
-main
+#main
 	position: relative
 	width: 100% 
-	flex: auto
 	@include push--auto
+	background-color: $main-bg 
+	flex: auto
 	clear: both
+	z-index: 2
 	
-	&.bounded
-
-			
-	&.left-sidebar
-		#main-container
-			flex-direction: row-reverse 
-			
 	#main-header
 		position: relative
 		//min-height: 200px 
@@ -20,6 +15,7 @@ main
 		//width: 100% 
 		height: calc-height($header-height, $nav-height, $top-bar-height)
 		@include push--auto
+		background-color: $header-bg
 		overflow: hidden
 			
 		&-excerpt
@@ -78,7 +74,24 @@ main
 			//padding: 0 $gutter-20
 			background-color: $content-bg
 			box-sizing: border-box
+			word-break: break-word
 			
+			p
+				text-align: justify
+				margin: $base-line-height 0 0.5em
+
+			li
+				list-style-type: square
+				margin: $base-line-height/2 0 0
+
+			p,li
+				font-size: 1.2em
+				font-weight: 300
+				letter-spacing: 0.5px
+				line-height: $base-line-height
+				+media-breakpoint-down(xs)
+					font-size: 1.2em
+
 			&.float-left
 				width: $content-width
 				margin-right: $gutter-20/2
@@ -91,8 +104,19 @@ main
 				&.visible
 					@include animation(article, 1s .2s ease-out both, In, 0, 100% )
 						//transform: translate(0, 60%)
+			&.search
+				nav, header
+					+media-breakpoint-up(lg)
+						padding-left: 0
+						padding-right: 0
+				>div
+					color: $base-text-color
+					//border: 1px solid $theme-color 
+					letter-spacing: 0.5px 
+					span
+						font-weight: 600
+						text-decoration: underline
 
-		
 		#main-sidebar
 			width: 25%
 			float: left
@@ -104,43 +128,9 @@ main
 	&.nav-inline-logo
 		#main-header
 			height: calc-height($header-height, $top-bar-height)
+	
+	&.left-sidebar
+		#main-container
+			flex-direction: row-reverse 
 
-.projects
-	&-header
-		margin-bottom: $gutter-20
-		
-	&-categories
-		display: flex
-		width: 100%
-		justify-content: space-around
-		padding: $gutter-20
-		margin: 0
-		li
-			padding: $gutter-20/2
-			border: 1px solid  $theme-color
-			border-radius: 3px  
-		
-.project
-	.container
-		padding: 0
-
-nav
-	.post-navigation
-		padding: $gutter-20 0
-		.screen-reader-text
-			display: none
-		.nav-links
-			display: inline-block
-			width: 100%
-			.nav-previous
-				float: left
-			.nav-next
-				float: right
-			div
-				padding: 5px 0
-				&:hover
-					transition:  200ms all linear
-					border-bottom: 3px solid $link-color-hover
-				.meta-nav
-					display: inline-block
 // <!-- End Main -->

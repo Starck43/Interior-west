@@ -1,18 +1,35 @@
 /* 
  *
 @import '../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css';
+@import 'fontello-codes.css';
  *
  */
+
+
 /*!
  * Font Awesome Free 5.10.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
+
+.fab {
+  font-family: 'Font Awesome 5 Brands'; }
+
+.fa,
+.fas,
+.far {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400; }
+
+.fa {
+ font-weight: 900; }
+	
 .fa,
 .fas,
 .far,
 .fal,
 .fad,
 .fab {
+  margin: auto;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-style: normal;

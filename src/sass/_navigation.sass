@@ -1,12 +1,12 @@
 						
-// Navigation styles	
+// Header navigation styles	
 #header-nav
 	display: flex
 	width: 100%
 	height: $nav-height
 	align-items: center
 	//margin-top: auto
-
+	transition: opacity 500ms ease-in
 	&:not(.burger)
 		li.menu-item-has-children
 			ul.sub-menu
@@ -195,6 +195,44 @@
 					@include animation-delays(4, 700ms, -125ms)
 
 				
-		.nav-search
-			font-size: $icon-font-size 
-// <!-- End Navigation -->
+		#nav-search
+			font-size: $icon-font-size
+
+		#nav-search,
+		#nav-burger
+			margin-left: $gutter-20  
+// <!-- End Header navigation -->
+
+// <!-- Post navigation -->
+.navigation
+	padding: $gutter-20 0
+	.screen-reader-text
+		//display: none
+		text-align: center
+	.nav-links
+		display: flex
+		width: 100%
+		padding: $gutter-20/2 0
+		border-top: 1px solid $base-border-color
+		border-bottom: 1px solid $base-border-color
+		justify-content: center
+		.nav-previous
+			margin-right: auto
+		.nav-next
+			margin-left: auto
+		a
+			display: flex
+			align-items: center
+		.nav-previous,
+		.nav-next,
+		.page-numbers
+			padding:  $gutter-20/2
+
+			display: flex
+			align-items: center
+			transition: color 100ms ease
+			span:not(.meta-nav)
+				padding: 5px
+				text-transform: uppercase
+
+// <!-- End Post navigation -->

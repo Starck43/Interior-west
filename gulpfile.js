@@ -1,6 +1,6 @@
 /*
  * Gulpfile.js
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Stanislav Shabalin
  */
 
@@ -11,6 +11,7 @@ var gulp 		 = require('gulp'),
     uglify       = require('gulp-uglify-es').default, // Подключаем плагин для сжатия JS
     jsRequires   = require('gulp-resolve-dependencies'), // Подключаем пакет для импортирования скриптов через //@requires *.js
     postcss      = require("gulp-postcss"),
+    combineCSS   = require('gulp-group-css-media-queries'),  // Объединяет все @media
     cssImport    = require('postcss-import'),   // Подключаем пакет для импортирования кода css, прописанного через @import '*.css' 
     cleanCSS     = require('gulp-clean-css'), // Подключаем пакет для минификации CSS с объединением одинаковых медиа запросов
     sourcemaps   = require('gulp-sourcemaps'), // Подключаем пакет sourcemaps для нахождения исходных стилей и скриптов в режиме dev-tool браузера
@@ -43,12 +44,14 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 		файлы с подчеркиванием не участвуют в компиляции, например, _part.sass. 
 		Его подключают через @import 'part' в файле *.sass 
 	*/
-	.pipe(concat('main.css')) // Объединяем все найденные файлы в один
+	.pipe(concat('main.min.css')) // Объединяем все найденные файлы в один
+	.pipe(combineCSS()) //Объединяем медиа запросы
 	.pipe(autoprefixer({
 		grid: true,
-		overrideBrowserslist: ['last 2 versions']
+		overrideBrowserslist: ['last 3 versions']
 	})) // Создаем префиксы
 	.pipe(sourcemaps.write()) //пропишем sourcemap
+    //.pipe(cleanCSS({level:2})) // Сжимаем CSS файл
 	.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 	.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
 });
@@ -56,13 +59,16 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 gulp.task('vendors-styles', function() { // таск обработает все файлы *.css, вложенные в css/, кроме сжатых и main.css
     return gulp.src(
         [
-            path.src+'css/*.css', 
-            '!'+path.src+'css/main.css',
-            '!'+path.src+'css/style.css',
-            '!'+path.src+'css/*.min.css',
+            path.src+'css/_vendors.css'
+
 		])
 	.pipe(postcss([ cssImport ])) // Импортируем стили, прописанные через команду @import в начале файла
 	.pipe(concat('vendors.min.css')) // Объединяем все найденные файлы в один
+	.pipe(combineCSS()) //Объединяем медиа запросы
+	.pipe(autoprefixer({
+		grid: true,
+		overrideBrowserslist: ['last 3 versions']
+	})) // Создаем префиксы
 	.pipe(cleanCSS({level:2})) // Сжимаем CSS файл
 	.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 	.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
@@ -78,10 +84,10 @@ gulp.task('css-compress', async function() {
 
 gulp.task('scripts', function() {
     return gulp.src([path.src+'js/custom*.js'])
-    //.pipe(sourcemaps.init()) // Инициализируем sourcemap
+    .pipe(sourcemaps.init()) // Инициализируем sourcemap
     .pipe(concat('custom.min.js')) // Объединяем в один файл
     //.pipe(uglify()) // Сжимаем JS файл
-    //.pipe(sourcemaps.write()) // Пропишем карты
+    .pipe(sourcemaps.write()) // Пропишем карты
     .pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта
 });
@@ -97,7 +103,7 @@ gulp.task('vendors-scripts', function() {
       pattern: /\* @requires [\s-]*(.*\.js)/g
     })).on('error', function(err) {console.log(err.message)})
     .pipe(concat('vendors.min.js')) // Объединяем в один файл
-    //.pipe(uglify()) // Сжимаем JS файл
+    .pipe(uglify()) // Сжимаем JS файл
 	.pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта
 });
@@ -127,11 +133,11 @@ gulp.task('img', function() {
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
     browserSync({ // Определяем параметры сервера.
         //server: { baseDir: path.src },  // Нельзя подключать одновремено с proxy
-		//host: site.http,
+		host: site.http,
 		proxy: site.http,
-        // tunnel: true, tunnel: 'projectname', // Demonstration page: http://projectname.localtunnel.me
+        //tunnel: true, tunnel: 'starck', // Demonstration page: http://projectname.localtunnel.me
         notify: false, // Отключаем уведомления
-        online: false, // Work offline without internet connection
+        //online: false, // Work offline without internet connection
 		open: false, // open browser on start 
     });
 });

@@ -1,0 +1,39 @@
+
+.projects
+	&-header
+		margin-bottom: $gutter-20
+		
+	&-categories
+		display: flex
+		width: 100%
+		justify-content: space-around
+		padding: $gutter-20
+		margin: 0
+		li
+			padding: $gutter-20/2
+			border: 1px solid  $theme-color
+			border-radius: 3px  
+		
+.project
+	.container
+		padding: 0
+
+nav
+	.post-navigation
+		padding: $gutter-20 0
+		.screen-reader-text
+			display: none
+		.nav-links
+			display: inline-block
+			width: 100%
+			.nav-previous
+				float: left
+			.nav-next
+				float: right
+			div
+				padding: 5px 0
+				&:hover
+					transition:  200ms all linear
+					border-bottom: 3px solid $link-color-hover
+				.meta-nav
+					display: inline-block

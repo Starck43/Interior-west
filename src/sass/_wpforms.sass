@@ -1,0 +1,71 @@
+
+//WP Forms plugin's styles
+.wpforms-container
+	max-width: 600px
+	@include push--auto
+	text-align: left
+	//padding: $gutter-20 / 2 
+
+	.wpforms-one-half, .wpforms-field
+		margin-bottom: 20px
+		+media-breakpoint-down(xs)	
+			margin-bottom: 15px
+
+	.wpforms-field
+		clear: both
+
+	.wpforms-one-half
+		width: 48%
+		float: right
+		&.wpforms-first
+			float: left
+		+media-breakpoint-down(xs)	
+			position: relative
+			width: 100%
+			&:first-child
+				margin-bottom: 30px
+			&.wpforms-first
+				label
+					display: none
+			label
+				position: absolute
+				left: 0
+				top: -$base-font-size
+	.wpforms-field-sublabel
+		display: none
+		+media-breakpoint-down(xs)
+			display: block
+
+	.wpforms-sublabel-hide, .wpforms-field-hp
+		display: none
+
+	label
+		font-weight: bold
+
+	textarea
+		height: 150px
+
+	.wpforms-required-label
+		color: red
+
+	.wpforms-confirmation-container
+		padding: 20px
+		border: 1px solid #bbb
+		border-radius: 3px
+		p
+			margin: 1em 0 
+
+	.wpforms-recaptcha-container
+		float: right
+		+media-breakpoint-down(xs)
+			display: flex
+			width: 100% 
+			.g-recaptcha
+				margin: auto
+
+
+	.wpforms-submit-container
+		+media-breakpoint-down(xs)
+			padding-top: $gutter-20
+			clear: both
+			text-align: center

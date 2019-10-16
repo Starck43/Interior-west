@@ -1,4 +1,5 @@
 <?php $args = array(
+	'screen_reader_text' => 'Навигация',
 	'prev_text' => '<span class="meta-nav"><i class="fa icon arrow-left"></i></span> %title',
 	'next_text' => '%title <span class="meta-nav"><i class="fa icon arrow-right"></i></span>'
 ); ?>

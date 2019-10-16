@@ -1,0 +1,21 @@
+
+.icon-search:before { content: '\e800'; } /* '' */
+.icon-down-open-big:before { content: '\e801'; } /* '' */
+.icon-left-open-big:before { content: '\e802'; } /* '' */
+.icon-right-open-big:before { content: '\e803'; } /* '' */
+.icon-down-thin:before { content: '\e804'; } /* '' */
+.icon-left-thin:before { content: '\e805'; } /* '' */
+.icon-right-thin:before { content: '\e806'; } /* '' */
+.icon-up-thin:before { content: '\e807'; } /* '' */
+.icon-search-1:before { content: '\e808'; } /* '' */
+.icon-down-1:before { content: '\e809'; } /* '' */
+.icon-down-open:before { content: '\f004'; } /* '' */
+.icon-right-open:before { content: '\f006'; } /* '' */
+.icon-left-open:before { content: '\f007'; } /* '' */
+.icon-angle-left:before { content: '\f104'; } /* '' */
+.icon-angle-right:before { content: '\f105'; } /* '' */
+.icon-angle-down:before { content: '\f107'; } /* '' */
+.icon-down:before { content: '\f175'; } /* '' */
+.icon-up:before { content: '\f176'; } /* '' */
+.icon-left:before { content: '\f177'; } /* '' */
+.icon-right:before { content: '\f178'; } /* '' */
