@@ -1,4 +1,4 @@
-<div id="projects-portfolio" class="portfolio">
+<div id="projects-portfolio" class="portfolio row">
 	<?php
 	$query = array();
 	if ( is_tax() ) {
@@ -29,7 +29,7 @@
 			$image_ratio = 'style="padding-top: ' . ($image[2]/$image[1]*100) . '%"';
 		}
 		?>
-		<a <?php post_class("portfolio-image"); ?> href="<?php echo get_permalink($post->ID) ?>">
+		<a <?php post_class("portfolio-image col-xs-12 col-sm-6 col-md-4"); ?> href="<?php echo get_permalink($post->ID) ?>">
 			<div class="portfolio-image-container" <?php echo $image_ratio ?>>
 				<img class="image lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $image[0]; ?>" data-srcset="<?php echo wp_get_attachment_image_srcset(get_post_thumbnail_id( $post->ID ), 'medium' ); ?>" alt="Project"/>
 				<?php if ( !empty($hide_title) || !empty($project_excerpt) ) { ?>

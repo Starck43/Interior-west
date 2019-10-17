@@ -20,7 +20,6 @@
 		$header_img_attr = sprintf(' style="background-image: url(%s)"', $custom_header->url);
 		$background_class = 'header-background';
 	}
-
 	?>
 	<header id="site-header" <?php starck_header_class(['site-header',$background_class]); echo $header_img_attr; ?>>
 
@@ -34,7 +33,7 @@
 				// navigation
 				starck_get_navigation();
 			}
-			?>		
+			?>
 			<section id="branding" <?php starck_branding_class('site-branding'); ?>>
 				<?php
 				$custom_logo_id = get_theme_mod( 'custom_logo' );
@@ -46,14 +45,24 @@
 	            </div>
 				<?php
 				}
+
+				// Get the title and tagline.
+				$title = get_bloginfo( 'title' );
+				$description = get_bloginfo( 'description' );
+				if ( !starck_get_option('hide_title') && '' != $title ) {
+					?>
+					<!-- header title -->
+					<div id="branding-title">
+						<h1 class="site-title">
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( $title ); ?>" rel="home"><?php echo esc_html( $title ); ?></a>
+						</h1>
+						<?php if ( !starck_get_option('hide_description') && '' != $description ) { ?>
+							<div class="site-description"><?php echo $description; ?></div>
+						<?php } ?>
+					</div>
+					<?php 
+				}
 				?>
-				<!-- header title -->
-				<div id="branding-title">
-					<h1 class="site-title">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" rel="home"><?php echo esc_html( get_bloginfo( 'name' ) ); ?></a>
-					</h1>
-					<div class="site-description"><?php bloginfo( 'description' ); ?></div>
-				</div>
 			</section>
 
 			<section id="header-content"  <?php printf('class="align-%1$s %2$s"',

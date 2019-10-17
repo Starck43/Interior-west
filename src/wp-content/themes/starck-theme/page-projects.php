@@ -22,7 +22,7 @@ $content = $post->post_content;
 
 		<?php starck_breadcrumbs(); ?>
 	
-		<header class="projects-header">
+		<header id="projects-header">
 			<h1 class="projects-title <?php echo $header_class ?>"><?php single_post_title(); ?></h1>
 			<?php if ($content) { ?>
 				<div class="projects-description"><p><?php echo $content; ?></p></div>
@@ -42,7 +42,7 @@ $content = $post->post_content;
 			);
 			$projects_cat = wp_list_categories($args);
 			if ($projects_cat) {
-				echo '<ul class="projects-categories">';
+				echo '<ul id="projects-categories">';
 				echo $projects_cat;
 				echo '</ul>';
 			}

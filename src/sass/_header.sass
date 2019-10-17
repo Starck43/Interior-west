@@ -3,6 +3,7 @@
 	position: relative
 	width: 100% 
 	height: $header-height
+	margin:   $gutter-20 0
 	background-color: $header-bg
 	z-index: 3
 	+media-breakpoint-down(xs)
@@ -31,15 +32,19 @@
 	#branding
 		display: flex
 		width: auto
-		margin: $gutter-20/2 0 auto
+		//margin: auto 0
 
 		#branding-logo
-			margin: auto 0
+			//margin: auto 0
 			//padding: 0 $gutter-20/2
-			max-width: $logo-width 
-			@include img-responsive
+			max-width: $logo-width
+			height: 100%
+			//@include img-responsive
 			+media-breakpoint-down(xs)
 				max-width: $logo-width-min
+			img
+				width: 100%
+				height: 100%  
 
 		#branding-title
 			margin: auto 0

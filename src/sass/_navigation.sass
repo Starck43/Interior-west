@@ -8,6 +8,9 @@
 	//margin-top: auto
 	transition: opacity 500ms ease-in
 	&:not(.burger)
+		#nav-burger
+			display: none
+			
 		li.menu-item-has-children
 			ul.sub-menu
 				position: absolute
@@ -118,7 +121,8 @@
 			ul.menu
 				margin-top: $nav-height 
 
-	&.burger
+	&.burger,
+	&.mobile
 		ul.menu
 			position: absolute
 			left: 0
@@ -194,7 +198,9 @@
 					//transform: translate(0, -80px)
 					@include animation-delays(4, 700ms, -125ms)
 
-				
+		#nav-burger
+			display: flex
+
 		#nav-search
 			font-size: $icon-font-size
 

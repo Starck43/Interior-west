@@ -1,14 +1,18 @@
 /*
  * Custom scripts library
  *
- * @version 1.0.5
+ * @version 1.0.6
  */
 
+function checkMobileNavgation(nav) {
+	var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	if (!nav.hasClass('burger'))
+		if ( width < 768 ) nav.addClass('mobile')
+		else nav.removeClass('mobile')
+}
 
 document.addEventListener('readystatechange', function(el) {
 	if ( document.readyState === 'interactive' ) {
-		var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-		if ( width < 768 ) $('#nav-burger').addClass('burger');
 		// Adding class after full DOM loading for applying CSS animation
 		//$('#main-header').addClass('visible');
 		$.when( $('#dom-preloader').find('i').removeClass('fa-spin').end().delay(500).fadeOut('slow') )
@@ -21,7 +25,9 @@ document.addEventListener('readystatechange', function(el) {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	var navigation = $('#header-nav').css('opacity', 1);
+	var navigation = $('#header-nav');
+	checkMobileNavgation(navigation);
+	navigation.css('opacity', 1);
 	var burger = $('#nav-burger');
 	var mainheader = $('#main-header');
 	var scrollup = $('#scroll-up');
@@ -40,14 +46,8 @@ document.addEventListener("DOMContentLoaded", function() {
 */
 
 	$( window ).on( 'resize', function( e ) {
-		if ( $(this).width() < 768 ) {
-			//navigation.addClass('burger');
-			burger.removeClass('hidden');
-		} else {
-			//navigation.removeClass('burger');
-			burger.addClass('hidden');
-		}
-
+		checkMobileNavgation(navigation);
+		if (burger.hasClass('active')) burger.click(); // if burger menu open then close it 
 	});
 
 	$(window).scroll(function() {
@@ -68,13 +68,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 
-// Click event on link starting from #
+/*
+// Click event on link starting from # for landing page
 	$('a[href^="#"]').on('click', function (e) {
 		e.preventDefault();
 		var target = $(this).attr('href');
-		if ( window.location.pathname == '/' && window.location.search == '' ) { //if home page
+		if ( target.length > 1 && window.location.pathname == '/' && window.location.search == '') { //if home page and no search query and no only #
 			//if ($(target).hasClass('animate')) $(target).removeClass('animate');
-			if (burger.hasClass('burger')) burger.click(); //close burger menu on link clicking
+			if (burger.is(':visible')) burger.click(); //close burger menu on link clicking
 
 			var top = $(target).offset().top;
 			$('html, body').animate({scrollTop: top}, 500+top/4); //800 - длительность скроллинга в мс			
@@ -84,8 +85,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 
-	burger.on('click', function (e) {
-		if (burger.hasClass('visible')) {
+*/	burger.on('click', function (e) {
+		if (burger.is(':visible')) {
 			burger.toggleClass('active');
 			$('#menu-top').toggleClass('active');
 			$(document.body).toggleClass('modal');
@@ -109,11 +110,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		var mc = document.body.querySelector('#main-container');
 		scrollup
 		.fadeOut('slow')
-		.delay(1000)
+		.delay(500)
+		.remove()
+		.delay(500)
 		.queue( function() {
 			mc.scrollIntoView({block: "start", behavior: "smooth"});
-		})
-		.remove();
+		});
 	});
 
 	back2top.on('click', function (e) {		

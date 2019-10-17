@@ -75,7 +75,7 @@ function starck_setup() {
 		'flex-height' => true,
 		'uploads' 	  => true,
 		'default-image' => '/img/logo.png', //get_stylesheet_directory_uri() . 
-		'header-text' => array( 'site-title', 'site-description' )
+		//'header-text' => array( 'site-title', 'site-description' )
 	) );
 
 	add_theme_support( 'title-tag' );
@@ -477,9 +477,10 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 			<?php
 			}
 
-			$burger_class = sprintf(' class="icon burger-icon%s"', $nav_burger ?  ' visible' : '' );
+
+			//$burger_class = sprintf(' class="icon burger-icon%s"', $nav_burger ?  ' visible' : '' );
 			?>
-			<div id="nav-burger"<?php echo $burger_class; ?>><div class="burger-inner"></div></div>
+			<div id="nav-burger" class="icon burger-icon"><div class="burger-inner"></div></div>
 		</nav>
 		<?php
 	}

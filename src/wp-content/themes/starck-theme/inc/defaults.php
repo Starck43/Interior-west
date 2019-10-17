@@ -17,6 +17,8 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 	function starck_get_defaults() {
 		return apply_filters( 'starck_option_defaults',
 			array(
+				'hide_title' => true,
+				'hide_description' => true,
 				'header_bound_setting' => 'full-width', //'bounded'
 				'top_bar_layout_setting' => false, //true
 				//'logo_width' => '',

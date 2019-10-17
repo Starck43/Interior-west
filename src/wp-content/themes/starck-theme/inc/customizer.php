@@ -73,6 +73,44 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			)
  *
  */
+
+		$wp_customize->add_setting(
+			'starck_settings[hide_title]',
+			array(
+				'default' => $defaults['hide_title'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[hide_title]',
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'Hide site title', 'starck' ),
+				'section' => 'title_tagline',
+				'priority' => 20,
+			)
+		);
+
+		$wp_customize->add_setting(
+			'starck_settings[hide_description]',
+			array(
+				'default' => $defaults['hide_description'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[hide_description]',
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'Hide site description', 'starck' ),
+				'section' => 'title_tagline',
+				'priority' => 25,
+			)
+		);
 // Adding a new custom panel in the Theme settings
 		if ( class_exists( 'WP_Customize_Panel' ) ) {
 			if ( ! $wp_customize->get_panel( 'starck_layout_panel' ) ) {
@@ -666,13 +704,11 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 
 	}
 }
-
+/*
 if ( ! function_exists( 'starck_customizer_live_preview' ) ) {
 	add_action( 'customize_preview_init', 'starck_customizer_live_preview', 100 );
-	/**
-	 * Add custom live preview scripts
-	 */
-/*	function starck_customizer_live_preview() {
+
+	function starck_customizer_live_preview() {
 
 		wp_enqueue_script( 'starck-themecustomizer', trailingslashit( get_template_directory_uri() ) . 'inc/js/customizer-live-preview.js', array( 'customize-preview' ), STARCK_VERSION, true );
 
@@ -683,5 +719,5 @@ if ( ! function_exists( 'starck_customizer_live_preview' ) ) {
 			'contentLeft' => 40,
 			'contentRight' => 40,
 		) );
-	}*/
-}
+	}
+}*/
