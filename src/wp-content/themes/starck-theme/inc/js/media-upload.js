@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	function toggleSliderAttr(isImg = false, value = 'hidden') {
-		if (isImg) { $('label.postbox-gallery-scroll, label.postbox-gallery-pagination').show(); }
-		else { $('label.postbox-gallery-scroll, label.postbox-gallery-pagination').hide(); }
+		$('label.postbox-gallery-scroll, label.postbox-gallery-pagination, label.postbox-gallery-header-slider').css('display', (isImg) ? 'block' : 'none');
 	}
 });

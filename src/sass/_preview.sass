@@ -1,0 +1,36 @@
+.preview-page
+	@include img-responsive
+	article
+		//padding-bottom: $gutter-30
+		.cell
+			margin-bottom: $gutter-30*2
+		.preview-description
+			height: fit-content
+			//margin-top: $gutter-20
+			//margin-bottom: $gutter-20
+			background-color: transparentize($main-bg, 0.3)
+			>*
+				padding: 0 $gutter-20
+			&:last-child
+				padding-bottom: $gutter-30/2
+		&:nth-child(odd)
+			+media-breakpoint-up(md)
+				.preview-description
+					margin-left: -10vw
+		&:nth-child(even)
+			+media-breakpoint-up(md)
+				flex-direction: row-reverse
+				.preview-description
+					margin-right: -10vw
+		+media-breakpoint-down(md)
+			//padding-bottom: $gutter-30/2
+			.preview-description
+				margin-left: 0
+				margin-right: 0
+				margin-bottom: $gutter-30
+			.preview-img
+				margin-bottom: $gutter-20
+				img
+					padding: 0 $gutter-20
+		+media-breakpoint-down(xs)
+			font-size: 0.8em

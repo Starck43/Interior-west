@@ -2,6 +2,7 @@
 #projects
 	&-header
 		margin-bottom: $gutter-20
+		padding: 0 $gutter-20
 		
 	&-categories
 		display: flex
@@ -13,29 +14,102 @@
 			padding: $gutter-20/2
 			border: 1px solid  $theme-color
 			border-radius: 3px  
-	&-portfolio
-		margin: 0 auto 
-		
-.project
-	.container
-		padding: 0
 
-nav
-	.post-navigation
-		padding: $gutter-20 0
-		.screen-reader-text
-			display: none
-		.nav-links
-			display: inline-block
-			width: 100%
-			.nav-previous
-				float: left
-			.nav-next
-				float: right
-			div
-				padding: 5px 0
-				&:hover
-					transition:  200ms all linear
-					border-bottom: 3px solid $link-color-hover
-				.meta-nav
-					display: inline-block
+	&-portfolio
+		.portfolio-container
+
+			&.visible
+				.portfolio-image-meta
+					opacity: 1
+
+			.portfolio-image-meta
+				position: absolute
+				display: flex
+				top: 0
+				right: 0
+				bottom: 0
+				left: 0
+				margin: 20%
+				align-items: center
+				justify-content: center
+				flex-direction: column
+				color: #FFF 
+				background: transparentize($theme-color, 0.5)
+				opacity: 0
+				transition: opacity 500ms 200ms ease
+				backdrop-filter: blur(10px)
+				
+				.meta-title
+					text-transform: uppercase
+				p
+					margin: 0.5em
+
+.gallery,
+.portfolio
+	position: relative
+	height: auto
+
+	&-container
+		position: relative
+		padding-top: 100%
+		background-color: darken($main-bg, 5%)
+		img
+			position: absolute
+			top: 0
+			left: 0
+			transition: opacity 500ms ease-in
+			opacity: 0
+			@extend %img
+			
+			&.loaded
+				opacity: 1
+.gallery
+	column-count: 2
+	+media-breakpoint-down(xs)
+		column-count: 1
+	a
+		display: inline-block
+		width: 100%
+		margin-top: $gutter-20
+		float: left
+		page-break-inside: avoid
+		break-inside: avoid
+
+	&-image-details
+		//position: absolute
+		left: 0
+		bottom: 0
+		width: 100%
+		padding: $gutter-20/2 0
+		color: $base-text-color 
+		background-color: transparentize(#FFF, 0.1) 
+		div
+			padding: 0 $gutter-20/4
+
+	&-caption
+		display: none
+
+	
+#gallery-lightbox-image
+	position: fixed
+	-ms-touch-action: none
+	touch-action: none
+
+	
+.grid
+	display: grid
+	grid-gap: $gutter-20
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+	//grid-template-columns: 1fr 1fr
+	//grid-template-areas: "left right"
+	margin: 0
+	
+	> div:first-child
+		grid-area: left
+	> div:last-child
+		grid-area: right
+
+	+media-breakpoint-down(xs)
+		//display: block
+		grid-gap: $gutter-20/2
+

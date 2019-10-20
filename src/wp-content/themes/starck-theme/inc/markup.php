@@ -26,7 +26,7 @@ function starck_merge_classes( $classes = [], $merged_class = '' ) {
 	// Apply esc_attr() function to array $classes
 	$classes = array_map( 'esc_attr', $classes );
 
-	if ($classes) { echo 'class="' . join( ' ', $classes ) . '"'; };
+	if ($classes) { echo 'class="' . trim(join( ' ', $classes ),' ') . '"'; };
 
 }
 
@@ -161,17 +161,15 @@ if ( ! function_exists( 'starck_content_classes' ) ) {
 	 * Adds custom classes to the content container.
 	 */
 	function starck_content_classes( $merged_class ) {
-		$classes[] = 'main-content';
+		$classes[] = '';
 
 		if (is_active_sidebar( 'sidebar' )) {
 
 			$sidebar_layout = starck_get_layout();
 			if ('left-sidebar' == $sidebar_layout) {
 				$classes[] = 'float-right';
-			} else 
-			if ('right-sidebar' == $sidebar_layout) {
+			} elseif ('right-sidebar' == $sidebar_layout)
 				$classes[] = 'float-left';
-			}
 		}
 
 		return starck_merge_classes($classes, $merged_class);

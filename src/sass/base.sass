@@ -21,6 +21,7 @@
 @import controls
 	
 @import search
+@import preview
 @import portfolio
 @import jcarousel/jcarousel
 @import imagelightbox/imagelightbox
@@ -106,9 +107,8 @@ img:not([src]):not([srcset])
 		
 
 .container
+	width: 100% 
 	@include push--auto
-	padding-left: $gutter-30
-	padding-right: $gutter-30
 		
 .bounded
 	max-width: $container_max_w
@@ -166,106 +166,7 @@ img:not([src]):not([srcset])
 	background-repeat: no-repeat
 	background-position: 50% 50%
 	//background-attachment: fixed
-	
-.grid
-	display: grid
-	grid-gap: $gutter-20
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr))
-	//grid-template-columns: 1fr 1fr
-	//grid-template-areas: "left right"
-	margin: 0
-	
-	> div:first-child
-		grid-area: left
-	> div:last-child
-		grid-area: right
 
-	+media-breakpoint-down(xs)
-		//display: block
-		grid-gap: $gutter-20/2
-
-.portfolio
-	display: block
-	width: 100%
-	margin-bottom: $gutter-20
-	column-count: 2
-
-	&-image
-		display: inline-block
-		width: 100%
-		margin-top: $gutter-20
-		float: left
-		page-break-inside: avoid
-		break-inside: avoid
-		
-		&-meta
-			position: absolute
-			display: flex
-			top: 0
-			right: 0
-			bottom: 0
-			left: 0
-			margin: 20%
-			align-items: center
-			justify-content: center
-			flex-direction: column
-			color: #FFF 
-			background: transparentize($theme-color, 0.5)
-			opacity: 0
-			transition: opacity 500ms 200ms ease
-			backdrop-filter: blur(10px)
-			
-			.image-title
-				text-transform: uppercase
-			p
-				margin: 0.5em
-
-		&-container		
-			&.visible
-				.portfolio-image-meta
-					opacity: 1
-
-.gallery,
-.portfolio
-	&-image
-		position: relative
-		height: auto
-		
-		&-container
-			position: relative
-			padding-top: 100%
-			background-color: darken($main-bg, 5%)
-			img
-				position: absolute
-				top: 0
-				left: 0
-				transition: opacity 500ms ease-in
-				opacity: 0
-				@extend %img
-				
-				&.loaded
-					opacity: 1
-
-		&-details
-			//position: absolute
-			left: 0
-			bottom: 0
-			width: 100%
-			padding: $gutter-20/2 0
-			color: $base-text-color 
-			background-color: transparentize(#FFF, 0.1) 
-			div
-				padding: 0 $gutter-20/4
- 
-	&-caption
-		display: none
-
-	
-#gallery-lightbox-image
-	position: fixed
-	-ms-touch-action: none
-	touch-action: none
-		
 
 @import header
 @import main

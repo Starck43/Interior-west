@@ -36,7 +36,8 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				'content_header_setting' => 'front-page', //'all-pages', 'disabled'
 				'content_header_background' => '',
 				'breadcrumbs_setting' => true, //false
-				'scroll_up' => true, //false
+				'parallax' => false, //true
+				'scroll_up' => false, //true
 				'layout_setting' => 'right-sidebar',
 				'blog_layout_setting' => 'right-sidebar',
 				'single_layout_setting' => 'right-sidebar',

@@ -17,6 +17,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 		private $gallery_pagination = 'gallery-pagination';
 		private $gallery_caption = 'gallery-caption';
 		private $gallery_caption_link = 'gallery-caption-link';
+		private $gallery_header_slider = 'gallery-in-slider';
 		private $screen = array( 'post', 'page', 'projects' );
 
 		/**
@@ -64,15 +65,18 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			wp_nonce_field( $this->gallery_pagination . '_dononce', 	$this->gallery_pagination . '_noncename' );
 			wp_nonce_field( $this->gallery_caption . '_dononce', 		$this->gallery_caption . '_noncename' );
 			wp_nonce_field( $this->gallery_caption_link . '_dononce', 	$this->gallery_caption_link . '_noncename' );
+			wp_nonce_field( $this->gallery_header_slider . '_dononce', 	$this->gallery_header_slider . '_noncename' );
 
 			$gallery 				= get_post_meta( $post->ID, $this->gallery_image );
 			$gallery_scroll 		= get_post_meta( $post->ID, $this->gallery_scroll, true );
 			$gallery_pagination 	= get_post_meta( $post->ID, $this->gallery_pagination, true );
 			$gallery_caption 		= get_post_meta( $post->ID, $this->gallery_caption, true );
 			$gallery_caption_link 	= get_post_meta( $post->ID, $this->gallery_caption_link, true );
+			$gallery_header_slider 	= get_post_meta( $post->ID, $this->gallery_header_slider, true );
 
 			if ( (bool)$gallery_scroll ) 	{ $scroll_checked = 'checked="checked"'; }
 			if ( (bool)$gallery_pagination ){ $pagination_checked = 'checked="checked"'; }
+			if ( (bool)$gallery_header_slider )	{ $header_slider_checked = 'checked="checked"'; }
 
 			if ( !empty( $gallery_caption ) ) {
 				$gallery_caption = is_array( $gallery_caption ) ? stripslashes_deep( $gallery_caption ) : stripslashes( wp_kses_decode_entities( $gallery_caption ) );
@@ -91,6 +95,11 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			}
 			echo '</div>';
 			echo '<div><input type="button" id="upload-button" class="button" value="Добавить фото" /></div>';
+			echo sprintf('<label class="postbox-gallery-header-slider" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Отобразить галерею в слайдере</label>',
+							(($gallery) ? 'block' : 'none'),
+							$this->gallery_header_slider,
+							$header_slider_checked
+						);
 			echo sprintf('<label class="postbox-gallery-scroll" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Режим слайдшоу</label>',
 							(($gallery) ? 'block' : 'none'),
 							$this->gallery_scroll,
@@ -135,6 +144,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 						 && $_POST[ $this->gallery_pagination . '_noncename' ]
 						 && $_POST[ $this->gallery_caption . '_noncename' ]
 						 && $_POST[ $this->gallery_caption_link . '_noncename' ]
+						 && $_POST[ $this->gallery_header_slider . '_noncename' ]
 					) 
 				|| 	!(		wp_verify_nonce( $_POST[ $this->hide_title . '_noncename' ], 			$this->hide_title . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_image . '_noncename' ], 		$this->gallery_image . '_dononce' )
@@ -142,6 +152,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 						 && wp_verify_nonce( $_POST[ $this->gallery_pagination . '_noncename' ],	$this->gallery_pagination . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_caption . '_noncename' ],		$this->gallery_caption . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_caption_link . '_noncename' ],	$this->gallery_caption_link . '_dononce' )
+						 && wp_verify_nonce( $_POST[ $this->gallery_header_slider . '_noncename' ],		$this->gallery_header_slider . '_dononce' )
 					) 
 				) { return $post_ID; }
 
@@ -221,6 +232,18 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 				}
 			}
 
+			//Update Gallery caption link meta
+			$old = get_post_meta( $post_ID, $this->gallery_header_slider, true );
+			$new = $_POST[ $this->gallery_header_slider ];
+
+			if ( $old != $new ) {
+				if ( $new ) { 
+					update_post_meta( $post_ID, $this->gallery_header_slider, esc_url($new) ); 
+				} else {
+					delete_post_meta( $post_ID, $this->gallery_header_slider );
+				}
+			}
+
 			return $post_ID;
 
 		} // save_meta
@@ -236,6 +259,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			delete_post_meta( $post_ID, $this->gallery_pagination );
 			delete_post_meta( $post_ID, $this->gallery_caption );
 			delete_post_meta( $post_ID, $this->gallery_caption_link );
+			delete_post_meta( $post_ID, $this->gallery_header_slider );
 			
 			return $post_ID;
 

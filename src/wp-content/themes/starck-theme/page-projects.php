@@ -18,7 +18,7 @@ $content = $post->post_content;
 
 ?>
 
-	<section id="content" <?php starck_content_class('projects'); ?>>
+	<section id="projects">
 
 		<?php starck_breadcrumbs(); ?>
 	

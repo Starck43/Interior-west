@@ -90,7 +90,7 @@
 	<!-- main -->
 	<main id="main" <?php starck_main_class('main'); ?> role="main">
 
-		<?php starck_main_header(); ?>
-		
 		<!-- main container -->
 		<div id="main-container" class="container">
+
+		<?php starck_main_header(); ?>

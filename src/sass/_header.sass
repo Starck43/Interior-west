@@ -1,12 +1,14 @@
 // Header styles
 #site-header
 	position: relative
+	display: flex
 	width: 100% 
 	height: $header-height
 	margin:   $gutter-20 0
+	align-items: center 
 	background-color: $header-bg
 	z-index: 3
-	+media-breakpoint-down(xs)
+	+media-breakpoint-down(sm)
 		height: $header-height-min
 	#top-bar
 		background-color: $top-bar-bg
@@ -28,6 +30,7 @@
 		display: flex
 		justify-content: space-between
 		align-items: center
+		margin: 0 $gutter-20
 									
 	#branding
 		display: flex

@@ -80,7 +80,7 @@ function starck_setup() {
 
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'automatic-feed-links' );
-	add_theme_support( 'post-thumbnails', array('projects') );
+	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'gallery', 'video', 'quote', 'link', 'status' ) );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 	add_theme_support( 'align-wide' );
@@ -486,6 +486,20 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 	}
 }
 
+/**
+ * Construct Main Header in Main section 
+ */
+function starck_main_header() {	
+
+	$header_setting = starck_get_option( 'content_header_setting' );
+
+	if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) || 
+		 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_page() || is_single() || is_archive() ) ) ) {
+
+		get_template_part( 'main','header' ); 
+
+	}
+}
 
 function starck_breadcrumbs() {	
 
@@ -504,18 +518,5 @@ function starck_back_to_top() {
 		?>
 		<a id="back-to-top" title="Вернуться наверх" rel="nofollow" href="/"><i class="icon fa arrow-up"></i></a>
 		<?php
-	}
-}
-
-
-function starck_main_header() {	
-
-	$header_setting = starck_get_option( 'content_header_setting' );
-
-	if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) || 
-		 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_page() || is_archive() ) ) ) {
-
-		get_template_part( 'main','header' ); 
-
 	}
 }

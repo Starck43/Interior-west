@@ -508,6 +508,26 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			)
 		);
 
+		$wp_customize->add_setting(
+			'starck_settings[parallax]',
+			array(
+				'default' => $defaults['parallax'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[parallax]',
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'Parallax effect for images', 'starck' ),
+				'section' => 'starck_layout_content',
+				'settings' => 'starck_settings[parallax]',
+				'priority' => 60,
+			)
+		);
+
 
 // Sidebar
 		$wp_customize->add_section(

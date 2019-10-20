@@ -55,23 +55,20 @@
 				//@include animation(header-link, 2s 2.5s ease-in-out both, In, -50%, 0, -50%, -230px)
 
 	#main-container
-		display: flex
+		//display: flex
 		//height: 100%
 		//min-height: 100vh
 		@include push--auto
-		padding: 
-			top: $gutter-20/2
-			bottom: $gutter-20/2
 		background-color: $main-bg
 		
 		.breadcrumbs
-			margin-bottom: $gutter-20 * 2
+			margin: $gutter-20 * 2 0
 			font-size: .8em   
 			
 		#content
 			float: left
 			width: 100%
-			//padding: 0 $gutter-20
+			padding: $gutter-30 0
 			background-color: $content-bg
 			box-sizing: border-box
 			word-break: break-word
