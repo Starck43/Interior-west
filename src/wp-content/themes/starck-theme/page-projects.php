@@ -5,7 +5,7 @@
  *
  * @package Starck-theme 
 
-   Template Name: Projects Portfolio
+   Template Name: Projects Template
    Template Post Type: page
  */
 
@@ -41,10 +41,12 @@ $content = $post->post_content;
 				'show_option_all' => 'Все проекты',
 			);
 			$projects_cat = wp_list_categories($args);
-			if ($projects_cat) {
-				echo '<ul id="projects-categories">';
-				echo $projects_cat;
-				echo '</ul>';
+			if ($projects_cat) { 
+			?>
+				<ul id="projects-categories">
+				<?php echo $projects_cat; ?>
+				</ul>
+			<?php
 			}
 		?>
 

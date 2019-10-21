@@ -95,18 +95,16 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			}
 			echo '</div>';
 			echo '<div><input type="button" id="upload-button" class="button" value="Добавить фото" /></div>';
-			echo sprintf('<label class="postbox-gallery-header-slider" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Отобразить галерею в слайдере</label>',
-							(($gallery) ? 'block' : 'none'),
+			echo sprintf('<div class="postbox-gallery-options" style="display: %1$s">', (($gallery) ? 'block' : 'none'));
+			echo sprintf('<label class="postbox-gallery-header-slider" ><input type="checkbox" name="%1$s" %2$s/>Отобразить галерею в слайдере</label>',
 							$this->gallery_header_slider,
 							$header_slider_checked
 						);
-			echo sprintf('<label class="postbox-gallery-scroll" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Режим слайдшоу</label>',
-							(($gallery) ? 'block' : 'none'),
+			echo sprintf('<label class="postbox-gallery-scroll"><input type="checkbox" name="%1$s" %2$s/>Режим слайдшоу</label>',
 							$this->gallery_scroll,
 							$scroll_checked
 						);
-			echo sprintf('<label class="postbox-gallery-pagination" style="display: %1$s;"><input type="checkbox" name="%2$s" %3$s/>Индикатор слайдов</label>',
-							(($gallery) ? 'block' : 'none'),
+			echo sprintf('<label class="postbox-gallery-pagination"><input type="checkbox" name="%1$s" %2$s/>Индикатор слайдов</label>',
 							$this->gallery_pagination,
 							$pagination_checked
 						);
@@ -120,6 +118,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 							$this->gallery_caption_link,
 							$gallery_caption_link
 						);
+			echo '</div>'; //.postbox-gallery-options
 /*
 			//Creating a WYSIWYG Editor
 			$gallery_caption = wpautop( $gallery_caption, true);

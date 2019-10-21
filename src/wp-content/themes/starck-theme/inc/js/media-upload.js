@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+	toggleSliderAttr();
+
 	$('#upload-button').on('click', function (e) {
 		e.preventDefault();
 		var button = $(this);
@@ -21,21 +23,18 @@ document.addEventListener('DOMContentLoaded', function() {
 				$('.postbox-gallery-block').append(html);
 			}
 
-
-			toggleSliderAttr(Boolean(attachment.length),'checkbox');
-
+			toggleSliderAttr();	
 
 		}).open();
-
 	});
 
-	$('.gallery-del-image').on('click', function (e) {
+	$('.postbox-gallery-block').on('click', 'a', function (e) {
 		e.preventDefault();
-		$(this).parents('.postbox-gallery-image').remove();
-		toggleSliderAttr(Boolean($('.postbox-gallery-image').length));	
+		$(this).parent().remove();
+		toggleSliderAttr();	
 	});
 
-	function toggleSliderAttr(isImg = false, value = 'hidden') {
-		$('label.postbox-gallery-scroll, label.postbox-gallery-pagination, label.postbox-gallery-header-slider').css('display', (isImg) ? 'block' : 'none');
+	function toggleSliderAttr() {
+		$('.postbox-gallery-options').css('display',  $('.postbox-gallery-image').length > 0 ? 'block' : 'none');
 	}
 });

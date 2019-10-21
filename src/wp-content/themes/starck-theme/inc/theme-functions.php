@@ -6,13 +6,15 @@ function add_custom_admin_styles() {
 		#wpfooter {position: relative;}
 		.wp-block {max-width: 1100px;}
 		.column-post_thumb {width: 80px;}
-		#gallery-image .button {margin: 5px 0 20px;}
+		#gallery-image .button {margin: 5px 0;}
 		.postbox-gallery-block {cursor: pointer;}
 		.postbox-gallery-image {
 			position: relative;
 			display: inline-block;
+			width: 100px;
+			height: 100px;
 			margin: 0 1% 1% 0;
-			max-width: 9%;
+			background: aliceblue;
 		}
 		.postbox-gallery-image img {width: 100%; height: auto;}
 		.postbox-gallery-image .gallery-del-image {
@@ -26,7 +28,7 @@ function add_custom_admin_styles() {
 			text-align: center;
 			font-size: 12px;
 		}
-		.postbox-gallery-caption, .postbox-gallery-caption-link {padding-top: 20px;}
+		.postbox-gallery-options label {display: block; padding: 20px 0 5px;}
 	</style>';
 }
 

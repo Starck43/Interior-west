@@ -60,7 +60,7 @@ function register_projects_post_type_and_taxonomy() {
 		'show_ui' => true,
 		'public' => true,
 		'menu_position' => 5,
-		'supports' => array('title', 'thumbnail', 'excerpt', 'custom-fields'),
+		'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
 		'rewrite' => array(
 			'slug' => 'projects/%project_cat%',
 			'with_front' => false

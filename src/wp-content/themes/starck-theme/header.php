@@ -86,9 +86,9 @@
 		starck_get_navigation();
 	}
 	?>
-
+	<?php global $post; ?>
 	<!-- main -->
-	<main id="main" <?php starck_main_class('main'); ?> role="main">
+	<main id="main" <?php starck_main_class(['main', get_post_type( $post->ID )]); ?> role="main">
 
 		<!-- main container -->
 		<div id="main-container" class="container">

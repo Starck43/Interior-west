@@ -13,7 +13,6 @@
 		//min-height: 200px 
 		//padding: $gutter-20 0
 		//width: 100% 
-		height: calc-height($header-height, $nav-height, $top-bar-height)
 		@include push--auto
 		background-color: $header-bg
 		overflow: hidden
@@ -53,11 +52,19 @@
 			#main-header-link
 				opacity: 1
 				//@include animation(header-link, 2s 2.5s ease-in-out both, In, -50%, 0, -50%, -230px)
+	&.page
+		#main-header
+			height: calc-height($header-height, $nav-height, $top-bar-height)
+		&.nav-inline-logo
+			#main-header
+				height: calc-height($header-height, $top-bar-height)	
 
 	#main-container
 		//display: flex
 		//height: 100%
 		//min-height: 100vh
+		max-width: $container_max_w
+		padding: $gutter-20*2 0
 		@include push--auto
 		background-color: $main-bg
 		
@@ -72,6 +79,7 @@
 			background-color: $content-bg
 			box-sizing: border-box
 			word-break: break-word
+			@include img-responsive
 			
 			p
 				text-align: justify
@@ -118,9 +126,6 @@
 			border: 1px solid $border-color
 			box-sizing: border-box
 
-	&.nav-inline-logo
-		#main-header
-			height: calc-height($header-height, $top-bar-height)
 	
 	&.left-sidebar
 		#main-container
