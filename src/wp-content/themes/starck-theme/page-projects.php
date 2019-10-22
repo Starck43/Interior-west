@@ -30,27 +30,44 @@ $content = $post->post_content;
 		</header>
 
 		<?php
-			// Выводим категории для projects постов
-			$args = array(
-				'taxonomy' => 'project_cat',
-				'title_li'     => '',
-				'hierarchical' => 0,
-				'orderby' => 'name',
-				'show_count' => true,
-				'echo' => 0,
-				'show_option_all' => 'Все проекты',
-			);
-			$projects_cat = wp_list_categories($args);
-			if ($projects_cat) { 
-			?>
-				<ul id="projects-categories">
-				<?php echo $projects_cat; ?>
+			// Выводим все категории для таксономии project_cat
+
+			if ( $terms = get_terms( array( 
+					'taxonomy' => 'project_cat',
+					'orderby' => 'name',
+					'hide_empty' => true,
+				) ) ) {
+
+				?> 
+            	<ul id="projects-categories">
+					<li><a href="#">Все</a></li>
+
+					<?php
+					foreach ($terms as $term): ?>
+						<li><a href="#" data-category-id="<?php echo $term->term_id?>"><?php echo $term->name;?></a></li>
+					<?php endforeach; ?>
+
 				</ul>
-			<?php
+				<?php
 			}
+			//var_dump($terms);
 		?>
 
-		<?php get_template_part( 'portfolio' ); ?>
+		<div id="projects-portfolio" class="row">
+
+			<?php get_template_part( 'entry','projects' ); ?>
+
+		</div>
+
+		<?php
+		if( $max_pages > 1 ) { // если страниц больше одной, то выводим кнопку с data-атрибутом следующей страницы
+		 ?>
+			<a id="projects-load-more" href="#" data-page="2">Показать еще</a> 
+		<?php 
+		}
+		?>
+
+		<?php //get_template_part( 'nav', 'below' ); ?>
 
 	</section>
 

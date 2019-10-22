@@ -158,3 +158,29 @@ function wspe16902_prepend_page_rewrite_rules($rewrite_rules)
 {
 	return $GLOBALS['wpse16902_page_rewrite_rules'] + $rewrite_rules;
 }
+
+add_action('wp_ajax_projects_filter', 'projects_filter_function'); // wp_ajax_{ACTION HERE} 
+add_action('wp_ajax_nopriv_projects_filter', 'projects_filter_function');
+ 
+function projects_filter_function() {
+
+	$paged = $_POST['paged'] ? $_POST['paged'] : 1; // Если в paged пусто, то будем считать, что нужна первая страница
+	// for taxonomies / categories
+	$args = array( // составляем запрос
+		'post_type' => 'projects',
+		'paged' => $paged,
+	);
+	if( isset( $_POST['term'] ) )
+		$args['tax_query'] = array(
+			array(
+				'taxonomy' => 'project_cat',
+				'field' => 'id',
+				'terms' => $_POST['term']
+			)
+		);
+ 
+ 
+	get_template_part( 'entry','projects' );
+ 
+	die();
+}
