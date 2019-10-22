@@ -50,8 +50,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$position += 1;
 		echo $home_link;
 	}
+	if ( is_tax() ) {
+		$taxonomy = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+		$terms = wp_get_post_terms( $post->ID, $taxonomy->taxonomy, array( "fields" => "ids" ) );
+		$position += 1;
+		$post_type = get_post_type_object( get_post_type() );
+		if ( $position > 1 ) echo $sep;
 
-	if ( is_category() ) {
+		//$terms = get_the_terms($post, 'project_cat');
+	//$parent = $terms[0]->parent;
+	//var_dump(get_term_link( 'projects' ,'project_cat'));
+		//var_dump( $post_type->name);
+		echo sprintf( $link, get_post_type_archive_link( $post_type->name ), $post_type->labels->name, $position );
+		if ( $show_current ) echo $sep . $before . $taxonomy->name . $after;
+		elseif ( $show_last_sep ) echo $sep;
+	}
+	elseif ( is_category() ) {
 		$parents = get_ancestors( get_query_var('cat'), 'category' );
 		foreach ( array_reverse( $parents ) as $cat ) {
 			$position += 1;
