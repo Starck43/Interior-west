@@ -104,7 +104,17 @@ body
 // Avoid empty images to appear as broken
 img:not([src]):not([srcset])
 	visibility: hidden
-		
+	
+img[data-sizes="auto"]
+	display: block
+	width: 100%		
+img
+	&.lazyload,
+	&.lazyloading
+		opacity: 0
+	&.lazyloaded
+		opacity: 1
+		transition: opacity 500ms ease-in
 
 .container
 	width: 100% 

@@ -29,7 +29,7 @@ global $post;
 					$cell_classes = 'cell col-md-6';
 					?>
 					<div class="<?php echo $cell_classes; ?>">
-						<?php the_post_thumbnail('portfolio'); ?>
+						<?php the_post_thumbnail('portfolio','class=lazyload'); ?>
 					</div>
 				<?php 
 				}
@@ -55,13 +55,13 @@ global $post;
 							$image = wp_get_attachment_metadata( $post_id );
 							$thumb = $image['sizes']['medium']['file'];
 							$image_ratio = $image['height']/$image['width']*100;
-							$full_image = wp_get_attachment_url($post_id, 'full');
+							$full_image_url = wp_get_attachment_url($post_id, 'full');
 							$title =  get_the_title( $post_id );
 							$caption = wp_get_attachment_caption( $post_id );
 							?>
-							<a class="gallery-image" href="<?php echo $full_image ?>">
+							<a class="gallery-image" href="<?php echo $full_image_url ?>">
 								<div class="gallery-container" style="padding-top: <?php echo $image_ratio.'%' ?>">
-									<img class="image lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-src="<?php echo $thumb; ?>" data-srcset="<?php echo wp_get_attachment_image_srcset( $post_id, 'medium' ); ?>" alt="Gallery"/>
+									<img class="image lazyload" src="<?php echo $thumb; ?>" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="<?php echo wp_get_attachment_image_srcset( $post_id, 'medium' ); ?>" data-sizes="auto" data-expand="-50"/>
 								</div>
 								<div class="gallery-image-details">
 									<div><h3><?php echo $title; ?></h3></div>

@@ -3,7 +3,7 @@
  *
  * @version 1.0.6
  */
-
+	
 function checkMobileNavgation(nav) {
 	var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	if (!nav.hasClass('burger'))
@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var scrollup = $('#scroll-up');
 	var search = $('#site-search-modal');
 	var back2top = $('#back-to-top');
+
 /*
 // inView.js
 	inView('.someSelector')

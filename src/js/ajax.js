@@ -3,7 +3,7 @@ jQuery(function($){
 		e.preventDefault();
 		var elem = $(this);
 		$.ajax({
-			url: '/wp-admin/admin-ajax.php',
+			url:  window.wp_data.ajax_url,
 			type: 'POST', // POST
 			data : {
 				action : 'projects_filter', //название нашего обработчика в inc/projects_layout.php
@@ -13,6 +13,7 @@ jQuery(function($){
 				elem.css('opacity',0.5); // changing the button label
 			},
 			success:function(data){
+				//alert(data);
 				elem.css('opacity',1); // changing the button label back
 				$('#projects-portfolio').html(data); // insert data
 			}
@@ -23,8 +24,8 @@ jQuery(function($){
 		e.preventDefault();
 		var elem = $(this);
 		$.ajax({
+			url:  window.wp_data.ajax_url,
 			type: "POST",
-			url: '/wp-admin/admin-ajax.php',
 			data : {
 				action : 'projects_filter',
 				term : elem.data('category-id'), //id таксономии

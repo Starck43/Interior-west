@@ -9,7 +9,7 @@
  * @requires modernizr\css-transitions.min.js
  *
  * lazy.js - lazy loading inline images in HTML (see more: https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video/)
- * @requires lazy\lazy.js
+ * @requires lazy\lazysizes.min.js
  *
  * Lightbox for Gallery viewing
  * @requires ..\plugins\imageGallery\gallerylightbox.js

@@ -51,18 +51,19 @@
 
 	&-container
 		position: relative
-		padding-top: 100%
+		height: 0
+		width: 100% 
+		//padding-top: 100%
 		background-color: darken($main-bg, 5%)
 		img
 			position: absolute
 			top: 0
 			left: 0
-			transition: opacity 500ms ease-in
-			opacity: 0
-			@extend %img
-			
-			&.loaded
-				opacity: 1
+			width: 100%
+			height: 100%  
+			//transition: opacity 500ms ease-in
+			//opacity: 0
+
 .gallery
 	column-count: 2
 	+media-breakpoint-down(xs)
@@ -114,6 +115,7 @@
 		grid-gap: $gutter-20/2
 
 .cell
+	@include img-responsive
 	img
 		display: block
 		margin: auto

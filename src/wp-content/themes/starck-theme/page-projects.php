@@ -55,7 +55,18 @@ $content = $post->post_content;
 
 		<div id="projects-portfolio" class="row">
 
-			<?php get_template_part( 'entry','projects' ); ?>
+			<?php 
+			$args = array( 
+				'post_type' => 'projects',
+				'posts_per_page' => 10,
+				'order' => 'ASC',
+				'orderby' => 'name',
+			);
+			 ?>
+			<?php
+			render_partial('entry-projects.php', ['args' => $args]);
+			//get_template_part( 'entry','projects' ); 
+			?>
 
 		</div>
 
