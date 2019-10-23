@@ -29,7 +29,7 @@ function register_projects_post_type_and_taxonomy() {
 		'rewrite' => array(
 			'hierarchical' => true,
 			'slug' => 'projects', // This controls the base slug that will display before each term
-			//'with_front' => false // Don't display the category prefix before 
+			'with_front' => true // Display the category prefix before 
 		),
 		'show_admin_column' => true
 	);

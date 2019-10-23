@@ -5,6 +5,8 @@
 /resources/
 /backup/
 /src/wordpress/
-/src/wp-content/plugins/
-/src/wp-content/uploads/
-!/src/wordpress/search-replace-db
+/src/wp-content/
+/src/wp-content/themes/starck-theme/css
+/src/wp-content/themes/starck-theme/js
+!src/wp-content/themes/starck-theme/
+!src/wordpress/search-replace-db

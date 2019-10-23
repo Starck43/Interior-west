@@ -51,18 +51,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 		echo $home_link;
 	}
 	if ( is_tax() ) {
-		$taxonomy = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-		$terms = wp_get_post_terms( $post->ID, $taxonomy->taxonomy, array( "fields" => "ids" ) );
+		//$taxonomy = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+		//$terms = wp_get_post_terms( $post->ID, $taxonomy->taxonomy, array( "fields" => "ids" ) );
+		$terms = get_the_terms($post, 'project_cat')[0];
 		$position += 1;
 		$post_type = get_post_type_object( get_post_type() );
 		if ( $position > 1 ) echo $sep;
+			//var_dump( $post_type->name);
+			echo sprintf( $link, home_url('/'.$post_type->name), $post_type->labels->name, $position ). $sep;
+			echo get_term_parents_list( $terms->term_id, 'project_cat', array(
+				'separator' => $sep,
+				'format' => 'slug',
+				'link' => true,
+				'inclusive' => false,
+			) );
 
-		//$terms = get_the_terms($post, 'project_cat');
-	//$parent = $terms[0]->parent;
-	//var_dump(get_term_link( 'projects' ,'project_cat'));
-		//var_dump( $post_type->name);
-		echo sprintf( $link, get_post_type_archive_link( $post_type->name ), $post_type->labels->name, $position );
-		if ( $show_current ) echo $sep . $before . $taxonomy->name . $after;
+		if ( $show_current ) echo $before . $terms->name . $after;
 		elseif ( $show_last_sep ) echo $sep;
 	}
 	elseif ( is_category() ) {

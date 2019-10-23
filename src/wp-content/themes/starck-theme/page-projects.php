@@ -17,7 +17,9 @@ $header_class = get_post_meta( $post->ID, 'hide-title', true ) ? 'hidden' : '';
 $content = $post->post_content;
 
 ?>
-
+<ul>
+	<?php wp_list_categories( 'taxonomy=project_cat' ); ?>
+</ul>
 	<section id="projects">
 
 		<?php starck_breadcrumbs(); ?>
@@ -44,7 +46,7 @@ $content = $post->post_content;
 
 					<?php
 					foreach ($terms as $term): ?>
-						<li><a href="#" data-category-id="<?php echo $term->term_id?>"><?php echo $term->name;?></a></li>
+						<li><a href="/<?php echo $term->slug ?>" data-category-id="<?php echo $term->term_id?>"><?php echo $term->name;?></a></li>
 					<?php endforeach; ?>
 
 				</ul>
