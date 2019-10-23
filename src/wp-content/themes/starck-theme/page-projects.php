@@ -15,43 +15,42 @@ global $post;
 
 $header_class = get_post_meta( $post->ID, 'hide-title', true ) ? 'hidden' : '';
 $content = $post->post_content;
-
 ?>
-<ul>
-	<?php wp_list_categories( 'taxonomy=project_cat' ); ?>
-</ul>
+
+<?php starck_breadcrumbs(); ?>
+
 	<section id="projects">
 
-		<?php starck_breadcrumbs(); ?>
-	
-		<header id="projects-header">
-			<h1 class="projects-title <?php echo $header_class ?>"><?php single_post_title(); ?></h1>
-			<?php if ($content) { ?>
-				<div class="projects-description"><p><?php echo $content; ?></p></div>
-			<?php } ?>
-		</header>
-
+		<article class="entry post-<?php the_ID(); ?>" <?php post_class(); ?>>	
+			<header id="projects-header">
+				<h1 class="entry-title <?php echo $header_class ?>"><?php single_post_title(); ?></h1>
+			</header>
+			<?php while ( have_posts() ) : the_post(); ?>
+				<?php get_template_part( 'entry','content' ); ?>
+			<?php endwhile;?>
+		</article>
 		<?php
-			// Выводим все категории для таксономии project_cat
 
-			if ( $terms = get_terms( array( 
-					'taxonomy' => 'project_cat',
-					'orderby' => 'name',
-					'hide_empty' => true,
-				) ) ) {
+			// Выводим все термы для таксономии project_cat
+		$terms = get_terms( array( 
+			'taxonomy' => 'project_cat',
+			'orderby' => 'name',
+			'hide_empty' => true,
+		) );
+		if ( $terms ) {
+			?> 
+			<ul id="projects-categories" class="projects-categories">
+				<li class="cat-item-all current-cat"><a href="/projects">Все проекты</a></li>
 
-				?> 
-            	<ul id="projects-categories">
-					<li><a href="#">Все</a></li>
-
-					<?php
-					foreach ($terms as $term): ?>
-						<li><a href="/<?php echo $term->slug ?>" data-category-id="<?php echo $term->term_id?>"><?php echo $term->name;?></a></li>
-					<?php endforeach; ?>
-
-				</ul>
 				<?php
-			}
+				foreach ($terms as $term) { ?>
+					<li class="cat-item cat-item-<?php echo $term->term_id ?>"><a href="/projects/<?php echo $term->slug ?>" data-category-id="<?php echo $term->term_id ?>"><?php echo $term->name;?></a></li>
+				<?php 
+				}
+				?>
+			</ul>
+			<?php
+		}
 			//var_dump($terms);
 		?>
 

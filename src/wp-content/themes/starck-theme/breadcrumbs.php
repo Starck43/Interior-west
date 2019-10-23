@@ -30,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	$show_home_link = 1; // 1 - показывать ссылку "Главная", 0 - не показывать
 	$show_current   = 1; // 1 - показывать название текущей страницы, 0 - не показывать
 	$show_last_sep  = 1; // 1 - показывать последний разделитель, когда название текущей страницы не отображается, 0 - не показывать
+	$show_tax		= 1; // 1 - показывать таксономию
 	/* === КОНЕЦ ОПЦИЙ === */
 
 	global $post;
@@ -50,26 +51,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$position += 1;
 		echo $home_link;
 	}
-	if ( is_tax() ) {
-		//$taxonomy = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-		//$terms = wp_get_post_terms( $post->ID, $taxonomy->taxonomy, array( "fields" => "ids" ) );
-		$terms = get_the_terms($post, 'project_cat')[0];
-		$position += 1;
-		$post_type = get_post_type_object( get_post_type() );
-		if ( $position > 1 ) echo $sep;
-			//var_dump( $post_type->name);
-			echo sprintf( $link, home_url('/'.$post_type->name), $post_type->labels->name, $position ). $sep;
-			echo get_term_parents_list( $terms->term_id, 'project_cat', array(
-				'separator' => $sep,
-				'format' => 'slug',
-				'link' => true,
-				'inclusive' => false,
-			) );
+	if ( is_tax() || is_single() && ! is_attachment() ) {
+		if ( get_post_type() != 'post' ) {
+			//$terms = wp_get_post_terms( $post->ID, $taxonomy->taxonomy, array( "fields" => "ids" ) );
+			$post_type = get_post_type();
+			$taxonomy = get_post_type_object($post_type)->taxonomies[0];
+			$term = get_the_terms($post, $taxonomy)[0];
 
-		if ( $show_current ) echo $before . $terms->name . $after;
-		elseif ( $show_last_sep ) echo $sep;
-	}
-	elseif ( is_category() ) {
+			$position += 1;
+			if ( $position > 1 ) echo $sep;
+				//var_dump( $post_type->name);
+				echo sprintf( $link, '/'.$post_type, get_post_type_object($post_type)->labels->name, $position ). $sep;
+				if ($show_tax) {
+					$args = array(
+						'separator' => $sep,
+						'format' => 'name',
+						'link' => true,
+					);
+					if (is_tax()) $args = ['inclusive' => false];
+					echo get_term_parents_list( $term->term_id, $taxonomy, $args );
+				}
+
+			if ( $show_current ) echo $before . (is_tax() ?$term->name : get_the_title()) . $after;
+			elseif ( $show_last_sep ) echo $sep;
+
+		} else {
+			$cat = get_the_category(); $catID = $cat[0]->cat_ID;
+			$parents = get_ancestors( $catID, 'category' );
+			$parents = array_reverse( $parents );
+			$parents[] = $catID;
+			foreach ( $parents as $cat ) {
+				$position += 1;
+				if ( $position > 1 ) echo $sep;
+				echo sprintf( $link, get_category_link( $cat ), get_cat_name( $cat ), $position );
+			}
+			if ( get_query_var( 'cpage' ) ) {
+				$position += 1;
+				echo $sep . sprintf( $link, get_permalink(), get_the_title(), $position );
+				echo $sep . $before . sprintf( $text['cpage'], get_query_var( 'cpage' ) ) . $after;
+			} else {
+				if ( $show_current ) echo $sep . $before . get_the_title() . $after;
+				elseif ( $show_last_sep ) echo $sep;
+			}
+		}
+
+	} elseif ( is_category() ) {
 		$parents = get_ancestors( get_query_var('cat'), 'category' );
 		foreach ( array_reverse( $parents ) as $cat ) {
 			$position += 1;
@@ -121,34 +147,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		echo sprintf( $link, get_month_link( get_the_time('Y'), get_the_time('m') ), get_the_time('F'), $position );
 		if ( $show_current ) echo $sep . $before . get_the_time('d') . $after;
 		elseif ( $show_last_sep ) echo $sep;
-
-	} elseif ( is_single() && ! is_attachment() ) {
-		if ( get_post_type() != 'post' ) {
-			$position += 1;
-			$post_type = get_post_type_object( get_post_type() );
-			if ( $position > 1 ) echo $sep;
-			echo sprintf( $link, get_post_type_archive_link( $post_type->name ), $post_type->labels->name, $position );
-			if ( $show_current ) echo $sep . $before . get_the_title() . $after;
-			elseif ( $show_last_sep ) echo $sep;
-		} else {
-			$cat = get_the_category(); $catID = $cat[0]->cat_ID;
-			$parents = get_ancestors( $catID, 'category' );
-			$parents = array_reverse( $parents );
-			$parents[] = $catID;
-			foreach ( $parents as $cat ) {
-				$position += 1;
-				if ( $position > 1 ) echo $sep;
-				echo sprintf( $link, get_category_link( $cat ), get_cat_name( $cat ), $position );
-			}
-			if ( get_query_var( 'cpage' ) ) {
-				$position += 1;
-				echo $sep . sprintf( $link, get_permalink(), get_the_title(), $position );
-				echo $sep . $before . sprintf( $text['cpage'], get_query_var( 'cpage' ) ) . $after;
-			} else {
-				if ( $show_current ) echo $sep . $before . get_the_title() . $after;
-				elseif ( $show_last_sep ) echo $sep;
-			}
-		}
 
 	} elseif ( is_post_type_archive() ) {
 		$post_type = get_post_type_object( get_post_type() );

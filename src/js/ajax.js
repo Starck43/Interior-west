@@ -1,5 +1,5 @@
 jQuery(function($){
-	$('#projects-categories li a').on('click', function(e){
+	$('.projects-categories li a').on('click', function(e){
 		e.preventDefault();
 		var elem = $(this);
 		$.ajax({
@@ -9,12 +9,14 @@ jQuery(function($){
 				action : 'projects_filter', //название нашего обработчика в inc/projects_layout.php
 				term : elem.data('category-id'), //id услуги из списка услуг
 			},
-			beforeSend:function(xhr){
+			beforeSend:function(xhr) {
 				elem.css('opacity',0.5); // changing the button label
 			},
-			success:function(data){
+			success:function(data) {
 				//alert(data);
 				elem.css('opacity',1); // changing the button label back
+				elem.parents().find('li').removeClass('current-cat');
+				elem.parent().addClass('current-cat');
 				$('#projects-portfolio').html(data); // insert data
 			}
 		});
