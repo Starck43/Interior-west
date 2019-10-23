@@ -1,16 +1,4 @@
-<div id="projects-portfolio" class="row">
 	<?php
-	$query = array();
-	if ( is_tax() ) {
-		$cat = get_the_terms($post, 'project_cat');
-		$query = array (
-			array (
-				'taxonomy' => 'project_cat',
-				'field' => 'slug',
-				'terms' => $cat[0]->slug,
-			)
-		);
-	}
 
 	$args = array( 
 		'post_type' => 'projects',
@@ -20,10 +8,10 @@
 		'tax_query' => ($query)
 	);
 	$loop = new WP_Query( $args );
-	
+	$max_pages = $loop->max_num_pages; // узнаем общее количество страниц постов
 	while ( $loop->have_posts() ) : $loop->the_post(); 
 	/* Query the post */
-		$hide_title = get_post_meta( $post->ID, 'hide-title', true ) ? 'hidden' : '';
+		$hide_title = get_post_meta( $loop->post->post_id, 'hide-title', true ) ? 'hidden' : '';
 		$project_excerpt = get_the_excerpt();
 		if ( $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'portfolio') ) { 
 			$image_ratio = 'style="padding-top: ' . ($image[2]/$image[1]*100) . '%"';
@@ -42,9 +30,5 @@
 			</div>
 		</a>
 		<?php 
-	endwhile; 
+	endwhile;
 	wp_reset_postdata();
-	?> 
-</div>
-
-<?php get_template_part( 'nav', 'below' ); ?>

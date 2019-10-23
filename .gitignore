@@ -5,7 +5,6 @@
 /resources/
 /backup/
 /src/wordpress/
-/src/wp-config.php
-/src/wp-content/
-!/src/wp-content/themes/
+/src/wp-content/plugins/
+/src/wp-content/uploads/
 !/src/wordpress/search-replace-db
