@@ -1,9 +1,17 @@
 <?php 
+// Объявим глобальный массив
+$projects = array (
+	'taxonomy'			=> 'project_cat',
+	'post_type'			=> 'projects',
+	'all_posts_title'	=> 'Все проекты',
+	'show_title'		=> 1 // 1 - Отображать заголовок текущей категории проектов 
+);
 
 add_action('init', 'register_projects_post_type_and_taxonomy');
 
 //Creating Custom Post types for Projects
 function register_projects_post_type_and_taxonomy() {
+	global $projects;
 
 	$labels = array(
 		'name' => _x('Категории проектов', 'taxonomy general name'),
@@ -28,14 +36,14 @@ function register_projects_post_type_and_taxonomy() {
 		//'query_var' => false,
 		'rewrite' => array(
 			'hierarchical' => true,
-			'slug' => 'projects', // This controls the base slug that will display before each term
+			'slug' => $projects['post_type'], // This controls the base slug that will display before each term
 			'with_front' => true // Display the category prefix before 
 		),
 		'show_admin_column' => true
 	);
 	//projects_cat - the name of the taxonomy. Name should be in slug form (no spaces and all lowercase)
 	//projects - post type name
-	register_taxonomy( 'project_cat', 'projects', $args );
+	register_taxonomy( $projects['taxonomy'], $projects['post_type'], $args );
 
 
 	$labels = array(
@@ -62,27 +70,29 @@ function register_projects_post_type_and_taxonomy() {
 		'menu_position' => 5,
 		'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
 		'rewrite' => array(
-			'slug' => 'projects/%project_cat%',
+			'slug' => $projects['post_type'] . '/%' . $projects['taxonomy'] . '%',
 			'with_front' => false
 		),
 		'query_var' => true,
 		'has_archive' => true,
-		'taxonomies' => array('project_cat'),
+		'taxonomies' => array( $projects['taxonomy']),
 		'menu_icon' => 'dashicons-admin-multisite', //Find the appropriate dashicon here: https://developer.wordpress.org/resource/dashicons/
 		);
-	register_post_type('projects', $args);
+	register_post_type($projects['post_type'], $args);
 }
 
 add_filter('post_type_archive_link', 'projects_permalink', 10, 2);
 add_filter('post_type_link', 'projects_hierarchical_permalink', 1, 2);
 
 function projects_permalink( $permalink, $post_type ){
-	// выходим если это не наш тип записи: без холдера %products%
-	if( strpos($permalink, '%project_cat%') === FALSE )
+	global $projects;
+
+	// выходим если это не наш тип записи: без холдера %%
+	if( strpos($permalink, '%' . $projects['taxonomy'] . '%') === FALSE )
 		return $permalink;
 
 	// Получаем элементы таксы
-	$terms = get_the_terms(get_post(), 'project_cat');
+	$terms = get_the_terms(get_post(), $projects['taxonomy']);
 	// если есть элемент заменим холдер
 	if( ! is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) {
 		$term_slug = array_pop($terms)->slug;
@@ -90,23 +100,25 @@ function projects_permalink( $permalink, $post_type ){
 	else
 		$term_slug = '';
 
-	return preg_replace( '#/$#', '', str_replace('%project_cat%', $term_slug, $permalink ) );
+	return preg_replace( '#/$#', '', str_replace('%' . $projects['taxonomy'] . '%', $term_slug, $permalink ) );
 }
 
 
 function projects_hierarchical_permalink( $permalink, $post ){
-	if( strpos($permalink, '%project_cat%') === FALSE )
+	global $projects;
+
+	if( strpos($permalink, '%' . $projects['taxonomy'] . '%') === FALSE )
 		return $permalink;
 
 	// Получаем элементы таксы
-	$terms = get_the_terms($post, 'project_cat');
+	$terms = get_the_terms($post,  $projects['taxonomy']);
 	$parent = $terms[0]->parent;
-
+ 
 	// если есть элемент заменим холдер
 	if( ! is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) {
 		$term_slug = array_pop($terms)->slug;
 		while( $parent ) {
-			$parent_term = get_term($parent, 'project_cat');
+			$parent_term = get_term($parent, $projects['taxonomy']);
 			$term_slug = $parent_term->slug . '/' . $term_slug;
 			$parent = $parent_term->parent;
 		}
@@ -115,25 +127,27 @@ function projects_hierarchical_permalink( $permalink, $post ){
 		$term_slug = '';
 		// В $permalink находим %project_cat% и заменяем на $term_slug
 	// убираем лишний слэш, если $term_slug будет пустой
-	return preg_replace( '#/$#', '', str_replace('%project_cat%', $term_slug, $permalink ) );
+	return preg_replace( '#/$#', '', str_replace('%' . $projects['taxonomy'] . '%', $term_slug, $permalink ) );
 }
 
 
 // смена запроса
 add_filter('request', 'action_function_name',1,1 );
 function action_function_name( $query ) {
-	$cat = 'project_cat';
+	global $projects;
+	$cat = $projects['taxonomy'];
 	if( isset($query[$cat]) ) { //здесь и далее название таксономии
 		$str = strrchr($query[$cat],'/');
 		$name = str_replace('/','',$str); //удалим слэшы
 		$term = get_term_by( 'slug', $name , $cat);
 		if( !$term && $name ) {
 			$query[$cat] = str_replace($str,'',$query[$cat]);
-			$query['post_type'] = 'projects'; //название пользовательского типа записей
-			$query['projects'] = $name; //$query['название пользовательского типа записей']
+			$query['post_type'] = $projects['post_type']; //название пользовательского типа записей
+			//$query[$projects['post_type']] = $name; //$query['название пользовательского типа записей']
 			$query['name'] = $name;
 		}
     }
+	//var_dump($query);
 
     return $query;
 }
@@ -145,8 +159,9 @@ function remove_projects_sidebar($layout) {
 	$layout = 'no-sidebar';
 	return $layout;
 }
-// Отдаем приоритет старанице, если ее адрес совпадает с категорией поста
-add_filter('page_rewrite_rules', 'wpse16902_collect_page_rewrite_rules');
+
+// Отдаем приоритет странице, если ее адрес совпадает с категорией поста
+/*add_filter('page_rewrite_rules', 'wpse16902_collect_page_rewrite_rules');
 function wpse16902_collect_page_rewrite_rules($page_rewrite_rules)
 {
 	$GLOBALS['wpse16902_page_rewrite_rules'] = $page_rewrite_rules;
@@ -158,33 +173,62 @@ function wspe16902_prepend_page_rewrite_rules($rewrite_rules)
 {
 	return $GLOBALS['wpse16902_page_rewrite_rules'] + $rewrite_rules;
 }
-
+*/
 add_action('wp_ajax_projects_filter', 'projects_filter_function'); // wp_ajax_{ACTION HERE} 
 add_action('wp_ajax_nopriv_projects_filter', 'projects_filter_function');
  
 function projects_filter_function() {
+	global $projects;
+
 	//var_dump($_POST['term']);
 	$paged = $_POST['paged'] ? $_POST['paged'] : 1; // Если в paged пусто, то будем считать, что нужна первая страница
 	// for taxonomies / categories
 	$args = array( // составляем запрос
-		'post_type' => 'projects',
+		'post_type' => $projects['post_type'],
 		'posts_per_page' => 10,
 		'order' => 'ASC',
 		'orderby' => 'name',
 		'paged' => $paged,
 	);
 
-	if( isset( $_POST['term'] ) ) {
+	if( isset( $_POST['term'] ) ) { //если передан запрос методом POST
 		$args['tax_query'][] = array(
-			'taxonomy' => 'project_cat',
-			//'field' => 'id',
+			'taxonomy' => $projects['taxonomy'],
+			'field' => 'slug',
 			'terms' => $_POST['term'],
 		);
 	}
-	render_partial('entry-projects.php', ['args' => $args]);
+
+	render_partial('entry-projects.php', ['args' => $args, 'projects' => $projects]);
 	//get_template_part( 'entry','projects' );
-	//var_dump($args);
 	die();
+}
+
+function get_projects_categories($projects, $term_slug = '') {
+	// Выводим все термы для таксономии project_cat
+	$terms = get_terms( [
+		'taxonomy'		=> $projects['taxonomy'],
+		'hide_empty' 	=> true,
+		'parent'		=> ($term_slug == '' ? '0' : ''),
+		'slug'			=> $term_slug,
+	] );
+
+//	var_dump($terms);
+	if ( $terms ) {
+		?>
+		<ul id="projects-categories" class="projects-categories">
+			<?php
+			echo '<li class="cat-item-all current-cat"><a href="/' . $projects['post_type'] . '">' . $projects['all_posts_title'] . '</a></li>';
+
+			foreach ($terms as $term) {
+				echo '<li class="cat-item cat-item-' . $term->term_id . '">';
+					echo '<a href="/' . $projects['post_type'] . '/' . $term->slug . '" data-name="' . $term->slug . '">' . $term->name . '</a>';
+				echo '</li>';
+			}
+			?>
+		</ul>
+		<?php
+	}
 }
 
 add_action('wp_head','js_variables');

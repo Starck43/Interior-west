@@ -7,7 +7,7 @@ jQuery(function($){
 			type: 'POST', // POST
 			data : {
 				action : 'projects_filter', //название нашего обработчика в inc/projects_layout.php
-				term : elem.data('category-id'), //id услуги из списка услуг
+				term : elem.data('name'), //назваие терма
 			},
 			beforeSend:function(xhr) {
 				elem.css('opacity',0.5); // changing the button label
@@ -30,7 +30,7 @@ jQuery(function($){
 			type: "POST",
 			data : {
 				action : 'projects_filter',
-				term : elem.data('category-id'), //id таксономии
+				term : elem.data('name'), //назваие терма
 				paged : elem.data('page'), // номер страницы для загрузки
 			},
 			success: function (data) {

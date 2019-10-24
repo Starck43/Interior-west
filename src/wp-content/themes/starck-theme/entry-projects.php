@@ -3,12 +3,14 @@
 
 	$loop = ( $args ) ? new WP_Query( $args ) : $wp_query;
 	$max_pages = $loop->max_num_pages; // узнаем общее количество страниц постов
-	if ($args['tax_query']) { //если есть запрос по таксономии, то выведем название категории
-		$post_type = $args['post_type'];
-		$taxonomy = get_post_type_object($post_type)->taxonomies[0];
-		$term = get_the_terms($loop->posts[0]->ID, $taxonomy)[0];
-		echo '<header id="projects-category-header"><h2 class="category-title">' . $term->name .'</h2></header>';	
+	if ( $projects['show_title'] ) {
+		if ($args['tax_query']) { //если есть запрос по таксономии, то выведем название категории из полученного запроса
+			$term = get_the_terms($loop->posts[0]->ID, $projects['taxonomy'])[0];
+			$cat_name = $term->name;
+		} else $cat_name = $projects['all_posts_title'];
+		echo '<header id="category-header"><h2 class="subtitle">' . $cat_name .'</h2></header>';
 	}
+
 	while ( $loop->have_posts() ) : $loop->the_post(); 
 	/* Query the post */
 		$hide_title = get_post_meta( $loop->post->post_id, 'hide-title', true ) ? ' hidden' : '';
