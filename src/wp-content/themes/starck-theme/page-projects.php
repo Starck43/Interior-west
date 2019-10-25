@@ -31,7 +31,7 @@ $content = $post->post_content;
 			<?php endwhile;?>
 		</article>
 		
-		<?php get_projects_categories($projects); ?>
+		<?php get_taxonomy_list_categories($projects); ?>
 
 		<div id="projects-portfolio" class="row">
 

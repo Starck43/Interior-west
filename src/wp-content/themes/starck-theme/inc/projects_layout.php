@@ -205,21 +205,23 @@ function projects_filter_function() {
 	die();
 }
 
-function get_projects_categories($projects, $term_id = 0) {
+function get_taxonomy_list_categories($projects) {
+
+	$current_term = is_tax() ? get_queried_object() : null;
 	// Выводим все термы для таксономии project_cat
 	$terms = get_terms( [
 		'taxonomy'		=> $projects['taxonomy'],
-		'parent'		=> $term_id,
+		'parent'		=> ($current_term ? $current_term->term_id : 0),
 		'hide_empty' 	=> 1,
 		'hierarchical'	=> 0,
 	] );
 
-//	var_dump($terms);
+	var_dump(get_query_var('taxonomy'));
 	if ( $terms ) {
 		?>
 		<ul id="projects-categories" class="projects-categories">
 			<?php
-			echo '<li class="cat-item-all current-cat"><a href="/' . $projects['post_type'] . '">' . $projects['all_posts_title'] . '</a></li>';
+			echo '<li class="cat-item-all current-cat"><a href="' . ($current_term ? get_term_link($current_term) : '/' . $projects['post_type']) . '">' . $projects['all_posts_title'] . '</a></li>';
 
 			foreach ($terms as $term) {
 				echo '<li class="cat-item cat-item-' . $term->term_id . '">';

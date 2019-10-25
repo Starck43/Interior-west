@@ -17,11 +17,8 @@ global $projects;
 
 	<section id="projects">
 	
-		<?php 
-			//$term = get_the_terms($post, $projects['taxonomy'])[0];
-			$term = get_query_var('term');
-			get_projects_categories($projects, $term->term_id);
-		?>	
+		<?php get_taxonomy_list_categories($projects); ?>
+
 		<div id="projects-portfolio" class="row">
 			<?php
 			get_template_part( 'entry','projects' );
