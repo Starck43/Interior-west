@@ -198,7 +198,10 @@ function projects_filter_function() {
 			'field' => 'slug',
 			'terms' => $_POST['term'],
 		);
-	}
+	} else
+		$args['tax_query'] = array(
+			'taxonomy' => $projects['taxonomy'],
+		);
 
 	render_partial('entry-projects.php', ['args' => $args, 'projects' => $projects]);
 	//get_template_part( 'entry','projects' );
@@ -216,12 +219,12 @@ function get_taxonomy_list_categories($projects) {
 		'hierarchical'	=> 0,
 	] );
 
-	var_dump(get_query_var('taxonomy'));
+	var_dump($current_term);
 	if ( $terms ) {
 		?>
 		<ul id="projects-categories" class="projects-categories">
 			<?php
-			echo '<li class="cat-item-all current-cat"><a href="' . ($current_term ? get_term_link($current_term) : '/' . $projects['post_type']) . '">' . $projects['all_posts_title'] . '</a></li>';
+			echo '<li class="cat-item-all current-cat"><a href="' . ($current_term ? get_term_link($current_term) : '/' . $projects['post_type']) . '"'. ($current_term ? ' data-name="' . $current_term->slug . '"' : '') . '>' . $projects['all_posts_title'] . '</a></li>';
 
 			foreach ($terms as $term) {
 				echo '<li class="cat-item cat-item-' . $term->term_id . '">';
