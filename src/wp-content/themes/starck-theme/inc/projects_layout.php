@@ -174,6 +174,7 @@ function wspe16902_prepend_page_rewrite_rules($rewrite_rules)
 	return $GLOBALS['wpse16902_page_rewrite_rules'] + $rewrite_rules;
 }
 */
+
 add_action('wp_ajax_projects_filter', 'projects_filter_function'); // wp_ajax_{ACTION HERE} 
 add_action('wp_ajax_nopriv_projects_filter', 'projects_filter_function');
  
@@ -204,13 +205,13 @@ function projects_filter_function() {
 	die();
 }
 
-function get_projects_categories($projects, $term_slug = '') {
+function get_projects_categories($projects, $term_id = 0) {
 	// Выводим все термы для таксономии project_cat
 	$terms = get_terms( [
 		'taxonomy'		=> $projects['taxonomy'],
-		'hide_empty' 	=> true,
-		'parent'		=> ($term_slug == '' ? '0' : ''),
-		'slug'			=> $term_slug,
+		'parent'		=> $term_id,
+		'hide_empty' 	=> 1,
+		'hierarchical'	=> 0,
 	] );
 
 //	var_dump($terms);
