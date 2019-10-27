@@ -64,34 +64,32 @@
 		//height: 100%
 		//min-height: 100vh
 		max-width: $container_max_w
-		padding: $gutter-20*2 0
+		//padding: 0 $gutter-20 $gutter-20
 		@include push--auto
 		background-color: $main-bg
-		
+		@include img-responsive
 		.breadcrumbs
-			margin: $gutter-20 * 2 0
+			margin: $gutter-20 0
 			font-size: .8em   
+
+		p
+			//text-align: justify
+			font-size: 1.2em
+			letter-spacing: 0.5px
+			line-height: $base-line-height
+			+media-breakpoint-down(xs)
+				font-size: 1.2em
 			
 		#content
 			float: left
 			width: 100%
-			padding: $gutter-30 0
+			margin-top: $gutter-20*2  
+			//padding: $gutter-30 0
 			background-color: $content-bg
 			box-sizing: border-box
 			word-break: break-word
 			//@include img-responsive
-			
-			p
-				text-align: justify
-				margin: $base-line-height 0 0.5em
 
-			p,li
-				font-size: 1.2em
-				font-weight: 300
-				letter-spacing: 0.5px
-				line-height: $base-line-height
-				+media-breakpoint-down(xs)
-					font-size: 1.2em
 
 			&.float-left
 				width: $content-width
@@ -117,6 +115,11 @@
 					span
 						font-weight: 600
 						text-decoration: underline
+		article
+			margin: $gutter-30 0
+
+		.entry-header
+			text-align: center
 
 		#main-sidebar
 			width: 25%

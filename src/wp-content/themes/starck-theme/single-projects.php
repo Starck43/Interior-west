@@ -43,12 +43,14 @@ global $post;
 					</header>
 			
 					<?php the_content();?>
+					<?php edit_post_link(); ?>
 				</div>
 
+			</article>
 				<?php 
 				if ( $gallery && !$gallery_in_slider ) {
 					?>
-					<div id="portfolio-gallery" class="gallery">
+					<div id="portfolio-gallery" class="gallery column-grid">
 						<?php 
 						foreach ($gallery as $post_id) {
 							$post_id = absint($post_id);
@@ -60,7 +62,7 @@ global $post;
 							$caption = wp_get_attachment_caption( $post_id );
 							?>
 							<a class="gallery-image" href="<?php echo $full_image_url ?>">
-								<div class="gallery-container" style="padding-top: <?php echo $image_ratio.'%' ?>">
+								<div class="img-container" style="padding-top: <?php echo $image_ratio.'%' ?>">
 									<img class="image lazyload" src="<?php echo $thumb; ?>" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" data-srcset="<?php echo wp_get_attachment_image_srcset( $post_id, 'medium' ); ?>" data-sizes="auto" data-expand="-50"/>
 								</div>
 								<div class="gallery-image-details">
@@ -75,10 +77,9 @@ global $post;
 					</div>
 					<?php
 				}
-				edit_post_link(); 
+
 				?>
 
-			</article>
 		<?php endwhile; ?>
 
 		<?php get_template_part( 'nav', 'below-single' ); ?>

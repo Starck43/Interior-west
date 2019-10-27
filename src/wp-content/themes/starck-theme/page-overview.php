@@ -12,9 +12,15 @@
 
 <?php get_header(); ?>
 
-	<section id="content">
-		<?php
 
+	<?php		
+	while (have_posts() ) : the_post();
+		get_template_part( 'entry' );
+	endwhile;
+	?>
+
+	<section id="overview-page">
+		<?php
 		$categories = get_categories( array(
 			'taxonomy'     => 'category',
 			'child_of'     => 0,
@@ -29,7 +35,7 @@
 			// полный список параметров смотрите в описании функции http://wp-kama.ru/function/get_terms
 		) );
 		foreach ($categories as $cat) {
-			echo '<h1 class="entry-title">'.$cat->name.'</h1>';
+			echo '<header class="entry-header"><h1 class="entry-title">'.$cat->name.'</h1></header>';
 			$args = array(
 				'category_name' => $cat->slug,
 				//'posts_per_page' => 5,
@@ -43,21 +49,6 @@
 		}
 		?>
 		
-		<?php 
-		
-		get_template_part( 'nav', 'below' );
-		
-		if ( comments_open() || get_comments_number() ) {
-			comments_template();
-		}
-		?>
-		<?php		
-		while (have_posts() ) : the_post();
-			get_template_part( 'entry','content' );
-		endwhile;
-		?>
 	</section>
-
-	<?php starck_get_sidebar(); ?>
 
 <?php get_footer(); ?>

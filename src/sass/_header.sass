@@ -4,9 +4,11 @@
 	display: flex
 	width: 100% 
 	height: $header-height
-	margin:   $gutter-20 0
+	margin-top: $gutter-20/2
+	margin-bottom: $gutter-20/2
 	align-items: center 
 	background-color: $header-bg
+	border-bottom: 1px solid darken(white, 10%)
 	z-index: 3
 	+media-breakpoint-down(sm)
 		height: $header-height-min
@@ -30,7 +32,6 @@
 		display: flex
 		justify-content: space-between
 		align-items: center
-		margin: 0 $gutter-20
 									
 	#branding
 		display: flex
@@ -78,7 +79,7 @@
 				
 			#branding-logo,
 			#branding-title
-				@include push--auto 	
+				@include push--auto
 
 	&.branding-right
 		flex-direction: row-reverse
@@ -114,7 +115,10 @@
 			
 		ul.menu
 			@extend .bounded
-
+	&.full-width
+		.container
+			margin: 0 $gutter-20
+			
 	#nav-menu
 		margin-left: 10px
 		//float: left

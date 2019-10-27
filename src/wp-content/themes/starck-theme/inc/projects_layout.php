@@ -4,7 +4,7 @@ $projects = array (
 	'taxonomy'			=> 'project_cat',
 	'post_type'			=> 'projects',
 	'all_posts_title'	=> 'Все проекты',
-	'show_title'		=> 1 // 1 - Отображать заголовок текущей категории проектов 
+	'show_cat_meta'		=> 1 // 1 - Отображать заголовок и описание текущей категории 
 );
 
 add_action('init', 'register_projects_post_type_and_taxonomy');
@@ -118,9 +118,9 @@ function projects_hierarchical_permalink( $permalink, $post ){
 	if( ! is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) {
 		$term_slug = array_pop($terms)->slug;
 		while( $parent ) {
-			$parent_term = get_term($parent, $projects['taxonomy']);
-			$term_slug = $parent_term->slug . '/' . $term_slug;
-			$parent = $parent_term->parent;
+			$cur_term = get_term($parent, $projects['taxonomy']);
+			$term_slug = $cur_term->slug . '/' . $term_slug;
+			$parent = $cur_term->parent;
 		}
 	}	
 	else 
@@ -181,7 +181,8 @@ add_action('wp_ajax_nopriv_projects_filter', 'projects_filter_function');
 function projects_filter_function() {
 	global $projects;
 
-	//var_dump($_POST['term']);
+	$term_id = $_POST['term'];
+	//$parent_id = $_POST['parent_term'];
 	$paged = $_POST['paged'] ? $_POST['paged'] : 1; // Если в paged пусто, то будем считать, что нужна первая страница
 	// for taxonomies / categories
 	$args = array( // составляем запрос
@@ -190,55 +191,81 @@ function projects_filter_function() {
 		'order' => 'ASC',
 		'orderby' => 'name',
 		'paged' => $paged,
+		'tax_query' => array(['taxonomy' => $projects['taxonomy']],
+		)
 	);
 
-	if( isset( $_POST['term'] ) ) { //если передан запрос методом POST
-		$args['tax_query'][] = array(
-			'taxonomy' => $projects['taxonomy'],
-			'field' => 'slug',
-			'terms' => $_POST['term'],
+	if( isset( $term_id ) ) { //если передан запрос методом POST
+		$new_args = array(
+			'field' => 'id',
+			'terms' => $term_id,
 		);
-	} else
-		$args['tax_query'] = array(
-			'taxonomy' => $projects['taxonomy'],
-		);
+		$args['tax_query'][0] = wp_parse_args( $args['tax_query'][0], $new_args);
+		//var_dump($args);
+	}
 
+	$term = get_term_by('id', $term_id, $projects['taxonomy']);
+	// Показать заголовок и описание текущей категории
+	//get_taxonomy_list_categories( $projects, $term );
 	render_partial('entry-projects.php', ['args' => $args, 'projects' => $projects]);
 	//get_template_part( 'entry','projects' );
 	die();
 }
 
-function get_taxonomy_list_categories($projects) {
+function get_category_meta( $projects, $cur_term ) {
+	// Показать заголовок категории проектов
+	if ( $projects['show_cat_meta'] ) {
+		if ($cur_term) { //если есть запрос по термину, то выведем название категории из полученного запроса
+			$cat_name = $cur_term->name;
+		} else $cat_name = $projects['all_posts_title'];
+		echo '<div id="projects-category-meta">';
+			echo '<header id="category-header"><h1 class="category-title">' . $cat_name .'</h2></header>';
+			echo '<div id="category-description"><p>' . $cur_term->description .'</p></div>';
+		echo '</div>';
+	}
+}
 
-	$current_term = is_tax() ? get_queried_object() : null;
-	// Выводим все термы для таксономии project_cat
-	$terms = get_terms( [
+function get_taxonomy_list_categories( $projects, $cur_term = null ) {
+
+	$child_terms = get_term_children($cur_term->term_id,$projects['taxonomy']);
+	$args = array(
 		'taxonomy'		=> $projects['taxonomy'],
-		'parent'		=> ($current_term ? $current_term->term_id : 0),
+		'parent'		=> (!$child_terms ? $cur_term->parent : ($cur_term ? $cur_term->term_id : 0)),
 		'hide_empty' 	=> 1,
-		'hierarchical'	=> 0,
-	] );
+	);
 
-	var_dump($current_term);
+	// Выводим дочерние термы для таксономии project_cat
+	$terms = get_terms( $args );
 	if ( $terms ) {
-		?>
-		<ul id="projects-categories" class="projects-categories">
-			<?php
-			echo '<li class="cat-item-all current-cat"><a href="' . ($current_term ? get_term_link($current_term) : '/' . $projects['post_type']) . '"'. ($current_term ? ' data-name="' . $current_term->slug . '"' : '') . '>' . $projects['all_posts_title'] . '</a></li>';
+
+		echo '<ul id="projects-categories">';
+			if ($cur_term) {
+				// присваиваем родителю текущий термин или старый термин
+				$parent_term = $child_terms ? $cur_term : get_term_by('term_taxonomy_id', $cur_term->parent);
+
+				printf('<li class="cat-item-all cat-%1$s active"><a href="%2$s" data-id="%3$s">Все %4$s</a></li>',
+					$parent_term->slug,
+					get_term_link( $parent_term ),
+					$parent_term->term_id,
+					mb_strtolower( $parent_term->name )
+				);
+			}
 
 			foreach ($terms as $term) {
-				echo '<li class="cat-item cat-item-' . $term->term_id . '">';
-					echo '<a href="/' . $projects['post_type'] . '/' . $term->slug . '" data-name="' . $term->slug . '">' . $term->name . '</a>';
-				echo '</li>';
+				$children_term = get_term_children($term->term_id,$projects['taxonomy']);
+				printf('<li class="cat-item cat-%1$s' . ($children_term ? ' has-children' :'') . '"><a href="%2$s" data-id="%3$s">%4$s</a></li>',
+					$term->slug,
+					get_term_link($term),
+					$term->term_id,
+					$term->name
+				);
 			}
-			?>
-		</ul>
-		<?php
+		echo '</ul>';
 	}
 }
 
 add_action('wp_head','js_variables');
-function js_variables(){
+function js_variables() {
     $variables = array (
         'ajax_url' => admin_url('admin-ajax.php'),
     );

@@ -20,21 +20,14 @@ $content = $post->post_content;
 
 <?php starck_breadcrumbs(); ?>
 
-	<section id="projects">
+	<?php while ( have_posts() ) : the_post(); ?>
+		<?php get_template_part( 'entry' ); ?>
+	<?php endwhile;?>
 
-		<article class="entry post-<?php the_ID(); ?>" <?php post_class(); ?>>	
-			<header id="projects-header">
-				<h1 class="entry-title <?php echo $header_class ?>"><?php single_post_title(); ?></h1>
-			</header>
-			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'entry','content' ); ?>
-			<?php endwhile;?>
-		</article>
+	<div id="projects">
 		
 		<?php get_taxonomy_list_categories($projects); ?>
-
 		<div id="projects-portfolio" class="row">
-
 			<?php 
 			$args = array( 
 				'post_type' => $projects['post_type'],
@@ -45,7 +38,6 @@ $content = $post->post_content;
 			 ?>
 			<?php
 			render_partial('entry-projects.php', ['args' => $args, 'projects' => $projects]); // передаем переменные в подключаемый шаблон
-			//get_template_part( 'entry','projects' );
 			?>
 
 		</div>
@@ -59,8 +51,7 @@ $content = $post->post_content;
 		?>
 
 		<?php //get_template_part( 'nav', 'below' ); ?>
-
-	</section>
+	</div>
 
 
 <?php get_footer(); ?>

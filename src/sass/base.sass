@@ -21,7 +21,7 @@
 @import controls
 	
 @import search
-@import preview
+@import overview
 @import portfolio
 @import jcarousel/jcarousel
 @import imagelightbox/imagelightbox
@@ -49,7 +49,7 @@ li
 			
 h1 
 	font: normal bold 2.4em/1.2 $base-font-family, Arial
-	margin: 0 0 20px 0
+	margin: 0 0 $gutter-30 0
 	color: $page-title-color 
 
 
@@ -107,7 +107,8 @@ img:not([src]):not([srcset])
 	
 img[data-sizes="auto"]
 	display: block
-	width: 100%		
+	width: 100%
+	
 img
 	&.lazyload,
 	&.lazyloading
@@ -115,6 +116,19 @@ img
 	&.lazyloaded
 		opacity: 1
 		transition: opacity 500ms ease-in
+ 
+.img-container
+	position: relative
+	height: 0
+	width: 100% 
+	//padding-top: 100%
+	background-color: darken($main-bg, 10%)
+	img
+		position: absolute
+		top: 0
+		left: 0
+		width: 100%
+		height: 100%  
 
 .container
 	width: 100% 
@@ -123,7 +137,7 @@ img
 .bounded
 	max-width: $container_max_w
 	//padding: 0 $gutter-20/2
-	//@include push--auto
+	@include push--auto
 
 .align-left
 	justify-content: flex-start
@@ -136,6 +150,9 @@ img
 .align-right
 	justify-content: flex-end
 	//align-items: flex-end
+
+.disabled
+	pointer-events: none
 
 .hidden
 	display: none

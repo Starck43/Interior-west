@@ -15,16 +15,13 @@ global $projects;
 
 <?php starck_breadcrumbs(); ?>
 
-	<section id="projects">
-	
-		<?php get_taxonomy_list_categories($projects); ?>
-
+	<div id="projects">
+		<?php $term = get_queried_object(); ?>
+		<?php get_category_meta( $projects, $term ); ?>
+		<?php get_taxonomy_list_categories( $projects, $term ); ?>
 		<div id="projects-portfolio" class="row">
-			<?php
-			get_template_part( 'entry','projects' );
-			?>
+			<?php get_template_part( 'entry','projects' ); ?>
 		</div>
-
-	</section>
+	</div>
 
 <?php get_footer(); ?>

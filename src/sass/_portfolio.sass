@@ -1,46 +1,54 @@
 
 #projects
-	&-header
-		margin-bottom: $gutter-20
-		padding: 0 $gutter-20
-	
+	&-category-meta
+		float: left
 	&-categories
-		display: flex
-		width: 100%
-		justify-content: space-around
-		padding: $gutter-20
-		margin: 0
+		float: right
+		margin: 0 0 $gutter-20
+		text-align: right
 		li
+			display: block
+			width: 100% 
 			padding: $gutter-20/2
-			border: 1px solid  $theme-color
-			border-radius: 3px  
+			//margin: $gutter-20/2
+			//border: 1px solid  $theme-color
+			//border-radius: 3px
+			&.active
+				pointer-events: none
+				a
+					font-weight: bold
 
 	&-portfolio
-		.portfolio-container
+		clear: both
+		.img-container
+			overflow: hidden
+			img
+				transition: all 1s ease
 
-			&.visible
-				.portfolio-image-meta
-					opacity: 1
+				&:hover
+					transform: scale(1.2)
 
 			.portfolio-image-meta
 				position: absolute
-				display: flex
-				top: 0
+				//display: flex
+				//top: 0
 				right: 0
 				bottom: 0
 				left: 0
-				margin: 20%
-				align-items: center
-				justify-content: center
-				flex-direction: column
+				//margin-top: -50% 
+				padding: $gutter-20
+				text-align: center
+				//align-items: center
+				//justify-content: center
+				//flex-direction: column
 				color: #FFF 
 				background: transparentize($theme-color, 0.5)
-				opacity: 0
-				transition: opacity 500ms 200ms ease
+				//opacity: 0
 				backdrop-filter: blur(10px)
-				
+
 				.meta-title
 					text-transform: uppercase
+					letter-spacing: 1px 
 				p
 					margin: 0.5em
 
@@ -48,34 +56,9 @@
 .portfolio
 	position: relative
 	height: auto
-
-	&-container
-		position: relative
-		height: 0
-		width: 100% 
-		//padding-top: 100%
-		background-color: darken($main-bg, 5%)
-		img
-			position: absolute
-			top: 0
-			left: 0
-			width: 100%
-			height: 100%  
-			//transition: opacity 500ms ease-in
-			//opacity: 0
+	padding-bottom: 30px
 
 .gallery
-	column-count: 2
-	+media-breakpoint-down(xs)
-		column-count: 1
-	a
-		display: inline-block
-		width: 100%
-		margin-top: $gutter-20
-		float: left
-		page-break-inside: avoid
-		break-inside: avoid
-
 	&-image-details
 		//position: absolute
 		left: 0
@@ -96,7 +79,18 @@
 	-ms-touch-action: none
 	touch-action: none
 
-	
+.column-grid
+	column-count: 2
+	+media-breakpoint-down(xs)
+		column-count: 1
+	a
+		display: inline-block
+		width: 100%
+		margin-top: $gutter-20
+		float: left
+		page-break-inside: avoid
+		break-inside: avoid
+
 .grid
 	display: grid
 	grid-gap: $gutter-20
