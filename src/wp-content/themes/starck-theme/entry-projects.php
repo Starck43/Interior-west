@@ -1,7 +1,30 @@
 	<?php
-	global $wp_query;
+	global $projects;
 
-	$loop = ( $args ) ? new WP_Query( $args ) : $wp_query;
+	$defaults = array( 
+		'post_type' => $projects['post_type'],
+		'posts_per_page' => 2,
+		'order' => 'ASC',
+		'orderby' => 'name',
+		'paged' => ($paged) ? $paged : 1,
+	);
+
+	//if (!$args['paged']) $defaults = wp_parse_args( $defaults, ['paged' => 1]);
+
+	if ( $term_id || get_query_var('term') )
+		$args = array(
+			'tax_query' => array(
+				array(
+					'taxonomy' => $projects['taxonomy'],
+					'field' => 'id',
+					'terms' => ($term_id) ? $term_id : get_queried_object()->term_id,		
+				)
+			)	
+		);
+
+	$args = wp_parse_args( $defaults, $args );
+
+	$loop =new WP_Query( $args );
 	$max_pages = $loop->max_num_pages; // узнаем общее количество страниц постов
 
 		while ( $loop->have_posts() ) : $loop->the_post(); 
@@ -23,6 +46,14 @@
 				echo '</div>';
 			echo '</a>';
 		endwhile;
+		if ($args['paged'] < $max_pages)  { // если текущая страница меньше общего числа страниц, то выводим кнопку для подгрузки
+			$next_page = $args['paged'] + 1; // в дата атрибуты кнопки передаем номер следующей страницы и id текущих терминов
+			echo '<a id="projects-load-more" href="#" data-id="' . $args['tax_query'][0]['terms'] . '" data-page="' . $next_page . '">Показать еще</a>';
+		}
+/*
+		if( $max_pages > 1 ) { // если страниц больше одной, то выводим кнопку с data-атрибутом следующей страницы
+			echo '<a id="projects-load-more" href="#" data-page="2">Показать еще</a>';
+		}*/
 
 	wp_reset_postdata();
 

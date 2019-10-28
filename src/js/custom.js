@@ -52,8 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	});
 
 	$(window).scroll(function() {
-		addVisibleClass(document.body.querySelectorAll('article')); //viewport.js
-		addVisibleClass(document.body.querySelectorAll('#copyright'));
+		//addVisibleClass(document.body.querySelectorAll('article')); //viewport.js
 
 		$('#back-to-top').topBtnToggle({
 			scrollTrigger: 1200,

@@ -82,9 +82,6 @@ global $post;
 
 		<?php endwhile; ?>
 
-		<?php get_template_part( 'nav', 'below-single' ); ?>
-		<?php if ( ( comments_open() || get_comments_number() ) && ! post_password_required() ) { comments_template( '', true ); } ?>
-
 	</section>
 
 <?php get_footer(); ?>

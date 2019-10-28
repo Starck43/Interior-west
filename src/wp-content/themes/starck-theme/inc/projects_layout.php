@@ -184,31 +184,9 @@ function projects_filter_function() {
 	$term_id = $_POST['term'];
 	//$parent_id = $_POST['parent_term'];
 	$paged = $_POST['paged'] ? $_POST['paged'] : 1; // Если в paged пусто, то будем считать, что нужна первая страница
-	// for taxonomies / categories
-	$args = array( // составляем запрос
-		'post_type' => $projects['post_type'],
-		'posts_per_page' => 10,
-		'order' => 'ASC',
-		'orderby' => 'name',
-		'paged' => $paged,
-		'tax_query' => array(['taxonomy' => $projects['taxonomy']],
-		)
-	);
 
-	if( isset( $term_id ) ) { //если передан запрос методом POST
-		$new_args = array(
-			'field' => 'id',
-			'terms' => $term_id,
-		);
-		$args['tax_query'][0] = wp_parse_args( $args['tax_query'][0], $new_args);
-		//var_dump($args);
-	}
-
-	$term = get_term_by('id', $term_id, $projects['taxonomy']);
 	// Показать заголовок и описание текущей категории
-	//get_taxonomy_list_categories( $projects, $term );
-	render_partial('entry-projects.php', ['args' => $args, 'projects' => $projects]);
-	//get_template_part( 'entry','projects' );
+	render_partial('entry-projects.php', ['args' => $args, 'term_id' => $term_id, 'paged' => $paged]);
 	die();
 }
 

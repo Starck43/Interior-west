@@ -28,27 +28,14 @@ $content = $post->post_content;
 		
 		<?php get_taxonomy_list_categories($projects); ?>
 		<div id="projects-portfolio" class="row">
-			<?php 
-			$args = array( 
-				'post_type' => $projects['post_type'],
-				'posts_per_page' => 10,
-				'order' => 'ASC',
-				'orderby' => 'name',
-			);
-			 ?>
+
+			<?php get_template_part( 'entry','projects' ); ?>
 			<?php
-			render_partial('entry-projects.php', ['args' => $args, 'projects' => $projects]); // передаем переменные в подключаемый шаблон
+
+			//render_partial('entry-projects.php', ['projects' => $projects]); // передаем переменные в подключаемый шаблон
 			?>
 
 		</div>
-
-		<?php
-		if( $max_pages > 1 ) { // если страниц больше одной, то выводим кнопку с data-атрибутом следующей страницы
-		 ?>
-			<a id="projects-load-more" href="#" data-page="2">Показать еще</a> 
-		<?php 
-		}
-		?>
 
 		<?php //get_template_part( 'nav', 'below' ); ?>
 	</div>

@@ -10,7 +10,6 @@
 get_header();
 
 global $projects;
-
 ?>
 
 <?php starck_breadcrumbs(); ?>
@@ -22,6 +21,7 @@ global $projects;
 		<div id="projects-portfolio" class="row">
 			<?php get_template_part( 'entry','projects' ); ?>
 		</div>
+
 	</div>
 
 <?php get_footer(); ?>
