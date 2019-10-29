@@ -1,7 +1,10 @@
 		</div>
 	<!-- end main container -->
+	<?php starck_back_to_previous_page(); ?>
+
 	</main>
 	<!-- end main -->
+
 	<footer id="site-footer"  <?php starck_footer_class('site-footer'); ?> >
 		<!-- container -->
 		<div id="footer-container">

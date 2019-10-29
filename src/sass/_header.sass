@@ -4,13 +4,15 @@
 	display: flex
 	width: 100% 
 	height: $header-height
-	margin-top: $gutter-20/2
+	//margin-top: $gutter-20/2
 	margin-bottom: $gutter-20/2
 	align-items: center 
 	background-color: $header-bg
 	border-bottom: 1px solid darken(white, 10%)
 	z-index: 3
 	+media-breakpoint-down(sm)
+		height: $header-height / 1.5
+	+media-breakpoint-down(xs)
 		height: $header-height-min
 	#top-bar
 		background-color: $top-bar-bg
@@ -32,6 +34,8 @@
 		display: flex
 		justify-content: space-between
 		align-items: center
+		+media-breakpoint-down(md)
+			margin: 0 $gutter-20 / 2
 									
 	#branding
 		display: flex
@@ -44,6 +48,8 @@
 			max-width: $logo-width
 			height: 100%
 			//@include img-responsive
+			+media-breakpoint-down(sm)
+				max-width: $logo-width / 1.5
 			+media-breakpoint-down(xs)
 				max-width: $logo-width-min
 			img

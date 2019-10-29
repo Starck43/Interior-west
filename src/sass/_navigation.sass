@@ -1,4 +1,28 @@
-						
+%burger-line
+	position: absolute
+	width: $icon-size
+	height: 3px
+	border-radius: 3px
+	background: $menu-icon-color
+
+%nav-link
+	content: ''
+	position: absolute
+	display: block
+	top: 50%
+	right: 100%
+	margin-right: 5px 
+	background-color: $menu-link-color
+	transform: translateY(-50%)
+	opacity: 0
+
+%nav-link-hover
+	opacity: 1
+	width: 3px
+	height: 2px
+	transition: all 100ms ease-in
+	border-left: 15px solid  $menu-link-color
+
 // Header navigation styles	
 #header-nav
 	display: flex
@@ -41,6 +65,7 @@
 		
 		li
 			display: flex
+			align-items: center
 			transition: none
 			&:hover			
 				background-color: transparent
@@ -51,24 +76,11 @@
 				@include font-settings(false, $menu-link-color, $menu-font-size, uppercase, 300, $nav-height)
 				letter-spacing: 0px
 				&::before
-					content: ''
-					position: absolute
-					display: block
-					top: 50%
-					right: 100%
-					margin-right: 5px 
-					background-color: $menu-link-color
-					transform: translateY(-50%)
-					opacity: 0
+					@extend %nav-link
 
 				&:hover
 					&::before
-						opacity: 1
-						width: 3px
-						height: 2px
-						transition: all 100ms ease-in
-						border-left: 15px solid  $menu-link-color
-					
+						@extend %nav-link-hover
 							
 			&.menu-item-has-children
 				> a i::before
@@ -140,7 +152,10 @@
 			box-sizing: border-box
 			border-top: 0px solid transparentize($theme-color , 1)
 			backdrop-filter: blur(10px)
-
+			+media-breakpoint-up(sm)
+				top: $header-height / 1.5
+			+media-breakpoint-down(xs)
+				top: $header-height-min
 			li
 				flex-direction: column
 				align-items: center
@@ -184,10 +199,10 @@
 			
 			>li:not(:last-child)::after
 				content: ''
-				height: 1px
-				width: 30px
-				bottom: 0
-				background-color: #FFF
+				//height: 1px
+				//width: 30px
+				//bottom: 0
+				//background-color: #FFF
 
 			&.active
 				opacity: 1
@@ -197,12 +212,17 @@
 					@include animation(menu-items, 300ms ease-in both, In, 0, -80px )
 					//transform: translate(0, -80px)
 					@include animation-delays(4, 700ms, -125ms)
-
+				+media-breakpoint-up(sm)
+					height: calc-height($header-height/1.5, $nav-height, $top-bar-height)
+				+media-breakpoint-down(xs)
+					height: calc-height($header-height-min, $nav-height, $top-bar-height)
 		#nav-burger
 			display: flex
+			width: $icon-size
 
 		#nav-search
-			font-size: $icon-font-size
+			margin-top: 2px 
+			font-size: $icon-font-size * 1.5
 
 		#nav-search,
 		#nav-burger

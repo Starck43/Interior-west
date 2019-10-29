@@ -34,7 +34,7 @@
 			$description = get_the_excerpt();
 			if ( $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'portfolio') )
 				$image_ratio = 'style="padding-top: ' . ($image[2]/$image[1]*100) . '%"';
-				echo '<a class="portfolio col-6" href="' . get_permalink($post->ID) . '">';
+				echo '<a class="portfolio col-sm-6" href="' . get_permalink($post->ID) . '">';
 				echo '<div class="img-container" ' . $image_ratio . '>';
 					echo '<img class="portfolio-image lazyload" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAEALAAAAAABAAEAAAICTAEAOw==" src="' . $image[0] . '" data-srcset="' . wp_get_attachment_image_srcset(get_post_thumbnail_id( $post->ID ), "medium" ). '" data-sizes="auto" data-expand="-50" alt="Проект"/>';
 					if ( !empty($title) && empty($hide_title) || !empty($description) ) {
@@ -48,7 +48,7 @@
 		endwhile;
 		if ($args['paged'] < $max_pages)  { // если текущая страница меньше общего числа страниц, то выводим кнопку для подгрузки
 			$next_page = $args['paged'] + 1; // в дата атрибуты кнопки передаем номер следующей страницы и id текущих терминов
-			echo '<a id="projects-load-more" href="#" data-id="' . $args['tax_query'][0]['terms'] . '" data-page="' . $next_page . '">Показать еще</a>';
+			echo '<a id="projects-load-more" class="button" href="#" data-id="' . $args['tax_query'][0]['terms'] . '" data-page="' . $next_page . '">Показать еще</a>';
 		}
 /*
 		if( $max_pages > 1 ) { // если страниц больше одной, то выводим кнопку с data-атрибутом следующей страницы

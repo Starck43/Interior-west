@@ -514,11 +514,20 @@ function starck_breadcrumbs() {
 
 
 function starck_back_to_top() {
-	$options = wp_parse_args( get_option( 'starck_settings', array() ), starck_get_defaults() );
+	//$options = wp_parse_args( get_option( 'starck_settings', array() ), starck_get_defaults() );
 
 	if ( starck_get_option('back_to_top') ) {
 		?>
-		<a id="back-to-top" title="Вернуться наверх" rel="nofollow" href="/"><i class="icon fa arrow-up"></i></a>
+		<a id="link-to-top" title="Вернуться наверх" rel="nofollow" href="/"><i class="icon fa arrow-up"></i></a>
+		<?php
+	}
+}
+
+function starck_back_to_previous_page() {
+
+	if ( starck_get_option('back_to_previous_page') ) {
+		?>
+		<a id="link-to-back" title="Вернуться назад" rel="nofollow" href="javascript:history.go(-1)">Назад</a>
 		<?php
 	}
 }

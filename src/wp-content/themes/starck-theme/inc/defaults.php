@@ -45,6 +45,7 @@ if ( ! function_exists( 'starck_get_defaults' ) ) {
 				'footer_widget_setting' => '1',
 				'footer_alignment' => 'center', //'left', 'right'
 				'back_to_top' => true, //false
+				'back_to_previous_page' => true, //false
 
 			)
 		);

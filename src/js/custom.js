@@ -1,7 +1,7 @@
 /*
  * Custom scripts library
  *
- * @version 1.0.6
+ * @version 1.0.7
  */
 	
 function checkMobileNavgation(nav) {
@@ -32,8 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
 	var mainheader = $('#main-header');
 	var scrollup = $('#scroll-up');
 	var search = $('#site-search-modal');
-	var back2top = $('#back-to-top');
-
+	var back2top = $('#link-to-top');
+	var gotoBack = $('#link-to-back');
+	
 /*
 // inView.js
 	inView('.someSelector')
@@ -54,8 +55,13 @@ document.addEventListener("DOMContentLoaded", function() {
 	$(window).scroll(function() {
 		//addVisibleClass(document.body.querySelectorAll('article')); //viewport.js
 
-		$('#back-to-top').topBtnToggle({
-			scrollTrigger: 1200,
+		back2top.topBtnToggle({
+			scrollTrigger: 1000,
+			//debug: true,
+		});
+
+		gotoBack.topBtnToggle({
+			scrollTrigger: 1000,
 			//debug: true,
 		});
 

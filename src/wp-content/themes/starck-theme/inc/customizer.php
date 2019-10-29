@@ -528,6 +528,25 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			)
 		);
 
+		$wp_customize->add_setting(
+			'starck_settings[back_to_previous_page]',
+			array(
+				'default' => $defaults['back_to_previous_page'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_checkbox',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[back_to_previous_page]',
+			array(
+				'type' => 'checkbox',
+				'label' => __( 'Back to Previous Page', 'starck' ),
+				'section' => 'starck_layout_content',
+				'settings' => 'starck_settings[back_to_previous_page]',
+				'priority' => 70,
+			)
+		);
 
 // Sidebar
 		$wp_customize->add_section(

@@ -27,14 +27,16 @@ input[type="checkbox"]
 .button,
 input[type="submit"]
 	position: relative
+	display: flex
 	height: $button-h
 	line-height: 1
 	width: max-content
 	padding: 0 $gutter-20
+	align-items: center
 	@include font-settings(false, $button-text-color, $base-font-size*0.8, uppercase, 500, false)
 	background-color: transparentize($theme-color, 1)
 	box-shadow: inset 0 0 0 1px $theme-color
-	border-radius: 3px
+	border-radius: 1px
 	transition: background-color 500ms ease 
 	cursor: pointer
 	&:hover
@@ -47,10 +49,10 @@ input[type="submit"]
 	font-style: inherit 
 	position: relative
 	display: flex
-	width: $icon-size
-	height: $icon-size
+	//width: $icon-size
+	//height: $icon-size
 	//padding: 5px
-	margin: 0
+	//margin: 0 $gutter-20/4
 	background-color: transparent
 	opacity: 0.7
 	font-size: 1.2em
@@ -102,14 +104,6 @@ input[type="submit"]
 				transition: bottom 100ms ease,transform 100ms cubic-bezier(.215,.61,.355,1) 150ms
 				transform: rotate(-90deg)
 
-		
-%burger-line
-	position: absolute
-	width: $icon-size
-	height: 3px
-	border-radius: 3px
-	background: $menu-icon-color
-
 #scroll-up
 	position: absolute
 	display: block
@@ -133,35 +127,49 @@ input[type="submit"]
 		//border: 1px solid white
 		box-shadow: inset 0 0 0 1px $theme-color
 
-#back-to-top
-	$btn-size: $icon-size * 1.2
+$btn-size: $icon-size * 1.2
+#link-to-top,
+#link-to-back
 	position: fixed
 	display: flex
 	align-items: center
 	justify-content: center
-	bottom: $btn-size * -1.2
-	right: 60px
+	bottom: $btn-size * 1.2
+	color: darken($theme-color, 0%)
+	transition: all 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
+	opacity: 0
+	z-index: 9999
+	&.visible
+		//bottom: $btn-size * 1
+
+#link-to-top
+	right: 60px		
 	width: $btn-size
 	height: $btn-size
 	font-size: $icon-font-size
-	//background: transparentize($theme-color, 0.8)
-	color: darken($theme-color, 0%)
 	border: 1px solid $theme-color
 	border-radius: $btn-size / 1.5
-	transition: bottom 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
-	z-index: 9999
+	//background: transparentize($theme-color, 0.8)
+	+media-breakpoint-down(lg)
+		right: $gutter-20
+	+media-breakpoint-down(md)
+		right: $gutter-20 / 2
 	&:hover
 		transition: all 300ms linear
 		color: white
 		background: $theme-color
 		border-color: $theme-color
-	&.show
-		bottom: $btn-size * 1
+
+#link-to-back
+	left: 60px
+	padding: $gutter-20 / 4 $gutter-20 / 2
+	font-size: 0.8em 	
 	+media-breakpoint-down(lg)
-		right: $gutter-20
+		left: $gutter-20
 	+media-breakpoint-down(md)
-		right: $gutter-20 / 2
-		
+		left: $gutter-20 / 2
+		background-color: transparentize($body-bg, 0.3)
+		//border-radius: 3px
 
 /* Font Awesome for a project */
 

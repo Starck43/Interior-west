@@ -11,10 +11,10 @@
 			
 			if (scrollTop > btn.scrollTrigger) {
 				//this.fadeIn(btn.scrollSpeed);
-				this.addClass('show');
+				this.addClass('visible');
 			} else {
 				//this.fadeOut(btn.scrollSpeed);
-				this.removeClass('show');
+				this.removeClass('visible');
 			}
 			
 			if( btn.debug ) {console.log('scroll Y: '+scrollTop+'px');}
