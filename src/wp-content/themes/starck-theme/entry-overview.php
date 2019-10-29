@@ -3,15 +3,15 @@
 	<?php
 	if ( has_post_thumbnail() ) {
 		?>
-		<div class="cell col-sm-12 col-md-6">
+		<div class="cell col-sm-12 col-md-8">
 			<?php the_post_thumbnail('large','class=lazyload'); ?>
 		</div>
 		<?php 
 	}
 	?>
-	<div class="cell col-sm-12 col-md-6">
+	<div class="cell col-sm-12 col-md-4">
 		<header class="overview-header">
-			<?php the_title('<h2 class="entry-title">', '</h2>'); ?> 
+			<?php the_title('<h3 class="entry-title">', '</h3>'); ?> 
 		</header>
 		<div class="entry-description">
 			<?php the_content(); ?>

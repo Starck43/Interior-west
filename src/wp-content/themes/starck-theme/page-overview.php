@@ -24,21 +24,18 @@
 		$categories = get_categories( array(
 			'taxonomy'     => 'category',
 			'child_of'     => 0,
-			'parent'       => '',
-			'orderby'      => 'term_group',
+			'orderby'      => 'name',
 			'order'        => 'ASC',
 			'hide_empty'   => 1,
 			'hierarchical' => 0,
-			'exclude'      => '',
-			'include'      => '',
 			'pad_counts'   => false,
 			// полный список параметров смотрите в описании функции http://wp-kama.ru/function/get_terms
 		) );
 		foreach ($categories as $cat) {
-			echo '<header class="entry-header"><h1 class="entry-title">'.$cat->name.'</h1></header>';
+			echo '<header class="entry-header"><h2 class="entry-title">'.$cat->name.'</h2></header>';
 			$args = array(
 				'category_name' => $cat->slug,
-				//'posts_per_page' => 5,
+				'posts_per_page' => -1,
 			);
 			$loop = new WP_Query($args);
 
