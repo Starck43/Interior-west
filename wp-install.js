@@ -1,8 +1,8 @@
 /*
  * wp-install.js
- * Usage: <node wp-nstall> in cmd console
- * Description: downloading and unpacking Wordpress in folder src/wordpress
- * Version: 1.0.1
+ * Usage: <node wp-install> in cmd console
+ * Description: downloading and unpacking Wordpress in folder src/wordpress with moving content folder up from wordpress folder
+ * Version: 1.0.2
  * Author: Stanislav Shabalin
  */
  
@@ -43,7 +43,8 @@ function downloadHTTP(url, file_name){
 function unpack(file_name, path) {
 
 	try {
-		var wpcontent_folder = path + '/wordpress/wp-content';
+		var wpcontent_folder = '/wp-content',
+			wp_folder = '/wordpress';
 		fs.accessSync(file_name);     
 		console.log(file_name + ' is extracting...');
 		fs.createReadStream(file_name)
@@ -56,11 +57,10 @@ function unpack(file_name, path) {
 					if (e) return console.log(e);
 					console.log('Delete complete!');
 				});
-				fs.realpath(wpcontent_folder, function(e) {
+				fs.realpath(path + wp_folder + wpcontent_folder, function(e) {
 					if (e) return console.log(e);
-					console.log('Deleting folder "' + wpcontent_folder + '"...');
-					fs.removeSync(wpcontent_folder);
-					console.log('Delete complete!');
+					move(wpcontent_folder, path); //moving content folder one level up
+					
 					console.log('WORDPRESS has been installed');
 				});
 		})
@@ -69,6 +69,16 @@ function unpack(file_name, path) {
 	
 }
 
+function move(wp_folder, wpcontent_folder, path) {
+	var wpcontent_folder_from = path + wp_folder + wpcontent_folder,
+		wpcontent_folder_to = path + wpcontent_folder;
+	try {
+		fs.renameSync(wpcontent_folder_from, wpcontent_folder_to);
+		console.log('Move complete!');
+	} catch (e) {
+		console.error(e);
+	}
+}
 
 downloadHTTP(FILE_URL, ZIP_FILE)
 	.then( () => {

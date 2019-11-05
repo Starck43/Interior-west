@@ -58,9 +58,10 @@ define('LOGGED_IN_SALT',   '2kRQJ[K]d8mB)@_df:h/ke+sb$s$6Cy+?a3+>YLxTGrut]YTH%cV
 define('NONCE_SALT',       'G6LH: o!>%u4)^3>frEh h_(OwzeQ#gX:vXUvbc=EDl4vNh Gj_4a|F+ urtD{WH');
 
 //define('WP_SITEURL', 'http://start-web/');
-//define('WP_HOME', 'http://start-web/wordpress');
+//define('WP_HOME', 'http://start-web/wordpress/');
 
 // Для разработчиков: Режим отладки WordPress. В обычном режиме false
+// Логи событий будут сохраняться в файл debug.log в папке wp-content.
 define('WP_DEBUG', false);
 
 //Задаем свой WordPress.com API-ключ как константу
@@ -74,6 +75,16 @@ define( 'WP_DEFAULT_THEME', 'starck-theme' );
 
 //Откажемся от автоматических обновлений тем в папке wp-content во время глобального обновления WP
 define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true );
+
+//Количество резервных постов в БД
+define( 'WP_POST_REVISIONS', 1 );
+
+//Включаем сохранение sql запросов. Чтобы их видеть, в footer.php вставляем код для отображения запросов
+//define( 'SAVEQUERIES', true );
+
+// Оптимизация, восстановление базы данных
+// http://start-web/wp-admin/maint/repair.php
+//define('WP_ALLOW_REPAIR', true);
 
 /* Это всё, дальше не редактируем. */
 /** Абсолютный путь к директории WordPress. */

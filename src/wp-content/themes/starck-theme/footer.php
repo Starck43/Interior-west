@@ -33,7 +33,15 @@
 		wp_footer();
 		
 		?>
-
+		
+		<?php //Для отслеживания запросов к БД в режиме администратора
+		if (current_user_can('administrator')){
+			global $wpdb;
+			echo "<pre>";
+			print_r($wpdb->queries);
+			echo "</pre>";
+		}
+		?>
 	</footer>
 
 <!-- 	<div id="site-search-modal" class="hidden">
