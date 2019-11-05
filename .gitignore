@@ -5,8 +5,11 @@
 /resources/
 /backup/
 /src/wordpress/
-/src/wp-content/
-/src/wp-content/themes/starck-theme/css
-/src/wp-content/themes/starck-theme/js
-!src/wp-content/themes/starck-theme/
-!src/wordpress/search-replace-db
+!/src/wordpress/search-replace-db
+/src/wp-content/*
+/src/wp-content/themes/*
+!/src/wp-content/themes/
+!/src/wp-content/themes/starck-theme/
+/src/wp-content/themes/starck-theme/css/
+/src/wp-content/themes/starck-theme/js/
+
