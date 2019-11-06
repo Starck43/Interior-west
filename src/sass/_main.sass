@@ -1,3 +1,10 @@
+//Parallax effect including
+
+$parallax-perspective : 1 !default
+$parallax-element     : "main-container" !default
+$parallax-ios         : true !default
+@include parallax-init
+
 // Main styles
 #main
 	position: relative
@@ -79,6 +86,8 @@
 			line-height: $base-line-height
 			+media-breakpoint-down(xs)
 				font-size: 1.2em
+		header
+			@include parallax(.4)
 			
 		#content
 			float: left

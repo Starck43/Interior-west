@@ -1,4 +1,4 @@
-<article class="overview post-<?php the_ID(); ?> row" <?php post_class(); ?>>
+<article class="entry post-<?php the_ID(); ?> row" <?php post_class(); ?>>
 
 	<?php
 	if ( has_post_thumbnail() ) {
