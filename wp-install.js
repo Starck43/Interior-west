@@ -2,10 +2,10 @@
  * wp-install.js
  * Usage: <node wp-install> in cmd console
  * Description: downloading and unpacking Wordpress in folder src/wordpress with moving content folder up from wordpress folder
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: Stanislav Shabalin
  */
- 
+
  // Dependencies
 var fs = require('fs-extra'),
 	url = require('url'),
@@ -30,7 +30,7 @@ function downloadHTTP(url, file_name){
 	    			if (responseSent) return;
 	    			responseSent = true;
 	    			resolve();
-	    		});	
+	    		});
 	    	});
 	    }).on('error', e => {
 	    	if(responseSent) return;
@@ -45,44 +45,70 @@ function unpack(file_name, path) {
 	try {
 		var wpcontent_folder = '/wp-content',
 			wp_folder = '/wordpress';
-		fs.accessSync(file_name);     
+		fs.accessSync(file_name);
 		console.log(file_name + ' is extracting...');
 		fs.createReadStream(file_name)
 		.pipe(unzipper.Extract({ path: path }))
 		.promise()
 		.then( () => {
 				console.log('Done!');
-				console.log(file_name + ' is deleting...');
-				fs.unlink(file_name, function(e) {
-					if (e) return console.log(e);
-					console.log('Delete complete!');
-				});
 				fs.realpath(path + wp_folder + wpcontent_folder, function(e) {
 					if (e) return console.log(e);
-					move(wpcontent_folder, path); //moving content folder one level up
-					
-					console.log('WORDPRESS has been installed');
+					//moving content from wordpress/wp-content folder
+					move_content(wp_folder, wpcontent_folder, path)
+						.then( () => {
+							console.log('WORDPRESS has been installed successfully');
+						})
+						.catch ( err => console.error('WORDPRESS has been installed with some errors!', err) );
 				});
 		})
 		.catch ( err => console.error('Unpacking error', err) );
 	} catch {err => console.log('There is no "' + file_name + '" file to extract') };
-	
+
 }
 
-function move(wp_folder, wpcontent_folder, path) {
+function move_content(wp_folder, wpcontent_folder, path) {
 	var wpcontent_folder_from = path + wp_folder + wpcontent_folder,
-		wpcontent_folder_to = path + wpcontent_folder;
-	try {
-		fs.renameSync(wpcontent_folder_from, wpcontent_folder_to);
-		console.log('Move complete!');
-	} catch (e) {
-		console.error(e);
-	}
+		wpcontent_folder_to = path + wpcontent_folder,
+		lang = '/languages',
+		plugins = '/plugins';
+	return new Promise((resolve, reject) => {
+		try {
+			console.log('Moving ' + lang + ' folder from ' + wpcontent_folder_from + ' to ' + wpcontent_folder_to);
+			fs.moveSync(wpcontent_folder_from+lang, wpcontent_folder_to+lang, { overwrite: true });
+			console.log('Done!');
+
+			console.log('Moving ' + plugins + ' folder from ' + wpcontent_folder_from + ' to ' + wpcontent_folder_to);
+			fs.moveSync(wpcontent_folder_from+plugins, wpcontent_folder_to+plugins, { overwrite: true });
+			console.log('Done!');
+
+			console.log('Deleting folder ' + wpcontent_folder_from + ' ...');
+			fs.removeSync(wpcontent_folder_from);
+			console.log('Done!');
+
+			console.log('Deleting archive file ' + ZIP_FILE + ' ...');
+			fs.removeSync(ZIP_FILE);
+			console.log('Done!');
+
+			resolve();
+		} catch (e) {
+			console.error(e);
+			reject(e);
+		}
+	});
 }
 
-downloadHTTP(FILE_URL, ZIP_FILE)
-	.then( () => {
-		console.log('File is downloaded successfully!');
-		unpack(ZIP_FILE, EXTRACT_DIR);
-	})
-	.catch ( err => console.error('Error while downloading', err) );
+//-----------START-----------
+try {
+    fs.accessSync(ZIP_FILE);
+    // Do something
+	console.log('File '+ZIP_FILE+' exists');
+	unpack(ZIP_FILE, EXTRACT_DIR);
+} catch (e) {
+	downloadHTTP(FILE_URL, ZIP_FILE)
+		.then( () => {
+			console.log('File is downloaded successfully!');
+			unpack(ZIP_FILE, EXTRACT_DIR);
+		})
+		.catch ( err => console.error('Error while downloading', err) );
+}
