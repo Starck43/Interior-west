@@ -2,6 +2,8 @@ jQuery(function($){
 	var actions = {
 		updateProjects: function (response) {
 			$('#projects-portfolio').html(response);
+			title = $('#projects-categories li.active').text();
+			$('#projects-entry h1').html(title);
 		},
 		loadMoreProjects: function (response) {
 			$('#projects-load-more').remove();

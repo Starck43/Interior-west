@@ -1,5 +1,5 @@
 <h1>Инструкция по разворачиванию стартового проекта на Wordpress с Gulp</h1>
-<p>(HTML-WP-Template v2)</p>
+<p>(Start-Web-Template v1.0.8)</p>
 
 <p>Автор: <b>Станислав Шабалин</b></p>
 
@@ -26,7 +26,7 @@
 <div><b>node_modules</b> - набор плагинов для запуска проекта (определяется в файле <i>package.json</i> и устанавливается после команды <i>npm i</i>). См. ниже "Запуск проекта"</div>
 <div><b><i>package.json</i></b> - собранный установочный пакет необходимых плагинов</div>
 <div><b><i>wp-install.js</i></b> - скрипт для установки последней версии CMS WordPress (rus)</div>
-<div><b><i>gulpfile.js</i></b> - скрипты gulp для работы с проектом</li>
+<div><b><i>gulpfile.js</i></b> - скрипты gulp для работы с проектом</div>
 </p>
 
 <h2>Запуск проекта</h2>
@@ -38,9 +38,10 @@
 	<li>Распаковать архив и(или) перейти в папку <b>Start-WP-Template</b></li>
 	<li>Запустить консоль cmd или shell (в Total Commander [shift+правая кнопка мыши]) для выполнения последующих команд:</li>
 	<li><b>npm i</b> - установить плагины в node_modules для нового проекта (запускать в корне проекта через консоль с предустановленным Node.js и глобальным Gulp</li>
-	<li><b>node wp-install</b> - развернуть WordPress</li>
+	<li><b>npm update</b> - обновить плагины в node_modules до текущей версии (при необходимости)</li>
+	<li><b>node wp-install</b> - развернуть WordPress в отдельную папку</li>
 	<li><b>gulp [default(по умол.)|styles|vendors-styles|scripts|vendors-scripts|css-compress|browser-sync|watch|rsync]</b> - запуск Gulp</li>
-	<li>Создать БД в phpMyAdmin с названием wordpress и создать нового пользователя со своим именем и паролем (по умол: admin/admin). Разрешить все права на управление базой wordpress</li>
+	<li>Создать БД в phpMyAdmin с названием wordpress и создать нового пользователя со своим именем и паролем (по умол: admin/admin). Предоставить полные права администратору БД на управление базой wordpress (настройки должны совпадать с теми, что прописаны в src/wp-config.php)</li>
 </ol>
 
 <pre>В папке src/wp-content/themes созданы две темы: 
