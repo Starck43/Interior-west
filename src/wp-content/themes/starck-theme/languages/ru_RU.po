@@ -1,0 +1,560 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: starck-theme\n"
+"POT-Creation-Date: 2019-12-04 10:44+0000\n"
+"PO-Revision-Date: 2019-12-04 10:46+0000\n"
+"Last-Translator: Starck <saloon.as@gmail.com>\n"
+"Language-Team: Русский\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_attr_e;esc_html__;esc_html_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-SearchPath-0: .\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Loco-Version: 2.3.1; wp-5.2.4"
+
+#: 404.php:8
+msgid "Not Found"
+msgstr "Ничего не найдено"
+
+#: 404.php:12
+msgid "Nothing found for the requested page. Try a search instead?"
+msgstr ""
+"Ничего не найдено для запрашиваемой страницы. Попробуйте воспользоваться "
+"поиском!"
+
+#: 404.php:19 inc/theme-functions.php:497
+msgid "Go back"
+msgstr "Вернуться назад"
+
+#: attachment.php:18 main-header.php:48
+#, php-format
+msgid "Return to %s"
+msgstr "Вернуться к %s"
+
+#: attachment.php:18
+#, php-format
+msgid "%s Return to "
+msgstr "%s возвращение к"
+
+#: breadcrumbs.php:15
+msgid "Home"
+msgstr "Главная"
+
+#: comments.php:48
+msgctxt "comments count"
+msgid "Trackback or Pingback"
+msgid_plural "Trackbacks and Pingbacks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: entry-footer.php:3
+msgid "Categories: "
+msgstr "Категории: "
+
+#: entry-footer.php:5
+msgid "Comments"
+msgstr "Комментарии"
+
+#: entry-projects.php:41
+#, php-format
+msgid "Project %s"
+msgstr "Проект %s"
+
+#: entry-projects.php:58
+msgid "Show more"
+msgstr "Показать еще"
+
+#: footer.php:21
+msgid "Y"
+msgstr ""
+
+#: main-header.php:66
+msgid "Detail"
+msgstr "Подробнее"
+
+#: main-header.php:77
+msgid "Scroll"
+msgstr "Подняться вверх"
+
+#: nav-below-single.php:2 inc/customizer.php:269
+msgid "Navigation"
+msgstr "Навигация"
+
+#: nav-below.php:10
+#, php-format
+msgid "%s older"
+msgstr "%s старше"
+
+#: nav-below.php:11
+#, php-format
+msgid "newer %s"
+msgstr "Новее %s"
+
+#: nav-below.php:15
+msgid "Page navigation"
+msgstr "Постраничная навигация"
+
+#. Name of the template
+msgid "Overview Post Template"
+msgstr "Шаблон Обзор записей"
+
+#. Name of the template
+msgid "Projects Template"
+msgstr "Шаблон Проекты"
+
+#: search.php:17
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Результаты поиска для: %s"
+
+#: search.php:18
+msgid "Found by request: "
+msgstr "Найдено по запросу: "
+
+#: search.php:29
+msgid "Nothing Found"
+msgstr "Ничего не найдено"
+
+#: search.php:31
+msgid "Sorry, nothing matched your search. Please try again"
+msgstr ""
+"Извините, ничего не нашлось по вашему запросу. Пожалуйста, измените "
+"поисковый запрос"
+
+#: searchform.php:2 inc/projects_layout.php:59
+msgid "Search"
+msgstr "Поиск"
+
+#: searchform.php:3
+msgid "Find"
+msgstr "Поиск"
+
+#: searchform.php:5
+msgid "Close"
+msgstr "Закрыть"
+
+#: single-projects.php:80
+msgid "If you like this, please, get in touch and we can discuss your project."
+msgstr ""
+"Если Вам понравился этот проект, то Вы можете связаться с нами для "
+"обсуждения Вашего проекта."
+
+#: inc/customizer.php:99
+msgid "Hide site title"
+msgstr "Скрыть заголовок сайта"
+
+#: inc/customizer.php:118
+msgid "Hide site description"
+msgstr "Скрыть описание сайта"
+
+#: inc/customizer.php:128
+msgid "Layout"
+msgstr "Разметка"
+
+#: inc/customizer.php:137 inc/theme-functions.php:187
+msgid "Header"
+msgstr "Заголовок страницы"
+
+#: inc/customizer.php:156
+msgid "Header container"
+msgstr "Контейнер заголовка страницы"
+
+#: inc/customizer.php:159 inc/customizer.php:291 inc/customizer.php:693
+msgid "Full-width"
+msgstr "Полная ширина контейнера"
+
+#: inc/customizer.php:160 inc/customizer.php:292 inc/customizer.php:468
+#: inc/customizer.php:694
+msgid "Bounded"
+msgstr "Ограниченная ширина контейнера"
+
+#: inc/customizer.php:180
+msgid "Header widget"
+msgstr "Заголовок виджета"
+
+#: inc/customizer.php:183 inc/customizer.php:207 inc/customizer.php:491
+msgid "Enabled"
+msgstr "Разрешено"
+
+#: inc/customizer.php:184 inc/customizer.php:208 inc/customizer.php:319
+#: inc/customizer.php:422 inc/customizer.php:492
+msgid "Disabled"
+msgstr "Запрещено"
+
+#: inc/customizer.php:204
+msgid "Top Bar appearence"
+msgstr "Отображение верхнего бара"
+
+#: inc/customizer.php:228
+msgid "Branding alignment"
+msgstr "Расположение информации о сайте"
+
+#: inc/customizer.php:231 inc/customizer.php:342 inc/customizer.php:745
+msgid "Left"
+msgstr "Слева"
+
+#: inc/customizer.php:232 inc/customizer.php:343 inc/customizer.php:746
+msgid "Center"
+msgstr "По центру"
+
+#: inc/customizer.php:233 inc/customizer.php:344 inc/customizer.php:747
+msgid "Right"
+msgstr "Справа"
+
+#: inc/customizer.php:253
+msgid "Branding position"
+msgstr "Позиция блока названия и описания сайта"
+
+#: inc/customizer.php:256
+msgid "Horizontal"
+msgstr "Горизонтально"
+
+#: inc/customizer.php:257
+msgid "Vertical"
+msgstr "Вертикально"
+
+#: inc/customizer.php:288
+msgid "Navigation container"
+msgstr "Контейнер навигации"
+
+#: inc/customizer.php:312
+msgid "Primary menu location"
+msgstr "Расположение основного меню"
+
+#: inc/customizer.php:315
+msgid "Inline Logo"
+msgstr "В одной строке с логотипом"
+
+#: inc/customizer.php:316
+msgid "Above Logo"
+msgstr "Выше логотипа"
+
+#: inc/customizer.php:317
+msgid "Below Logo"
+msgstr "Под логотипом"
+
+#: inc/customizer.php:318
+msgid "Under Header"
+msgstr "Под заголовком страницы"
+
+#: inc/customizer.php:339
+msgid "Navigation alignment"
+msgstr "Положение навигации"
+
+#: inc/customizer.php:365
+msgid "Search Icon in navigation"
+msgstr "Иконка поиска в навигационном меню"
+
+#: inc/customizer.php:386
+msgid "Burger Menu on Desktop"
+msgstr "Бургер меню для десктопной версии"
+
+#: inc/customizer.php:398
+msgid "Content"
+msgstr "Контент"
+
+#: inc/customizer.php:417
+msgid "Content Header appearence"
+msgstr "Отображение заголовка основного контента"
+
+#: inc/customizer.php:420
+msgid "Only front page"
+msgstr "Только на главной странице"
+
+#: inc/customizer.php:421
+msgid "All pages"
+msgstr "На всех страницах"
+
+#: inc/customizer.php:443
+msgid "Header background image"
+msgstr "Изображение фона заголовка"
+
+#: inc/customizer.php:464
+msgid "Main Container"
+msgstr "Main контейнер"
+
+#: inc/customizer.php:467
+msgid "Full width"
+msgstr "По ширине экрана"
+
+#: inc/customizer.php:488
+msgid "Breadcrumbs"
+msgstr "Отображать хлебные крошки"
+
+#: inc/customizer.php:513
+msgid "Scroll Up Button in Gallery"
+msgstr "Кнопка пролистывания вниз в галерее"
+
+#: inc/customizer.php:533
+msgid "Parallax Effect for Images"
+msgstr "Параллакс эффект для изображений"
+
+#: inc/customizer.php:553
+msgid "Back to Previous Page"
+msgstr "К предыдущей странице"
+
+#: inc/customizer.php:575
+msgid "Form Shortcode"
+msgstr "Шорткод формы"
+
+#: inc/customizer.php:586
+msgid "Sidebars"
+msgstr "Сайдбары"
+
+#: inc/customizer.php:605
+msgid "Page Sidebar Layout"
+msgstr "Макет страницы"
+
+#: inc/customizer.php:608 inc/customizer.php:633 inc/customizer.php:658
+msgid "Sidebar | Content"
+msgstr "Сайдбар | Контент"
+
+#: inc/customizer.php:609 inc/customizer.php:634 inc/customizer.php:659
+msgid "Content | Sidebar"
+msgstr "Контент | Сайдбар"
+
+#: inc/customizer.php:610 inc/customizer.php:635 inc/customizer.php:660
+msgid "Only content"
+msgstr "Только контент"
+
+#: inc/customizer.php:630
+msgid "Blog Sidebar Layout"
+msgstr "Сайдбар в Blog post"
+
+#: inc/customizer.php:655
+msgid "Single Post Sidebar Layout"
+msgstr "Сайдбар в Single post"
+
+#: inc/customizer.php:671
+msgid "Footer"
+msgstr "Подвал"
+
+#: inc/customizer.php:690
+msgid "Footer container"
+msgstr "Footer контейнер"
+
+#: inc/customizer.php:714
+msgid "Footer Widgets"
+msgstr "Виджеты подвала"
+
+#: inc/customizer.php:717
+msgid "Disable"
+msgstr "Запретить"
+
+#: inc/customizer.php:742
+msgid "Footer alignment"
+msgstr "Положение подвала"
+
+#: inc/customizer.php:768
+msgid "Back to Top Button"
+msgstr "Всплывающая кнопка наверх"
+
+#: inc/meta-controls.php:38 inc/theme-functions.php:226
+msgid "Title"
+msgstr "Заголовок"
+
+#: inc/meta-controls.php:40
+msgid "Gallery"
+msgstr "Галерея"
+
+#: inc/meta-controls.php:56
+msgid "Hide Title"
+msgstr "Скрыть Заголовок страницы"
+
+#: inc/meta-controls.php:97
+msgid "Add Image"
+msgstr "Добавить изображение"
+
+#: inc/meta-controls.php:102
+msgid "Show Gallery in Header Slider"
+msgstr "Отображать галерею в виде слайдера"
+
+#: inc/meta-controls.php:107
+msgid "Slideshow Mode"
+msgstr "Режим слайдшоу"
+
+#: inc/meta-controls.php:112
+msgid "Slider Pagination"
+msgstr "Навигация слайдеров в галерее"
+
+#: inc/meta-controls.php:116
+msgid "Gallery Description"
+msgstr "Описание в галерее"
+
+#: inc/meta-controls.php:121
+msgid "Gallery Link"
+msgstr "Ссылка в галерее"
+
+#: inc/projects_layout.php:6 inc/projects_layout.php:227
+msgid "All projects"
+msgstr "Все проекты"
+
+#: inc/projects_layout.php:17 inc/projects_layout.php:34
+msgctxt "taxonomy general name"
+msgid "Projects category"
+msgstr "Категории проектов"
+
+#: inc/projects_layout.php:18
+msgctxt "taxonomy singular name"
+msgid "Projects Category"
+msgstr "Категория проекта"
+
+#: inc/projects_layout.php:19
+msgid "Add New Category"
+msgstr "Добавить категорию"
+
+#: inc/projects_layout.php:20
+msgid "Change Category"
+msgstr "Изменить категорию"
+
+#: inc/projects_layout.php:21
+msgid "New Category"
+msgstr "Новая категория"
+
+#: inc/projects_layout.php:22
+msgid "View Category"
+msgstr "Просмотр категории"
+
+#: inc/projects_layout.php:25
+msgid "All Projects Categories"
+msgstr "Все категории"
+
+#: inc/projects_layout.php:26
+msgid "Update Category"
+msgstr "Обновить категорию"
+
+#: inc/projects_layout.php:27
+msgid "Search in Categories"
+msgstr "Поиск категорий"
+
+#: inc/projects_layout.php:28
+msgid "No Categories found"
+msgstr "Категории не найдены"
+
+#: inc/projects_layout.php:29 inc/projects_layout.php:61
+msgid "Nothing found in Trash"
+msgstr "Корзина пуста"
+
+#: inc/projects_layout.php:50 inc/projects_layout.php:63
+#: inc/projects_layout.php:67
+msgctxt "post type general name"
+msgid "Projects"
+msgstr "Проекты"
+
+#: inc/projects_layout.php:51
+msgctxt "post type singular name"
+msgid "Project"
+msgstr "Проект"
+
+#: inc/projects_layout.php:52
+msgctxt "Project"
+msgid "Add New Project"
+msgstr "Новый проект"
+
+#: inc/projects_layout.php:53
+msgid "Add"
+msgstr "Добавить новый проект"
+
+#: inc/projects_layout.php:54
+msgid "Edit"
+msgstr "Изменить проект"
+
+#: inc/projects_layout.php:55
+msgid "New"
+msgstr "Новый проект"
+
+#: inc/projects_layout.php:56
+msgid "All Projects"
+msgstr "Все проекты"
+
+#: inc/projects_layout.php:57
+msgid "View"
+msgstr "Посмотреть проект"
+
+#: inc/projects_layout.php:58
+msgid "Update"
+msgstr "Обновить проект"
+
+#: inc/projects_layout.php:60
+msgid "No Projects found"
+msgstr "Проекты не найдены"
+
+#: inc/theme-functions.php:74
+msgid "Primary Menu"
+msgstr "Основное меню"
+
+#: inc/theme-functions.php:75
+msgid "Secondary Menu"
+msgstr "Дополнительное меню"
+
+#: inc/theme-functions.php:186
+msgid "Sidebar"
+msgstr "Сайдбар"
+
+#: inc/theme-functions.php:188
+msgid "Top Bar"
+msgstr "Верхний бар"
+
+#: inc/theme-functions.php:189
+msgid "Footer 1"
+msgstr "Подвал 1"
+
+#: inc/theme-functions.php:190
+msgid "Footer 2"
+msgstr "Подвал 2"
+
+#: inc/theme-functions.php:191
+msgid "Footer 3"
+msgstr "Подвал 3"
+
+#: inc/theme-functions.php:225
+msgid "Thumbnail"
+msgstr "Миниатюра"
+
+#: inc/theme-functions.php:227
+msgid "Date"
+msgstr "Дата"
+
+#: inc/theme-functions.php:237
+msgid "No image"
+msgstr "Нет фото"
+
+#: inc/theme-functions.php:497
+msgid "Back"
+msgstr "Назад"
+
+#: inc/theme-functions.php:507
+msgid "Scroll up"
+msgstr "Прокрутить вверх"
+
+#. Name of the theme
+msgid "Starck Theme"
+msgstr ""
+
+#. Description of the theme
+msgid ""
+"Based on Blankslate theme. Clean, simple, unstyled, semi-minified, "
+"unformatted, and valid code, SEO-friendly, jQuery-enabled, no programmer "
+"comments, standardized and as white label as possible, and most importantly, "
+"the CSS is reset for cross-browser-compatability and no intrusive visual CSS "
+"styles have been added whatsoever. A perfect skeleton theme. For support and "
+"suggestions, go to: https://github.com/tidythemes/blankslate/issues. Thank "
+"you."
+msgstr ""
+
+#. URI of the theme
+msgid "https://github.com/tidythemes/blankslate"
+msgstr ""
+
+#. Author of the theme
+msgid "S.Shabalin"
+msgstr ""
