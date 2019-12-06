@@ -16,7 +16,7 @@ define( 'WP_CONTENT_URL',  "//{$_SERVER['HTTP_HOST']}/wp-content" );
 
 // ** Параметры MySQL: Эту информацию можно получить у вашего хостинг-провайдера ** //
 /** Имя базы данных для WordPress */
-define('DB_NAME', 'wordpress');
+define('DB_NAME', 'u0569630_wp565');
 /** Имя пользователя MySQL */
 define('DB_USER', 'admin');
 /** Пароль к базе данных MySQL */
@@ -38,7 +38,7 @@ define('DB_COLLATE', '');
  * В принципе этот префикс можно не трогать, все будет работать. 
  * Указанный в переменной $table_prefix будет использоваться для всех создаваемых таблиц.
  */
-$table_prefix  = 'web_';
+$table_prefix  = 'wp23_';
 /**
  *
  *
