@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$total = isset( $wp_query->max_num_pages ) ? $wp_query->max_num_pages : 1;
 	$big = 999999999; // уникальное число для замены
 	$args = array (
@@ -12,9 +12,9 @@
 	);
 	if ( $total > 1 ) {
 		echo '<nav class="navigation posts-navigation">';
-		echo '<h2 class="screen-reader-text">Постраничная навигация</h2>';
+		echo '<h2 class="screen-reader-text">' . __('Page navigation','starck') . '</h2>';
 		echo '<div class="nav-links">';
-		echo paginate_links( $args ); 
+		echo paginate_links( $args );
 		echo '</div></nav>';
 	}
 ?>

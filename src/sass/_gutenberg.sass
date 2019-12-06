@@ -1,0 +1,24 @@
+.wp-block-columns
+	display: flex
+	flex-wrap: wrap
+	margin-right: 15px
+	margin-left: 15px
+[class*='wp-block-'] >div
+	margin-top: $gutter/4
+	&:first-child
+		@extend .grey-bg
+		padding: 1em
+
+.wp-block-column
+	display: flex
+	flex-direction: column
+	justify-content: space-evenly
+	align-items: center
+
++media-breakpoint-down(sm)
+	.wp-block-column
+		flex-basis: 100% !important
+		margin-left: 0 !important
+		margin-right: 0 !important
+		p
+			text-align: center !important

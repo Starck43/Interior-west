@@ -1,3 +1,4 @@
+.*
 /node_modules/
 /.git/
 /**/Thumbs.db
@@ -10,6 +11,5 @@
 /src/wp-content/themes/*
 !/src/wp-content/themes/
 !/src/wp-content/themes/starck-theme/
-/src/wp-content/themes/starck-theme/css/
-/src/wp-content/themes/starck-theme/js/
 !/src/wp-content/backup/
+/*.sublime-workspace

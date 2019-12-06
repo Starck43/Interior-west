@@ -1,8 +1,8 @@
 <?php
 /**
- * Builds our Customizer controls.
+ * Builds our Customizer controls in the theme settings.
  *
- * @package Starcktheme
+ * @package StarckTheme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,6 +36,15 @@ if ( ! function_exists( 'starck_sanitize_checkbox' ) ) {
 	}
 }
 
+if ( ! function_exists( 'starck_sanitize_text_field' ) ) {
+	/**
+	 * Sanitize text values.
+	 */
+	function starck_sanitize_text_field( $value ) {
+		return strip_tags( stripslashes( $value ) ); // cut slashes and HTML tags
+	}
+}
+
 
 if ( ! function_exists( 'starck_customize_register' ) ) {
 	add_action( 'customize_register', 'starck_customize_register' );
@@ -63,13 +72,13 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'normal'    => 'Светлая', // перечисляем в виде массива
 				'inverse'   => 'Темная'
 				'sanitize_callback'  => 'true_sanitize_copyright', // функция, обрабатывающая значение поля при сохранении
-				
+
 			Default Controls:
 				WP_Customize_Image_Control
 				WP_Customize_Color_Control
 				WP_Customize_Media_Control
 				WP_Customize_Nav_Menu_Control
-				
+
 			)
  *
  */
@@ -353,7 +362,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[nav_search_setting]',
 			array(
 				'type' => 'checkbox',
-				'label' => __( 'Search icon in navigation', 'starck' ),
+				'label' => __( 'Search Icon in navigation', 'starck' ),
 				'section' => 'starck_layout_navigation',
 				'settings' => 'starck_settings[nav_search_setting]',
 				'priority' => 30,
@@ -374,13 +383,13 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[nav_burger]',
 			array(
 				'type' => 'checkbox',
-				'label' => __( 'Burger menu on desktop', 'starck' ),
+				'label' => __( 'Burger Menu on Desktop', 'starck' ),
 				'section' => 'starck_layout_navigation',
 				'settings' => 'starck_settings[nav_burger]',
 				'priority' => 40,
 			)
 		);
-				
+
 
 // Main content
 		$wp_customize->add_section(
@@ -405,7 +414,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[content_header_setting]',
 			array(
 				'type' => 'select',
-				'label' => __( 'Content header appearence', 'starck' ),
+				'label' => __( 'Content Header appearence', 'starck' ),
 				'section' => 'starck_layout_content',
 				'choices' => array(
 					'front-page' => __( 'Only front page', 'starck' ),
@@ -452,7 +461,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[main_bound_setting]',
 			array(
 				'type' => 'select',
-				'label' => __( 'Main container', 'starck' ),
+				'label' => __( 'Main Container', 'starck' ),
 				'section' => 'starck_layout_content',
 				'choices' => array(
 					'full-width' => __( 'Full width', 'starck' ),
@@ -501,7 +510,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[scroll_up]',
 			array(
 				'type' => 'checkbox',
-				'label' => __( 'Scroll up button in gallery', 'starck' ),
+				'label' => __( 'Scroll Up Button in Gallery', 'starck' ),
 				'section' => 'starck_layout_content',
 				'settings' => 'starck_settings[scroll_up]',
 				'priority' => 50,
@@ -521,7 +530,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 			'starck_settings[parallax]',
 			array(
 				'type' => 'checkbox',
-				'label' => __( 'Parallax effect for images', 'starck' ),
+				'label' => __( 'Parallax Effect for Images', 'starck' ),
 				'section' => 'starck_layout_content',
 				'settings' => 'starck_settings[parallax]',
 				'priority' => 60,
@@ -545,6 +554,28 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'section' => 'starck_layout_content',
 				'settings' => 'starck_settings[back_to_previous_page]',
 				'priority' => 70,
+			)
+		);
+
+
+		$wp_customize->add_setting(
+			'starck_settings[form_shortcode_setting]',
+			array(
+				'default' => $defaults['form_shortcode_setting'],
+				'type' => 'option',
+				'sanitize_callback' => 'starck_sanitize_text_field',
+				//'transport' => 'refresh' //'postMessage',
+			)
+		);
+
+		$wp_customize->add_control(
+			'starck_settings[form_shortcode_setting]',
+			array(
+				'type' => 'text',
+				'label' => __( 'Form Shortcode', 'starck' ),
+				'section' => 'starck_layout_content',
+				'settings' => 'starck_settings[form_shortcode_setting]',
+				'priority' => 80,
 			)
 		);
 
@@ -632,7 +663,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'priority' => 30,
 			)
 		);
-		
+
 // Footer
 		$wp_customize->add_section(
 			'starck_layout_footer',
@@ -642,7 +673,7 @@ if ( ! function_exists( 'starck_customize_register' ) ) {
 				'panel' => 'starck_layout_panel',
 			)
 		);
-		
+
 		$wp_customize->add_setting(
 			'starck_settings[footer_bound_setting]',
 			array(

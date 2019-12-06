@@ -10,33 +10,38 @@
 		//height: $footer-height
 		overflow: hidden
 		background: $footer-bg
-		font-size: 0.8em 
 		//color: #FFF
 		.footer-widgets
 
 			display: flex
-			//justify-content: space-around
-			padding: $gutter-20 / 2	 
-			
+			margin: 2vh $gutter/2
+			//align-items: center
+			justify-content: space-between
+
 			.footer-widget
-				//display: flex
-				width: 100%
-				margin:  0 0 auto
+				flex-basis: 100%
+				//width: 100%
+				margin: auto
 				//justify-content: center
-				//align-items: start
 				&:nth-child(n)
 					text-align: center
-				&:first-child
+				&:first-child:not(:last-child)
 					text-align: left
-				&:last-child
+				&:last-child:not(:first-child)
 					text-align: right
-
+				a
+					color: white
 				table
-					margin: auto 
+					margin: auto
 
 		#copyright
 			//background: $body-bg
-			padding: $gutter-20 / 2
+			margin: 2vh $gutter/2
 			text-align: center
+			font-size: 0.8em
 
+	+media-breakpoint-down(sm)
+		.icon
+			width: $icon-sm-size
+			height: $icon-sm-size
 // <!-- End Footer -->

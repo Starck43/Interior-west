@@ -16,7 +16,7 @@
 		</article>
 
 		<div class="goto-back">
-			<a href = "#" <?php echo 'onclick="javascript:history.back(); return false;"'?>><i class="fa fa-angle-left"></i><?php esc_html_e( 'Go back', 'starck' ); ?></a>
+			<a href = "#" <?php echo 'onclick="javascript:history.back(); return false;"'?>><i class="icon arrow left"></i><?php esc_html_e( 'Go back', 'starck' ); ?></a>
 		</div>
 
 	</section>

@@ -1,36 +1,21 @@
 #overview-page
-	@include img-responsive
+	clear: both
 	article
-		//padding-bottom: $gutter-30
-		.cell
-			margin-bottom: $gutter-20*2
-		.preview-description
-			height: fit-content
-			//margin-top: $gutter-20
-			//margin-bottom: $gutter-20
-			background-color: transparentize($main-bg, 0.3)
-			>*
-				padding: 0 $gutter-20
-			&:last-child
-				padding-bottom: $gutter-30/2
-		&:nth-child(odd)
-			+media-breakpoint-up(md)
-				.preview-description
-					margin-left: -10vw
-		&:nth-child(even)
-			+media-breakpoint-up(md)
+		.overview-content
+			display: flex
+			flex-direction: column
+		.overview-thumbnail
+			+media-breakpoint-down(sm)
+				margin-bottom: $gutter/4
+		+media-breakpoint-up(md)
+			&:nth-child(odd)
+				.overview-content
+					align-items: end
+					.overview-title
+						text-align: right
+			&:nth-child(even)
 				flex-direction: row-reverse
-				.preview-description
-					margin-right: -10vw
-		+media-breakpoint-down(md)
-			//padding-bottom: $gutter-30/2
-			.preview-description
-				margin-left: 0
-				margin-right: 0
-				margin-bottom: $gutter-30
-			.preview-img
-				margin-bottom: $gutter-20
-				img
-					padding: 0 $gutter-20
-		+media-breakpoint-down(xs)
-			font-size: 0.8em
+				.overview-content
+					align-items: start
+					.overview-title
+						text-align: left

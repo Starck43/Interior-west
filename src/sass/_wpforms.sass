@@ -1,14 +1,15 @@
 
 //WP Forms plugin's styles
 .wpforms-container
+	width: 100%
 	max-width: 600px
-	@include push--auto
+	//@include push--auto
 	text-align: left
-	//padding: $gutter-20 / 2 
+	font-size: 0.8em
 
 	.wpforms-one-half, .wpforms-field
 		margin-bottom: 20px
-		+media-breakpoint-down(xs)	
+		+media-breakpoint-down(xs)
 			margin-bottom: 15px
 
 	.wpforms-field
@@ -19,53 +20,54 @@
 		float: right
 		&.wpforms-first
 			float: left
-		+media-breakpoint-down(xs)	
+		+media-breakpoint-down(xs)
 			position: relative
 			width: 100%
 			&:first-child
-				margin-bottom: 30px
-			&.wpforms-first
-				label
-					display: none
-			label
-				position: absolute
-				left: 0
-				top: -$base-font-size
-	.wpforms-field-sublabel
-		display: none
-		+media-breakpoint-down(xs)
-			display: block
+				//margin-bottom: 30px
 
-	.wpforms-sublabel-hide, .wpforms-field-hp
+			&:not(.wpforms-first)
+				display: none
+
+	.wpforms-label-hide, .wpforms-sublabel-hide, .wpforms-field-hp, .wpforms-field-limit-text
 		display: none
 
 	label
-		font-weight: bold
+		//font-weight: bold
 
 	textarea
-		height: 150px
+		height: $button-h
+		line-height: $button-h - 10px
+		overflow: hidden
+		&:focus
+			height: 100px
 
-	.wpforms-required-label
+	.wpforms-error, .wpforms-required-label
 		color: red
+		font-weight: normal
+	label.wpforms-error
+		text-transform: uppercase
 
 	.wpforms-confirmation-container
 		padding: 20px
 		border: 1px solid #bbb
 		border-radius: 3px
 		p
-			margin: 1em 0 
+			margin: 1em 0
 
 	.wpforms-recaptcha-container
 		float: right
 		+media-breakpoint-down(xs)
 			display: flex
-			width: 100% 
+			width: 100%
 			.g-recaptcha
 				margin: auto
 
 
 	.wpforms-submit-container
-		+media-breakpoint-down(xs)
-			padding-top: $gutter-20
-			clear: both
-			text-align: center
+		padding-top: $gutter-20
+		float: right
+		+media-breakpoint-down(sm)
+			float: none
+			button
+				margin: auto

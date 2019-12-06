@@ -1,29 +1,42 @@
 //Control selectors
 
-input, textarea
+input:not([type="submit"]), textarea
 	@include font-settings(false, $button-text-color, $base-font-size, false, 300, 1.3)
 	width: 100%
 	//margin-top: 3px
-	padding: 5px 10px
-	border-radius: 3px 
-	border: 1px solid $base-border-color 
+	padding: 5px 0px
+	background-color: transparent
+	border-radius: 0
+	border: none
+	border-bottom: 1px solid transparentize($base-shadow-color,.5)
+	transition: all 300ms ease
 	outline: none
 	resize: vertical
 	&:focus
-		border-color: $theme-color
+		//border-color: $theme-color
+		padding-left: 10px
+		padding-right: 10px
+		border-bottom: 1px solid $base-border-color
 		outline-offset: 0
+		@extend .grey-bg
 	&:-webkit-autofill
 		box-shadow: inset 0 0 0 50px transparentize($theme-color, 0) !important /* Цвет фона */	d
-	
+	&::placeholder
+		font-size: 0.8em
+		vertical-align: middle
+
 input
-	line-height: 30px
+	border: none
+	height: $button-h
+	line-height: 100%
 
 input[type="checkbox"]
 	width: auto
-	
+
 .search-submit
-	visibility: hidden	
-	
+	visibility: hidden
+
+button,
 .button,
 input[type="submit"]
 	position: relative
@@ -37,40 +50,19 @@ input[type="submit"]
 	background-color: transparentize($theme-color, 1)
 	box-shadow: inset 0 0 0 1px $theme-color
 	border-radius: 1px
-	transition: background-color 500ms ease 
+	transition: background-color 500ms ease
 	cursor: pointer
 	&:hover
 		background-color: transparentize($theme-color, 0.5)
 		color: $button-text-hover
 
 
-.icon
-	//font-family: "fontello"
-	font-style: inherit 
-	position: relative
-	display: flex
-	//width: $icon-size
-	//height: $icon-size
-	//padding: 5px
-	//margin: 0 $gutter-20/4
-	background-color: transparent
-	opacity: 0.7
-	font-size: 1.2em
-	text-align: center
-	text-transform: none
-	justify-content: center
-	align-items: center
-	overflow: visible
-	cursor: pointer
-	transition: opacity 200ms ease
-					
-	&:hover
-		opacity: 1
-		//color: $theme-color 
-			
-.burger-icon	
+.burger-icon
 	.burger-inner
 		@extend %burger-line
+		//width: $icon-size - 10px
+		left: 7px
+		right: 0
 		top: 50%
 		transform: translateY(-50%)
 		//transition: all 100ms cubic-bezier(.55,.055,.675,.19)
@@ -78,31 +70,75 @@ input[type="submit"]
 		&::before
 			content: ""
 			@extend %burger-line
+			//width: $icon-size
+			left: -7px
+			right: 0
 			top: -10px
-			left: 0
 			transition: top 100ms ease 150ms, opacity 100ms ease
-			
+
 		&::after
 			content: ""
 			@extend %burger-line
+			//width: $icon-size - 10px
+			left: 10px
+			right: 0
 			bottom: -10px
-			left: 0
 			transition: bottom 100ms ease 150ms, transform 100ms cubic-bezier(.55,.055,.675,.19)
 
 	&.active
 		.burger-inner
-			transition: all 150ms cubic-bezier(.215,.61,.355,1)
+			left: 0
+			transition: all 100ms cubic-bezier(.215,.61,.355,1)
 			transform: rotate(45deg)
-			
+
 			&::before
+				left: 0
 				top: 0
 				opacity: 0
 				transition: top 100ms ease,opacity 100ms ease 150ms
-				
+
 			&::after
+				left: 0
 				bottom: 0
 				transition: bottom 100ms ease,transform 100ms cubic-bezier(.215,.61,.355,1) 150ms
 				transform: rotate(-90deg)
+
+
+.close-icon
+	@include push--absolute
+	width: $icon-size
+	height: $icon-size
+	left: 50%
+	//transform: translateY(100%)
+	transition: opacity 150ms ease
+	mix-blend-mode: exclusion
+	opacity: 0.7
+	cursor: pointer
+
+	&::before,
+	&::after
+		content: ''
+		position: absolute
+		width: 100%
+		top: 50%
+		height: 2px
+		margin-top: -1px
+		background: white
+		border-radius: 1px
+		transition: transform 150ms ease
+	&::before
+		transform: rotate(45deg)
+
+	&::after
+		transform: rotate(-45deg)
+
+	&:hover
+		opacity: 1
+		&::before,
+			transform: rotate(135deg)
+		&::after
+			transform: rotate(-135deg)
+		//transform-origin: right
 
 #scroll-up
 	position: absolute
@@ -111,7 +147,7 @@ input[type="submit"]
 	height: 45px
 	bottom: 30px
 	left: 50%
-	color: #FFF 
+	color: #FFF
 	//background-color: transparentize($theme-color, 0.5)
 	transition: all 200ms ease
 	border-radius: 15px
@@ -120,7 +156,7 @@ input[type="submit"]
 	.icon
 		margin-top: 2px
 		width: auto
-		font-size: 1.6em 
+		font-size: 1.6em
 		@include animation(scroll-up, 1.3s infinite ease, no-fade, 0, -3px, 0, 6px)
 	&:hover
 		background: transparentize($theme-color, 0)
@@ -129,79 +165,175 @@ input[type="submit"]
 
 $btn-size: $icon-size * 1.2
 #link-to-top,
-#link-to-back
+#link-to-back:not(.show-in-top)
 	position: fixed
 	display: flex
 	align-items: center
 	justify-content: center
-	bottom: $btn-size * 1.2
-	color: darken($theme-color, 0%)
+	bottom: em($footer-h) + $btn-size * 2
+	color: black
+	border: 1px solid $nav-bg
+	border-radius: 1px //$btn-size / 1.5
+	background-color: transparentize($nav-bg, 0.5)
 	transition: all 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
 	opacity: 0
 	z-index: 9999
-	&.visible
-		//bottom: $btn-size * 1
+	@extend .no-select
+	&:hover
+		transition: all 150ms linear
+		//color: white
+		background-color: transparentize($nav-bg, 0)
 
 #link-to-top
-	right: 60px		
+	right: 1vw
 	width: $btn-size
 	height: $btn-size
 	font-size: $icon-font-size
-	border: 1px solid $theme-color
-	border-radius: $btn-size / 1.5
-	//background: transparentize($theme-color, 0.8)
 	+media-breakpoint-down(lg)
 		right: $gutter-20
 	+media-breakpoint-down(md)
 		right: $gutter-20 / 2
-	&:hover
-		transition: all 300ms linear
-		color: white
-		background: $theme-color
-		border-color: $theme-color
 
 #link-to-back
-	left: 60px
-	padding: $gutter-20 / 4 $gutter-20 / 2
-	font-size: 0.8em 	
-	+media-breakpoint-down(lg)
-		left: $gutter-20
-	+media-breakpoint-down(md)
-		left: $gutter-20 / 2
-		background-color: transparentize($body-bg, 0.3)
-		//border-radius: 3px
+	font-size: .8em
+	text-transform: uppercase
+	.back-caption
+		@extend .no-select
+	&:not(.show-in-top)
+		left: 0
+		//border-radius: 2px
+		//border: 1px solid transparentize($theme-color, 0.5)
+		//background-color: transparentize($nav-bg, 0)
+		transform: translateX(-100%)
 
-/* Font Awesome for a project */
+		&.visible
+			transform: translateX(0%)
+		+media-breakpoint-up(md)
+			padding: 8px 10px
+			color: #FFF
+			.icon
+				display: none
+		+media-breakpoint-down(sm)
+			width: $gutter/2
+			min-width: $gutter-30
+			height: $gutter/2
+			min-height: $gutter-30
+			//padding: 5px 7px
+			//background-color: transparent
+			//border: 1px solid $nav-bg
+			border-left: none
+			.icon
+				//font-size: 1.4em
+			.back-caption
+				display: none
+	&.show-in-top
+		position: absolute
+		display: flex
+		//top: $gutter/4
+		left: -15px
+		//right: -15px
+		height: $gutter/2
+		align-items: center
+		@include animation(link-back, 800ms 1s ease-in both, In, -100%, 0%, 0%, 0% )
+		+media-breakpoint-down(sm)
+			//left: 50%
+			//margin: 0
+			//@include animation(link-back, 800ms 1s ease-in both, In, -50%, -100%, -50%, 0% )
+		+media-breakpoint-down(xs)
+			//position: relative
+			//top: $gutter/4
+			//justify-content: center
+		%extend .visible
+		cursor: pointer
+		z-index: 3
+		.icon
+			display: none
 
-.fa-spinner::before 
-	content: "\f110" 
+.icon
+	display: inline-block
+	width: $icon-size
+	height: $icon-size
+	background-size: cover
+	background-position: center
+	stroke: black
+	stroke-width: 1px
+	transition: opacity 150ms ease
+	opacity: 0.7
+	cursor: pointer
+	&:hover
+		opacity: 1
+		//color: $theme-color
+	&.inverse
+		fill: currentColor
+		stroke: currentColor
+		//stroke-width: 0
+		//mix-blend-mode: exclusion
 
-.fa-angle-left::before
-	content: "\f104" 
+.search-icon
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"></circle><line x1="22" y1="22" x2="15.50" y2="15.50"></line></svg>')
 
-.arrow-down::before 
-	content: "\f078" 
+.arrow-icon
+	stroke: currentColor
+	stroke-width: 1
+	vertical-align: middle
+	&.left
+		transform: rotate(0deg)
+	&.up
+		transform: rotate(90deg)
+	&.right
+		transform: rotate(180deg)
+	&.down
+		transform: rotate(270deg)
 
-.arrow-left::before 
-	content: "\f053" 
+.check-icon::before
+	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>')
+	background-size: 100%
+	position: absolute
+	display: inline-flex
+	width: $icon-font-size
+	height: $icon-font-size
+	left: 0
+	margin-top: 4px
 
-.arrow-right::before 
-	content: "\f054" 
+.checkbox-icon
+	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>')
 
-.arrow-up::before 
-	content: "\f077"
+svg
+	width: 100%
+	height: 100%
+	//left: 0
 
-.fa-long-arrow-alt-down:before
-	content: "\f309"
+.icon-in-link
+	display: inline-flex
+	align-items: center
+	&.top
+		flex-direction: column
+		justify-content: center
+		.icon
+			margin-bottom: 0.5em
 
-.fa-long-arrow-alt-left:before
-	content: "\f30a"
+#instagram-link
+	.instagram-icon
+		margin-right: 0.5em
+		//stroke-width: 1px
 
-.fa-long-arrow-alt-right:before
-	content: "\f30b"
+#phone-link
+	.phone-icon
+		margin-right: 0.5em
+		fill: transparent
+		stroke-linecap: round
+		stroke-linejoin: round
+	span
+		white-space: nowrap
 
-.fa-long-arrow-alt-up:before
-	content: "\f30c"
-	
-.fa-search::before
-	content: "\f002"
+#site-footer
+	.instagram-icon
+		padding: 3px
+
+	#phone-link
+		justify-content: center
+		.phone-icon
+			width: 1.1em !important
+			height: 1.1em !important
+			fill: currentColor
+			//stroke-width: 1px

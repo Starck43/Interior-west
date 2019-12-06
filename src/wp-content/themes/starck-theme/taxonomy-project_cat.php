@@ -1,9 +1,9 @@
-<?php 
+<?php
 /*
 
  * The Project taxonomy template to show portfolio
  *
- * @package Starck-theme 
+ * @package Starck-theme
  *
  */
 
@@ -18,7 +18,7 @@ global $projects;
 		<?php $term = get_queried_object(); ?>
 		<?php get_category_meta( $projects, $term ); ?>
 		<?php get_taxonomy_list_categories( $projects, $term ); ?>
-		<div id="projects-portfolio" class="row">
+		<div id="projects-portfolio">
 			<?php get_template_part( 'entry','projects' ); ?>
 		</div>
 

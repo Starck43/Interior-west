@@ -1,29 +1,38 @@
 %burger-line
 	position: absolute
-	width: $icon-size
-	height: 3px
-	border-radius: 3px
+	height: 2px
+	border-radius: 0px
 	background: $menu-icon-color
 
 %nav-link
 	content: ''
 	position: absolute
 	display: block
-	top: 50%
+	width: 0
+	height: 1px
+	//top: 50%
+	bottom: 0.5em
 	right: 100%
-	margin-right: 5px 
-	background-color: $menu-link-color
-	transform: translateY(-50%)
-	opacity: 0
+	margin-right: 5px
+	background-color: $theme-color
+	transition: all 100ms ease-in
+	//transform: translateY(-100%)
+	//opacity: 0
+	//border-left: 0 solid  $theme-color
 
 %nav-link-hover
-	opacity: 1
-	width: 3px
-	height: 2px
+	content: ''
+	position: absolute
+	display: block
+	width: 100%
+	height: 1px
+	bottom: -8px
+	background-color: $theme-color
 	transition: all 100ms ease-in
-	border-left: 15px solid  $menu-link-color
+	transform: scaleX(0)
+	//opacity: 1
 
-// Header navigation styles	
+// Header navigation styles
 #header-nav
 	display: flex
 	width: 100%
@@ -31,152 +40,125 @@
 	align-items: center
 	//margin-top: auto
 	transition: opacity 500ms ease-in
-	&:not(.burger)
-		#nav-burger
-			display: none
-			
-		li.menu-item-has-children
-			ul.sub-menu
-				position: absolute
-				display: table
-				top: 100%
-				margin-top: 5px 
-				padding: 0 20px
-				opacity: 0
-				border: 1px solid $menu-link-color
-				border-radius: 3px 
-				background-color: transparentize($nav-bg, 0.05)
-				transition: all 150ms ease-in-out
-				z-index: -1	
-							
-			&.collapsed
-				ul.sub-menu
-					opacity: 1
-					z-index: 2
-				
-	ul.menu
-		display: flex
+	ul.primary-menu
 		position: relative
-		width: 100%
-		margin: 0
-		padding: 0
-		height: $nav-height
-		background-color: $nav-bg 
-		
+		display: flex
+		//width: 100%
+		//height: $nav-height
+		//flex-shrink: 0
 		li
-			display: flex
+			position: relative
+			display: block
 			align-items: center
+			margin: 0 $gutter/8
 			transition: none
-			&:hover			
-				background-color: transparent
+			&::before
+				@extend %nav-link-hover
+
+			&:hover
+				&::before
+					transform: scaleX(1)
 
 			a
 				position: relative
-				margin: 0 $gutter-20
-				@include font-settings(false, $menu-link-color, $menu-font-size, uppercase, 300, $nav-height)
-				letter-spacing: 0px
-				&::before
-					@extend %nav-link
+				@include font-settings(false, $menu-link-color, $menu-font-size, lowercase, 300, $nav-height)
+				letter-spacing: 0.3px
+				white-space: nowrap
 
-				&:hover
-					&::before
-						@extend %nav-link-hover
-							
 			&.menu-item-has-children
 				> a i::before
 					content: '\f078'
 					width: 10px
 					left: 100%
 					top: 50%
-					background-color: transparent 
+					background-color: transparent
 					margin-left: $burger-menu-font-size / 2
-
 					transition: all 500ms ease-in-out
-					//clip-path: polygon(0 80%, 80% 80%, 80% 0, 100% 0, 100% 100%, 0 100%)
-					//clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%)
-					//clip-path: polygon(8% 0, 50% 67%, 92% 0, 100% 20%, 50% 100%, 0 20%)
-					//transform: rotate(45deg) translateY(-100%) skew(-10deg,-10deg) !important
 
-										
+
 				&.collapsed
 					> a
 						i::before
 							content: '\f077'
-
+			&.lang-item
+				display: none
 
 
 		&.responsive
 			height: 500px
 
+	ul.secondary-menu
+		margin-left: $gutter/4
+
+	&:not(.burger)
+		#nav-burger
+			display: none
+
+		li.menu-item-has-children
+			ul.sub-menu
+				position: absolute
+				display: table
+				top: 100%
+				margin-top: 5px
+				padding: 0 20px
+				opacity: 0
+				border: 1px solid $menu-link-color
+				border-radius: 3px
+				background-color: transparentize($nav-bg, 0.05)
+				transition: all 150ms ease-in-out
+				z-index: -1
+
+			&.collapsed
+				ul.sub-menu
+					opacity: 1
+					z-index: 2
+
+
 	&.align-left
 		margin-right: auto
-		
+
 	&.align-center
-		margin-right: auto
-		margin-left: auto
-		ul.menu
+		@include push--auto
+		ul.primary-menu
 			justify-content: center
 
 	&.align-right
 		margin-left: auto
-		ul.menu
+		ul.primary-menu
 			justify-content: flex-end
-			
+
 	&.inline-logo
 		width: auto
-		&.burger
-			ul.menu.active
-				height: calc-height($header-height, $top-bar-height)
-
-	&.under-header
-		&.burger
-			ul.menu
-				margin-top: $nav-height 
 
 	&.burger,
 	&.mobile
-		ul.menu
-			position: absolute
-			left: 0
-			right: 0
-			top: $header-height
-			//width: 100%
+		ul.primary-menu
+			@extend .modal
 			height: 0
-			opacity: 0
 			flex-direction: column
 			align-items: center
 			justify-content: space-evenly
-			background-color: transparentize($theme-color, 0.3)
-			transition: height 500ms ease-out, opacity 300ms ease
-			z-index: 9999
-			box-sizing: border-box
-			border-top: 0px solid transparentize($theme-color , 1)
-			backdrop-filter: blur(10px)
-			+media-breakpoint-up(sm)
-				top: $header-height / 1.5
-			+media-breakpoint-down(xs)
-				top: $header-height-min
+			background-color: $body-bg
+			//border-top: 0px solid transparentize($theme-color , 1)
+			transition: all 500ms ease-out, opacity 300ms ease
+			//box-sizing: border-box
+			opacity: 0
+			z-index: 0
+
 			li
+				display: flex
+				height: $burger-menu-font-size
 				flex-direction: column
 				align-items: center
-				//flex-basis: 100% 
-				flex-grow: 1
-						
+				//flex-basis: 100%
+				//flex-grow: 1
 				&.current-menu-item a
 					font-weight: bold
 
 				a
 					margin: auto
 					font-size: $burger-menu-font-size
-					line-height: $burger-menu-font-size * 2
-					color: #FFF
-					letter-spacing: 1px
-					&::before
-						background-color: #FFF							
-					&:hover
-						&::before
-							border-color: #FFF 
-					
+
 				ul.sub-menu
 					display: flex
 					padding: 0
@@ -190,43 +172,53 @@
 				&.collapsed
 					a
 						margin-bottom: 0
-							
+
 					ul.sub-menu
 						display: table
-						@include animation(sub-menu, 250ms ease-in both, In, 0, 80px )
+						@include animation(sub-menu, 200ms ease-in both, In, 0, 80px )
 						margin-bottom: auto
 						height: 100%
-			
-			>li:not(:last-child)::after
-				content: ''
-				//height: 1px
-				//width: 30px
-				//bottom: 0
-				//background-color: #FFF
+
+			.close-icon
+				z-index: 10000
+				@include animation(close-icon, 300ms .8s ease-in both, In, -50%, 0, -50%, 100%)
 
 			&.active
+				height: 100vh
+				padding-top: 10vh
+				//padding-bottom: 10vh
+				//transform: scale(1)
 				opacity: 1
-				height: calc-height($header-height, $nav-height, $top-bar-height)
-				border-top: 3px solid transparentize($theme-color , 0)
+				z-index: 9998
+				//border-top: 3px solid transparentize($theme-color , 0)
 				>li
-					@include animation(menu-items, 300ms ease-in both, In, 0, -80px )
+					@include animation(menu-items, 200ms ease-out both, In, 0, -120px )
 					//transform: translate(0, -80px)
-					@include animation-delays(4, 700ms, -125ms)
-				+media-breakpoint-up(sm)
-					height: calc-height($header-height/1.5, $nav-height, $top-bar-height)
-				+media-breakpoint-down(xs)
-					height: calc-height($header-height-min, $nav-height, $top-bar-height)
+					@include animation-delays(6, 600ms, -80ms)
+
+				.lang-item
+					display: block
+					@include animation(menu-lang, 1s .8s ease-out both, In, 0, 0 )
+
+		ul.secondary-menu
+			opacity: 0
+
 		#nav-burger
+			position: relative
 			display: flex
-			width: $icon-size
+			min-width: $icon-size
+			margin-left: $gutter/4
 
-		#nav-search
-			margin-top: 2px 
-			font-size: $icon-font-size * 1.5
 
-		#nav-search,
-		#nav-burger
-			margin-left: $gutter-20  
+	#nav-search
+		display: flex
+		//margin-top: 2px
+		margin-left: $gutter/4
+		+media-breakpoint-up(md)
+			.icon
+				width: $icon-font-size
+				height: $icon-font-size
+
 // <!-- End Header navigation -->
 
 // <!-- Post navigation -->

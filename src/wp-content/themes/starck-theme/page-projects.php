@@ -27,7 +27,7 @@ $content = $post->post_content;
 	<div id="projects">
 		
 		<?php get_taxonomy_list_categories($projects); ?>
-		<div id="projects-portfolio" class="row">
+		<div id="projects-portfolio">
 
 			<?php get_template_part( 'entry','projects' ); ?>
 			<?php

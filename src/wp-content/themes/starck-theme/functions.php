@@ -1,5 +1,5 @@
 <?php
-define( 'STARCK_VERSION', '1.0.6' );
+define( 'STARCK_VERSION', '1.0.8' );
 
 //!-- START ENQUEUE PARENT ACTION
 
@@ -10,8 +10,10 @@ if ( !file_exists( dirname( __FILE__ ) . '/css/' . $main_css_file )) $main_css_f
 
 
 // STYLES registry
-wp_enqueue_style( 'starck-theme', $home_url . '/css/' . $main_css_file, array(), STARCK_VERSION);
-wp_enqueue_style( 'vendors', $home_url . '/css/vendors.min.css', array(), STARCK_VERSION);
+if(!is_admin()) {
+	wp_enqueue_style( 'starck-theme', $home_url . '/css/' . $main_css_file, array(), STARCK_VERSION);
+	wp_enqueue_style( 'vendors', $home_url . '/css/vendors.min.css', array(), STARCK_VERSION);
+}
 
 // !!! Check for dublicates of the styles below in /css/vendors.css via @import
 //wp_enqueue_style( 'magnific-popup', $home_url . '/plugins/magnific-popup/dist/magnific-popup.css');
@@ -23,19 +25,15 @@ function starck_scripts_add() {
 
 	$home_url = get_template_directory_uri();
 
-	wp_deregister_script( 'jquery' );
-
 	if ( file_exists( dirname( __FILE__ ) . '/js/jquery.min.js' )) {
+		wp_deregister_script( 'jquery' );
 		wp_enqueue_script('jquery', $home_url . '/js/jquery.min.js');
-	}	
-	if ( file_exists( dirname( __FILE__ ) . '/js/vendors.min.js' )) {
-		wp_register_script('vendors', $home_url . '/js/vendors.min.js', array('jquery'), STARCK_VERSION, true);
-		wp_enqueue_script('vendors');
 	}
-	if ( file_exists( dirname( __FILE__ ) . '/js/custom.min.js' )) {
-		wp_register_script('starck-theme', $home_url . '/js/custom.min.js', array('jquery'), STARCK_VERSION, true);
-		wp_enqueue_script('starck-theme');
-	}
+	wp_register_script('vendors', $home_url . '/js/vendors.min.js', array('jquery'), STARCK_VERSION, true);
+	wp_enqueue_script('vendors');
+
+	wp_register_script('starck-theme', $home_url . '/js/custom.min.js', array('jquery'), STARCK_VERSION, true);
+	wp_enqueue_script('starck-theme');
 }
 //!-- END ENQUEUE PARENT ACTION
 

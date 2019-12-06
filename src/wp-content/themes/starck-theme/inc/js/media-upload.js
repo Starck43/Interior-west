@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
+
+jQuery(document).ready(function($) {
 
 	toggleSliderAttr();
 
@@ -37,4 +38,5 @@ document.addEventListener('DOMContentLoaded', function() {
 	function toggleSliderAttr() {
 		$('.postbox-gallery-options').css('display',  $('.postbox-gallery-image').length > 0 ? 'block' : 'none');
 	}
+
 });

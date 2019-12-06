@@ -1,0 +1,37 @@
+	#wpcontent {height:auto;}
+	#wpfooter {position: relative;}
+	.wp-block {max-width: 1100px;}
+	.column-post_thumb {width: 80px;}
+	#gallery-image .button {margin: 5px 0;}
+	.postbox-gallery-block {cursor: pointer;}
+	.postbox-gallery-image {
+		position: relative;
+		display: inline-block;
+		width: 100px;
+		height: 100px;
+		margin: 0 1% 1% 0;
+		background: aliceblue;
+	}
+	.postbox-gallery-image img {width: 100%; height: auto;}
+	.postbox-gallery-image .gallery-del-image {
+		position: absolute;
+		right: 4px;
+		top: 4px;
+		border-radius: 2px;
+		background: rgba(255,255,255,.8);
+		width: 20px;
+		height: 20px;
+		text-align: center;
+		text-decoration: none;
+	}
+	.postbox-gallery-options {
+		font-style: 14px;
+	}
+	.postbox-gallery-options label {display: block; padding: 20px 0 5px;}
+	.postbox-gallery-options textarea,
+	.postbox-gallery-options input[type="text"] {
+		width: 100%;
+	}
+	.postbox-gallery-options input[type="text"] {
+		margin-top: 5px;
+	}

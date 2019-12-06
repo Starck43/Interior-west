@@ -11,9 +11,15 @@
 </head>
 
 <body <?php body_class(); ?>>
+	<?php include_once('sprite.svg'); ?>
 	<!-- Preloader -->
-	<div id="dom-preloader" class="preloader"><i class="fa fa-spinner fa-spin"></i></div>
+	<div id="dom-preloader" class="preloader">
+		<svg class="icon preloader-icon"><use xlink:href="#preloader-logo"></use></svg>
+	</div>
 	<?php
+
+
+	global $post;
 
 	$custom_header = get_custom_header();
 	if ( ! empty( $custom_header->attachment_id ) ) {
@@ -60,7 +66,7 @@
 							<div class="site-description"><?php echo $description; ?></div>
 						<?php } ?>
 					</div>
-					<?php 
+					<?php
 				}
 				?>
 			</section>
@@ -69,7 +75,7 @@
 													( "right" === starck_get_option( 'branding_alignment' ) ? 'left' : 'right'),
 													( starck_get_option( 'nav_burger' ) ?  'burger-menu' : '' )
 												); ?>>
-				<?php 
+				<?php
 				if ( starck_get_option( 'header_widget_setting' ) )
 					starck_get_header_widget();
 
@@ -81,16 +87,18 @@
 		<!-- end header container -->
 	</header>
 
-	<?php 
-	if ( 'under' == $nav_position ) { 
+	<?php
+	if ( 'under' == $nav_position ) {
 		starck_get_navigation();
 	}
 	?>
-	<?php global $post; ?>
+
 	<!-- main -->
 	<main id="main" <?php starck_main_class(['main', get_post_type( $post->ID )]); ?> role="main">
+
+		<?php starck_breadcrumbs(); ?>
 
 		<!-- main container -->
 		<div id="main-container" class="container">
 
-		<?php starck_main_header(); ?>
+			<?php starck_main_header(); ?>

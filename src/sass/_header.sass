@@ -2,24 +2,24 @@
 #site-header
 	position: relative
 	display: flex
-	width: 100% 
-	height: $header-height
+	//width: auto
+	min-height: $header-h
 	//margin-top: $gutter-20/2
-	margin-bottom: $gutter-20/2
-	align-items: center 
+	//margin-bottom: $gutter-20/2
+	align-items: center
 	background-color: $header-bg
 	border-bottom: 1px solid darken(white, 10%)
-	z-index: 3
+	//z-index: 3
 	+media-breakpoint-down(sm)
-		height: $header-height / 1.5
+		min-height: $header-h-sm
 	+media-breakpoint-down(xs)
-		height: $header-height-min
+		min-height: $header-h-xs
 	#top-bar
 		background-color: $top-bar-bg
 		display: flex
-		padding: 
+		padding:
 			left: 0
-			right: 0	
+			right: 0
 		.widget
 			width: 100%
 			margin:  0 $gutter-20 / 2 auto
@@ -29,14 +29,13 @@
 				text-align: left
 			&:last-child
 				text-align: right
-										
+
 	#header-container
 		display: flex
+		width: 100%
 		justify-content: space-between
 		align-items: center
-		+media-breakpoint-down(md)
-			margin: 0 $gutter-20 / 2
-									
+
 	#branding
 		display: flex
 		width: auto
@@ -45,16 +44,15 @@
 		#branding-logo
 			//margin: auto 0
 			//padding: 0 $gutter-20/2
-			max-width: $logo-width
-			height: 100%
-			//@include img-responsive
+			width: auto
+			height: $header-h - $gutter-20
+			@include img-responsive
 			+media-breakpoint-down(sm)
-				max-width: $logo-width / 1.5
+				height: $header-h-sm - $gutter-20
+				//max-width: $logo-width / 1.5
 			+media-breakpoint-down(xs)
-				max-width: $logo-width-min
-			img
-				width: 100%
-				height: 100%  
+				height: $icon-size
+				//max-width: $logo-width-min
 
 		#branding-title
 			margin: auto 0
@@ -68,8 +66,8 @@
 				font-size: 2em
 				text-transform: uppercase
 			.site-description
-				font-size: 1em 
-			
+				font-size: 1em
+
 		&.align-center
 			margin-bottom: $gutter-20/2
 			a
@@ -82,22 +80,24 @@
 			flex-direction: column
 			a
 				justify-content: center
-				
+
 			#branding-logo,
 			#branding-title
 				@include push--auto
 
 	&.branding-right
 		flex-direction: row-reverse
-		
+
 	&.branding-center
 		flex-direction: column
-		
+
 	&.nav-above-logo,
 	&.nav-below-logo
-		height: #{strip-units($header-height) + strip-units($nav-height)}px
+		height: #{strip-units($header-h) + strip-units($nav-height)}px
+		+media-breakpoint-down(sm)
+			height: #{strip-units($header-h-sm) + strip-units($nav-height)}px
 		+media-breakpoint-down(xs)
-			height: #{strip-units($header-height-min) + strip-units($nav-height)}px
+			height: #{strip-units($header-h-xs) + strip-units($nav-height)}px
 
 	&.nav-below-logo
 		#header-container
@@ -107,7 +107,7 @@
 		#header-container
 			flex-wrap: wrap
 
-			
+
 	&.nav-inline-logo
 		#header-content
 			display: flex
@@ -118,19 +118,9 @@
 		.container
 			padding-left: 0
 			padding-right: 0
-			
-		ul.menu
-			@extend .bounded
-	&.full-width
-		.container
-			margin: 0 $gutter-20
-			
-	#nav-menu
-		margin-left: 10px
-		//float: left
-		
-	#nav-search
-		@extend #nav-menu
+			+media-breakpoint-down(sm)
+				padding-left: 15px
+				padding-right: 15px
 
 	#header-content
 		margin: auto 0

@@ -1,114 +1,285 @@
-
 #projects
-	margin-bottom: $gutter-20*2
-	&-category-meta
+	&-entry
+		margin-bottom: $gutter/4
 		float: left
-		+media-breakpoint-down(md)
-			margin: 0 $gutter-20 / 2
+		+media-breakpoint-down(sm)
+			float: none
+
 	&-categories
 		float: right
 		margin: 0 0 $gutter-20 / 2
-		font-size: 0.8em
-		text-align: right
-		text-transform: uppercase
-		+media-breakpoint-down(md)
-			margin-right: $gutter-20 / 2
+		//font-size: 0.8em
+		text-transform: lowercase
 		li
-			display: block
-			width: 100% 
+			display: table
+			//width: 100%
 			padding: $gutter-20/4 0
 			opacity: 0.7
-			//margin: $gutter-20/2
+			margin-left: auto
 			//border: 1px solid  $theme-color
 			//border-radius: 3px
+			a
+				position: relative
+				&::before
+					@extend %nav-link
+				&:hover
+					&::before
+						width: 20px
 			&.active
 				pointer-events: none
 				opacity: 1
 				a
 					font-weight: bold
-			a
-				position: relative
-				&::before
-					@extend %nav-link
 
-				&:hover
-					&::before
-						@extend %nav-link-hover
+		+media-breakpoint-down(sm)
+			float: none
+			text-align: center
+			margin-bottom: $gutter/2
+			li
+				margin-right: auto
 
 	&-portfolio
+		$frame-size: 1vw
 		clear: both
-		.img-container
-			overflow: hidden
-			img
-				transition: all 1s ease
+		//margin-top: $gutter
+		.portfolio
+			position: relative
+			margin-bottom: $gutter / 2
+			&-image
+				&::after
+					content: ''
+					@include push--absolute
+					margin: $frame-size*2
+					pointer-events: none
+				.img-container
+					overflow: hidden
+					img
+						transition: all 1s ease
 
-				&:hover
-					transform: scale(1.2)
+						&:hover
+							transform: scale(1.2)
+				+media-breakpoint-down(sm)
+					padding: 0
 
-			.portfolio-image-meta
-				position: absolute
-				//display: flex
-				//top: 0
-				right: 0
-				bottom: 0
-				left: 0
-				//margin-top: -50% 
-				padding: $gutter-20
-				text-align: center
-				//align-items: center
-				//justify-content: center
-				//flex-direction: column
-				color: #FFF 
-				background: transparentize($theme-color, 0.5)
-				//opacity: 0
-				backdrop-filter: blur(5px)
+			&-meta
+				@extend .blur
+				&-header
+					//border: 1px solid white
+					@extend .no-select
+					font-size: 0.8em
+					h2
+						//font-weight: 700
 
-				.meta-title
-					text-transform: uppercase
-					letter-spacing: 1px 
-				p
-					margin: 0.5em
-	#projects-load-more
-		margin: $gutter-20 auto
- 
-.gallery,
-.portfolio
-	position: relative
-	height: auto
-	padding-bottom: 30px
+				+media-breakpoint-down(sm)
+					$padding-meta: 0 //$frame-size*2
+					$padding-in-meta: 1.5vw
+					//@include push--absolute
+					position: absolute
+					display: flex
+					max-height: 100%
+					padding: $padding-meta
+					color: #FFF
+					flex-direction: column
+					overflow: hidden
+					>*
+						background: transparentize($theme-color2, 0.5)
+						cursor: pointer
+					&-header
+						position: relative
+						//margin: 1px 1px 0
+						padding: $padding-in-meta
+						//border-bottom: 1px solid white
+						h2
+							margin-bottom: 0
+							margin-right: 2em
+							color: #FFF
+						transition: all 0.5s 0.5s ease-in-out
+						opacity: 0
+						i
+							right: $padding-in-meta
+							top: 50%
+							left: unset
+							transform: translate( 0, -50% ) rotate( 45deg )
+							opacity: 1
+							mix-blend-mode: normal
+
+					&-description
+						position: relative
+						margin-left: 1px
+						margin-right: 1px
+						padding: $padding-in-meta 0
+						height: 100%
+						overflow: hidden
+						transition: all 0.5s ease-in-out
+						transform: translate( 0 , 0% )
+						//animation: flipdown 2.5s ease both
+						opacity: 1
+						pointer-events: none
+						z-index: 2
+						p
+							margin: 0 $padding-in-meta
+							max-width: none !important
+
+					input[type=checkbox]
+						position: absolute
+						width: 100%
+						height: 100%
+						margin: -$padding-meta
+						padding: 0
+						opacity: 0
+						z-index: 1
+
+						&:not(:checked)
+							&~.portfolio-meta-header i
+								&::before
+									transform: translate( 0 , 0 ) rotate( 135deg )
+
+						// if description is hidden
+						&:checked
+							&~.portfolio-meta-description
+								height: 0
+								opacity: 0
+								transform: translate( 0 , -20% ) scale(2)
+
+			+media-breakpoint-up(md)
+				//margin-bottom: 0
+				.portfolio-image
+					&::after
+						margin: $frame-size
+						border: 1px solid white
+				.portfolio-meta
+					//margin: auto 0
+					padding-bottom: 15px
+					margin: auto 0
+					input[type=checkbox]
+						display: none
+					&-header
+						position: relative
+						&::before,
+						&::after
+							content: ''
+							position: absolute
+						&::after
+							width: 8px
+							height: 8px
+							bottom: -4px
+							background-color: white
+							border: 1px solid $theme-color
+							transition: opacity 200ms 2s ease
+							opacity: 0
+						&::before
+							bottom: 0
+							border-bottom: 1px solid $theme-color
+							transition: all 1s 1s ease
+						i
+							display: none
+
+				&:nth-child(even)
+					flex-direction: row-reverse
+					.portfolio-image
+						padding-left: 0
+						padding-right: 15px
+						&::after
+							right: 15px
+					.portfolio-meta
+						//padding-right: $gutter
+						&-header
+							&::before
+								left: 0
+								right: 100%
+
+				&:nth-child(odd)
+					.portfolio-image
+						padding-left: 15px
+						padding-right: 0
+						&::after
+							left: 15px
+					.portfolio-meta
+						//padding-left: $gutter
+						&-header
+							text-align: right
+							&::before
+								left: 100%
+								right: 0
+						&-description
+							float: right
+
+			&.lazyloaded
+				+media-breakpoint-down(sm)
+					overflow: hidden
+					.portfolio-meta-header
+						opacity: 1
+
+				+media-breakpoint-up(md)
+					&:nth-child(even)
+						.portfolio-meta-header
+							&::before,
+							&::after
+								right: -$frame-size
+								margin-right: -20px
+								opacity: 1
+
+					&:nth-child(odd)
+						.portfolio-meta-header
+							text-align: right
+							&::before,
+							&::after
+								left: -$frame-size
+								margin-left: -20px
+								opacity: 1
+	&-load-more
+		margin: $gutter/2 auto
+
+#project-entry
+	+media-breakpoint-up(md)
+		.project-title
+			text-align: left
+	+media-breakpoint-down(sm)
+		margin-bottom: $gutter/2
+
+	.cell
+		@include img-responsive
+		img
+			display: block
+			margin: auto
+
 
 .gallery
-	&-image-details
-		//position: absolute
-		left: 0
-		bottom: 0
-		width: 100%
-		padding: $gutter-20/2 0
-		color: $base-text-color 
-		background-color: transparentize(#FFF, 0.1) 
-		div
-			padding: 0 $gutter-20/4
+	position: relative
+	height: auto
+	padding-bottom: $gutter/2
 
-	&-caption
-		display: none
+	&-image
+		position: relative
+		&-meta
+			position: absolute
+			left: 0
+			bottom: 0
+			width: 100%
+			padding: $gutter-20/2 0
+			color: $base-text-color
+			background-color: transparentize(#FFF, 0.5)
+			>div
+				padding: 0 $gutter-20/4
 
-	
 #gallery-lightbox-image
 	position: fixed
-	-ms-touch-action: none
+	//-ms-touch-action: none
 	touch-action: none
 
 .column-grid
 	column-count: 2
+	width: 100%
 	+media-breakpoint-down(xs)
 		column-count: 1
 	a
 		display: inline-block
 		width: 100%
 		margin-top: $gutter-20
-		float: left
+		//float: left
 		page-break-inside: avoid
 		break-inside: avoid
+
 
 .grid
 	display: grid
@@ -117,7 +288,7 @@
 	//grid-template-columns: 1fr 1fr
 	//grid-template-areas: "left right"
 	margin: 0
-	
+
 	> div:first-child
 		grid-area: left
 	> div:last-child
@@ -126,9 +297,3 @@
 	+media-breakpoint-down(xs)
 		//display: block
 		grid-gap: $gutter-20/2
-
-.cell
-	@include img-responsive
-	img
-		display: block
-		margin: auto

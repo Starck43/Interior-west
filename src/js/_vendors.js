@@ -1,8 +1,8 @@
 /*
  * Including vendors JS libraries.
- * @version 1.0.5
+ * Use: @requires inside comments block
+ * @version 1.0.8
  *
- * Example:
  * //@requires ../../node_modules/jquery/dist/jquery.min.js
  *
  * modernizr.js needs for using CSS-transition method in jcarousel plugin (see more: https://modernizr.com)

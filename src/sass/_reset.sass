@@ -8,9 +8,9 @@
 	color: #fff
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill, 
+input:-webkit-autofill,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus,
@@ -22,6 +22,19 @@ select:-webkit-autofill:focus
 	-webkit-box-shadow: 0 0 0px 1000px transparent inset
 	transition: background-color 5000s ease-in-out 0s
 	background: $theme-color
-	
+
 select
 	background-color: transparent
+
+// Deny for text selection
+.no-select
+	-webkit-tap-highlight-color: rgba(0,0,0,0)
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-khtml-user-select: none
+	-moz-user-select: none
+	-ms-user-select: none
+	user-select: none
+
+button
+	border: none

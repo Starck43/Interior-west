@@ -32,7 +32,7 @@
 			// полный список параметров смотрите в описании функции http://wp-kama.ru/function/get_terms
 		) );
 		foreach ($categories as $cat) {
-			echo '<header class="entry-header"><h2 class="entry-title">'.$cat->name.'</h2></header>';
+			//echo '<header class="entry-header"><h2>'.$cat->name.'</h2></header>';
 			$args = array(
 				'category_name' => $cat->slug,
 				'posts_per_page' => -1,

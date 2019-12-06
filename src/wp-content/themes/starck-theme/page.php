@@ -1,18 +1,18 @@
-<?php 
+<?php
 /*
  * The template for displaying all single posts
  *
- * @package Starck-theme 
+ * @package Starck-theme
  */
 get_header(); ?>
 
 	<section id="content" <?php starck_content_class('page'); ?>>
 
 		<?php starck_breadcrumbs(); ?>
-		
+
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+			<article class="entry post-<?php the_ID(); ?> row" <?php post_class(); ?>>
 
 				<header class="entry-header">
 					<?php if (get_post_meta( $post->ID, 'hide-title', true )) $hidden_class = ' hidden'; ?>
@@ -20,15 +20,24 @@ get_header(); ?>
 					<?php edit_post_link(); ?>
 				</header>
 
-				<div class="entry-content">
-					<?php if ( has_post_thumbnail() ) { the_post_thumbnail(); } ?>
+				<?php
+				if ( has_post_thumbnail() ) { ?>
+					<div class="entry-thumbnail cell col-md-5">
+						<?php the_post_thumbnail('portfolio','class=lazyload'); ?>
+					</div>
+				<?php
+					$cell = ' cell col-md-7';
+				} else $cell = '';
+				?>
+
+				<div class="entry-content<?php echo $cell; ?>">
 					<?php the_content(); ?>
 					<div class="entry-links"><?php wp_link_pages(); ?></div>
 				</div>
 
 			</article>
 
-			<?php 
+			<?php
 			if ( comments_open() || get_comments_number() ) {
 				comments_template();
 			}
@@ -40,6 +49,6 @@ get_header(); ?>
 
 	<?php starck_get_sidebar();
 
-get_footer(); 
+get_footer();
 
 ?>

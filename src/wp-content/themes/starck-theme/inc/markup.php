@@ -1,9 +1,9 @@
 <?php
 /**
- * HTML markup.
+ * HTML markup for adding theme's classes to HTML elements.
  *
- * @package Starcktheme
- * @since 1.0.4
+ * @package StarckTheme
+ * @Version 1.0.5
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

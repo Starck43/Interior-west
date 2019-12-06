@@ -1,14 +1,21 @@
-@import "../../node_modules/bootstrap/scss/mixins/_breakpoints.scss" // Bootstrap Breakpoints mixin
+/*
+ * @package Starck-theme 
+ *
+ * Base styles library
+ *
+ * @version 1.0.8
+ */
 // @import "../../node_modules/bootstrap/scss/bootstrap-grid.scss" // Bootstrap Grid
 // @import "../../node_modules/bootstrap/scss/bootstrap-reboot.scss" // Bootstrap Reboot collection
 // @import "../../node_modules/bootstrap/scss/utilities/_sizing.scss" // Optional Bootstrap Utilites
 // @import "../../node_modules/normalize.css/normalize.css" // CSS library plug-in example (npm i --save-dev normalize.css)
+@import "../../node_modules/bootstrap/scss/mixins/_breakpoints.scss" // Bootstrap Breakpoints mixin
 
-// // Breakpoints mixin settings (node_modules/bootstrap/scss/mixins/_breakpoints.scss)
-// // Example: +media-breakpoint-down(xs) - ≥576px / +media-breakpoint-up(sm) - // ≤576px
-// // Default variables: node_modules/bootstrap/scss/_variables.scss
+// Breakpoints mixin settings (node_modules/bootstrap/scss/mixins/_breakpoints.scss)
+// Example: +media-breakpoint-down(xs) - ≤576px / +media-breakpoint-up(sm) - // >576px
+// Default variables: node_modules/bootstrap/scss/_variables.scss
 
-// Bootstrap compatible gutter variable => $gutter
+// Bootstrap compartible gutter variable => $gutter
 
 // Lazy Load Placeholder built by HTML generator (https://webdesign-master.ru/services/lazy/)
 //background-image: url(data:image/gifbase64,R0lGODlhCgAIAIABAN3d3f///yH5BAEAAAEALAAAAAAKAAgAAAINjAOnyJv2oJOrVXrzKQA7)
@@ -19,21 +26,19 @@
 @import reset
 //@import media
 @import controls
-	
+
 @import search
 @import overview
 @import portfolio
 @import jcarousel/jcarousel
 @import imagelightbox/imagelightbox
-//@import wpforms
+@import polylang
+@import wpforms
+@import gutenberg
 
 *
 	box-sizing: border-box
 
-p
-	margin: 0 0 $base-line-height 0
-	letter-spacing: 0.5px
-	
 a
 	text-decoration: none
 	//font-weight: bold
@@ -41,49 +46,69 @@ a
 	&:hover
 	 	color: $link-color-hover
 
+p
+	letter-spacing: 0.3px
+	text-align: justify
+	line-height: $base-line-height
+	margin-top: 0
+ul
+	padding: 0
+	margin: 0
 li
 	list-style-type: none /* Убираем глобально маркеры */
+	letter-spacing: 0.3px
 
-			
-h1 
-	font: normal bold 2.4em/1.2 $base-font-family, Arial
-	margin: 0 0 $gutter-30 0
-	color: $page-title-color 
+h1
+	@include font-settings($title-font-family, $page-title-color, 2.4em, uppercase, 500, 1.2)
+	margin: 0 0 1em
+	+media-breakpoint-down(md)
+		font-size: 2em
 
+h2
+	font-size: 1.8em
+	font-weight: 500
+	margin: 0 0 .75em
+	color: $page-title-color
 
-h2  
-	font: normal bold 2em/1.2 $base-font-family, Arial
-	margin: 1em 0
-	color: $page-title-color 
-
-h3 
-	font: normal bold 1.6em/1.2 $base-font-family, Arial
-	margin: 0 0 0.5em 0
-	letter-spacing: -0.5px
-
-
-h4 
-	font: normal bold 1.4em/1.2 $base-font-family, Arial
-	margin: 0 0 0.5em 0
+h3
+	font-size: 1.4em
+	font-weight: 700
+	margin: 0 0 .5em
 
 
-h5 
-	font: normal bold 1.2em/1.1 $base-font-family, Arial
-	margin: 0 0 0.5em 0
-		
+h4
+	font-size: 1.2em
+	font-weight: 700
+	margin: 0 0 .2em
+
+
+h5
+	font-size: 1em
+	font-weight: 700
+	margin: 0 0 .2em
+
+header
+	text-transform: uppercase
+	letter-spacing: 0.3px
+
 html
-	@include font-settings(Roboto, $base-text-color, 1rem, normal, 300, $base-line-height)
-	font-size: $base-font-size
+	@include font-settings($html-font-family, $base-text-color, $base-font-size, normal, initial, 1.25)
 	-ms-text-size-adjust: 100%
 	-webkit-text-size-adjust: 100%
 	-webkit-font-smoothing: antialiased
+	+media-breakpoint-down(lg)
+		//font-size: 15px
 	+media-breakpoint-down(md)
-		font-size: 14px
+		font-size: 15px
 		overflow: scroll
 		overflow-x: hidden
 		::-webkit-scrollbar
 			//width: 0px  /* remove scrollbar space */
 			background: transparent  /* optional: just make scrollbar invisible */
+	+media-breakpoint-down(sm)
+		font-size: 14px
+	+media-breakpoint-down(xs)
+		//font-size: 13px
 
 body
 	display: flex
@@ -93,20 +118,20 @@ body
 	margin: 0
 	background-color: $body-bg
 	overflow-x: hidden
-	
-// better to use img-responsive mixin
+
 %img
-	width: 100%
-	height: auto
+	img
+		width: 100%
+		height: auto
 
 // Avoid empty images to appear as broken
 img:not([src]):not([srcset])
 	visibility: hidden
-	
+
 img[data-sizes="auto"]
 	display: block
 	width: 100%
-	
+
 img
 	&.lazyload,
 	&.lazyloading
@@ -114,11 +139,13 @@ img
 	&.lazyloaded
 		opacity: 1
 		transition: opacity 500ms ease-in
- 
+.grey-bg
+	background-color: transparentize($theme-color2, 0.9)
+
 .img-container
 	position: relative
 	height: 0
-	width: 100% 
+	width: 100%
 	//padding-top: 100%
 	background-color: darken($main-bg, 10%)
 	img
@@ -126,13 +153,16 @@ img
 		top: 0
 		left: 0
 		width: 100%
-		height: 100%  
+		height: 100%
 
 .container
-	width: 100% 
-	@include push--auto
-		
+	//width: 100%
+	//@include push--auto
+	margin-left: $gutter / 2
+	margin-right: $gutter / 2
+
 .bounded
+	width: 100%
 	max-width: $container_max_w
 	//padding: 0 $gutter-20/2
 	@include push--auto
@@ -140,9 +170,9 @@ img
 .align-left
 	justify-content: flex-start
 	//align-items: flex-start
-	
+
 .align-center
-	justify-content: center		
+	justify-content: center
 	//align-items: center
 
 .align-right
@@ -153,45 +183,105 @@ img
 	pointer-events: none
 
 .hidden
-	display: none
-	
+	//display: none !important
+	visibility: hidden !important
+	opacity: 0 !important
+	z-index: -1 !important
+
 .visible
 	opacity: 1 !important
 
 .show
 	display: block !important
 
-.modal
-	position: fixed
-	width: 100% 
-	overflow-y: hidden	
+%blur-bg
+	filter: blur(5px) grayscale(0)
 
 .blur
-	filter: blur(10px) grayscale(0)
+	@supports (backdrop-filter: blur(0))
+		backdrop-filter: blur(8px)
 
-.preloader
+.scroll-disabled
+	position: fixed
+	margin-top: 0 // override by JS to use acc to curr $(window).scrollTop()
+	width: 100%
+	overflow: hidden
+
+.modal
 	position: fixed
 	left: 0
 	right: 0
 	top: 0
 	bottom: 0
-	background-color: $preloader-bg
-
+	//overflow: hidden
+	transition: all .3s ease
+	visibility: visible
+	opacity: 1
+	touch-action: none
+	//cursor: pointer
 	z-index: 10000
-	i
-		position: absolute
-		left: 50%
-		top: 50%
-		transform: translate(-50%, -50%)
-		font-size: 3em
-		color: $preloader-color
-	
+	overflow: hidden
+	@extend .blur
+
 .header-background
 	background-size: cover
 	background-repeat: no-repeat
 	background-position: 50% 50%
 	//background-attachment: fixed
 
+.slide
+	&::after
+		content: ''
+		@include push--absolute
+		background-color: $body-bg
+
+	&.lazyloaded
+		&::after
+			transition: all 800ms ease
+			left: 50%
+			right: 50%
+	+media-breakpoint-down(sm)
+		&.lazyloaded
+			&::after
+				transition: left 500ms ease
+				left: 100%
+				right: 0
+
+#dom-preloader
+	@extend .modal
+	background-color: $preloader-bg
+	z-index: 10000
+	.preloader-icon
+		position: absolute
+		width: 15vh
+		height: 15vh
+		left: 50%
+		top: 50%
+		fill: $theme-color
+		stroke: $theme-color
+		stroke-width: 10px
+		transform: translate(-50%, -50%)
+		//font-size: 3em
+		//color: $preloader-color
+
+#overlay
+	background-color: transparentize(black, .15)
+		//filter: blur(10px)
+
+	div.imagebox
+		position: relative
+		height: 100%
+		background-size: contain
+		background-position: 50% 50%
+		background-repeat: no-repeat
+		touch-action: pinch-zoom
+
+	div.close
+		transform: translate(-50%, 100%)
+
+.feedback
+	margin: $gutter/2 auto 0 
+	max-width: 600px
 
 @import header
 @import main

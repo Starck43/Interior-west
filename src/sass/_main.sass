@@ -1,144 +1,168 @@
-//Parallax effect including
-
-$parallax-perspective : 1 !default
-$parallax-element     : "main-container" !default
-$parallax-ios         : true !default
-@include parallax-init
 
 // Main styles
 #main
 	position: relative
-	width: 100% 
-	@include push--auto
-	background-color: $main-bg 
 	flex: auto
 	clear: both
 	z-index: 2
-	
-	#main-header
-		position: relative
-		//min-height: 200px 
-		//padding: $gutter-20 0
-		//width: 100% 
-		@include push--auto
-		background-color: $header-bg
-		overflow: hidden
-			
-		&-excerpt
-			position: absolute
-			width: 50%
-			height: 50% 
-			left: 50%
-			top: 50%
-			color: #FFF
-			padding: $gutter-20 $gutter-20 $gutter-20 * 4
-			background-color: transparentize($theme-color, 0.5)
-			opacity: 0
-			transition: opacity 1s 1s ease
-			transform: translate(-50%, -50%)
-			//backdrop-filter: blur(10px)
-			p
-				font-size: 2em
-				line-height: 1.3
-
-		&-link
-			position: absolute
-			left: 50%
-			top: 50%
-			opacity: 0
-			transition: opacity 1s 2s ease
-			transform: translate(-50%, -50%)
-			.button
-				color: #FFF 
-
-		&.visible
-			#main-header-excerpt
-				opacity: 1
-				//@include animation(header-excerpt, 1.5s 1s ease-in-out both, no-fade, -50%, 0, -50%, -350px)
-
-			#main-header-link
-				opacity: 1
-				//@include animation(header-link, 2s 2.5s ease-in-out both, In, -50%, 0, -50%, -230px)
 	&.page
 		#main-header
-			height: calc-height($header-height, $nav-height, $top-bar-height)
+			height: calc-height($header-h, $nav-height, $top-bar-height)
 		&.nav-inline-logo
 			#main-header
-				height: calc-height($header-height, $top-bar-height)	
+				height: calc-height($header-h, $top-bar-height)
+#main-header
+	position: relative
+	//min-height: 200px
+	//padding: $gutter-20 0
+	//width: 100%
+	@include push--auto
+	margin-bottom: $gutter/4
+	background-color: $header-bg
+	+media-breakpoint-down(sm)
+		margin-left: -5vw
+		margin-right: -5vw
+	.gallery-meta
+		position: absolute
+		width: 50%
+		height: 50%
+		left: 50%
+		top: 50%
+		color: #FFF
+		padding: $gutter-20 $gutter-20 $gutter-20 * 4
+		background-color: transparentize($theme-color, 0.5)
+		opacity: 0
+		transition: opacity 1s 1s ease
+		transform: translate(-50%, -50%)
+		//backdrop-filter: blur(10px)
+		.gallery-description
+			font-size: 2em
+			line-height: 1.3
 
-	#main-container
-		//display: flex
-		//height: 100%
-		//min-height: 100vh
-		max-width: $container_max_w
-		//padding: 0 $gutter-20 $gutter-20
-		@include push--auto
-		background-color: $main-bg
-		@include img-responsive
-		.breadcrumbs
-			margin: $gutter-20 0
-			font-size: .8em   
+			.gallery-link
+				position: absolute
+				left: 50%
+				top: 50%
+				opacity: 0
+				transition: opacity 1s 2s ease
+				transform: translate(-50%, -50%)
+				.button
+					color: #FFF
 
-		p
-			//text-align: justify
-			font-size: 1.2em
-			letter-spacing: 0.5px
-			line-height: $base-line-height
-			+media-breakpoint-down(xs)
-				font-size: 1.2em
-		header
-			@include parallax(.4)
-			
-		#content
+	&.visible
+		.gallery-meta
+			opacity: 1
+			//@include animation(header-excerpt, 1.5s 1s ease-in-out both, no-fade, -50%, 0, -50%, -350px)
+
+			.gallery-link
+				opacity: 1
+				//@include animation(header-link, 2s 2.5s ease-in-out both, In, -50%, 0, -50%, -230px)
+
+#main-container
+	position: relative
+	padding-top: $gutter/2
+	margin-bottom: $gutter/2
+	background-color: $main-bg
+	@extend %img
+	.breadcrumbs
+		margin: $gutter / 2 0
+		font-size: .8em
+
+	#content
+		//margin-top: $gutter-20*2
+		//padding: $gutter-30 0
+		background-color: $content-bg
+		box-sizing: border-box
+		word-break: break-word
+		//@include img-responsive
+		ul
+			position: relative
+			li
+				//list-style-type: disclosure-closed
+				margin-left: 2em
+				margin-bottom: 0.5em
+				@extend p
+				@extend .check-icon
+
+		&.float-left
+			width: $content-width
+			margin-right: $gutter-20/2
+
+		&.float-right
+			margin-left: $gutter-20/2
+
+		.page
 			float: left
 			width: 100%
-			margin-top: $gutter-20*2  
-			//padding: $gutter-30 0
-			background-color: $content-bg
-			box-sizing: border-box
-			word-break: break-word
-			//@include img-responsive
+			//opacity: 0
+			&.in-view
+				@include animation(article, 1s .2s ease both, In, 0, 20% )
 
 
-			&.float-left
-				width: $content-width
-				margin-right: $gutter-20/2
-				
-			&.float-right
-				margin-left: $gutter-20/2
+		&.project
+			article
+				img
+					margin-top: $gutter/2
+				.cell
+					.entry-header
+						text-align: left
 
-			.page
-				opacity: 0
-				&.visible
-					@include animation(article, 1s .2s ease-out both, In, 0, 100% )
-						//transform: translate(0, 60%)
-			&.search
-				nav, header
-					+media-breakpoint-up(lg)
-						padding-left: 0
-						padding-right: 0
-				>div
-					color: $base-text-color
-					//border: 1px solid $theme-color 
-					letter-spacing: 0.5px 
-					span
-						font-weight: 600
-						text-decoration: underline
-		article
-			margin: $gutter-20*2 0
+	article
+		position: relative
+		&.overview,
+		.entry-thumbnail,
+			margin-top: $gutter/2
+			margin-bottom: $gutter/2
+		&.entry
+			//float: left
+			margin-bottom: $gutter/2
+			.entry-summary
+				+img-responsive
+				a
+					display: block
+					float: left
+					+media-breakpoint-down(sm)
+						width: 100%
+						float: inherit
+						text-align: center
+				img
+					margin-right: $gutter/4
+					margin-bottom: $gutter/4
 
+		.entry-header
+			width: 100%
+			text-align: center
+			//margin-bottom: $gutter-20 * 2
 
-		#main-sidebar
-			width: 25%
-			float: left
-			padding: $gutter-20/2
-			background-color: $sidebar-bg 
-			border: 1px solid $border-color
-			box-sizing: border-box
+		.entry-content
+			flex-grow: 1
+			width: 100%
+			//float: left
+			//margin-top: $gutter/2
+			//@include push--auto
 
-	
-	&.left-sidebar
-		#main-container
-			flex-direction: row-reverse 
+			.entry-description
+				+media-breakpoint-up(md)
+					//display: inline-block
+					column-count: 2
+					column-gap: $gutter-30
+
+		.entry-description
+			+media-breakpoint-down(sm)
+				width: max-content
+				@include push--auto
+
+		&.cell
+			display: flex
+			//margin-top: $gutter/2
+			flex-direction: column
+			+media-breakpoint-up(md)
+				&:nth-child(odd)
+					padding-left: $gutter/5
+				&:nth-child(even)
+					padding-right: $gutter/5
+
+			p, li
+				font-size: 1.2em
 
 // <!-- End Main -->

@@ -5,37 +5,39 @@ $grid-breakpoints: (xs: 320px, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
 // sizes
 $gutter-20: 20px
 $gutter-30: 30px
-$gutter: $gutter-20
-$container_max-w: 1000px
-$top-bar-height: 0px
-$header-height: 90px
-$header-height-min: $header-height / 2
-$logo-width: 70px
-$logo-width-min: 40px
+$gutter: 10vw
+$container_max-w: 1200px
+$top-bar-height: 0
+$header-h: 90px
+$header-h-sm: 60px
+$header-h-xs: 45px
 $sidebar-width: 25%
 $content-width: 100% - $sidebar-width
 $nav-height: 0px
-$footer-height: 20px
+$secondary-menu-mobile-h: 7vh
+
+$footer-h: 40px
 //$main-header-height: calc(100vh - #{$header-height} - #{$nav-height} - #{$top-bar-height} )
-$icon-size: 30px
+$icon-size: 2em
+$icon-sm-size: 25px
 $button-h: 40px
-$portfolio-header-h: 60vh
+$portfolio-header-h: 73vh
 //colors
-$theme-color: #69c
+$theme-color: #997245
+$theme-color2: #AEAEAE
 $body-bg: white
 $header-bg: white
 $top-bar-bg: $header-bg
 $main-bg: white //darken(white, 5%)
 $content-bg: transparent
 $sidebar-bg: $main-bg
-$nav-bg: $theme-color
-$footer-bg: $theme-color
+$nav-bg: $theme-color2
+$footer-bg: $theme-color2
 $branding-link-color: white
-$base-shadow-color: #888
-$base-border-color: #555
+$base-shadow-color: $theme-color2
+$base-border-color: $theme-color
 $base-text-color: #333
 $page-title-color: $theme-color
-$nav-bg: $header-bg
 $menu-link-color: $base-text-color
 $menu-icon-color: $base-text-color
 $link-color: $theme-color
@@ -45,19 +47,19 @@ $button-text-hover: white
 $border-color: $body-bg
 $preloader-bg: white
 $preloader-color: $theme-color
-$accent: orange
+$accent: $theme-color2
 
 //opacify($theme-color, 0.5)
 //transparentize($theme-color, 0.3)
 
 /* TYPOGRAPHY */
-$base-font-family: 'Roboto'
-$default-fonts: Arial, Helvetica, sans-serif
-$base-font-size: 15px
-$base-line-height: 1.25em
-$icon-font-size: 12px
-$menu-font-size: 1em
+$title-font-family: 'ms-Sans-serif'
+$html-font-family: 'CenturyGothic'
+$default-fonts: sans-serif, Arial, Helvetica
+$base-font-size: 16px
+$base-line-height: 1.5em
+$icon-font-size: 1.2em
+$menu-font-size: 1.0em
 $burger-menu-font-size: 1.5em
 $burger-submenu-font-size: $burger-menu-font-size * 0.8
-
 

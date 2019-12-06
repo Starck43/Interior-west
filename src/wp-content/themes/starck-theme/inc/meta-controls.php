@@ -1,11 +1,12 @@
 <?php
 /*
-Plugin Name: Page Layout Controls
-Description: Allows to hide the title of pages and posts and single project portfolio 
-			 and build Gallery for posts, projects, pages.
-Version: 1.0.3
-Author: S.Shabalin
-*/
+ * Plugin Name: Page Layout Controls
+ * Description: Allows to hide the title of pages and posts and adjust a single project portfolio
+ * 
+ * @package StarckTheme
+ * Version: 1.0.5
+ * 
+ */
 
 if ( !class_exists( 'starck_meta_controls' ) ) {
 
@@ -35,9 +36,9 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
 		function add_section(){
 
-			add_meta_box( $this->hide_title, 'Title', array( $this, 'title_metabox_callback' ), $screen, 'side', 'default' );
+			add_meta_box( $this->hide_title, __( 'Title', 'starck' ), array( $this, 'title_metabox_callback' ), $screen, 'side', 'default' );
 
-			add_meta_box( $this->gallery_image, 'Gallery', array( $this, 'gallery_metabox_callback' ), $screen, 'advanced', 'default' );
+			add_meta_box( $this->gallery_image, __( 'Gallery', 'starck' ), array( $this, 'gallery_metabox_callback' ), $screen, 'advanced', 'default' );
 
 		}
 
@@ -53,7 +54,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			wp_nonce_field( $this->hide_title . '_dononce', $this->hide_title . '_noncename' );
 
 			?>
-			<label><input type="checkbox" name="<?php echo $this->hide_title; ?>" <?php echo $checked; ?> />Скрыть заголовок</label>
+			<label><input type="checkbox" name="<?php echo $this->hide_title; ?>" <?php echo $checked; ?> /><?php echo __( 'Hide Title', 'starck' ) ?></label>
 			<?php
 
 		}
@@ -86,7 +87,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			if ( $gallery ) {
 
 				foreach ( $gallery as $value ) {
-					$url = wp_get_attachment_image_url(absint($value) );
+					$url = wp_get_attachment_image_url(absint($value), 'mini-thumbnail' );
 					echo '<div class="postbox-gallery-image"><img src="' . $url . '" />';
 					echo '<a class="gallery-del-image" href="#">x</a>';
 					echo '<input type="hidden" name="gallery-image[]" value="' . $value . '">';
@@ -94,27 +95,31 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 				}
 			}
 			echo '</div>';
-			echo '<div><input type="button" id="upload-button" class="button" value="Добавить фото" /></div>';
+			echo '<div><input type="button" id="upload-button" class="button" value="'.__( 'Add Image', 'starck' ).'" /></div>';
 			echo sprintf('<div class="postbox-gallery-options" style="display: %1$s">', (($gallery) ? 'block' : 'none'));
-			echo sprintf('<label class="postbox-gallery-header-slider" ><input type="checkbox" name="%1$s" %2$s/>Отобразить галерею в слайдере</label>',
+			echo sprintf('<label class="postbox-gallery-header-slider" ><input type="checkbox" name="%1$s" %2$s/>%3$s</label>',
 							$this->gallery_header_slider,
-							$header_slider_checked
+							$header_slider_checked,
+							__( 'Show Gallery in Header Slider', 'starck' )
 						);
-			echo sprintf('<label class="postbox-gallery-scroll"><input type="checkbox" name="%1$s" %2$s/>Режим слайдшоу</label>',
+			echo sprintf('<label class="postbox-gallery-scroll"><input type="checkbox" name="%1$s" %2$s/>%3$s</label>',
 							$this->gallery_scroll,
-							$scroll_checked
+							$scroll_checked,
+							__( 'Slideshow Mode', 'starck' )
 						);
-			echo sprintf('<label class="postbox-gallery-pagination"><input type="checkbox" name="%1$s" %2$s/>Индикатор слайдов</label>',
+			echo sprintf('<label class="postbox-gallery-pagination"><input type="checkbox" name="%1$s" %2$s/>%3$s</label>',
 							$this->gallery_pagination,
-							$pagination_checked
+							$pagination_checked,
+							__( 'Slider Pagination', 'starck' )
 						);
-			echo sprintf('<label class="postbox-gallery-caption" for="postbox-gallery-caption">Описание галереи</label>
-							<textarea id="postbox-gallery-caption" name="%1$s">%2$s</textarea>',
+			echo sprintf('<label class="postbox-gallery-caption" for="postbox-gallery-caption">%1$s</label>
+							<textarea id="postbox-gallery-caption" name="%2$s">%3$s</textarea>',
+							__( 'Gallery Description', 'starck' ),
 							$this->gallery_caption,
 							$gallery_caption
 						);
-			echo sprintf('<label class="postbox-gallery-caption-link">Ссылка для перехода
-							<input type="text" name="%1$s" value="%2$s"/></label>',
+			echo sprintf('<label class="postbox-gallery-caption-link">%1$s<input type="text" name="%2$s" value="%3$s"/></label>',
+							__( 'Gallery Link', 'starck' ),
 							$this->gallery_caption_link,
 							$gallery_caption_link
 						);
@@ -144,7 +149,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 						 && $_POST[ $this->gallery_caption . '_noncename' ]
 						 && $_POST[ $this->gallery_caption_link . '_noncename' ]
 						 && $_POST[ $this->gallery_header_slider . '_noncename' ]
-					) 
+					)
 				|| 	!(		wp_verify_nonce( $_POST[ $this->hide_title . '_noncename' ], 			$this->hide_title . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_image . '_noncename' ], 		$this->gallery_image . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_scroll . '_noncename' ], 		$this->gallery_scroll . '_dononce' )
@@ -152,15 +157,15 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 						 && wp_verify_nonce( $_POST[ $this->gallery_caption . '_noncename' ],		$this->gallery_caption . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_caption_link . '_noncename' ],	$this->gallery_caption_link . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_header_slider . '_noncename' ],		$this->gallery_header_slider . '_dononce' )
-					) 
+					)
 				) { return $post_ID; }
 
 			//Update Title meta
 			$old = get_post_meta( $post_ID, $this->hide_title, true );
 			$new = $_POST[ $this->hide_title ];
 			if ( $old != $new ) {
-				if ( $new ) { 
-					update_post_meta( $post_ID, $this->hide_title, $new ); 
+				if ( $new ) {
+					update_post_meta( $post_ID, $this->hide_title, $new );
 				} else {
 					delete_post_meta( $post_ID, $this->hide_title );
 				}
@@ -173,12 +178,12 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			$new = $_POST[ $this->gallery_image ];
 
 			if ( $old != $new ) {
-				if ( $old ) { 
-					delete_post_meta( $post_ID, $this->gallery_image ); 
+				if ( $old ) {
+					delete_post_meta( $post_ID, $this->gallery_image );
 				}
 				if ( $new ) {
 					for ( $i = 0; $i < count($new); $i++) {
-						add_post_meta( $post_ID, $this->gallery_image, $new[$i] ); 
+						add_post_meta( $post_ID, $this->gallery_image, $new[$i] );
 					}
 				}
 			}
@@ -190,8 +195,8 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			$new = $_POST[ $this->gallery_scroll ];
 
 			if ( $old != $new ) {
-				if ( $new ) { 
-					update_post_meta( $post_ID, $this->gallery_scroll, $new ); 
+				if ( $new ) {
+					update_post_meta( $post_ID, $this->gallery_scroll, $new );
 				} else {
 					delete_post_meta( $post_ID, $this->gallery_scroll );
 				}
@@ -204,8 +209,8 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			$new = $_POST[ $this->gallery_pagination ];
 
 			if ( $old != $new ) {
-				if ( $new ) { 
-					update_post_meta( $post_ID, $this->gallery_pagination, $new ); 
+				if ( $new ) {
+					update_post_meta( $post_ID, $this->gallery_pagination, $new );
 				} else {
 					delete_post_meta( $post_ID, $this->gallery_pagination );
 				}
@@ -213,8 +218,8 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
 			//Update Gallery caption meta
 			$value = $_POST[ $this->gallery_caption ];
-			if ( isset( $value ) ) { 
-				update_post_meta( $post_ID, $this->gallery_caption, esc_attr($value) ); 
+			if ( isset( $value ) ) {
+				update_post_meta( $post_ID, $this->gallery_caption, esc_attr($value) );
 			} else {
 				delete_post_meta( $post_ID, $this->gallery_caption );
 			}
@@ -224,8 +229,8 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			$new = $_POST[ $this->gallery_caption_link ];
 
 			if ( $old != $new ) {
-				if ( $new ) { 
-					update_post_meta( $post_ID, $this->gallery_caption_link, esc_url($new) ); 
+				if ( $new ) {
+					update_post_meta( $post_ID, $this->gallery_caption_link, esc_url($new) );
 				} else {
 					delete_post_meta( $post_ID, $this->gallery_caption_link );
 				}
@@ -236,8 +241,8 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			$new = $_POST[ $this->gallery_header_slider ];
 
 			if ( $old != $new ) {
-				if ( $new ) { 
-					update_post_meta( $post_ID, $this->gallery_header_slider, esc_url($new) ); 
+				if ( $new ) {
+					update_post_meta( $post_ID, $this->gallery_header_slider, esc_url($new) );
 				} else {
 					delete_post_meta( $post_ID, $this->gallery_header_slider );
 				}
@@ -259,7 +264,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			delete_post_meta( $post_ID, $this->gallery_caption );
 			delete_post_meta( $post_ID, $this->gallery_caption_link );
 			delete_post_meta( $post_ID, $this->gallery_header_slider );
-			
+
 			return $post_ID;
 
 		} // delete_meta

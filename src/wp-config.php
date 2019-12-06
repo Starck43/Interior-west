@@ -59,6 +59,11 @@ define('NONCE_SALT',       'G6LH: o!>%u4)^3>frEh h_(OwzeQ#gX:vXUvbc=EDl4vNh Gj_4
 
 //define('WP_SITEURL', 'http://start-web/');
 //define('WP_HOME', 'http://start-web/wordpress/');
+//define ('FS_CHMOD_FILE', 0644);
+//define ('FS_CHMOD_DIR', 0755);
+
+//Прямой доступ к папке wp-content
+define('FS_METHOD','direct');
 
 // Для разработчиков: Режим отладки WordPress. В обычном режиме false
 // Логи событий будут сохраняться в файл debug.log в папке wp-content.
@@ -77,7 +82,9 @@ define( 'WP_DEFAULT_THEME', 'starck-theme' );
 define( 'CORE_UPGRADE_SKIP_NEW_BUNDLED', true );
 
 //Количество резервных постов в БД
-define( 'WP_POST_REVISIONS', 1 );
+define('WP_POST_REVISIONS', 1); // 1 - количество ревизий записи или страницы / false - отключить ревизию
+
+define ('WP_ALLOW_MULTISITE', true); // Создание нескольких сайтов на одном движке Wordpress
 
 //Включаем сохранение sql запросов. Чтобы их видеть, в footer.php вставляем код для отображения запросов
 //define( 'SAVEQUERIES', true );

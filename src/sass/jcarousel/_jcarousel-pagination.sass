@@ -2,30 +2,50 @@
 
 .jcarousel-wrapper
 	.jcarousel-pagination
-		position: absolute
+		position: relative
+		display: flex
+		justify-content: center
 		width: 100%
-		bottom: $gutter-20 / 2
-		background-color: transparent
+		height: 3px //$nav-control-w / 1.2
+		//bottom: $gutter-20 / 2
+		background-color: transparentize($nav-color, 0.8)
 		text-align: center
 		a
-			display: inline-block
-			width: $nav-control-w / 1.5
-			height: $nav-control-h / 1.5
-			font-size: 0.8em
-			color: #FFF
-			line-height: $nav-control-h / 1.5
-			text-align: center
-			background-color: transparentize($nav-color, 0.8)
-			border-radius: $nav-control-w 
+			display: block
+			width: 100%
+			//margin: 0 5px
+			//box-sizing: content-box
+			color: transparent //$nav-color
+			//background-color: transparentize($body-bg, 0.3)
+			font-size: 1em
+			//line-height: $nav-control-w / 1.2
+			//text-align: center
+			//border-left: 1px solid $body-bg
+			//border-radius: 1px
 			//@include border-radius(50%)
-			margin-left: $gutter-20 / 4
-			&:first-child
-				margin-left: 0
 
-			&:hover
-				background-color: transparentize($nav-color, 0.2)
-				
 			&.active
-				background-color: #FFF
-				//opacity: .9
-				color: #69c
+				background-color: $nav-color
+			&:hover
+				//color: white
+				background-color: transparentize($nav-color, 0.2)
+				//mix-blend-mode: overlay
+
+
+		+media-breakpoint-down(xs) 
+			position: absolute
+			height: $gutter-20
+			bottom: 0
+			background-color: transparent
+			a
+				display: flex
+				margin: 0 5px
+				width: 8px
+				height: 8px
+				border: 1px solid darken($body-bg, 5%)
+				justify-content: center
+
+				&.active
+					background-color: white
+					//opacity: .9
+					//color: white

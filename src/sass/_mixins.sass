@@ -7,22 +7,20 @@
 		@if $f-weight != 0
 			font-weight: $f-weight
 		src: url($f-url) if($url != none, #{','} $url format('woff2'), format('woff2'))
-	
+
 @mixin font-settings($font:false, $colour:false, $size:false, $case:false, $weight:false, $lh:false)
 	@if $font
 		font-family: "#{$font}",#{$default-fonts}
-	@else
-		font-family: $default-fonts
 	@if $size
-		font-size: $size 
+		font-size: $size
 	@if $colour
-		color: $colour 
+		color: $colour
 	@if $case
-		text-transform: $case 
+		text-transform: $case
 	@if $weight
-		font-weight: $weight 
+		font-weight: $weight
 	@if $lh
-		line-height: $lh 
+		line-height: $lh
 
 //Убираем единицы измерения у чисел
 @function strip-units($size)
@@ -37,10 +35,18 @@
 	@return round(strip-units($em) * strip-units($fontsize))*1px
 
 //Автоматическое центрирование
-@mixin push--auto 
+@mixin push--auto
 	margin:
 		left: auto
 		right: auto
+
+//Абсолютное позиционирование в размер родителя
+@mixin push--absolute
+	position: absolute
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
 
 //модальное окно в полный экран
 @mixin modal
@@ -52,31 +58,37 @@
 
 // Вычисляем высоту блока за вычетом видимых в области экрана
 // например: height: calc-height($header-height, $nav-height, $top-bar-height)
-@function calc-height($h1, $h2:0, $h3:0)
+@function calc-height($h1, $h2:0, $h3:0, $h4:0)
 	$h: strip-units($h1) + strip-units($h2) + strip-units($h3)
-	@return calc(100vh - #{$h}px )
+	@if $h4 != 0
+		@return calc(100vh - #{$h}px - #{$h4})
+	@else
+		@return calc(100vh - #{$h}px)
 
 
 @mixin animation($name, $animation, $fade:no-fade, $x:0, $y:0, $x1:0, $y1:0)
 	animation: animation-#{$name} $animation
 	@content
-	
+
 	@keyframes animation-#{$name}
 		0%
 			@if $fade != no-fade
 				opacity: if($fade == Out, 1, 0)
-			@if strip-units($x)+strip-units($y)+strip-units($x1)+strip-units($y1) != 0
+			@if strip-units($x)+strip-units($y) != 0
 				transform: translate($x, $y)
+		50%
+			@if $fade != no-fade
+				opacity: if($fade == In, 0, 0.5)
 
 		100%
 			@if $fade != no-fade
 				opacity: if($fade == Out, 0, 1)
-			@if strip-units($x)+strip-units($y)+strip-units($x1)+strip-units($y1) != 0
+			@if strip-units($x1)+strip-units($y1) != 0
 				transform: translate($x1, $y1)
 
 @mixin animation-delays($items, $start-delay:0ms, $between-delay:50ms)
-	@for $i from 0 through $items 
-		&:nth-child(#{$i + 1}) 
+	@for $i from 0 through $items
+		&:nth-child(#{$i + 1})
 			animation-delay: $start-delay+($between-delay*($i))
 
 // Magic parallax mixins
@@ -95,7 +107,8 @@ $parallax-ios         : true !default
 			overflow: hidden
 
 	#{$element}
-		overflow: auto
+		overflow-x: hidden
+		overflow-y: auto
 		perspective: $perspective * 1px
 		transform-style: preserve-3d
 		// Allows for smooth scrolling but disables parallax effects.
@@ -107,15 +120,15 @@ $parallax-ios         : true !default
 
 @mixin parallax($distance: 0, $perspective: $parallax-perspective)
 	transform: translateZ($distance * $perspective * 1px) scale(abs($distance - 1))
-	z-index: $distance * 1000
+	//z-index: $distance * 1000
 
 // End of magic parallax mixins
 @mixin transition-delays($items, $start-delay:0ms, $between-delay:50ms)
-	@for $i from 0 through $items 
-		&:nth-child(#{$i + 1}) 
+	@for $i from 0 through $items
+		&:nth-child(#{$i + 1})
 			transition-delay: $start-delay+($between-delay*($i))
-						
-// Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона), 
+
+// Миксин для создания масштабируемыхэлементов(обычно изображения/картинки заднего фона),
 // чтобы поддерживать соотношение. Пример: @include responsive-ratio(16,9)
 @mixin responsive-ratio($x, $y, $pseudo:false)
 	$padding: unquote(( $y / $x )*100+'%')
@@ -132,24 +145,24 @@ $parallax-ios         : true !default
 	@include pseudo($pos: $position)
 	width: 0
 	height: 0
-	@if $round 
+	@if $round
 		border-radius: 3px
-	@if $direction == down 
+	@if $direction == down
 		border-left: $size solid transparent
 		border-right: $size solid transparent
 		border-top: $size solid $color
 		margin-top: (0 - round( $size / 2.5 ))
-	@else if $direction == up 
+	@else if $direction == up
 		border-left: $size solid transparent
 		border-right: $size solid transparent
 		border-bottom: $size solid $color
 		margin-bottom: 0 - round( $size / 2.5 )
-	@else if $direction == right 
+	@else if $direction == right
 		border-top: $size solid transparent
 		border-bottom: $size solid transparent
 		border-left: $size solid $color
 		margin-right: -$size
-	@else if  $direction == left 
+	@else if  $direction == left
 		border-top: $size solid transparent
 		border-bottom: $size solid transparent
 		border-right: $size solid $color
@@ -159,8 +172,8 @@ $parallax-ios         : true !default
 // Keep images from scaling beyond the width of their parents.
 @mixin img-responsive
 	img
-		max-width: 100%
-		height: auto
+		width: auto !important
+		height: 100% !important
 
 // Retina image
 // Short retina mixin for setting background-image and -size.

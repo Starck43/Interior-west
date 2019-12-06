@@ -1,35 +1,7 @@
 <?php
 add_action('admin_head', 'add_custom_admin_styles');
 function add_custom_admin_styles() {
-	echo '<style>
-		#wpcontent {height:auto;}
-		#wpfooter {position: relative;}
-		.wp-block {max-width: 1100px;}
-		.column-post_thumb {width: 80px;}
-		#gallery-image .button {margin: 5px 0;}
-		.postbox-gallery-block {cursor: pointer;}
-		.postbox-gallery-image {
-			position: relative;
-			display: inline-block;
-			width: 100px;
-			height: 100px;
-			margin: 0 1% 1% 0;
-			background: aliceblue;
-		}
-		.postbox-gallery-image img {width: 100%; height: auto;}
-		.postbox-gallery-image .gallery-del-image {
-			position: absolute; 
-			right: 4px; 
-			top: 4px;
-			border-radius: 2px;
-			background: rgba(255,255,255,.8);
-			width: 20px;
-			height: 20px;
-			text-align: center;
-			font-size: 12px;
-		}
-		.postbox-gallery-options label {display: block; padding: 20px 0 5px;}
-	</style>';
+	wp_enqueue_style("style-admin",get_template_directory_uri()."/inc/css/style.css");
 }
 
  /* Add the media uploader script */
@@ -47,6 +19,7 @@ function media_upload_enqueue() {
 
 add_action( 'after_setup_theme', 'starck_setup' );
 function starck_setup() {
+	//Подключаем переводы из папки languages в теме starck-theme
 	load_theme_textdomain( 'starck', get_template_directory() . '/languages' );
 
 	//добавление фонового изображения через настройки темы
@@ -65,7 +38,7 @@ function starck_setup() {
 		'default-attachment'	=> 'fixed',
 		//'header-text'			=> true,
 		'uploads'				=> true,
-		'default-image'			=>  '/img/header.jpg', //get_stylesheet_directory_uri() . 
+		'default-image'			=>  '/img/header.jpg', //get_stylesheet_directory_uri() .
 		'wp-head-callback'		=> '',
 	) );
 
@@ -76,7 +49,7 @@ function starck_setup() {
 		'flex-width'  => true,
 		'flex-height' => true,
 		'uploads' 	  => true,
-		'default-image' => '/img/logo.png', //get_stylesheet_directory_uri() . 
+		'default-image' => '/img/logo.png', //get_stylesheet_directory_uri() .
 		//'header-text' => array( 'site-title', 'site-description' )
 	) );
 
@@ -187,8 +160,8 @@ if ( ! function_exists( 'starck_get_link_url' ) ) {
 }
 
 add_action ('wp_print_styles','remove_styles',100);
-function remove_styles() {				
-	wp_deregister_style('starck-theme-google-font'); 
+function remove_styles() {
+	wp_deregister_style('starck-theme-google-font');
 }
 /**
  * Check if the logo and site branding are active.
@@ -249,9 +222,9 @@ add_filter('manage_posts_custom_column','posts_custom_columns',5,2);
 function posts_columns($columns) {
 	$columns = array (
 		'cb' => $columns['cb'],
-		'post_thumb' => __('Миниатюра'),
-		'title' => __('Title'),
-		'date' => __('Date'),
+		'post_thumb' => __('Thumbnail', 'starck'),
+		'title' => __('Title', 'starck'),
+		'date' => __('Date', 'starck'),
 	);
 	return $columns;
 }
@@ -261,7 +234,7 @@ function posts_custom_columns($column_name, $id) {
 	if ($column_name === 'post_thumb') {
 		if ( has_post_thumbnail() ) {
 			the_post_thumbnail( array(50,50) );
-		} else echo 'No Image';
+		} else echo __( 'No image', 'starck' );
 	}
 }
 
@@ -380,14 +353,14 @@ if ( ! function_exists( 'starck_get_top_bar' ) ) {
 	/**
 	 * Construct Top Bar
 	 */
-	function starck_get_top_bar() {	
+	function starck_get_top_bar() {
 		if ( ! is_active_sidebar( 'top-bar' ) ) { return; }
 		?>
 		<!-- Top bar container -->
 		<div id="top-bar" class="container">
 			<?php dynamic_sidebar( 'top-bar' ); ?>
 		</div>
-		<?php 
+		<?php
 	}
 }
 
@@ -395,7 +368,7 @@ if ( ! function_exists( 'starck_get_header_widget' ) ) {
 	/**
 	 * Build our header widget.
 	 */
-	function starck_get_header_widget() {	
+	function starck_get_header_widget() {
 		if ( ! is_active_sidebar( 'header' ) ) { return; }
 		dynamic_sidebar( 'header' );
 	}
@@ -441,41 +414,44 @@ function starck_add_footer_widget( $widget ) {
 }
 
 /**
- * Construct Navigation menu (primary/secondary) 
+ * Construct Navigation menu (primary/secondary)
  */
 if ( ! function_exists( 'starck_get_navigation' ) ) {
 	/**
 	 * Build our navigation.
 	 */
-	function starck_get_navigation() {	
+	function starck_get_navigation() {
 
 		if ( 'none' === starck_get_option( 'nav_position_setting' ) ) return;
 		if ( ! has_nav_menu( 'primary' ) ) return;
-		
+
 		$nav_burger = starck_get_option( 'nav_burger' );
 
-		$primary_args = array( 
+		$primary_args = array(
 			'theme_location' => 'primary',
+			'menu_class' => 'primary-menu menu',
 			//'items_wrap'     => '<ul id="%1$s" class="%2$s">%3$s</ul><div id="menu-icon" class="burger-menu">&#9776;</div>',
-			'link_after' => '<i class="fa"></i>', // Add element icon after link for each menu item
+			'link_after' => '<i class=""></i>', // Add element icon after link for each menu item
 			'container' => ''
 		);
-		/*
-		$secondary_args = array( 
+
+		$secondary_args = array(
 			'theme_location' => 'secondary',
+			'menu_class' => 'secondary-menu menu',
 			'fallback_cb' => '__return_empty_string', // show additional menu only if it exists
+			'container' => '',
 		);
-		*/
+
 		?>
 		<nav id="header-nav" <?php starck_navigation_class( $nav_burger ? 'burger' : '' ); ?> role="navigation">
 			<?php
 			wp_nav_menu( $primary_args );
-			//wp_nav_menu( $secondary_args );
+			wp_nav_menu( $secondary_args );
 			if ( starck_get_option( 'nav_search_setting' ) ) {
 			?>
-				<div id="site-search-modal"><?php get_search_form(); ?></div>
+				<div id="site-search-modal" class="modal hidden"><?php get_search_form(); ?></div>
 
-				<div id="nav-search"><i class="icon fa fa-search"></i></div>
+				<div id="nav-search"><i class="icon search-icon"></i></div>
 			<?php
 			}
 
@@ -489,45 +465,47 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 }
 
 /**
- * Construct Main Header in Main section 
+ * Construct Main Header in Main section
  */
-function starck_main_header() {	
+function starck_main_header() {
 
 	$header_setting = starck_get_option( 'content_header_setting' );
 
-	if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) || 
+	if ( ( 'front-page' == $header_setting && ( is_home() || is_front_page() ) ) ||
 		 ('all-pages' == $header_setting && ( is_home() || is_front_page() || is_page() || is_single() || is_archive() ) ) ) {
 
-		get_template_part( 'main','header' ); 
+		get_template_part( 'main','header' );
 
 	}
 }
 
-function starck_breadcrumbs() {	
+function starck_breadcrumbs() {
 
 	if ( starck_get_option( 'breadcrumbs_setting' ) ) {
-
-		get_template_part( 'breadcrumbs' ); 
-
+		get_template_part( 'breadcrumbs' );
+	}
+	else {
+		if ( is_single() ) $show_in_top = true;
+		if ( $_SERVER['HTTP_REFERER'] ) starck_back_to_previous_page( $show_in_top );
 	}
 }
 
+function starck_back_to_previous_page( $in_top ) {
+
+	if ( starck_get_option('back_to_previous_page') ) {
+		?>
+		<a id="link-to-back" <?php echo ($in_top ? 'class="show-in-top container"' : '') ?>title="<?php __( 'Go back', 'starck' ); ?>" rel="nofollow" href="/" <?php echo 'onclick="javascript:history.back(); return false;"'?>><svg class="icon arrow-icon left"><use xlink:href="#arrow"></use></svg><span class="back-caption"><?php esc_html_e('Back', 'starck'); ?></span></a>
+		<?php
+	}
+}
 
 function starck_back_to_top() {
 	//$options = wp_parse_args( get_option( 'starck_settings', array() ), starck_get_defaults() );
 
 	if ( starck_get_option('back_to_top') ) {
 		?>
-		<a id="link-to-top" title="Вернуться наверх" rel="nofollow" href="/"><i class="icon fa arrow-up"></i></a>
+		<a id="link-to-top" title="<?php __( 'Scroll up', 'starck' ); ?>" rel="nofollow" href="/"><svg class="icon arrow-icon up"><use xlink:href="#arrow"></use></svg></a>
 		<?php
 	}
 }
 
-function starck_back_to_previous_page() {
-
-	if ( starck_get_option('back_to_previous_page') ) {
-		?>
-		<a id="link-to-back" title="Вернуться назад" rel="nofollow" href="javascript:history.go(-1)">Назад</a>
-		<?php
-	}
-}

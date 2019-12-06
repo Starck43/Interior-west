@@ -1,10 +1,10 @@
-<?php 
-// Объявим глобальный массив
+<?php
+// Объявим глобальный массив для проектов
 $projects = array (
 	'taxonomy'			=> 'project_cat',
 	'post_type'			=> 'projects',
-	'all_posts_title'	=> 'Все проекты',
-	'show_cat_meta'		=> 1 // 1 - Отображать заголовок и описание текущей категории 
+	'all_posts_title'	=> __('All projects','starck'),
+	'show_cat_meta'		=> 1 // 1 - Отображать заголовок и описание текущей категории
 );
 
 add_action('init', 'register_projects_post_type_and_taxonomy');
@@ -14,30 +14,30 @@ function register_projects_post_type_and_taxonomy() {
 	global $projects;
 
 	$labels = array(
-		'name' => _x('Категории проектов', 'taxonomy general name'),
-		'singular_name' => _x('Категория проектов', 'taxonomy singular name'),
-		'add_new_item' => __('Добавить категорию'),
-		'edit_item' => __('Изменить категорию'),
-		'new_item' => __('Новая категория'),
-		'view_item' => __('Посмотреть категорию'),
+		'name' => _x('Projects category', 'taxonomy general name','starck'),
+		'singular_name' => _x('Projects Category', 'taxonomy singular name','starck'),
+		'add_new_item' => __('Add New Category','starck'),
+		'edit_item' => __('Change Category','starck'),
+		'new_item' => __('New Category','starck'),
+		'view_item' => __('View Category','starck'),
 		'parent_item' => null,
 		'parent_item_colon' => null,
-		'all_items' => __('Все категории'),
-		'update_item' => __('Обновить'),
-		'search_items' => __('Поиск категории'),
-		'not_found' => __('Категории не найдены'),
-		'not_found_in_trash' => __('Не найдено в корзине')
+		'all_items' => __('All Projects Categories','starck'),
+		'update_item' => __('Update Category','starck'),
+		'search_items' => __('Search in Categories','starck'),
+		'not_found' => __('No Categories found','starck'),
+		'not_found_in_trash' => __('Nothing found in Trash','starck')
 		);
 	$args = array(
 		'hierarchical' => true,
 		'labels' => $labels,
-		'label' => 'Категории проектов',  //Label Displayed in the Admin when creating a new project
+		'label' => _x('Projects category', 'taxonomy general name','starck'),  //Label Displayed in the Admin when creating a new project
 		'public' => true,
 		//'query_var' => false,
 		'rewrite' => array(
 			'hierarchical' => true,
 			'slug' => $projects['post_type'], // This controls the base slug that will display before each term
-			'with_front' => true // Display the category prefix before 
+			'with_front' => true // Display the category prefix before
 		),
 		'show_admin_column' => true
 	);
@@ -47,28 +47,28 @@ function register_projects_post_type_and_taxonomy() {
 
 
 	$labels = array(
-		'name' => _x('Проекты', 'post type general name'),
-		'singular_name' => _x('Проект', 'post type singular name'),
-		'add_new' => _x('Добавить проект', 'Project'),
-		'add_new_item' => __('Добавить проект'),
-		'edit_item' => __('Изменить проект'),
-		'new_item' => __('Новый проект'),
-		'all_items' => __('Все проекты'),
-		'view_item' => __('Посмотреть проект'),
-		'update_item' => __('Посмотреть проект'),
-		'search_items' => __('Поиск проектов'),
-		'not_found' => __('Проекты не найдены'),
-		'not_found_in_trash' => __('Не найдено в корзине'),
+		'name' => _x('Projects', 'post type general name','starck'),
+		'singular_name' => _x('Project', 'post type singular name','starck'),
+		'add_new' => _x('Add New Project', 'Project','starck'),
+		'add_new_item' => __('Add','starck'),
+		'edit_item' => __('Edit','starck'),
+		'new_item' => __('New','starck'),
+		'all_items' => __('All Projects','starck'),
+		'view_item' => __('View','starck'),
+		'update_item' => __('Update','starck'),
+		'search_items' => __('Search','starck'),
+		'not_found' => __('No Projects found','starck'),
+		'not_found_in_trash' => __('Nothing found in Trash','starck'),
 		'parent_item_colon' => '',
-		'menu_name' => 'Проекты'
+		'menu_name' => _x('Projects', 'post type general name','starck')
 		);
 	$args = array(
 		'labels' => $labels,
-		'description' => 'Проекты',
+		'description' => _x('Projects', 'post type general name','starck'),
 		'show_ui' => true,
 		'public' => true,
 		'menu_position' => 5,
-		'supports' => array('title', 'editor', 'page-attributes', 'thumbnail', 'custom-fields'),
+		'supports' => array('title', 'editor', 'excerpt', 'page-attributes', 'thumbnail', 'custom-fields'),
 		'rewrite' => array(
 			'slug' => $projects['post_type'] . '/%' . $projects['taxonomy'] . '%',
 			'with_front' => false
@@ -113,7 +113,7 @@ function projects_hierarchical_permalink( $permalink, $post ){
 	// Получаем элементы таксы
 	$terms = get_the_terms($post,  $projects['taxonomy']);
 	$parent = $terms[0]->parent;
- 
+
 	// если есть элемент заменим холдер
 	if( ! is_wp_error($terms) && !empty($terms) && is_object($terms[0]) ) {
 		$term_slug = array_pop($terms)->slug;
@@ -122,8 +122,8 @@ function projects_hierarchical_permalink( $permalink, $post ){
 			$term_slug = $cur_term->slug . '/' . $term_slug;
 			$parent = $cur_term->parent;
 		}
-	}	
-	else 
+	}
+	else
 		$term_slug = '';
 		// В $permalink находим %project_cat% и заменяем на $term_slug
 	// убираем лишний слэш, если $term_slug будет пустой
@@ -175,9 +175,9 @@ function wspe16902_prepend_page_rewrite_rules($rewrite_rules)
 }
 */
 
-add_action('wp_ajax_projects_filter', 'projects_filter_function'); // wp_ajax_{ACTION HERE} 
+add_action('wp_ajax_projects_filter', 'projects_filter_function'); // wp_ajax_{ACTION HERE}
 add_action('wp_ajax_nopriv_projects_filter', 'projects_filter_function');
- 
+
 function projects_filter_function() {
 	global $projects;
 
@@ -196,10 +196,10 @@ function get_category_meta( $projects, $cur_term ) {
 		if ($cur_term) { //если есть запрос по термину, то выведем название категории из полученного запроса
 			$cat_name = $cur_term->name;
 		} else $cat_name = $projects['all_posts_title'];
-		echo '<div id="projects-category-meta">';
-			echo '<header id="category-header"><h1 class="category-title">' . $cat_name .'</h2></header>';
-			echo '<div id="category-description"><p>' . $cur_term->description .'</p></div>';
-		echo '</div>';
+		echo '<article id="projects-entry" class="entry-content">';
+			echo '<header class="entry-header"><h1>' . $cat_name .'</h1></header>';
+			echo '<div class="entry-description"><p>' . $cur_term->description .'</p></div>';
+		echo '</article>';
 	}
 }
 
@@ -215,23 +215,23 @@ function get_taxonomy_list_categories( $projects, $cur_term = null ) {
 	// Выводим дочерние термы для таксономии project_cat
 	$terms = get_terms( $args );
 	if ( $terms ) {
-
 		echo '<ul id="projects-categories">';
 			if ($cur_term) {
 				// присваиваем родителю текущий термин или старый термин
 				$parent_term = $child_terms ? $cur_term : get_term_by('term_taxonomy_id', $cur_term->parent);
 
-				printf('<li class="cat-item-all cat-%1$s active"><a href="%2$s" data-id="%3$s">Все %4$s</a></li>',
+				printf('<li class="cat-item-all cat-%1$s'.($cur_term->term_id == $parent_term->term_id ? ' active' : '').'"><a href="%2$s" data-id="%3$s">%4$s</a></li>',
 					$parent_term->slug,
 					get_term_link( $parent_term ),
 					$parent_term->term_id,
-					mb_strtolower( $parent_term->name )
+					__('All projects','starck')
+					//( stristr(get_locale(), 'en') ? 'All projects' : 'Все проекты' ) //. mb_strtolower($parent_term->name)
 				);
 			}
 
 			foreach ($terms as $term) {
 				$children_term = get_term_children($term->term_id,$projects['taxonomy']);
-				printf('<li class="cat-item cat-%1$s' . ($children_term ? ' has-children' :'') . '"><a href="%2$s" data-id="%3$s">%4$s</a></li>',
+				printf('<li class="cat-item cat-%1$s' . ($children_term ? ' has-children' :'') . ($cur_term->term_id == $term->term_id ? ' active' : '') . '"><a href="%2$s" data-id="%3$s">%4$s</a></li>',
 					$term->slug,
 					get_term_link($term),
 					$term->term_id,

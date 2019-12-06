@@ -2,7 +2,7 @@
 
 	<header class="entry-header">
 
-		<?php 
+		<?php
 		$header_class = ' class="entry-title' . ((get_post_meta( $post->ID, 'hide-title', true )) ? ' hidden' : '');
 
 		if ( is_singular() ) :
@@ -18,12 +18,11 @@
 	<div class="entry-content row">
 		<?php
 		//if ( !is_search() ) get_template_part( 'entry', 'meta' );
-		//get_template_part( 'entry', ( is_front_page() || is_home() || is_front_page() && is_home() || is_archive() || is_search() ? 'summary' : 'content' ) ); 
+		//get_template_part( 'entry', ( is_front_page() || is_home() || is_front_page() && is_home() || is_archive() || is_search() ? 'summary' : 'content' ) );
 		get_template_part( 'entry', ( is_archive() || is_search() ? 'summary' : 'content' ) );
 		//if ( is_singular() ) get_template_part( 'entry', 'footer' );
 		?>
+		<?php edit_post_link(); ?>
 	</div>
-
-	<?php edit_post_link(); ?>
 
 </article>
