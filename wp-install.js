@@ -2,7 +2,7 @@
  * wp-install.js
  * Usage: <node wp-install> in cmd console
  * Description: downloading and unpacking Wordpress in folder src/wordpress with moving content folder up from wordpress folder
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Stanislav Shabalin
  */
 
