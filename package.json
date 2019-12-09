@@ -1,7 +1,7 @@
 {
-  "name": "start-web-project",
+  "name": "Interior-West-project",
   "version": "1.0.4",
-  "description": "A new Web project with Gulp based on WordPress",
+  "description": "Design studio Interior-West project",
   "main": "wp-install.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,12 +10,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Starck43/Start-WP-Template.git"
+    "url": "git+https://github.com/Starck43/Interior-west.git"
   },
   "bugs": {
-    "url": "https://github.com/Starck43/Start-WP-Template/issues"
+    "url": "https://github.com/Starck43/Interior-west/issues"
   },
-  "homepage": "https://github.com/Starck43/Start-WP-Template#readme",
+  "homepage": "https://github.com/Starck43/Interior-west#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",

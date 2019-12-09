@@ -28,7 +28,7 @@ var path = {
 		dest: 'src/wp-content/themes/starck-theme/' // Путь до дочерней темы WP.
 	}
 var site = {
-		http: 'starck.loc' // здесь нужно указать адрес рабочего сайта, удаленного или локального
+		http: 'interior-west.loc' // здесь нужно указать адрес рабочего сайта, удаленного или локального
 }
 
 gulp.task('message', async function() { // Вывод любой информации в консоль
