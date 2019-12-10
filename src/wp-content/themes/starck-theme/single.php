@@ -14,11 +14,10 @@ get_header();
 	
 	<?php while ( have_posts() ) : the_post(); ?>
 		<?php get_template_part( 'entry' ); ?>
-
-		<?php if ( ( comments_open() || get_comments_number() ) && ! post_password_required() ) { comments_template( '', true ); } ?>
 	<?php endwhile;?>
 
 	<?php get_template_part( 'nav', 'below-single' ); ?>
+	<?php get_template_part( 'contact', 'form' ); ?>
 
 </section>
 

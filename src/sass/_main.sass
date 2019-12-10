@@ -82,7 +82,7 @@
 				margin-left: 2em
 				margin-bottom: 0.5em
 				@extend p
-				@extend .check-icon
+				//@extend .check-icon
 
 		&.float-left
 			width: $content-width
@@ -98,14 +98,8 @@
 			&.in-view
 				@include animation(article, 1s .2s ease both, In, 0, 20% )
 
-
-		&.project
-			article
-				img
-					margin-top: $gutter/2
-				.cell
-					.entry-header
-						text-align: left
+		.entry-header
+			text-align: center
 
 	article
 		position: relative

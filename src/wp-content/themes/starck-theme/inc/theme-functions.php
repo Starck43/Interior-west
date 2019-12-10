@@ -216,28 +216,6 @@ function widget_execute_php($widget_content)
 	return $widget_content;
 }
 
-add_filter('manage_posts_columns','posts_columns',5);
-add_filter('manage_posts_custom_column','posts_custom_columns',5,2);
-
-function posts_columns($columns) {
-	$columns = array (
-		'cb' => $columns['cb'],
-		'post_thumb' => __('Thumbnail', 'starck'),
-		'title' => __('Title', 'starck'),
-		'date' => __('Date', 'starck'),
-	);
-	return $columns;
-}
-
-function posts_custom_columns($column_name, $id) {
-
-	if ($column_name === 'post_thumb') {
-		if ( has_post_thumbnail() ) {
-			the_post_thumbnail( array(50,50) );
-		} else echo __( 'No image', 'starck' );
-	}
-}
-
 require_once trailingslashit( dirname( __FILE__ ) ) . 'customizer.php';
 require_once trailingslashit( dirname( __FILE__ ) ) . 'defaults.php';
 require_once trailingslashit( dirname( __FILE__ ) ) . 'markup.php';

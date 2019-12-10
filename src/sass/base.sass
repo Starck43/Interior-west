@@ -28,11 +28,11 @@
 @import controls
 
 @import search
-@import overview
+//@import overview
 @import portfolio
 @import jcarousel/jcarousel
-@import imagelightbox/imagelightbox
-@import polylang
+//@import imagelightbox/imagelightbox
+//@import polylang
 @import wpforms
 @import gutenberg
 
@@ -59,7 +59,8 @@ li
 	letter-spacing: 0.3px
 
 h1
-	@include font-settings($title-font-family, $page-title-color, 2.4em, uppercase, 500, 1.2)
+	@include font-settings($title-font-family, $page-title-color, 2.4em, lowercase, 500, 1.2)
+	letter-spacing: 1px
 	margin: 0 0 1em
 	+media-breakpoint-down(md)
 		font-size: 2em
@@ -69,6 +70,7 @@ h2
 	font-weight: 500
 	margin: 0 0 .75em
 	color: $page-title-color
+	text-transform: lowercase
 
 h3
 	font-size: 1.4em
