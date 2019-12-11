@@ -13,8 +13,8 @@
 <body <?php body_class(); ?>>
 	<?php include_once('sprite.svg'); ?>
 	<!-- Preloader -->
-	<div id="dom-preloader" class="preloader">
-		<svg class="icon preloader-icon"><use xlink:href="#preloader-logo"></use></svg>
+	<div id="dom-preloader">
+		<svg class="logo-icon"><use xlink:href="#logo"></use></svg>
 	</div>
 	<?php
 
@@ -41,16 +41,20 @@
 			}
 			?>
 			<section id="branding" <?php starck_branding_class('site-branding'); ?>>
-				<?php
-				$custom_logo_id = get_theme_mod( 'custom_logo' );
-				if ( $custom_logo_id ) {
-				?>
 				<!-- logo -->
 	            <div id="branding-logo" class="site-logo">
-					<?php the_custom_logo(); ?>
+	            <?php
+					$custom_logo_id = get_theme_mod( 'custom_logo' );
+					if ( $custom_logo_id ) {
+						the_custom_logo();
+					} else {
+					?>
+						<svg><use xlink:href="#logo"></use></svg>
+					<?php
+					}
+				?>
 	            </div>
 				<?php
-				}
 
 				// Get the title and tagline.
 				$title = get_bloginfo( 'title' );
