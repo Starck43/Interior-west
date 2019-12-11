@@ -21,7 +21,9 @@ document.addEventListener('readystatechange', function(el) {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	$('#dom-preloader').fadeOut(500, function() { $('#dom-preloader').remove(); });
+	$('#dom-preloader').fadeOut(500, function() { 
+		//$('#dom-preloader').remove(); 
+	});
 	$('body').fadeIn(500);
 	var overlay = $('#overlay');
 	var navigation = $('#header-nav');
