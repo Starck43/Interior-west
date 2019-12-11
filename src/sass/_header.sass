@@ -40,26 +40,28 @@
 		display: flex
 		width: auto
 		//margin: auto 0
+		height: $header-h - $gutter-20
+		+media-breakpoint-down(sm)
+			height: $header-h-sm - $gutter-20
+			//max-width: $logo-width / 1.5
+		+media-breakpoint-down(xs)
+			height: $icon-size
+			//max-width: $logo-width-min
 
 		#branding-logo
-			//margin: auto 0
+			position: relative
+			//margin: 0 auto
 			//padding: 0 $gutter-20/2
 			width: auto
-			height: $header-h - $gutter-20
 			@include img-responsive
-			+media-breakpoint-down(sm)
-				height: $header-h-sm - $gutter-20
-				//max-width: $logo-width / 1.5
-			+media-breakpoint-down(xs)
-				height: $icon-size
-				//max-width: $logo-width-min
 
 		#branding-title
+			width: 100% 
 			margin: auto 0
 			padding: 0 $gutter-20/2
-			a
-				display: flex
-
+			display: flex
+			flex-direction: column
+			justify-content: space-between
 			.site-title
 				margin: 0
 				line-height: 1
@@ -68,9 +70,13 @@
 			.site-description
 				font-size: 1em
 
+		&.align-left
+			#branding-logo
+				margin-right: auto
+
 		&.align-center
 			margin-bottom: $gutter-20/2
-			a
+			#branding-title
 				justify-content: center
 
 		&.align-right
@@ -78,7 +84,7 @@
 
 		&.align-vertical
 			flex-direction: column
-			a
+			#branding-title
 				justify-content: center
 
 			#branding-logo,
