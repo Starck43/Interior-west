@@ -4,21 +4,18 @@ input:not([type="submit"]), textarea
 	@include font-settings(false, $button-text-color, $base-font-size, false, 300, 1.3)
 	width: 100%
 	//margin-top: 3px
-	padding: 5px 0px
+	padding: 5px 10px
 	background-color: transparent
 	border-radius: 0
 	border: none
-	border-bottom: 1px solid transparentize($base-shadow-color,.5)
+	border: 1px solid transparentize($base-text-color,.8)
 	transition: all 300ms ease
 	outline: none
 	resize: vertical
 	&:focus
 		//border-color: $theme-color
-		padding-left: 10px
-		padding-right: 10px
-		border-bottom: 1px solid $base-border-color
+		border-color: $base-border-color
 		outline-offset: 0
-		@extend .grey-bg
 	&:-webkit-autofill
 		box-shadow: inset 0 0 0 50px transparentize($theme-color, 0) !important /* Цвет фона */	d
 	&::placeholder
@@ -257,7 +254,7 @@ $btn-size: $icon-size * 1.2
 	background-position: center
 	stroke: black
 	stroke-width: 1px
-	transition: opacity 150ms ease
+	transition: all 150ms ease
 	opacity: 0.7
 	cursor: pointer
 	&:hover
@@ -270,7 +267,13 @@ $btn-size: $icon-size * 1.2
 		//mix-blend-mode: exclusion
 
 .search-icon
-	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"></circle><line x1="22" y1="22" x2="15.50" y2="15.50"></line></svg>')
+	fill: none
+	stroke: black
+	stroke-width: 2px
+	+media-breakpoint-up(md)
+		padding: 3px
+	&:hover
+		stroke: white
 
 .arrow-icon
 	stroke: currentColor
@@ -320,7 +323,7 @@ svg
 	max-width: 114px
 	.cls-1
 		fill: $theme-color2
-	.cls-2 
+	.cls-2
 		fill: $theme-color
 	.cls-1, .cls-2
 		fill-rule: evenodd
@@ -334,10 +337,9 @@ svg
 		.icon
 			margin-bottom: 0.5em
 
-#instagram-link
-	.instagram-icon
-		margin-right: 0.5em
-		//stroke-width: 1px
+
+.instagram-icon
+	stroke-width: 2px
 
 #phone-link
 	.phone-icon
@@ -349,8 +351,12 @@ svg
 		white-space: nowrap
 
 #site-footer
-	.instagram-icon
-		padding: 3px
+	.facebook-icon
+		padding: 1px
+	.icon
+		margin-right: 0.5em
+		opacity: 1
+
 
 	#phone-link
 		justify-content: center

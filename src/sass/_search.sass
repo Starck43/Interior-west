@@ -9,19 +9,27 @@
 
 .search-no-results
 	input:not([type="submit"])
-		border: 1px solid transparentize($base-shadow-color,.5)
+		border: 1px solid transparentize($base-text-color,.8)
 		&:focus
 			border: 1px solid $base-border-color
 
 #searchform
-	display: flex
+	position: relative
 	max-width: 600px
-	@include push--auto
-	flex-direction: column
-	align-items: center
-	> *
-		margin: $gutter/4
-
+	//@include push--auto
+	//flex-direction: column
+	//align-items: center
+#site-footer #searchform-submit
+	position: absolute
+	top: 1px
+	bottom: 1px
+	right: 1px
+	width: $button-h
+	height: auto
+	color: transparent
+	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"></circle><line x1="22" y1="22" x2="15.50" y2="15.50"></line></svg>') 50% 50% no-repeat
+	background-size: $icon-size
+	background-color: $theme-color
 //Search modal window
 #site-search-modal
 	display: flex

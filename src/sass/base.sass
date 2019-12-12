@@ -1,5 +1,5 @@
 /*
- * @package Starck-theme 
+ * @package Starck-theme
  *
  * Base styles library
  *
@@ -30,11 +30,11 @@
 @import search
 //@import overview
 @import portfolio
-@import jcarousel/jcarousel
+//@import jcarousel/jcarousel
 //@import imagelightbox/imagelightbox
 //@import polylang
 @import wpforms
-@import gutenberg
+//@import gutenberg
 
 *
 	box-sizing: border-box
@@ -45,6 +45,8 @@ a
 	color: $link-color
 	&:hover
 	 	color: $link-color-hover
+	&:focus, &:active
+		color: $theme-color !important
 
 p
 	letter-spacing: 0.3px
@@ -159,9 +161,9 @@ img
 
 .container
 	//width: 100%
-	//@include push--auto
-	margin-left: $gutter / 2
-	margin-right: $gutter / 2
+	@include push--auto
+	//margin-left: $gutter / 2
+	//margin-right: $gutter / 2
 
 .bounded
 	width: 100%
@@ -189,6 +191,9 @@ img
 	visibility: hidden !important
 	opacity: 0 !important
 	z-index: -1 !important
+
+header .hidden
+	display: none
 
 .visible
 	opacity: 1 !important
@@ -270,7 +275,7 @@ img
 		transform: translate(-50%, 100%)
 
 .feedback
-	margin: $gutter/2 auto 0 
+	margin: $gutter/2 auto 0
 	max-width: 600px
 
 @import header

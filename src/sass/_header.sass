@@ -3,38 +3,23 @@
 	position: relative
 	display: flex
 	//width: auto
-	min-height: $header-h
+	height: $header-h
 	//margin-top: $gutter-20/2
 	//margin-bottom: $gutter-20/2
 	align-items: center
 	background-color: $header-bg
-	border-bottom: 1px solid darken(white, 10%)
 	//z-index: 3
 	+media-breakpoint-down(sm)
-		min-height: $header-h-sm
+		height: $header-h-sm
 	+media-breakpoint-down(xs)
-		min-height: $header-h-xs
-	#top-bar
-		background-color: $top-bar-bg
-		display: flex
-		padding:
-			left: 0
-			right: 0
-		.widget
-			width: 100%
-			margin:  0 $gutter-20 / 2 auto
-			&:nth-child(n)
-				text-align: center
-			&:first-child
-				text-align: left
-			&:last-child
-				text-align: right
+		height: $header-h-xs
 
 	#header-container
 		display: flex
 		width: 100%
 		justify-content: space-between
 		align-items: center
+		//margin-right: $gutter/5
 
 	#branding
 		display: flex
@@ -62,20 +47,22 @@
 			display: flex
 			flex-direction: column
 			justify-content: space-between
-			.site-title
-				margin: 0
-				line-height: 1
-				font-size: 1.1em
-				font-weight: bold
-				text-transform: uppercase
-			.site-description
-				font-family: Tahoma
-				font-size: 2.1em
-				line-height: 1
-				font-weight: bold
-				text-transform: uppercase
+			a
+				div
+					margin: 0
+					line-height: 1
+					font-weight: bold
+					text-transform: uppercase
+				div:first-child
+					color: $base-text-color
+					font-size: 1.1em
+				div:last-child
+					font-family: Tahoma
+					font-size: 2.1em
+
 
 		&.align-left
+			margin-left: $gutter/5
 			#branding-logo
 				margin-right: auto
 

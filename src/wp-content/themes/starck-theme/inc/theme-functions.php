@@ -429,7 +429,7 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 			?>
 				<div id="site-search-modal" class="modal hidden"><?php get_search_form(); ?></div>
 
-				<div id="nav-search"><i class="icon search-icon"></i></div>
+				<div id="nav-search"><svg class="icon search-icon"><use xlink:href="#search"></use></svg></div>
 			<?php
 			}
 

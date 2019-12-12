@@ -9,7 +9,7 @@
 	position: absolute
 	display: block
 	width: 0
-	height: 1px
+	height: 4px
 	//top: 50%
 	bottom: 0.5em
 	right: 100%
@@ -25,12 +25,12 @@
 	position: absolute
 	display: block
 	width: 100%
-	height: 1px
+	height: 4px
 	bottom: -8px
 	background-color: $theme-color
-	transition: all 100ms ease-in
-	transform: scaleX(0)
-	//opacity: 1
+	transition: all 150ms ease-in
+	//transform: scaleX(0)
+	opacity: 0
 
 // Header navigation styles
 #header-nav
@@ -57,17 +57,20 @@
 
 			&:hover
 				&::before
-					transform: scaleX(1)
+					opacity: 1
 
 			a
 				position: relative
-				@include font-settings(false, $menu-link-color, $menu-font-size, lowercase, 300, $nav-height)
+				@include font-settings(false, $menu-link-color, $menu-font-size, initial, 300, $nav-height)
 				letter-spacing: 0.3px
 				white-space: nowrap
+			&.current-menu-item
+				a
+					color: $theme-color
 
 			&.menu-item-has-children
 				> a i::before
-					content: '\f078'
+					content: ''
 					width: 10px
 					left: 100%
 					top: 50%
@@ -213,11 +216,12 @@
 	#nav-search
 		display: flex
 		//margin-top: 2px
-		margin-left: $gutter/4
-		+media-breakpoint-up(md)
-			.icon
-				width: $icon-font-size
-				height: $icon-font-size
+		width: $header-h
+		height: $header-h
+		margin-left: $gutter-20
+		background-color: $theme-color
+		justify-content: center
+		align-items: center
 
 // <!-- End Header navigation -->
 

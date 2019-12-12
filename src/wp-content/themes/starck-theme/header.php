@@ -57,15 +57,18 @@
 				<?php
 
 				// Get the title and tagline.
-				$title = get_bloginfo( 'title' );
+				//$title = get_bloginfo( 'title' );
 				$description = get_bloginfo( 'description' );
+				$title = explode("-", get_bloginfo( 'title' ));
 				if ( !starck_get_option('hide_title') && '' != $title ) {
 					?>
 					<!-- header title -->
 					<div id="branding-title">
-						<h1 class="site-title">
-							<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( $title ); ?>" rel="home"><?php echo esc_html( $title ); ?></a>
-						</h1>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'title' ) ); ?>" rel="home">
+						<?php
+							foreach ($title as $value)
+								echo '<div>' . $value . '</div>';
+						?></a>
 						<?php if ( !starck_get_option('hide_description') && '' != $description ) { ?>
 							<div class="site-description"><?php echo $description; ?></div>
 						<?php } ?>

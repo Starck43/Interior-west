@@ -14,21 +14,23 @@
 		.footer-widgets
 
 			display: flex
-			margin: 2vh $gutter/2
+			margin: 2vh $gutter/4
 			//align-items: center
 			justify-content: space-between
 
 			.footer-widget
 				flex-basis: 100%
 				//width: 100%
-				margin: auto
+				margin: 0 auto
 				//justify-content: center
 				&:nth-child(n)
 					text-align: center
 				&:first-child:not(:last-child)
 					text-align: left
+					padding-right: $gutter/4
 				&:last-child:not(:first-child)
 					text-align: right
+					padding-left: $gutter/2
 				a
 					color: white
 				table
