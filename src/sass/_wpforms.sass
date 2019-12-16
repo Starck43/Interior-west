@@ -3,9 +3,20 @@
 .wpforms-container
 	width: 100%
 	max-width: 600px
-	//@include push--auto
+	@include push--auto
 	text-align: left
 	font-size: 0.8em
+	.wpforms-title
+		text-align: center
+		@extend h1
+
+	ul 
+		margin-bottom: 0 !important
+		li
+			margin: 0 !important
+			list-style-type: none !important /* Убираем глобально маркеры */
+			&::before
+				content: none !important
 
 	.wpforms-one-half, .wpforms-field
 		margin-bottom: 20px
@@ -65,8 +76,8 @@
 
 
 	.wpforms-submit-container
-		padding-top: $gutter-20
-		float: right
+		padding-top: $gutter-20/2
+		float: left
 		+media-breakpoint-down(sm)
 			float: none
 			button

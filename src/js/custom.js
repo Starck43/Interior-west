@@ -1,7 +1,7 @@
 /*
  * Custom scripts library
  *
- * @version 1.0.8
+ * @version 1.8.3
  */
 
 var $ = jQuery.noConflict();
@@ -11,7 +11,7 @@ function checkMobileNavgation(nav) {
 	width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	//height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	if (!nav.hasClass('burger'))
-		if ( width < 768 ) nav.addClass('mobile')
+		if ( width < 992 ) nav.addClass('mobile')
 		else nav.removeClass('mobile')
 }
 
@@ -21,8 +21,8 @@ document.addEventListener('readystatechange', function(el) {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	$('#dom-preloader').fadeOut(500, function() { 
-		//$('#dom-preloader').remove(); 
+	$('#dom-preloader').fadeOut(500, function() {
+		//$('#dom-preloader').remove();
 	});
 	$('body').fadeIn(500);
 	var overlay = $('#overlay');
@@ -68,19 +68,24 @@ document.addEventListener("DOMContentLoaded", function() {
 	}	
 
 	// in vewport check script
-	inView.offset(200);
-	inView('#overview-page article')
+	inView.offset(0);
+	inView('h1')
 		.on('enter', el => {
 			//el.style.opacity = 1;
-			el.classList.add('lazyloaded');
+			el.classList.add('in-view');
 		})
 		.on('exit', el => {
 			//el.style.opacity = 0.5;
 		});
-	inView('article.page')
+	inView('h2')
 		.on('enter', el => {
 			el.classList.add('in-view');
-		})
+		});
+	inView('.entry-content >div')
+		.on('enter', el => {
+			el.classList.add('in-view');
+		});
+
 
 	$( window ).on( 'resize', function( e ) {
 		checkMobileNavgation(navigation);
@@ -138,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	});
 */
+
 	//New version with own close button in menu
 	burger.on('click', function (e) {
 		if (!mobileMenu.hasClass('active')) {
@@ -151,17 +157,16 @@ document.addEventListener("DOMContentLoaded", function() {
 	mobileMenu.on('click','.close-icon', function (e) {
 		mobileMenu.removeClass('active').children().remove('.close-icon');
 	});
-	
+
 	var submenu_item = $('.menu-item-has-children a').on('click', function (e) {
 		e.preventDefault();
 		$(this).parent().toggleClass('collapsed');
 	});
-		
+
 	$( document ).on( 'keyup', function (e) {
 		e.preventDefault();
-		if( e.keyCode == 27 && !search.hasClass('hidden') )
-			//close search form
-			search.addClass('hidden') //if( e.keyCode == 27 && search.is(':visible') ) search.fadeToggle(300)
+		if( e.keyCode == 27 && search.is(':visible') )
+			search.fadeToggle(300) //close search form
 		else
 		if( e.keyCode == 27 && !overlay.hasClass('hidden') )
 			overlay.click() //close overlay form
@@ -190,26 +195,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	$('#nav-search').on('click', function (e) {
 		if ( !search.attr('display','none') && search.find('#s').val() ) {
-			$('#searchform').submit(); 
+			$('#searchform').submit();
 		} else search.fadeToggle(300);
 	});
-/*
-	$('#nav-search').on('click', function (e) {
-		search.toggleClass('hidden');
-	});
 
-	$('#searchform').on('submit', function (e) {
-		//идет поиск...
-		//можно вывести preloader с надписью
-	});
-	$('#searchform-close').on('click', function (e) {
+	$('#search-close').on('click', function (e) {
 		var field_s = search.find('#s');
 		if ( field_s.val() ) field_s.val('')
 		else search.fadeToggle(300);
-	});
-*/
-	search.on('click','.close-icon', function (e) {
-		search.addClass('hidden');
 	});
 
 	overlay.on('click', function (e) {

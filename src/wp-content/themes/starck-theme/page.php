@@ -6,17 +6,17 @@
  */
 get_header(); ?>
 
-	<section id="content" <?php starck_content_class('page'); ?>>
+	<?php $page_width = get_post_meta( $post->ID, 'page-width', true ); ?>
+	<section id="content" <?php starck_content_class('page'); echo (bool)$page_width ? ' style="margin: 0 1em"' : ''; ?>>
 
 		<?php starck_breadcrumbs(); ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
-
-			<article class="entry post-<?php the_ID(); ?> row" <?php post_class(); ?>>
+			<article class="entry post-<?php the_ID(); ?>" <?php post_class(); echo (bool)$page_width ? ' style="max-width:'.$page_width.'px"' : ''; ?>>
 
 				<header class="entry-header">
-					<?php if (get_post_meta( $post->ID, 'hide-title', true )) $hidden_class = ' hidden'; ?>
-					<h1 class="entry-title <?php echo $hidden_class ?>"><?php the_title(); ?></h1>
+					<?php  $hidden_class = (get_post_meta( $post->ID, 'hide-title', true )) ? ' hidden' : ''; ?>
+					<h1 class="entry-title<?php echo $hidden_class ?>"><?php the_title(); ?></h1>
 					<?php edit_post_link(); ?>
 				</header>
 

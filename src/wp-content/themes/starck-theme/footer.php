@@ -1,6 +1,7 @@
 		</div>
 	<!-- end main container -->
-
+		<div id="site-search-modal"><?php get_search_form(); ?></div>
+				<?php starck_back_to_top(); ?>
 	</main>
 	<!-- end main -->
 
@@ -25,13 +26,7 @@
 		</div>
 		<!-- end container -->
 
-		<?php
-
-		starck_back_to_top();
-
-		wp_footer();
-
-		?>
+		<?php wp_footer(); ?>
 
 	</footer>
 	<div id="overlay" class="modal hidden"></div>

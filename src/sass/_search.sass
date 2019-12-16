@@ -15,7 +15,7 @@
 
 #searchform
 	position: relative
-	max-width: 600px
+	//max-width: 600px
 	//@include push--auto
 	//flex-direction: column
 	//align-items: center
@@ -30,34 +30,38 @@
 	background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"></circle><line x1="22" y1="22" x2="15.50" y2="15.50"></line></svg>') 50% 50% no-repeat
 	background-size: $icon-size
 	background-color: $theme-color
+
 //Search modal window
 #site-search-modal
-	display: flex
+	display: none
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
 	justify-content: center
 	align-items: center
 	//@include animation(modal, 200ms ease-in both, In )
 	//opacity: 1
-	background-color: $body-bg
-	@supports (backdrop-filter: blur(0))
-		background-color: transparentize($body-bg, .15)
-	#searchform
-		width: 70%
-		//height: $button-h
-		//margin-right: $icon-size
-		+media-breakpoint-down(sm)
-			width: 90%
+	//background-color: $theme-color2
+	background-color: transparentize($nav-bg, 0)
 
+	#searchform
 		input
 			margin: 0
+			padding-right: $icon-size
+			border-left: none
+			border-right: none
+			border-bottom: none
 			//color: $theme-color
 			//border-radius: 2px
 			//padding: 0 5px
 			//background-color: $body-bg
-
 		&-submit
 			display: none
 
 	.close-icon
 		display: block !important
-		transform: translate(-50%, 100%)
-
+		position: absolute
+		right: 0
+		top: 50%
+		transform: translate(-50%, -50%)

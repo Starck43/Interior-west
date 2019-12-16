@@ -70,18 +70,11 @@
 	#content
 		//margin-top: $gutter-20*2
 		//padding: $gutter-30 0
+		@include push--auto
 		background-color: $content-bg
 		box-sizing: border-box
 		word-break: break-word
 		//@include img-responsive
-		ul
-			position: relative
-			li
-				//list-style-type: disclosure-closed
-				margin-left: 2em
-				margin-bottom: 0.5em
-				@extend p
-				//@extend .check-icon
 
 		&.float-left
 			width: $content-width
@@ -94,21 +87,23 @@
 			float: left
 			width: 100%
 			//opacity: 0
-			&.in-view
-				@include animation(article, 1s .2s ease both, In, 0, 20% )
 
 		.entry-header
 			text-align: center
 
 	article
 		position: relative
-		&.overview,
-		.entry-thumbnail,
-			margin-top: $gutter/2
-			margin-bottom: $gutter/2
+		@include push--auto
+		.entry-header
+			width: 100%
+			text-align: center
+			//margin-bottom: $gutter-20 * 2
 		&.entry
 			//float: left
-			margin-bottom: $gutter/2
+			h1
+				&.in-view
+					@include animation(h1, 1s 0s ease-out both, In, 0, -$gutter/2 )
+
 			.entry-summary
 				+img-responsive
 				a
@@ -122,40 +117,42 @@
 					margin-right: $gutter/4
 					margin-bottom: $gutter/4
 
-		.entry-header
-			width: 100%
-			text-align: center
-			//margin-bottom: $gutter-20 * 2
-
 		.entry-content
-			flex-grow: 1
+			//flex-grow: 1
 			width: 100%
+
 			//float: left
 			//margin-top: $gutter/2
-			//@include push--auto
+			h2
+				text-transform: uppercase
+				opacity: 0
+				&.in-view
+					@include animation(h2, 1.5s 0.2s ease-out both, In, 100%, 0% )
+			>div
+				margin: $gutter/2 auto
+				opacity: 0
+				&.in-view
+					@include animation(h1, 1.5s 0.2s ease-out both, In, 0, 200px )
+				ul
+					margin-bottom: $gutter/4
+					li
+						display: inline-block
+						width: 100% 
+						margin-left: 0
+						align-items: center
 
-			.entry-description
-				+media-breakpoint-up(md)
-					//display: inline-block
-					column-count: 2
-					column-gap: $gutter-30
+			iframe
+				width: 100%
+				height: 70vh
+				border: none
+				+media-breakpoint-down(xs)
+				height: 85vh
 
 		.entry-description
 			+media-breakpoint-down(sm)
 				width: max-content
 				@include push--auto
 
-		&.cell
-			display: flex
-			//margin-top: $gutter/2
-			flex-direction: column
-			+media-breakpoint-up(md)
-				&:nth-child(odd)
-					padding-left: $gutter/5
-				&:nth-child(even)
-					padding-right: $gutter/5
 
-			p, li
-				font-size: 1.2em
 
 // <!-- End Main -->

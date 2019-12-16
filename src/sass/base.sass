@@ -34,7 +34,7 @@
 //@import imagelightbox/imagelightbox
 //@import polylang
 @import wpforms
-//@import gutenberg
+@import gutenberg
 
 *
 	box-sizing: border-box
@@ -61,39 +61,41 @@ li
 	letter-spacing: 0.3px
 
 h1
-	@include font-settings($title-font-family, $page-title-color, 2.4em, lowercase, 500, 1.2)
-	letter-spacing: 1px
-	margin: 0 0 1em
-	+media-breakpoint-down(md)
-		font-size: 2em
-
-h2
-	font-size: 1.8em
-	font-weight: 500
 	margin: 0 0 .75em
-	color: $page-title-color
+	//@include font-settings($title-font-family, black, 2em, lowercase, 500, 1.2)
+	font-size: 2em
+	font-weight: 500
+	line-height: 1.2  
+	letter-spacing: 3px
 	text-transform: lowercase
+		
+h2
+	margin: 0 0 .75em
+	font-size: 1.6em
+	font-weight: 700
+	letter-spacing: 3px
+	color: $page-title-color
 
 h3
 	font-size: 1.4em
 	font-weight: 700
-	margin: 0 0 .5em
+	margin: 1.5em 0 .5em
 
 
 h4
 	font-size: 1.2em
-	font-weight: 700
+	font-weight: 500
 	margin: 0 0 .2em
 
 
 h5
 	font-size: 1em
-	font-weight: 700
+	font-weight: 300
 	margin: 0 0 .2em
 
 header
-	text-transform: uppercase
-	letter-spacing: 0.3px
+	text-transform: lowercase
+	letter-spacing: 1px
 
 html
 	@include font-settings($html-font-family, $base-text-color, $base-font-size, normal, initial, 1.25)

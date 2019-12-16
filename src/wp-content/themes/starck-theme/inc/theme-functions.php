@@ -422,21 +422,18 @@ if ( ! function_exists( 'starck_get_navigation' ) ) {
 
 		?>
 		<nav id="header-nav" <?php starck_navigation_class( $nav_burger ? 'burger' : '' ); ?> role="navigation">
+			<div id="nav-burger" class="icon burger-icon"><div class="burger-inner"></div></div>
 			<?php
 			wp_nav_menu( $primary_args );
 			wp_nav_menu( $secondary_args );
 			if ( starck_get_option( 'nav_search_setting' ) ) {
 			?>
-				<div id="site-search-modal" class="modal hidden"><?php get_search_form(); ?></div>
-
 				<div id="nav-search"><svg class="icon search-icon"><use xlink:href="#search"></use></svg></div>
 			<?php
 			}
 
-
 			//$burger_class = sprintf(' class="icon burger-icon%s"', $nav_burger ?  ' visible' : '' );
 			?>
-			<div id="nav-burger" class="icon burger-icon"><div class="burger-inner"></div></div>
 		</nav>
 		<?php
 	}
@@ -486,4 +483,3 @@ function starck_back_to_top() {
 		<?php
 	}
 }
-

@@ -13,6 +13,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 	class starck_meta_controls {
 
 		private $hide_title = 'hide-title';
+		private $page_width = 'page-width';
 		private $gallery_image = 'gallery-image';
 		private $gallery_scroll = 'gallery-autoscroll';
 		private $gallery_pagination = 'gallery-pagination';
@@ -37,7 +38,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 		function add_section(){
 
 			add_meta_box( $this->hide_title, __( 'Title', 'starck' ), array( $this, 'title_metabox_callback' ), $screen, 'side', 'default' );
-
+			add_meta_box( $this->page_width, __( 'Page settings', 'starck' ), array( $this, 'pagewidth_metabox_callback' ), $screen, 'side', 'default' );
 			add_meta_box( $this->gallery_image, __( 'Gallery', 'starck' ), array( $this, 'gallery_metabox_callback' ), $screen, 'advanced', 'default' );
 
 		}
@@ -55,6 +56,18 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
 			?>
 			<label><input type="checkbox" name="<?php echo $this->hide_title; ?>" <?php echo $checked; ?> /><?php echo __( 'Hide Title', 'starck' ) ?></label>
+			<?php
+
+		}
+
+		function pagewidth_metabox_callback( $post ){
+
+			$page_width = get_post_meta( $post->ID, $this->page_width, true );
+
+			wp_nonce_field( $this->page_width . '_dononce', $this->page_width . '_noncename' );
+
+			?>
+			<label><?php echo __( 'Width: ', 'starck' ) ?><input type="number" name="<?php echo $this->page_width; ?>" value="<?php echo $page_width; ?>" /> px</label>
 			<?php
 
 		}
@@ -143,6 +156,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 
 			if ( ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
 				||  !(		$_POST[ $this->hide_title . '_noncename' ]
+						 && $_POST[ $this->page_width . '_noncename' ]
 						 && $_POST[ $this->gallery_image . '_noncename' ]
 						 && $_POST[ $this->gallery_scroll . '_noncename' ]
 						 && $_POST[ $this->gallery_pagination . '_noncename' ]
@@ -151,6 +165,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 						 && $_POST[ $this->gallery_header_slider . '_noncename' ]
 					)
 				|| 	!(		wp_verify_nonce( $_POST[ $this->hide_title . '_noncename' ], 			$this->hide_title . '_dononce' )
+						 && wp_verify_nonce( $_POST[ $this->page_width . '_noncename' ], 			$this->page_width . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_image . '_noncename' ], 		$this->gallery_image . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_scroll . '_noncename' ], 		$this->gallery_scroll . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_pagination . '_noncename' ],	$this->gallery_pagination . '_dononce' )
@@ -168,6 +183,18 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 					update_post_meta( $post_ID, $this->hide_title, $new );
 				} else {
 					delete_post_meta( $post_ID, $this->hide_title );
+				}
+			}
+
+	
+			//Update Page meta
+			$old = get_post_meta( $post_ID, $this->page_width, true );
+			$new = $_POST[ $this->page_width ];
+			if ( $old != $new ) {
+				if ( $new ) {
+					update_post_meta( $post_ID, $this->page_width, $new );
+				} else {
+					delete_post_meta( $post_ID, $this->page_width );
 				}
 			}
 

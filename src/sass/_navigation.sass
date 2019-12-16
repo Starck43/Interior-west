@@ -36,7 +36,12 @@
 #header-nav
 	display: flex
 	width: 100%
-	height: $nav-height
+	height: $header-h
+	+media-breakpoint-down(sm)
+		height: $header-h-sm
+	+media-breakpoint-down(xs)
+		height: $header-h-xs
+
 	align-items: center
 	//margin-top: auto
 	transition: opacity 500ms ease-in
@@ -137,15 +142,16 @@
 	&.mobile
 		ul.primary-menu
 			@extend .modal
-			height: 0
+			height: 100vh
 			flex-direction: column
 			align-items: center
 			justify-content: space-evenly
-			background-color: $body-bg
+			background-color: $theme-color2
 			//border-top: 0px solid transparentize($theme-color , 1)
 			transition: all 500ms ease-out, opacity 300ms ease
+			transform: translate(100%,0)
 			//box-sizing: border-box
-			opacity: 0
+			//opacity: 0
 			z-index: 0
 
 			li
@@ -184,20 +190,26 @@
 
 			.close-icon
 				z-index: 10000
-				@include animation(close-icon, 300ms .8s ease-in both, In, -50%, 0, -50%, 100%)
+				//@include animation(close-icon, 300ms .8s ease-in both, In, -50%, 0, -50%, 100%)
+				position: absolute
+				top: $icon-size/2
+				right: $icon-size/2
+				width: $icon-size
+				height: $icon-size
 
 			&.active
-				height: 100vh
-				padding-top: 10vh
+				//height: 100vh
+				//padding-top: 10vh
 				//padding-bottom: 10vh
 				//transform: scale(1)
-				opacity: 1
+				transform: translate(0, 0)
+				//opacity: 1
 				z-index: 9998
 				//border-top: 3px solid transparentize($theme-color , 0)
 				>li
-					@include animation(menu-items, 200ms ease-out both, In, 0, -120px )
+					@include animation(menu-items, 200ms ease-out both, In, 200px, 0 )
 					//transform: translate(0, -80px)
-					@include animation-delays(6, 600ms, -80ms)
+					@include animation-delays(6, 800ms, -50ms)
 
 				.lang-item
 					display: block
@@ -217,7 +229,11 @@
 		display: flex
 		//margin-top: 2px
 		width: $header-h
-		height: $header-h
+		height: 100%
+		+media-breakpoint-down(sm)
+			width: $header-h-sm
+		+media-breakpoint-down(xs)
+			width: $header-h-xs
 		margin-left: $gutter-20
 		background-color: $theme-color
 		justify-content: center

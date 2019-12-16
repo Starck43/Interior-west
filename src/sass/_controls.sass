@@ -22,13 +22,13 @@ input:not([type="submit"]), textarea
 		font-size: 0.8em
 		vertical-align: middle
 
-input
-	border: none
+input:not([type="checkbox"],[type="submit"])
 	height: $button-h
-	line-height: 100%
+	line-height: 1
 
 input[type="checkbox"]
 	width: auto
+	margin: 0 5px 0.75em 0
 
 .search-submit
 	visibility: hidden
@@ -58,7 +58,7 @@ input[type="submit"]
 	.burger-inner
 		@extend %burger-line
 		//width: $icon-size - 10px
-		left: 7px
+		left: 0
 		right: 0
 		top: 50%
 		transform: translateY(-50%)
@@ -68,7 +68,7 @@ input[type="submit"]
 			content: ""
 			@extend %burger-line
 			//width: $icon-size
-			left: -7px
+			left: 0
 			right: 0
 			top: -10px
 			transition: top 100ms ease 150ms, opacity 100ms ease
@@ -77,7 +77,7 @@ input[type="submit"]
 			content: ""
 			@extend %burger-line
 			//width: $icon-size - 10px
-			left: 10px
+			left: 0
 			right: 0
 			bottom: -10px
 			transition: bottom 100ms ease 150ms, transform 100ms cubic-bezier(.55,.055,.675,.19)
@@ -101,15 +101,16 @@ input[type="submit"]
 				transform: rotate(-90deg)
 
 
+
 .close-icon
-	@include push--absolute
-	width: $icon-size
-	height: $icon-size
-	left: 50%
+	//@include push--absolute
+	width: $icon-size/1.5
+	height: $icon-size/1.5
+	//left: 50%
 	//transform: translateY(100%)
-	transition: opacity 150ms ease
+	transition: opacity 200ms ease
 	mix-blend-mode: exclusion
-	opacity: 0.7
+	opacity: 0.5
 	cursor: pointer
 
 	&::before,
@@ -134,7 +135,7 @@ input[type="submit"]
 		&::before,
 			transform: rotate(135deg)
 		&::after
-			transform: rotate(-135deg)
+			transform: rotate(45deg)
 		//transform-origin: right
 
 #scroll-up
@@ -165,21 +166,22 @@ $btn-size: $icon-size * 1.2
 #link-to-back:not(.show-in-top)
 	position: fixed
 	display: flex
+	bottom: em($footer-h) + $btn-size * 2
+	padding: 3px
 	align-items: center
 	justify-content: center
-	bottom: em($footer-h) + $btn-size * 2
-	color: black
-	border: 1px solid $nav-bg
-	border-radius: 1px //$btn-size / 1.5
-	background-color: transparentize($nav-bg, 0.5)
+	color: white
+	//border: 1px solid $nav-bg
+	border-radius: 2px //$btn-size / 1.5
+	background-color: transparentize(black, 0.5)
 	transition: all 700ms cubic-bezier(0.61, 0.67, 0.1, 1.01)
 	opacity: 0
 	z-index: 9999
 	@extend .no-select
 	&:hover
 		transition: all 150ms linear
-		//color: white
-		background-color: transparentize($nav-bg, 0)
+		color: black
+		background-color: transparentize(black, 0.95)
 
 #link-to-top
 	right: 1vw
@@ -290,7 +292,8 @@ $btn-size: $icon-size * 1.2
 
 .check-icon::before
 	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>')
-	background-size: 100%
+	//background-repeat: no-repeat
+	//background-size: 100%
 	position: absolute
 	display: inline-flex
 	width: $icon-font-size
@@ -298,9 +301,17 @@ $btn-size: $icon-size * 1.2
 	left: 0
 	margin-top: 4px
 
-.checkbox-icon
-	background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>')
-
+.checkbox-icon::before
+	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>')
+	display: inline-flex
+	width: $icon-font-size
+	height: $icon-font-size
+	align-items: center
+	margin-right: $gutter-20/2
+	padding: 2px
+	border: 2px solid $theme-color 
+	//border-radius: 50% 
+	
 svg
 	width: 100%
 	height: 100%

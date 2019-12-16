@@ -35,7 +35,10 @@
 					color: white
 				table
 					margin: auto
-
+			+media-breakpoint-down(sm)
+				flex-direction: column-reverse
+				.footer-widget
+					padding: 0 0 $gutter/2 !important
 		#copyright
 			//background: $body-bg
 			margin: 2vh $gutter/2
