@@ -46,6 +46,7 @@ input[type="submit"]
 	@include font-settings(false, $button-text-color, $base-font-size*0.8, uppercase, 500, false)
 	background-color: transparentize($theme-color, 1)
 	box-shadow: inset 0 0 0 1px $theme-color
+	border: none
 	border-radius: 1px
 	transition: background-color 500ms ease
 	cursor: pointer
@@ -119,10 +120,10 @@ input[type="submit"]
 		position: absolute
 		width: 100%
 		top: 50%
-		height: 2px
+		height: 3px
 		margin-top: -1px
 		background: white
-		border-radius: 1px
+		border-radius: 2px
 		transition: transform 150ms ease
 	&::before
 		transform: rotate(45deg)
@@ -272,8 +273,6 @@ $btn-size: $icon-size * 1.2
 	fill: none
 	stroke: black
 	stroke-width: 2px
-	+media-breakpoint-up(md)
-		padding: 3px
 	&:hover
 		stroke: white
 
@@ -309,9 +308,9 @@ $btn-size: $icon-size * 1.2
 	align-items: center
 	margin-right: $gutter-20/2
 	padding: 2px
-	border: 2px solid $theme-color 
-	//border-radius: 50% 
-	
+	border: 2px solid $theme-color
+	//border-radius: 50%
+
 svg
 	width: 100%
 	height: 100%

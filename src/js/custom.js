@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function enableTouchMove() {
 		document.ontouchmove = function() { return true; }
 		return false;
-	}	
+	}
 
 	// in vewport check script
 	inView.offset(0);
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			if (burger.is(':visible')) burger.click(); //close burger menu on link clicking
 
 			var top = $(target).offset().top;
-			$('html, body').animate({scrollTop: top}, 500+top/4); //800 - длительность скроллинга в мс			
+			$('html, body').animate({scrollTop: top}, 500+top/4); //800 - длительность скроллинга в мс
 		} else {
 			//target = target.replace(/[^A-Za-z]/g, "");
 			location.replace('/'+target);

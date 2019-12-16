@@ -2,8 +2,8 @@
 	<symbol id="arrow" viewBox="8 4 8 16" stroke-linecap="round" stroke-linejoin="round">
 		<path fill="none" d="M15 18l-6-6 6-6"/>
 	</symbol>
-	<symbol id="search" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-		<circle cx="10" cy="10" r="7"></circle><line x1="22" y1="22" x2="15.50" y2="15.50"></line>
+	<symbol id="search" viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="11" cy="11" r="7"></circle><line x1="22" y1="22" x2="17" y2="17"></line>
 	</symbol>
 	<symbol id="message" viewbox="0 7 172 172">
 		<title>Write message</title>

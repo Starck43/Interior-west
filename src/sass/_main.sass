@@ -60,98 +60,98 @@
 .home
 	#main-container
 		padding-top: 0
-#main-container
-	position: relative
-	padding-top: $gutter/2
-	margin-bottom: $gutter/2
-	background-color: $main-bg
-	@extend %img
-
-	#content
-		//margin-top: $gutter-20*2
-		//padding: $gutter-30 0
-		@include push--auto
-		background-color: $content-bg
-		box-sizing: border-box
-		word-break: break-word
-		//@include img-responsive
-
-		&.float-left
-			width: $content-width
-			margin-right: $gutter-20/2
-
-		&.float-right
-			margin-left: $gutter-20/2
-
-		.page
-			float: left
-			width: 100%
-			//opacity: 0
-
-		.entry-header
-			text-align: center
-
-	article
+body:not(.home)
+	#main-container
 		position: relative
-		@include push--auto
-		.entry-header
-			width: 100%
-			text-align: center
-			//margin-bottom: $gutter-20 * 2
-		&.entry
-			//float: left
-			h1
-				&.in-view
-					@include animation(h1, 1s 0s ease-out both, In, 0, -$gutter/2 )
+		padding-top: $gutter/2
+		margin-bottom: $gutter/2
+		background-color: $main-bg
+		@extend %img
 
-			.entry-summary
-				+img-responsive
-				a
-					display: block
-					float: left
-					+media-breakpoint-down(sm)
-						width: 100%
-						float: inherit
-						text-align: center
-				img
-					margin-right: $gutter/4
-					margin-bottom: $gutter/4
+		#content
+			//margin-top: $gutter-20*2
+			//padding: $gutter-30 0
+			@include push--auto
+			background-color: $content-bg
+			box-sizing: border-box
+			word-break: break-word
+			//@include img-responsive
 
-		.entry-content
-			//flex-grow: 1
-			width: 100%
+			&.float-left
+				width: $content-width
+				margin-right: $gutter-20/2
 
-			//float: left
-			//margin-top: $gutter/2
-			h2
-				text-transform: uppercase
-				opacity: 0
-				&.in-view
-					@include animation(h2, 1.5s 0.2s ease-out both, In, 100%, 0% )
-			>div
-				margin: $gutter/2 auto
-				opacity: 0
-				&.in-view
-					@include animation(h1, 1.5s 0.2s ease-out both, In, 0, 200px )
-				ul
-					margin-bottom: $gutter/4
-					li
-						display: inline-block
-						width: 100% 
-						margin-left: 0
-						align-items: center
+			&.float-right
+				margin-left: $gutter-20/2
 
-			iframe
+			.page
+				float: left
 				width: 100%
-				height: 70vh
-				border: none
-				+media-breakpoint-down(xs)
-				height: 85vh
+				//opacity: 0
 
-		.entry-description
-			+media-breakpoint-down(sm)
-				width: max-content
-				@include push--auto
+			.entry-header
+				text-align: center
+
+		article
+			position: relative
+			@include push--auto
+			.entry-header
+				width: 100%
+				text-align: center
+				//margin-bottom: $gutter-20 * 2
+			&.entry
+				//float: left
+				h1
+					&.in-view
+						@include animation(h1, 1s 0s ease-out both, In, 0, -$gutter/2 )
+
+				.entry-summary
+					+img-responsive
+					a
+						display: block
+						float: left
+						+media-breakpoint-down(sm)
+							width: 100%
+							float: inherit
+							text-align: center
+					img
+						margin-right: $gutter/4
+						margin-bottom: $gutter/4
+
+			.entry-content
+				//flex-grow: 1
+				width: 100%
+
+				//float: left
+				//margin-top: $gutter/2
+				h2
+					text-transform: uppercase
+					opacity: 0
+					&.in-view
+						@include animation(h2, 1.5s 0.2s ease-out both, In, 100%, 0% )
+				>div
+					margin: $gutter/2 auto
+					opacity: 0
+					&.in-view
+						@include animation(h1, 1.5s 0.2s ease-out both, In, 0, 200px )
+					ul
+						margin-bottom: $gutter/4
+						li
+							display: inline-block
+							margin-left: 0
+							align-items: center
+
+				iframe
+					width: 100%
+					height: 70vh
+					border: none
+					+media-breakpoint-down(xs)
+					height: 85vh
+
+			.entry-description
+				+media-breakpoint-down(sm)
+					width: max-content
+					@include push--auto
 
 
 

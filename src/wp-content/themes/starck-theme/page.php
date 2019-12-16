@@ -28,13 +28,19 @@ get_header(); ?>
 				<?php
 					$cell = ' cell col-md-7';
 				} else $cell = '';
-				?>
 
+				if ( is_home() ) {
+					the_content();
+				}
+				else {
+				?>
 				<div class="entry-content<?php echo $cell; ?>">
 					<?php the_content(); ?>
 					<div class="entry-links"><?php wp_link_pages(); ?></div>
 				</div>
-
+			<?php
+			}
+			?>
 			</article>
 
 		<?php endwhile;?>

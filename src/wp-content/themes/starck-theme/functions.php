@@ -1,5 +1,5 @@
 <?php
-define( 'STARCK_VERSION', '1.0.8' );
+define( 'STARCK_VERSION', '1.8.4' );
 
 //!-- START ENQUEUE PARENT ACTION
 
