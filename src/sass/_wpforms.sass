@@ -17,6 +17,8 @@
 			list-style-type: none !important /* Убираем глобально маркеры */
 			&::before
 				content: none !important
+			+media-breakpoint-down(xs)
+				text-align: inherit
 
 	.wpforms-one-half, .wpforms-field
 		margin-bottom: 20px

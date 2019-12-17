@@ -3,6 +3,7 @@
 #main
 	position: relative
 	flex: auto
+	width: 100%
 	clear: both
 	z-index: 2
 	&.page
@@ -131,9 +132,6 @@ body:not(.home)
 						@include animation(h2, 1.5s 0.2s ease-out both, In, 100%, 0% )
 				>div
 					margin: $gutter/1.5 auto
-					opacity: 0
-					&.in-view
-						@include animation(h1, 1.5s 0.2s ease-out both, In, 0, 200px )
 					ul
 						//margin-bottom: 5vh
 						li

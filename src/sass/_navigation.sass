@@ -71,7 +71,7 @@
 				white-space: nowrap
 			&.current-menu-item
 				a
-					color: $theme-color
+					color: $link-color
 
 			&.menu-item-has-children
 				> a i::before
@@ -148,11 +148,11 @@
 			justify-content: space-evenly
 			background-color: $theme-color2
 			//border-top: 0px solid transparentize($theme-color , 1)
-			transition: all 300ms ease-out, opacity 300ms ease
+			transition: all 300ms ease-out, opacity 0ms ease
 			transform: translate(100%,0)
 			//box-sizing: border-box
-			//opacity: 0
-			z-index: 0
+			opacity: 0
+			z-index: -1
 
 			li
 				display: flex
@@ -203,17 +203,13 @@
 				//padding-bottom: 10vh
 				//transform: scale(1)
 				transform: translate(0, 0)
-				//opacity: 1
+				opacity: 1
 				z-index: 9998
 				//border-top: 3px solid transparentize($theme-color , 0)
 				>li
 					@include animation(menu-items, 200ms ease-out both, In, 250px, 0 )
 					//transform: translate(0, -80px)
 					@include animation-delays(6, 400ms, -50ms)
-
-				.lang-item
-					display: block
-					@include animation(menu-lang, 1s .8s ease-out both, In, 0, 0 )
 
 		ul.secondary-menu
 			opacity: 0

@@ -10,6 +10,10 @@
 			//@extend .check-icon
 			@extend .checkbox-icon
 
+.wp-block-group__inner-container
+	opacity: 0
+	&.in-view
+		@include animation(content, 1.5s 0.5s ease-out both, In, 0, 200px )
 hr
 	border: 0
 	height: 1px

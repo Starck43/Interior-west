@@ -1,7 +1,7 @@
 /*
  * Custom scripts library
  *
- * @version 1.8.4
+ * @version 1.8.5
  */
 
 var $ = jQuery.noConflict();
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		.on('enter', el => {
 			el.classList.add('in-view');
 		});
-	inView('.entry-content >div')
+	inView('.entry-content .wp-block-group__inner-container')
 		.on('enter', el => {
 			el.classList.add('in-view');
 		});

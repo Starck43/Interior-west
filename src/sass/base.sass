@@ -50,25 +50,27 @@ a
 
 p
 	letter-spacing: 0.3px
-	//text-align: justify
 	line-height: $base-line-height
 	margin-top: 0
+	+media-breakpoint-down(xs)
+		text-align: justify
 ul
 	padding: 0
 	margin: 0
 li
 	list-style-type: none /* Убираем глобально маркеры */
 	letter-spacing: 0.3px
-
+	+media-breakpoint-down(xs)
+		text-align: justify
 h1
 	margin: 0 0 .75em
 	//@include font-settings($title-font-family, black, 2em, lowercase, 500, 1.2)
 	font-size: 2em
 	font-weight: 500
-	line-height: 1.2  
+	line-height: 1.2
 	letter-spacing: 3px
 	text-transform: lowercase
-		
+
 h2
 	margin: 0 0 .75em
 	font-size: 1.6em
@@ -98,23 +100,23 @@ header
 	letter-spacing: 1px
 
 html
-	@include font-settings($html-font-family, $base-text-color, $base-font-size, normal, initial, 1.25)
+	@include font-settings($html-font-family, $base-text-color, $base-font-size, normal, initial, $base-line-height)
 	-ms-text-size-adjust: 100%
 	-webkit-text-size-adjust: 100%
 	-webkit-font-smoothing: antialiased
 	+media-breakpoint-down(lg)
 		//font-size: 15px
 	+media-breakpoint-down(md)
-		font-size: 16px
+		//font-size: 15px
 		overflow: scroll
 		overflow-x: hidden
 		::-webkit-scrollbar
 			//width: 0px  /* remove scrollbar space */
 			background: transparent  /* optional: just make scrollbar invisible */
 	+media-breakpoint-down(sm)
-		//font-size: 14px
-	+media-breakpoint-down(xs)
 		font-size: 15px
+	+media-breakpoint-down(xs)
+		//font-size: 15px
 
 body
 	display: flex
