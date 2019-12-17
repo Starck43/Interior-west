@@ -18,13 +18,18 @@ input:not([type="submit"]), textarea
 		outline-offset: 0
 	&:-webkit-autofill
 		box-shadow: inset 0 0 0 50px transparentize($theme-color, 0) !important /* Цвет фона */	d
-	&::placeholder
+	&::placeholder,
+	&::-webkit-input-placeholder
+		//height: $button-h
+		//line-height: 2
+		color: #888
 		font-size: 0.8em
-		vertical-align: middle
+
 
 input:not([type="checkbox"],[type="submit"])
 	height: $button-h
-	line-height: 1
+	+media-breakpoint-down(sm)
+		min-width: 290px
 
 input[type="checkbox"]
 	width: auto
@@ -162,7 +167,7 @@ input[type="submit"]
 		//border: 1px solid white
 		box-shadow: inset 0 0 0 1px $theme-color
 
-$btn-size: $icon-size * 1.2
+$btn-size: $icon-size * 1.5
 #link-to-top,
 #link-to-back:not(.show-in-top)
 	position: fixed
@@ -185,14 +190,10 @@ $btn-size: $icon-size * 1.2
 		background-color: transparentize(black, 0.95)
 
 #link-to-top
-	right: 1vw
+	right: 1em
 	width: $btn-size
 	height: $btn-size
 	font-size: $icon-font-size
-	+media-breakpoint-down(lg)
-		right: $gutter-20
-	+media-breakpoint-down(md)
-		right: $gutter-20 / 2
 
 #link-to-back
 	font-size: .8em
@@ -293,23 +294,30 @@ $btn-size: $icon-size * 1.2
 	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>')
 	//background-repeat: no-repeat
 	//background-size: 100%
-	position: absolute
+	//position: absolute
 	display: inline-flex
 	width: $icon-font-size
 	height: $icon-font-size
-	left: 0
-	margin-top: 4px
+	//left: 0
+	//margin-top: 4px
 
 .checkbox-icon::before
-	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>')
+	content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16"><path fill="black" fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"/></svg>')
 	display: inline-flex
 	width: $icon-font-size
 	height: $icon-font-size
-	align-items: center
-	margin-right: $gutter-20/2
 	padding: 2px
+	margin-right: $gutter-20/2
 	border: 2px solid $theme-color
 	//border-radius: 50%
+	+media-breakpoint-down(xs)
+		content: ''
+		display: inline
+		vertical-align: middle
+		//transform: scale(0.8)
+		background-color: $theme-color
+		border: none
+		//padding: 0 
 
 svg
 	width: 100%

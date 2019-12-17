@@ -30,14 +30,14 @@
 			height: $header-h-sm - $gutter-20
 			//max-width: $logo-width / 1.5
 		+media-breakpoint-down(xs)
-			height: $icon-size
-			//max-width: $logo-width-min
+			height: $header-h-xs - $gutter-20
+			max-width: ($header-h-xs - $gutter-20)*1.9
 
 		#branding-logo
 			position: relative
 			//margin: 0 auto
 			//padding: 0 $gutter-20/2
-			width: auto
+			//width: auto
 			@include img-responsive
 
 		#branding-title

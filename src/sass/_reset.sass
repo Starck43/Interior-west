@@ -1,12 +1,11 @@
 //Control selectors
-
-::placeholder
-	color: #666
-
 ::selection //когда выделяем текст на странице
 	background-color: $accent
 	color: #fff
 
+//::-webkit-input-placeholder
+
+	
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -23,8 +22,11 @@ select:-webkit-autofill:focus
 	transition: background-color 5000s ease-in-out 0s
 	background: $theme-color
 
+input:not([type=checkbox]):not([type=radio]),
+textarea,
 select
 	background-color: transparent
+	appearance: none
 
 // Deny for text selection
 .no-select

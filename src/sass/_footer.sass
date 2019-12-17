@@ -14,7 +14,7 @@
 		.footer-widgets
 
 			display: flex
-			margin: 2vh $gutter/4
+			margin: 3vh 1em
 			//align-items: center
 			justify-content: space-between
 
@@ -31,6 +31,10 @@
 				&:last-child:not(:first-child)
 					text-align: right
 					padding-left: $gutter/4
+				.textwidget p
+					text-align: center
+					+media-breakpoint-up(sm)
+						font-size: 0.8em
 
 			+media-breakpoint-down(sm)
 				flex-direction: column-reverse
@@ -38,12 +42,12 @@
 					padding: 0 0 $gutter/2 !important
 		#copyright
 			//background: $body-bg
-			margin: 2vh $gutter/2
+			margin: 2vh 1em
 			text-align: center
-			font-size: 0.8em
+			font-size: 0.6em
 
 	+media-breakpoint-down(sm)
 		.icon
-			width: $icon-sm-size
-			height: $icon-sm-size
+			//width: $icon-sm-size
+			//height: $icon-sm-size
 // <!-- End Footer -->

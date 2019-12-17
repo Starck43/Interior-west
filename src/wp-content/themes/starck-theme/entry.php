@@ -26,7 +26,7 @@
 
 		get_template_part( 'entry', ( is_archive() || is_search() ? 'summary' : 'content' ) );
 		?>
-		<?php edit_post_link(); ?>
+		<?php if ( is_user_admin() ) edit_post_link(); ?>
 	</div>
 	<?php } ?>
 

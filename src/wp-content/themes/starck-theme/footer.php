@@ -1,7 +1,6 @@
 		</div>
 	<!-- end main container -->
 		<div id="site-search-modal"><?php get_search_form(); ?></div>
-				<?php starck_back_to_top(); ?>
 	</main>
 	<!-- end main -->
 
@@ -30,5 +29,6 @@
 
 	</footer>
 	<div id="overlay" class="modal hidden"></div>
+	<?php starck_back_to_top(); ?>
 </body>
 </html>

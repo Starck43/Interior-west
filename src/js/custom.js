@@ -1,7 +1,7 @@
 /*
  * Custom scripts library
  *
- * @version 1.8.3
+ * @version 1.8.4
  */
 
 var $ = jQuery.noConflict();
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var search = $('#site-search-modal');
 	var back2top = $('#link-to-top');
 	var gotoBack = $('#link-to-back:not(.show-in-top)');
-
+/*
 	var stopScroll;
 	var scrollPos_Y;
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.ontouchmove = function() { return true; }
 		return false;
 	}
-
+*/
 	// in vewport check script
 	inView.offset(0);
 	inView('h1')
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			scrollTrigger: 1000,
 			//debug: true,
 		});
-
+/*
 		gotoBack && gotoBack.topBtnToggle({
 			scrollTrigger: 1000,
 			//debug: true,
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				bgpositionY: 50, //it must be the same background-position value in css
 				speed: 0.5,
 			});
-		}
+		}*/
 	});
 
 
@@ -157,12 +157,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	mobileMenu.on('click','.close-icon', function (e) {
 		mobileMenu.removeClass('active').children().remove('.close-icon');
 	});
-
+/*
 	var submenu_item = $('.menu-item-has-children a').on('click', function (e) {
 		e.preventDefault();
 		$(this).parent().toggleClass('collapsed');
 	});
-
+*/
 	$( document ).on( 'keyup', function (e) {
 		e.preventDefault();
 		if( e.keyCode == 27 && search.is(':visible') )
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		if( e.keyCode == 27 && mobileMenu.hasClass('active') ) mobileMenu.children('.close-icon').click(); // if( e.keyCode == 27 && burger.hasClass('active') ) burger.click();
 	});
 
-
+/*
 	scrollup.on('click', function (e) {
 		var mc = document.body.querySelector('#main-container');
 		scrollup
@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			mc.scrollIntoView({block: "start", behavior: "smooth"});
 		});
 	});
-
+*/
 	back2top.on('click', function (e) {
 		// 800 - скорость задержки перемещения наверх (в миллисекундах)
 		e.preventDefault();
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		$(this).addClass('hidden');
 		enableScroll();
 	});
-
+/*
 	if ( $('.jcarousel').has('li.slide').length ) {
 
 		$('[data-jcarousel]').each(function() {
@@ -312,16 +312,6 @@ document.addEventListener("DOMContentLoaded", function() {
 					.jcarouselControl({
 						//target: '+='+String(slidesPerPage)
 					});
-	/*
-				if ( !$("html").has("mobile") ) {
-					$(".jcarousel-wrapper").hover( function() {
-						$('.jcarousel-control').fadeIn(300);
-					}, function() {
-						$('.jcarousel-control').fadeOut(300);
-					});
-				}
-	*/
-
 			}
 
 		if ( $('.jcarousel-wrapper').has('.jcarousel-pagination').length && 'true' === $('.jcarousel-pagination').attr('data-jcarouselpagination') ) {
@@ -338,7 +328,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else $('.jcarousel-pagination').remove();
 
 	}
+*/
 
+/*
 	//Adding an agent to HTML selector
 	var deviceAgent = navigator.userAgent.toLowerCase();
 	if (deviceAgent.match(/(iphone|ipod|ipad)/)) {
@@ -360,5 +352,5 @@ document.addEventListener("DOMContentLoaded", function() {
 	else if (navigator.userAgent.search("Opera") >= 0) {
 		$("html").addClass("opera");
 	}
-
+*/
 });

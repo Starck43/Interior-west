@@ -17,7 +17,6 @@ get_header(); ?>
 				<header class="entry-header">
 					<?php  $hidden_class = (get_post_meta( $post->ID, 'hide-title', true )) ? ' hidden' : ''; ?>
 					<h1 class="entry-title<?php echo $hidden_class ?>"><?php the_title(); ?></h1>
-					<?php edit_post_link(); ?>
 				</header>
 
 				<?php
@@ -36,7 +35,7 @@ get_header(); ?>
 				?>
 				<div class="entry-content<?php echo $cell; ?>">
 					<?php the_content(); ?>
-					<div class="entry-links"><?php wp_link_pages(); ?></div>
+					<?php if ( is_user_admin() ) edit_post_link(); ?>
 				</div>
 			<?php
 			}

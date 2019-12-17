@@ -16,7 +16,7 @@ get_header();
 		<?php get_template_part( 'entry' ); ?>
 	<?php endwhile;?>
 
-	<?php get_template_part( 'nav', 'below-single' ); ?>
+	<?php //get_template_part( 'nav', 'below-single' ); ?>
 	<?php get_template_part( 'contact', 'form' ); ?>
 
 </section>
