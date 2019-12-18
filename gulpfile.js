@@ -53,7 +53,7 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 		overrideBrowserslist: ['last 3 versions']
 	})) // Создаем префиксы
 	.pipe(sourcemaps.write()) //пропишем sourcemap
-	//.pipe(cleanCSS({level:2})) // Сжимаем CSS файл
+	.pipe(cleanCSS({level:2})) // Сжимаем CSS файл
 	.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 	.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
 });
@@ -84,7 +84,7 @@ gulp.task('scripts', function() {
 	return gulp.src([path.src+'js/custom*.js'])
 	.pipe(sourcemaps.init()) // Инициализируем sourcemap
 	.pipe(concat('custom.min.js')) // Объединяем в один файл
-	//.pipe(uglify()) // Сжимаем JS файл
+	.pipe(uglify()) // Сжимаем JS файл
 	.pipe(sourcemaps.write()) // Пропишем карты
 	.pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта

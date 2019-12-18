@@ -14,7 +14,9 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-			<h1 class="search-title"><?php printf( esc_html__( 'Search Results for: %s', 'starck' ), get_search_query() ); ?></h1>
+			<header class="entry-header">
+				<h1 class="entry-title"><?php printf( esc_html__( 'Search Results for: %s', 'starck' ), get_search_query() ); ?></h1>
+			</header>
 			<div class="post-count">( <?php esc_html_e('Found by request: ', 'starck'); ?><span><?php echo $wp_query->found_posts; ?></span> )</div>
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php get_template_part( 'entry' ); ?>
@@ -24,14 +26,13 @@ get_header();
 
 		<?php else : ?>
 
+
+			<header class="entry-header">
+				<h1 class="entry-title"><?php esc_html_e( 'Nothing Found', 'starck' ); ?></h1>
+			</header>
 			<div class="entry-content post-0 no-result not-found">
-
-				<h1 class="search-title"><?php esc_html_e( 'Nothing Found', 'starck' ); ?></h1>
-				<div>
-					<p><?php esc_html_e( 'Sorry, nothing matched your search. Please try again', 'starck' ); ?></p>
-					<?php get_search_form(); ?>
-				</div>
-
+				<p><?php esc_html_e( 'Sorry, nothing matched your search. Please try again', 'starck' ); ?></p>
+				<?php get_search_form(); ?>
 			</div>
 
 		<?php endif; ?>

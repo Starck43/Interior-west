@@ -7,7 +7,7 @@
 get_header(); ?>
 
 	<?php $page_width = get_post_meta( $post->ID, 'page-width', true ); ?>
-	<section id="content" <?php starck_content_class('page'); echo (bool)$page_width ? ' style="margin: 0 1em"' : ''; ?>>
+	<section id="content" <?php starck_content_class('page'); ?>>
 
 		<?php starck_breadcrumbs(); ?>
 
