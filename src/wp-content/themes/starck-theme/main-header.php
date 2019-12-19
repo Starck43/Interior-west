@@ -4,6 +4,7 @@
  * @package Starck-theme
  *
  * description: The Main header plugin
+ * Version: 1.8.6
 */
 
 if ( !defined( 'ABSPATH' ) ) exit;
@@ -21,9 +22,10 @@ if ( $gallery_in_slider && $gallery || $main_header_background ) {
 	if ( $count_gallery > 1 ) {
 		$gallery_scroll 	= ( 'on' === get_post_meta( $page_id, 'gallery-autoscroll', true )) ? 'true' : 'false';
 		$gallery_pagination = ( 'on' === get_post_meta( $page_id, 'gallery-pagination', true )) ? 'true' : 'false';
+		$gallery_control = ( 'on' === get_post_meta( $page_id, 'gallery-control', true )) ? 'true' : 'false';
 		?>
 		<section id="main-header">
-			<div class="jcarousel-wrapper">
+			<div class="jcarousel-wrapper lazyload">
 				<div class="jcarousel" data-jcarouselautoscroll="<?php echo $gallery_scroll ?>">
 					<ul>
 						<?php
@@ -42,16 +44,23 @@ if ( $gallery_in_slider && $gallery || $main_header_background ) {
 						?>
 					</ul>
 				</div>
-				<?php if ( is_single() ) {
+				<?php
+				if ( is_single() ) {
 					global $projects;
 					$parent_term = wp_get_post_terms( $page_id , $projects['taxonomy'], array( 'orderby' => 'parent', 'order' => 'DESC' ) )[0];
 					echo '<a class="parent-category" title="' . sprintf( __('Return to %s','starck'), $parent_term->name) . '" rel="nofollow" href="'.get_term_link($parent_term->term_id, $projects['taxonomy']).'">'.$parent_term->name.'</a>';
-				} ?>
-				<a href="#" class="jcarousel-control prev"><svg class="arrow-icon left"><use xlink:href="#arrow"></use></svg></a>
-				<a href="#" class="jcarousel-control next"><svg class="arrow-icon right"><use xlink:href="#arrow"></use></svg></a>
-				<div class="jcarousel-pagination" data-jcarouselpagination ="<?php echo $gallery_pagination ?>"></div>
-
+				}
+				if (true === $gallery_control) {
+				?>
+					<a href="#" class="jcarousel-control prev"><svg class="arrow-icon left"><use xlink:href="#arrow"></use></svg></a>
+					<a href="#" class="jcarousel-control next"><svg class="arrow-icon right"><use xlink:href="#arrow"></use></svg></a>
 				<?php
+				}
+				if (true === $gallery_pagination) {
+				?>
+					<div class="jcarousel-pagination" data-jcarouselpagination ="<?php echo $gallery_pagination ?>"></div>
+				<?php
+				}
 				$gallery_caption = get_post_meta( $page_id, 'gallery-caption', true );
 				$gallery_caption_link = get_post_meta( $page_id, 'gallery-caption-link', true );
 
@@ -62,8 +71,8 @@ if ( $gallery_in_slider && $gallery || $main_header_background ) {
 						<?php
 						if ( $gallery_caption_link ) {
 							?>
-							<a class="gallery-link" href="<?php esc_url($gallery_caption_link) ?>">
-								<div class="button"><?php echo __( 'Detail', 'starck' ) ?></div>
+							<a class="gallery-link" href="<?php echo esc_url(wp_validate_redirect($gallery_caption_link)); ?>">
+								<div class="button"><?php echo __( 'View', 'starck' ) ?></div>
 							</a>
 							<?php
 						}

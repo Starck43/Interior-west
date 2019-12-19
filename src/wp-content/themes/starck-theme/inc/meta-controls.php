@@ -2,10 +2,10 @@
 /*
  * Plugin Name: Page Layout Controls
  * Description: Allows to hide the title of pages and posts and adjust a single project portfolio
- * 
+ *
  * @package StarckTheme
- * Version: 1.0.5
- * 
+ * Version: 1.8.5
+ *
  */
 
 if ( !class_exists( 'starck_meta_controls' ) ) {
@@ -17,6 +17,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 		private $gallery_image = 'gallery-image';
 		private $gallery_scroll = 'gallery-autoscroll';
 		private $gallery_pagination = 'gallery-pagination';
+		private $gallery_control = 'gallery-control';
 		private $gallery_caption = 'gallery-caption';
 		private $gallery_caption_link = 'gallery-caption-link';
 		private $gallery_header_slider = 'gallery-in-slider';
@@ -77,6 +78,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			wp_nonce_field( $this->gallery_image . '_dononce', 			$this->gallery_image . '_noncename' );
 			wp_nonce_field( $this->gallery_scroll . '_dononce', 		$this->gallery_scroll . '_noncename' );
 			wp_nonce_field( $this->gallery_pagination . '_dononce', 	$this->gallery_pagination . '_noncename' );
+			wp_nonce_field( $this->gallery_control . '_dononce', 		$this->gallery_control . '_noncename' );
 			wp_nonce_field( $this->gallery_caption . '_dononce', 		$this->gallery_caption . '_noncename' );
 			wp_nonce_field( $this->gallery_caption_link . '_dononce', 	$this->gallery_caption_link . '_noncename' );
 			wp_nonce_field( $this->gallery_header_slider . '_dononce', 	$this->gallery_header_slider . '_noncename' );
@@ -84,12 +86,14 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			$gallery 				= get_post_meta( $post->ID, $this->gallery_image );
 			$gallery_scroll 		= get_post_meta( $post->ID, $this->gallery_scroll, true );
 			$gallery_pagination 	= get_post_meta( $post->ID, $this->gallery_pagination, true );
+			$gallery_control 		= get_post_meta( $post->ID, $this->gallery_control, true );
 			$gallery_caption 		= get_post_meta( $post->ID, $this->gallery_caption, true );
 			$gallery_caption_link 	= get_post_meta( $post->ID, $this->gallery_caption_link, true );
 			$gallery_header_slider 	= get_post_meta( $post->ID, $this->gallery_header_slider, true );
 
 			if ( (bool)$gallery_scroll ) 	{ $scroll_checked = 'checked="checked"'; }
 			if ( (bool)$gallery_pagination ){ $pagination_checked = 'checked="checked"'; }
+			if ( (bool)$gallery_control ){ $control_checked = 'checked="checked"'; }
 			if ( (bool)$gallery_header_slider )	{ $header_slider_checked = 'checked="checked"'; }
 
 			if ( !empty( $gallery_caption ) ) {
@@ -100,7 +104,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			if ( $gallery ) {
 
 				foreach ( $gallery as $value ) {
-					$url = wp_get_attachment_image_url(absint($value), 'mini-thumbnail' );
+					$url = wp_get_attachment_image_url(absint($value));
 					echo '<div class="postbox-gallery-image"><img src="' . $url . '" />';
 					echo '<a class="gallery-del-image" href="#">x</a>';
 					echo '<input type="hidden" name="gallery-image[]" value="' . $value . '">';
@@ -124,6 +128,11 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 							$this->gallery_pagination,
 							$pagination_checked,
 							__( 'Slider Pagination', 'starck' )
+						);
+			echo sprintf('<label class="postbox-gallery-control"><input type="checkbox" name="%1$s" %2$s/>%3$s</label>',
+							$this->gallery_control,
+							$control_checked,
+							__( 'Slider Control', 'starck' )
 						);
 			echo sprintf('<label class="postbox-gallery-caption" for="postbox-gallery-caption">%1$s</label>
 							<textarea id="postbox-gallery-caption" name="%2$s">%3$s</textarea>',
@@ -160,6 +169,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 						 && $_POST[ $this->gallery_image . '_noncename' ]
 						 && $_POST[ $this->gallery_scroll . '_noncename' ]
 						 && $_POST[ $this->gallery_pagination . '_noncename' ]
+						 && $_POST[ $this->gallery_control . '_noncename' ]
 						 && $_POST[ $this->gallery_caption . '_noncename' ]
 						 && $_POST[ $this->gallery_caption_link . '_noncename' ]
 						 && $_POST[ $this->gallery_header_slider . '_noncename' ]
@@ -169,6 +179,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 						 && wp_verify_nonce( $_POST[ $this->gallery_image . '_noncename' ], 		$this->gallery_image . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_scroll . '_noncename' ], 		$this->gallery_scroll . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_pagination . '_noncename' ],	$this->gallery_pagination . '_dononce' )
+						 && wp_verify_nonce( $_POST[ $this->gallery_control . '_noncename' ],		$this->gallery_control . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_caption . '_noncename' ],		$this->gallery_caption . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_caption_link . '_noncename' ],	$this->gallery_caption_link . '_dononce' )
 						 && wp_verify_nonce( $_POST[ $this->gallery_header_slider . '_noncename' ],		$this->gallery_header_slider . '_dononce' )
@@ -186,7 +197,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 				}
 			}
 
-	
+
 			//Update Page meta
 			$old = get_post_meta( $post_ID, $this->page_width, true );
 			$new = $_POST[ $this->page_width ];
@@ -243,6 +254,20 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 				}
 			}
 
+			//Update Gallery control meta
+			(string)$old = '';
+			(string)$new = '';
+			$old = get_post_meta( $post_ID, $this->gallery_control, true );
+			$new = $_POST[ $this->gallery_control ];
+
+			if ( $old != $new ) {
+				if ( $new ) {
+					update_post_meta( $post_ID, $this->gallery_control, $new );
+				} else {
+					delete_post_meta( $post_ID, $this->gallery_control );
+				}
+			}
+
 			//Update Gallery caption meta
 			$value = $_POST[ $this->gallery_caption ];
 			if ( isset( $value ) ) {
@@ -285,9 +310,11 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 		function delete_meta( $post_ID ){
 
 			delete_post_meta( $post_ID, $this->hide_title );
+			delete_post_meta( $post_ID, $this->page_width );
 			delete_post_meta( $post_ID, $this->gallery_image );
 			delete_post_meta( $post_ID, $this->gallery_scroll );
 			delete_post_meta( $post_ID, $this->gallery_pagination );
+			delete_post_meta( $post_ID, $this->gallery_control );
 			delete_post_meta( $post_ID, $this->gallery_caption );
 			delete_post_meta( $post_ID, $this->gallery_caption_link );
 			delete_post_meta( $post_ID, $this->gallery_header_slider );
