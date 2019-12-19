@@ -1,7 +1,7 @@
 /*
  * Custom scripts library
  *
- * @version 1.8.5
+ * @version 1.8.6
  */
 
 var $ = jQuery.noConflict();
@@ -22,7 +22,7 @@ document.addEventListener('readystatechange', function(el) {
 document.addEventListener("DOMContentLoaded", function() {
 
 	$('#dom-preloader').fadeOut(500, function() {
-		//$('#dom-preloader').remove();
+		$('#dom-preloader').remove();
 	});
 	$('body').fadeIn(500);
 	var overlay = $('#overlay');
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		$(this).addClass('hidden');
 		enableScroll();
 	});
-/*
+
 	if ( $('.jcarousel').has('li.slide').length ) {
 
 		$('[data-jcarousel]').each(function() {
@@ -217,8 +217,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			el.jcarousel(el.data());
 		});
 
-		var xStart, yStart;
-		var stopTouch;
+		//var xStart, yStart;
+		//var stopTouch;
 		var slidesPerPage = 1;
 
 		var carousel = $('.jcarousel');
@@ -227,12 +227,12 @@ document.addEventListener("DOMContentLoaded", function() {
 				var carousel_w = carousel.parent().innerWidth(),
 					carousel_h = carousel.parent().innerHeight();
 
-				slidesPerPage = (carousel_w > carousel_h) ? Math.trunc(  carousel_w / carousel_h ) : 1;
+				//slidesPerPage = (carousel_w > carousel_h) ? Math.trunc(  carousel_w / carousel_h ) : 1;
 
 				var slide_width = Math.ceil( carousel_w / slidesPerPage );
 				carousel.jcarousel('items').css("width", slide_width + 'px');
 			})
-			.on('touchstart', function(e) {
+/*			.on('touchstart', function(e) {
 				xStart = e.touches[0].screenX;
 				yStart = e.touches[0].screenY;
 				stopTouch = null;
@@ -245,14 +245,14 @@ document.addEventListener("DOMContentLoaded", function() {
 			})
 			.on('touchend touchcancel', function() {
 				stopTouch && enableTouchMove();
-			})
+			})*/
 			.on('jcarousel:createend jcarousel:animateend', function() {
 				$(this).jcarousel('target').addClass('active');
 			})
 			.on('jcarousel:visibleout', 'li', function() {
 				$(this).removeClass('active');
 			})
-			.on('click', 'li', function (e) {
+/*			.on('click', 'li', function (e) {
 				var src = $(this).attr('src-url');
 				if (src) {
 					src = 'url('+src+')';
@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					overlay.children('.imagebox').css('background-image', src).parent().removeClass('hidden');
 					disableScroll();
 				}
-			})
+			})*/
 			.jcarousel({
 				//scroll: slidesPerPage,
 				//center: true,
@@ -283,12 +283,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			if ( 'true' === carousel.attr('data-jcarouselautoscroll') ) {
 				carousel.jcarouselAutoscroll({
-					interval:  5000,
+					interval:  8000,
 					//autostart: false,
 					//target: '-=1'+String(slidesPerPage)
 				});
 			}
-
+/*
 			if ( $('.jcarousel-wrapper').has('.jcarousel-control').length ) {
 
 				$('.jcarousel-control.prev')
@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						//target: '+='+String(slidesPerPage)
 					});
 			}
-
+*/
 		if ( $('.jcarousel-wrapper').has('.jcarousel-pagination').length && 'true' === $('.jcarousel-pagination').attr('data-jcarouselpagination') ) {
 			$('.jcarousel-pagination')
 				.on('jcarouselpagination:active', 'a', function() {
@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else $('.jcarousel-pagination').remove();
 
 	}
-*/
+
 
 /*
 	//Adding an agent to HTML selector

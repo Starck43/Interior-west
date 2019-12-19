@@ -17,7 +17,6 @@ get_header();
 			<header class="entry-header">
 				<h1 class="entry-title"><?php printf( esc_html__( 'Search Results for: %s', 'starck' ), get_search_query() ); ?></h1>
 			</header>
-			<div class="post-count">( <?php esc_html_e('Found by request: ', 'starck'); ?><span><?php echo $wp_query->found_posts; ?></span> )</div>
 			<?php while ( have_posts() ) : the_post(); ?>
 				<?php get_template_part( 'entry' ); ?>
 			<?php endwhile; ?>

@@ -62,8 +62,8 @@ function starck_setup() {
 	add_theme_support( 'editor-color-palette', array() );
 	//add_theme_support( 'woocommerce' );
 
-	add_image_size( 'category-thumb', 300, 9999 ); // 450 в ширину и без ограничения в высоту
-	add_image_size( 'portfolio', 600, 9999 ); // 450 в ширину и без ограничения в высоту
+	//add_image_size( 'category-thumb', 300, 9999 ); // 450 в ширину и без ограничения в высоту
+	//add_image_size( 'portfolio', 600, 9999 ); // 450 в ширину и без ограничения в высоту
 	add_image_size( 'mini-thumbnail', 100, 100, true ); // Кадрирование изображения
 	set_post_thumbnail_size( 300, 300 ); // размер миниатюры поста по умолчанию
 
@@ -72,7 +72,7 @@ function starck_setup() {
 
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu', 'starck' ),
-		'secondary' => __( 'Secondary Menu', 'starck' ),
+		//'secondary' => __( 'Secondary Menu', 'starck' ),
 	) );
 
 }
@@ -121,30 +121,6 @@ function starck_pingback_header() {
 	}
 }
 
-add_action( 'comment_form_before', 'starck_enqueue_comment_reply_script' );
-function starck_enqueue_comment_reply_script() {
-	if ( get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
-}
-
-function starck_custom_pings( $comment ) {
-	?>
-	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>"><?php echo comment_author_link(); ?></li>
-	<?php
-}
-
-add_filter( 'get_comments_number', 'starck_comment_count', 0 );
-function starck_comment_count( $count ) {
-	if ( ! is_admin() ) {
-		global $id;
-		$get_comments = get_comments( 'status=approve&post_id=' . $id );
-		$comments_by_type = separate_comments( $get_comments );
-		return count( $comments_by_type['comment'] );
-	} else {
-		return $count;
-	}
-}
 
 if ( ! function_exists( 'starck_get_link_url' ) ) {
 	/**

@@ -15,13 +15,13 @@
 
 	</header>
 
-	<?php 
+	<?php
 	if ( is_singular() ) {
 		the_content();
 	}
 	else {
 	?>
-	<div class="entry-content row">
+	<div class="entry-content">
 		<?php
 
 		get_template_part( 'entry', ( is_archive() || is_search() ? 'summary' : 'content' ) );
