@@ -8,9 +8,9 @@
 	text-align: left
 	//font-size: 0.8em
 	.wpforms-title
+		color: $theme-color
 		text-align: center
 		@extend h1
-
 	ul
 		margin-bottom: 0 !important
 		li
@@ -50,11 +50,11 @@
 		//font-weight: bold
 
 	textarea
-		height: $button-h
+		height: 150px
 		line-height: $button-h - 10px
 		overflow: hidden
 		&:focus
-			height: 100px
+			//height: 100px
 
 	.wpforms-error, .wpforms-required-label
 		color: red
@@ -76,12 +76,13 @@
 			width: 100%
 			.g-recaptcha
 				margin: auto
+		.grecaptcha-badge
+			position: absolute !important
+			bottom: $gutter-20 !important
+			opacity: .5
 
 
 	.wpforms-submit-container
 		padding-top: $gutter-20/2
+		padding-bottom: $gutter-20
 		//float: left
-		+media-breakpoint-down(sm)
-			//float: none
-			button
-				margin: auto

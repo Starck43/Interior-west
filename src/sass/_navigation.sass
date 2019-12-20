@@ -250,24 +250,28 @@
 		border-top: 1px solid transparentize($base-border-color, 0.8)
 		//border-bottom: 1px solid $base-border-color
 		justify-content: center
-		.nav-previous
-			margin-right: auto
-		.nav-next
-			margin-left: auto
 		a
 			display: flex
 			align-items: center
+		.nav-previous
+			margin-right: auto
+			.meta-nav
+				margin-right: 5px
+		.nav-next
+			margin-left: auto
+			text-align: right
+			.meta-nav
+				margin-left: 5px
 		.nav-previous,
 		.nav-next,
 		.page-numbers
 			padding:  $gutter-20/2
-
 			display: flex
 			align-items: center
 			transition: color 100ms ease
 			.meta-nav .icon
-				width: 1.2em
-				height: 1.2em
+				width: 1.4em
+				height: 1.4em
 			span:not(.meta-nav)
 				padding: 5px
 				text-transform: uppercase

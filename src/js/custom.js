@@ -1,7 +1,7 @@
 /*
  * Custom scripts library
  *
- * @version 1.8.6
+ * @version 1.8.7
  */
 
 var $ = jQuery.noConflict();
@@ -14,11 +14,11 @@ function checkMobileNavgation(nav) {
 		if ( width < 992 ) nav.addClass('mobile')
 		else nav.removeClass('mobile')
 }
-
+/*
 document.addEventListener('readystatechange', function(el) {
 	if ( document.readyState === 'interactive' ) {}
 });
-
+*/
 document.addEventListener("DOMContentLoaded", function() {
 
 	$('#dom-preloader').fadeOut(500, function() {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	var search = $('#site-search-modal');
 	var back2top = $('#link-to-top');
 	var gotoBack = $('#link-to-back:not(.show-in-top)');
-/*
+
 	var stopScroll;
 	var scrollPos_Y;
 
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		document.ontouchmove = function() { return true; }
 		return false;
 	}
-*/
+
 	// in vewport check script
 	inView.offset(0);
 	inView('h1')
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				var slide_width = Math.ceil( carousel_w / slidesPerPage );
 				carousel.jcarousel('items').css("width", slide_width + 'px');
 			})
-/*			.on('touchstart', function(e) {
+			.on('touchstart', function(e) {
 				xStart = e.touches[0].screenX;
 				yStart = e.touches[0].screenY;
 				stopTouch = null;
@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			})
 			.on('touchend touchcancel', function() {
 				stopTouch && enableTouchMove();
-			})*/
+			})
 			.on('jcarousel:createend jcarousel:animateend', function() {
 				$(this).jcarousel('target').addClass('active');
 			})
@@ -332,15 +332,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Прослушка события смены ориентации
 	window.addEventListener("orientationchange", function() {
 		if ( carousel.has('li.slide').length )
-			if ( window.orientation != 0 ) {
-				('fit-contain').each( function() {
-					$(this).addClass('fit-cover').removeClass('fit-contain');
-				});
-			} else {
-				('fit-cover').each( function() {
-					$(this).addClass('fit-contain').removeClass('fit-cover');
-				});
+			if ( typeof(window.orientation)=="number" && window.orientation == 0 ) {
+				$('.fit-contain').addClass('fit-cover').removeClass('fit-contain');
 			}
+			else $('.fit-cover').addClass('fit-contain').removeClass('fit-cover');
 	}, false);
 
 /*

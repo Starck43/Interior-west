@@ -40,7 +40,7 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 	return gulp.src(path.src+'sass/*.sass')
 	// Пример: gulp.src('src/sass/*.+(sass|scss)')
 	// Пример: gulp.src(['src/sass/**/*.sass','!src/sass/libs.sass'])  ! - кроме styles.sass
-	.pipe(sourcemaps.init()) //инициализируем soucemap
+	//.pipe(sourcemaps.init()) //инициализируем soucemap
 	.pipe(sass({ outputStyle: 'expanded' })) //  Опция { outputStyle: 'expanded' } развертывает все унификации
 	/*
 		файлы с подчеркиванием не участвуют в компиляции, например, _part.sass.
@@ -52,7 +52,7 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 		grid: true,
 		overrideBrowserslist: ['last 3 versions']
 	})) // Создаем префиксы
-	.pipe(sourcemaps.write()) //пропишем sourcemap
+	//.pipe(sourcemaps.write()) //пропишем sourcemap
 	.pipe(cleanCSS({level:2})) // Сжимаем CSS файл
 	.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 	.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
@@ -82,10 +82,10 @@ gulp.task('css-compress', async function() {
 
 gulp.task('scripts', function() {
 	return gulp.src([path.src+'js/custom*.js'])
-	.pipe(sourcemaps.init()) // Инициализируем sourcemap
+	//.pipe(sourcemaps.init()) // Инициализируем sourcemap
 	.pipe(concat('custom.min.js')) // Объединяем в один файл
 	.pipe(uglify()) // Сжимаем JS файл
-	.pipe(sourcemaps.write()) // Пропишем карты
+	//.pipe(sourcemaps.write()) // Пропишем карты
 	.pipe(gulp.dest(path.dest+'js')) // Выгружаем в папку dest::/js
 	.pipe(browserSync.reload({ stream: true }))  // Обновляем страницу после изменения своего скрипта
 });
