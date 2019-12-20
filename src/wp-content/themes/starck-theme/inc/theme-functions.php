@@ -65,7 +65,7 @@ function starck_setup() {
 	//add_image_size( 'category-thumb', 300, 9999 ); // 450 в ширину и без ограничения в высоту
 	//add_image_size( 'portfolio', 600, 9999 ); // 450 в ширину и без ограничения в высоту
 	add_image_size( 'mini-thumbnail', 100, 100, true ); // Кадрирование изображения
-	set_post_thumbnail_size( 300, 300 ); // размер миниатюры поста по умолчанию
+	set_post_thumbnail_size( 450, 999 ); // размер миниатюры поста по умолчанию
 
 	global $content_width;
 	if ( ! isset( $content_width ) ) { $content_width = 1920; }

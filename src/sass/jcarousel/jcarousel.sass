@@ -16,66 +16,25 @@
 			width: 20000em
 			margin: 0
 			padding: 0
-			li 
+			li
+				position: relative
 				display: flex
 				float: left
 				align-items: center
 				justify-content: center
 				img
+					position: absolute
 					min-width: 100%
 					min-height: 100%
 					object-fit: cover
 				+media-breakpoint-down(sm)
 					//@include img-responsive
-				.image-caption
-					position: absolute
-					//display: table
-					top: 0
-					left: 2em
-					right: 2em
-					//bottom: 100%
-					//margin-top: 1vw
-					width: max-content
-					max-width: 92%
-					padding: 1vh 2vw
-					margin: 0 auto
-					text-align: center
-					text-transform: uppercase
-					color: white
-					background-color: transparentize($nav-color, 0.5)
-					transition: all 500ms ease-out
-					//opacity: 0
-					transform: translate(0, -100%)
-					//touch-action: none
-					pointer-events: none
-					z-index: 2
-				&.active
-					.image-caption
-						//opacity: 1
-						top: 1vw
-						transform: translate(0, 0)
 
-	.parent-category
-		position: absolute
-		top: 0
-		left: 0
-		//right: 1vw
-		margin: -1px
-		padding: 0.5em
-		color: black
-		background: white //transparentize($nav-color, 0.5)
-		border: 1px solid white
-		transform: rotate(-90deg) translate(-100%,0%)
-		transform-origin: 0 0%
-		transition: all 300ms ease
-		@include animation(go-to-parent-block, .6s ease both, fade-in)
-		&:hover
-			background: transparentize($nav-color, 0.2)
 
 .jcarousel-wrapper, .jcarousel li
 	width: 100%
 	//width: calc(100vw - (100vw - 100%))
-	height: calc-height($header-h, $nav-height, $top-bar-height, $gutter)
+	height: 1000px //calc-height($header-h, $nav-height, $top-bar-height, $gutter)
 	+media-breakpoint-down(sm)
 		height: calc-height($header-h-sm, $nav-height, $top-bar-height, $gutter)
 	+media-breakpoint-down(xs)
@@ -85,6 +44,3 @@ main
 		.jcarousel-wrapper, .jcarousel li
 			max-width: $container_max-w
 
-	&.projects
-		.jcarousel-wrapper, .jcarousel li
-			//height: $portfolio-header-h

@@ -89,8 +89,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	$( window ).on( 'resize', function( e ) {
 		checkMobileNavgation(navigation);
-
 		if (mobileMenu.hasClass('active')) burger.click(); // if burger menu open then close it
+		if (true) {}
 	});
 
 	$(window).scroll(function() {
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	if ( $('.jcarousel').has('li.slide').length ) {
 
-		$('[data-jcarousel]').each(function() {
+		$('[data-jcarousel]').each( function() {
 			var el = $(this);
 			el.jcarousel(el.data());
 		});
@@ -329,6 +329,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	}
 
+	// Прослушка события смены ориентации
+	window.addEventListener("orientationchange", function() {
+		if ( carousel.has('li.slide').length )
+			if ( window.orientation != 0 ) {
+				('fit-contain').each( function() {
+					$(this).addClass('fit-cover').removeClass('fit-contain');
+				});
+			} else {
+				('fit-cover').each( function() {
+					$(this).addClass('fit-contain').removeClass('fit-cover');
+				});
+			}
+	}, false);
 
 /*
 	//Adding an agent to HTML selector

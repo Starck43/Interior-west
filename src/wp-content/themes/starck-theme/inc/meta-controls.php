@@ -104,7 +104,7 @@ if ( !class_exists( 'starck_meta_controls' ) ) {
 			if ( $gallery ) {
 
 				foreach ( $gallery as $value ) {
-					$url = wp_get_attachment_image_url(absint($value));
+					$url = wp_get_attachment_image_url(absint($value),'mini-thumbnail');
 					echo '<div class="postbox-gallery-image"><img src="' . $url . '" />';
 					echo '<a class="gallery-del-image" href="#">x</a>';
 					echo '<input type="hidden" name="gallery-image[]" value="' . $value . '">';

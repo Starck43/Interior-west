@@ -16,7 +16,7 @@ $main_header_background = starck_get_option( 'content_header_background' );
 
 if ( $gallery_in_slider && $gallery || $main_header_background ) {
 
-	$parallax = starck_get_option( 'content_header_background' ) ? 'parallax' : '';
+	$parallax = starck_get_option( 'content_header_background' ) ? ' parallax' : '';
 	$count_gallery = ($gallery) ? count($gallery) : 0;
 
 	if ( $count_gallery > 1 ) {
@@ -31,25 +31,24 @@ if ( $gallery_in_slider && $gallery || $main_header_background ) {
 						<?php
 						$i = 1;
 						foreach ($gallery as $value) {
-							$caption = wp_get_attachment_caption( absint($value) );
-							echo sprintf('<li slide="%1$s" class="slide %2$s"  src-url="%4$s"><img class="lazyload" src="%3$s" data-srcset="%5$s" data-sizes="auto" />%6$s</li>',
+							$thumbnail = wp_get_attachment_image_url( absint($value), 'thumbnail' );
+							$image = wp_get_attachment_metadata( absint($value) );
+							$image_ratio = $image['height']/$image['width'];
+							echo sprintf('<li slide="%1$s" class="slide%2$s">%6$s<img class="lazyload%5$s" src="%3$s" data-srcset="%4$s" data-sizes="auto" /></li>',
 								$i++,
 								$parallax,
-								wp_get_attachment_image_url( absint($value), 'thumbnail' ),
-								wp_get_attachment_image_url( absint($value), 'full' ),
-								wp_get_attachment_image_srcset( absint($value), 'full' ),
-								($caption ? '<div class="image-caption">' . $caption . '</div>' : '')
+								$thumbnail,
+								wp_get_attachment_image_srcset( absint($value) ),
+								($image_ratio > 1 ? ' fit-contain' : ''),
+								($image_ratio > 1 ? '<div class="header-background blur" style="background-image: url('.$thumbnail.')"></div>' : '')
+								//wp_get_attachment_caption( absint($value) ) ? '<div class="image-caption">' . $caption . '</div>' : ''
 							);
 						}
 						?>
 					</ul>
 				</div>
 				<?php
-				if ( is_single() ) {
-					global $projects;
-					$parent_term = wp_get_post_terms( $page_id , $projects['taxonomy'], array( 'orderby' => 'parent', 'order' => 'DESC' ) )[0];
-					echo '<a class="parent-category" title="' . sprintf( __('Return to %s','starck'), $parent_term->name) . '" rel="nofollow" href="'.get_term_link($parent_term->term_id, $projects['taxonomy']).'">'.$parent_term->name.'</a>';
-				}
+
 				if (true === $gallery_control) {
 				?>
 					<a href="#" class="jcarousel-control prev"><svg class="arrow-icon left"><use xlink:href="#arrow"></use></svg></a>
