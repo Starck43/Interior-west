@@ -1,7 +1,7 @@
 /*
  * Custom scripts library
  *
- * @version 1.8.7
+ * @version 1.8.8
  */
 
 var $ = jQuery.noConflict();
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	$('body').fadeIn(500);
 	var overlay = $('#overlay');
 	var navigation = $('#header-nav');
-	checkMobileNavgation(navigation);
+	//checkMobileNavgation(navigation);
 	navigation.css('opacity', 1);
 	var burger = $('#nav-burger');
 	var mobileMenu = $('ul.primary-menu');
@@ -87,10 +87,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 
 
-	$( window ).on( 'resize', function( e ) {
+	$( window ).on( 'load resize', function( e ) {
 		checkMobileNavgation(navigation);
 		if (mobileMenu.hasClass('active')) burger.click(); // if burger menu open then close it
-		if (true) {}
 	});
 
 	$(window).scroll(function() {
@@ -328,15 +327,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else $('.jcarousel-pagination').remove();
 
 	}
-
-	// Прослушка события смены ориентации
-	window.addEventListener("orientationchange", function() {
-		if ( carousel.has('li.slide').length )
-			if ( typeof(window.orientation)=="number" && window.orientation == 0 ) {
-				$('.fit-contain').addClass('fit-cover').removeClass('fit-contain');
-			}
-			else $('.fit-cover').addClass('fit-contain').removeClass('fit-cover');
-	}, false);
 
 /*
 	//Adding an agent to HTML selector

@@ -39,7 +39,7 @@ if ( $gallery_in_slider && $gallery || $main_header_background ) {
 								$parallax,
 								$thumbnail,
 								wp_get_attachment_image_srcset( absint($value) ),
-								($image_ratio > 1 ? ' fit-contain' : ''),
+								($image_ratio > 1 ? ' portrait' : ''),
 								($image_ratio > 1 ? '<div class="header-background blur-bg" style="background-image: url('.$thumbnail.')"></div>' : '')
 								//wp_get_attachment_caption( absint($value) ) ? '<div class="image-caption">' . $caption . '</div>' : ''
 							);
