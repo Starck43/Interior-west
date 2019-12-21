@@ -35,7 +35,8 @@
 .jcarousel-wrapper, .jcarousel li
 	width: 100%
 	//width: calc(100vw - (100vw - 100%))
-	height: 1000px //calc-height($header-h, $nav-height, $top-bar-height, $gutter)
+	max-height: 1000px
+	height: calc-height($header-h, $nav-height, $top-bar-height, $gutter)
 	+media-breakpoint-down(sm)
 		height: calc-height($header-h-sm, $nav-height, $top-bar-height, $gutter)
 	+media-breakpoint-down(xs)
