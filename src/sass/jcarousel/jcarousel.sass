@@ -40,11 +40,11 @@
 	width: 100%
 	//width: calc(100vw - (100vw - 100%))
 	max-height: 1000px
-	height: calc-height($header-h, $nav-height, $top-bar-height, $gutter)
+	height: calc-height($header-h, $nav-height, $top-bar-height, 0)
 	+media-breakpoint-down(sm)
-		height: calc-height($header-h-sm, $nav-height, $top-bar-height, $gutter)
+		height: calc-height($header-h-sm, $nav-height, $top-bar-height, 0)
 	+media-breakpoint-down(xs)
-		height: calc-height($header-h-xs, $nav-height, $top-bar-height, $gutter)
+		height: calc-height($header-h-xs, $nav-height, $top-bar-height, 40px)
 main
 	&.bounded
 		.jcarousel-wrapper, .jcarousel li
