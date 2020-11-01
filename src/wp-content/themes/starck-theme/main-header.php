@@ -31,7 +31,7 @@ if ( $gallery_in_slider && $gallery || $main_header_background ) {
 						<?php
 						$i = 1;
 						foreach ($gallery as $value) {
-							$thumbnail = wp_get_attachment_image_url( absint($value), 'thumbnail' );
+							$thumbnail = wp_get_attachment_image_url( absint($value), 'large' );
 							$image = wp_get_attachment_metadata( absint($value) );
 							$image_ratio = $image['height']/$image['width'];
 							echo sprintf('<li slide="%1$s" class="slide%2$s">%6$s<img class="lazyload%5$s" src="%3$s" data-srcset="%4$s" data-sizes="auto" /></li>',
