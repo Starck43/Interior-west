@@ -2,7 +2,7 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php esc_attr( bloginfo( 'charset' ) ); ?>" />
-	<meta name="description" content="">
+	<meta name="description" content="Разработка дизайна интерьера, архитектура малоэтажных домов">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="icon" href="/img/favicon.png">
