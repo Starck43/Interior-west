@@ -1,5 +1,5 @@
 <?php
-define( 'STARCK_VERSION', '1.8.9' );
+define( 'STARCK_VERSION', '1.9.0' );
 
 //!-- START ENQUEUE PARENT ACTION
 
@@ -38,22 +38,33 @@ function starck_scripts_add() {
 //!-- END ENQUEUE PARENT ACTION
 
 require_once get_template_directory() . '/inc/theme-functions.php'; // Include main theme functions
-if ( is_admin() )
+
+if ( is_admin() ) {
 	require_once get_template_directory() . '/inc/meta-controls.php'; // Include custom meta in pages (i.e. header gallery or hide title)
+}
 //require_once get_template_directory() . '/inc/projects_layout.php'; // Include Projects Post Layout
-?>
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-   ym(51322627, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/51322627" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+add_action('wp_footer', function (){
+
+	if( !is_admin() ) {
+	?>
+	<!-- Yandex.Metrika counter -->
+	<script type="text/javascript" >
+	   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+	   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+	   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+	   ym(51322627, "init", {
+	        clickmap:true,
+	        trackLinks:true,
+	        accurateTrackBounce:true
+	   });
+	</script>
+	<noscript><div><img src="https://mc.yandex.ru/watch/51322627" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika counter -->
+	<?php
+	}
+
+});
+

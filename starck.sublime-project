@@ -3,6 +3,9 @@
 	[
 		{
 			"path": "."
+		},
+		{
+			"path": "src/wp-content/themes/starck-theme"
 		}
 	]
 }
