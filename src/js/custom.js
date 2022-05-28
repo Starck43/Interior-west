@@ -265,13 +265,13 @@ document.addEventListener("DOMContentLoaded", function() {
 			.jcarousel({
 				//scroll: slidesPerPage,
 				//center: true,
-				wrap: 'circular',
-				animation: 500,
+				//wrap: 'circular',
+				animation: 900,
 				//transitions: true,
 				transitions: Modernizr.csstransitions ? {
 					transforms:   Modernizr.csstransforms,
 					transforms3d: Modernizr.csstransforms3d,
-					easing:       'ease'
+					easing:       'ease-out'
 				} : false
 			})
 			//.jcarousel('scroll', '+='+String(slidesPerPage))
@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			if ( 'true' === carousel.attr('data-jcarouselautoscroll') ) {
 				carousel.jcarouselAutoscroll({
-					interval:  8000,
+					interval:  6000,
 					//autostart: false,
 					//target: '-=1'+String(slidesPerPage)
 				});

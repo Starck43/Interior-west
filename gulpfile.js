@@ -5,7 +5,7 @@
  */
 
 var gulp 		 = require('gulp'),
-	sass 		 = require('gulp-sass'),   // Подключаем SASS
+	sass 		 = require('gulp-sass')(require('sass')),   // Подключаем SASS
 	browserSync  = require('browser-sync'), // Подключаем Browser Sync
 	concat       = require('gulp-concat'), // Подключаем gulp-concat (для слияния файлов)
 	uglify       = require('gulp-uglify-es').default, // Подключаем плагин для сжатия JS
@@ -36,7 +36,7 @@ gulp.task('message', async function() { // Вывод любой информа�
 });
 
 
-gulp.task('styles', function() { // таск 'styles' обработает все файлы *.sass, вложенные в любые подпапки
+gulp.task('styles', gulp.series(function(done) { // таск 'styles' обработает все файлы *.sass, вложенные в любые подпапки
 	return gulp.src(path.src+'sass/*.sass')
 	// Пример: gulp.src('src/sass/*.+(sass|scss)')
 	// Пример: gulp.src(['src/sass/**/*.sass','!src/sass/libs.sass'])  ! - кроме styles.sass
@@ -56,9 +56,11 @@ gulp.task('styles', function() { // таск 'styles' обработает вс�
 	.pipe(cleanCSS({level:2})) // Сжимаем CSS файл
 	.pipe(gulp.dest(path.dest+'css')) // Выгружаем результат в папку dest::/css
 	.pipe(browserSync.stream()); // Обновляем CSS на странице при изменении
-});
 
-gulp.task('vendors-styles', function() { // таск обработает все файлы *.css, вложенные в css/, кроме сжатых и main.css
+	done();
+}));
+
+gulp.task('vendors-styles', async function() { // таск обработает все файлы *.css, вложенные в css/, кроме сжатых и main.css
 	return gulp.src([path.src+'css/*.css'])
 	.pipe(postcss([ cssImport ])) // Импортируем стили, прописанные через команду @import в начале файла
 	.pipe(concat('vendors.min.css')) // Объединяем все найденные файлы в один
@@ -80,7 +82,7 @@ gulp.task('css-compress', async function() {
 	.pipe(gulp.dest(path.dest+'css'))
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', async function() {
 	return gulp.src([path.src+'js/custom*.js'])
 	//.pipe(sourcemaps.init()) // Инициализируем sourcemap
 	.pipe(concat('custom.min.js')) // Объединяем в один файл
@@ -157,7 +159,7 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
 });
 
 gulp.task('watch', function() { //таск слежения изменений в sass,css,html,php,js.
-	gulp.watch([path.src+'sass/**/*.sass'], gulp.parallel('styles')); // Наблюдение за sass файлами в папке sass
+	gulp.watch([path.src+'sass/**/*.sass'], gulp.series('styles')); // Наблюдение за sass файлами в папке sass
 	gulp.watch([path.src+'css/*.css', '!'+path.src+'css/main.css'], gulp.parallel('vendors-styles')); // Наблюдение за вендорными css файлами в папке _src
 	gulp.watch([path.src+'js/custom.js'], gulp.parallel('scripts')); // Наблюдение за главным JS файлом
 	gulp.watch([path.src+'js/_vendors.js', path.src+'js/**/*.js', '!'+path.src+'js/custom*.js', path.src+'plugins/**/*.js'], gulp.parallel('vendors-scripts')); // Наблюдение за сторонней библиотекой JS файлов

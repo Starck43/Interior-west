@@ -4,7 +4,7 @@
 	width: 100%
 	max-width: 600px
 	@include push--auto
-	padding-top: $gutter/2
+	padding-top: math.div($gutter, 2)
 	text-align: left
 	//font-size: 0.8em
 	.wpforms-title
@@ -83,6 +83,6 @@
 
 
 	.wpforms-submit-container
-		padding-top: $gutter-20/2
+		padding-top: math.div($gutter-20, 2)
 		padding-bottom: $gutter-20
 		//float: left

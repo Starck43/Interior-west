@@ -2,16 +2,12 @@
 // Main styles
 #main
 	position: relative
-	flex: auto
-	width: 100%
+	flex: 100%
+	width: 100vw
+	height: 100vh
 	clear: both
 	z-index: 2
-	&.page
-		#main-header
-			//height: calc-height($header-h, $nav-height, $top-bar-height)
-		&.nav-inline-logo
-			#main-header
-				//height: calc-height($header-h, $top-bar-height)
+
 #main-header
 	position: relative
 	//min-height: 200px
@@ -19,8 +15,8 @@
 	//width: 100%
 	//@include push--auto
 	//margin-bottom: $gutter/4
-	margin-left: - $gutter-20/2
-	margin-right: - $gutter-20/2
+	margin-left: - math.div($gutter-20, 2)
+	margin-right: - math.div($gutter-20, 2)
 	//background-color: $header-bg
 	//float: left
 	.gallery-meta
@@ -71,8 +67,8 @@
 
 #main-container
 	position: relative
-	padding: 0 $gutter-20/2
-	//margin-bottom: $gutter/2
+	padding: 0 math.div($gutter-20, 2)
+	//margin-bottom: math.div($gutter, 2)
 	background-color: $main-bg
 	//@extend %img
 
@@ -86,10 +82,10 @@
 
 		&.float-left
 			width: $content-width
-			margin-right: $gutter-20/2
+			margin-right: math.div($gutter-20, 2)
 
 		&.float-right
-			margin-left: $gutter-20/2
+			margin-left: math.div($gutter-20, 2)
 
 		.page
 			float: left
@@ -101,7 +97,7 @@
 
 	article
 		position: relative
-		margin-top: $gutter/2
+		margin-top: math.div($gutter, 2)
 		@include push--auto
 		.entry-header
 			width: 100%
@@ -111,21 +107,21 @@
 			//float: left
 			h1
 				&.in-view
-					@include animation(h1, 1s 200ms ease-out both, In, 0, -$gutter/2 )
+					@include animation(h1, 1s 200ms ease-out both, In, 0, - math.div($gutter, 2) )
 
 		.entry-content
 			//flex-grow: 1
 			width: 100%
 			//float: left
-			//margin-top: $gutter/2
-			margin-bottom: $gutter/2
+			//margin-top: math.div($gutter, 2)
+			margin-bottom: math.div($gutter, 2)
 			h2
 				text-transform: uppercase
 				opacity: 0
 				&.in-view
 					@include animation(h2, 1.5s 100ms ease-out both, In, 300px, 0% )
 			>div
-				//margin-top: $gutter/2
+				//margin-top: math.div($gutter, 2)
 				ul
 					//margin-bottom: 5vh
 					li

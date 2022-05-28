@@ -7,6 +7,7 @@
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="icon" href="/img/favicon.png">
 	<link rel="apple-touch-icon" href="/img/apple-touch-favicon.png">
+	<meta name="yandex-verification" content="6099aebab02c2b27" />
 	<?php wp_head(); ?>
 </head>
 

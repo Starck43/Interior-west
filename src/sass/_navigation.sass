@@ -43,7 +43,6 @@
 		height: $header-h-xs
 
 	align-items: center
-	//margin-top: auto
 	transition: opacity 500ms ease-in
 	ul.primary-menu
 		position: relative
@@ -55,8 +54,10 @@
 			position: relative
 			display: block
 			align-items: center
-			margin: 0 $gutter/8
+			margin: 0 math.div($gutter, 8)
 			transition: none
+			&:last-child
+				margin-right: 0
 			&::before
 				@extend %nav-link-hover
 
@@ -66,9 +67,10 @@
 
 			a
 				position: relative
-				@include font-settings(false, $menu-link-color, $menu-font-size, initial, 300, $nav-height)
+				@include font-settings(false, $menu-link-color, $menu-font-size, initial, 500, $nav-height)
 				letter-spacing: 0.3px
 				white-space: nowrap
+				text-transform: lowercase
 			&.current-menu-item
 				a
 					color: $link-color
@@ -80,7 +82,7 @@
 					left: 100%
 					top: 50%
 					background-color: transparent
-					margin-left: $burger-menu-font-size / 2
+					margin-left: math.div($burger-menu-font-size, 2)
 					transition: all 500ms ease-in-out
 
 
@@ -96,7 +98,7 @@
 			height: 500px
 
 	ul.secondary-menu
-		margin-left: $gutter/4
+		margin-left: math.div($gutter, 4)
 
 	&:not(.burger)
 		#nav-burger
@@ -192,8 +194,8 @@
 				z-index: 10000
 				//@include animation(close-icon, 300ms .8s ease-in both, In, -50%, 0, -50%, 100%)
 				position: absolute
-				top: $icon-size/2
-				right: $icon-size/2
+				top: math.div($icon-size, 2)
+				right: math.div($icon-size, 2)
 				width: $icon-size
 				height: $icon-size
 
@@ -218,7 +220,7 @@
 			position: relative
 			display: flex
 			min-width: $icon-size
-			margin-left: $gutter/4
+			margin-left: math.div($gutter, 4)
 
 
 	#nav-search
@@ -246,7 +248,7 @@
 	.nav-links
 		display: flex
 		width: 100%
-		padding: $gutter-20/2 0
+		padding: math.div($gutter-20, 2) 0
 		border-top: 1px solid transparentize($base-border-color, 0.8)
 		//border-bottom: 1px solid $base-border-color
 		justify-content: center
@@ -265,7 +267,7 @@
 		.nav-previous,
 		.nav-next,
 		.page-numbers
-			padding:  $gutter-20/2
+			padding:  math.div($gutter-20, 2)
 			display: flex
 			align-items: center
 			transition: color 100ms ease

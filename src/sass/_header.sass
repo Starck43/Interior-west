@@ -1,15 +1,17 @@
 // Header styles
 #site-header
-	position: relative
 	display: flex
-	//font-size: 1em
-	//width: auto
+	position: absolute
+	left: 0
+	top: 0
+	width: 100%
 	height: $header-h
+	padding: 0 1rem
 	//margin-top: $gutter-20/2
 	//margin-bottom: $gutter-20/2
 	align-items: center
 	background-color: $header-bg
-	//z-index: 3
+	z-index: 10
 	+media-breakpoint-down(sm)
 		height: $header-h-sm
 	+media-breakpoint-down(xs)
@@ -25,7 +27,7 @@
 	#branding
 		display: flex
 		width: auto
-		//margin: auto 0
+		align-items: center
 		height: $header-h - $gutter-20
 		+media-breakpoint-down(sm)
 			height: $header-h-sm - $gutter-20
@@ -37,17 +39,15 @@
 				width: 100% !important
 		#branding-logo
 			position: relative
-			//margin: 0 auto
-			//padding: 0 $gutter-20/2
-			//width: auto
-			@include img-responsive
+			a
+				display: block
 
 		#branding-title
 			width: 100%
 			//margin: auto 0
-			padding: 0 $gutter-20/2
+			padding: 0 math.div($gutter-20, 2)
 			display: flex
-			font-size: Tahoma
+			font-family: Tahoma
 			flex-direction: column
 			justify-content: space-between
 			a
@@ -58,20 +58,19 @@
 					text-transform: uppercase
 				div:first-child
 					color: $base-text-color
-					font-size: 1.1em
+					font-size: 1rem
 				div:last-child
 					font-family: Tahoma
-					font-size: 2.1em
+					font-size: 1.9rem
 			+media-breakpoint-down(sm)
 				display: none
 
 		&.align-left
-			margin-left: $gutter-20/2
 			#branding-logo
 				margin-right: auto
 
 		&.align-center
-			margin-bottom: $gutter-20/2
+			margin-bottom: math.div($gutter-20, 2)
 			#branding-title
 				justify-content: center
 
@@ -121,8 +120,8 @@
 			padding-left: 0
 			padding-right: 0
 			+media-breakpoint-down(sm)
-				padding-left: $gutter-20/2
-				padding-right: $gutter-20/2
+				padding-left: math.div($gutter-20, 2)
+				padding-right: math.div($gutter-20, 2)
 
 	#header-content
 		margin: auto 0

@@ -110,8 +110,8 @@ input[type="submit"]
 
 .close-icon
 	//@include push--absolute
-	width: $icon-size/1.5
-	height: $icon-size/1.5
+	width: math.div($icon-size, 1.5)
+	height: math.div($icon-size, 1.5)
 	//left: 50%
 	//transform: translateY(100%)
 	transition: opacity 200ms ease
@@ -138,7 +138,7 @@ input[type="submit"]
 
 	&:hover
 		opacity: 1
-		&::before,
+		&::before
 			transform: rotate(135deg)
 		&::after
 			transform: rotate(45deg)
@@ -190,7 +190,7 @@ $btn-size: $icon-size * 1.5
 		background-color: transparentize(black, 0.95)
 
 #link-to-top
-	right: $gutter-20/2
+	right: math.div($gutter-20, 2)
 	width: $btn-size
 	height: $btn-size
 	font-size: $icon-font-size
@@ -215,9 +215,9 @@ $btn-size: $icon-size * 1.5
 			.icon
 				display: none
 		+media-breakpoint-down(sm)
-			width: $gutter/2
+			width: math.div($gutter, 2)
 			min-width: $gutter-30
-			height: $gutter/2
+			height: math.div($gutter, 2)
 			min-height: $gutter-30
 			//padding: 5px 7px
 			//background-color: transparent
@@ -233,7 +233,7 @@ $btn-size: $icon-size * 1.5
 		//top: $gutter/4
 		left: -15px
 		//right: -15px
-		height: $gutter/2
+		height: math.div($gutter, 2)
 		align-items: center
 		@include animation(link-back, 800ms 1s ease-in both, In, -100%, 0%, 0%, 0% )
 		+media-breakpoint-down(sm)
@@ -244,7 +244,7 @@ $btn-size: $icon-size * 1.5
 			//position: relative
 			//top: $gutter/4
 			//justify-content: center
-		%extend .visible
+		@extend .visible
 		cursor: pointer
 		z-index: 3
 		.icon
@@ -300,7 +300,7 @@ $btn-size: $icon-size * 1.5
 	width: $icon-font-size
 	height: $icon-font-size
 	padding: 2px
-	margin-right: $gutter-20/2
+	margin-right: math.div($gutter-20, 2)
 	border: 2px solid $theme-color
 	//border-radius: 50%
 	+media-breakpoint-down(xs)

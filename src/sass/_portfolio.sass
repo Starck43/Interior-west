@@ -1,18 +1,23 @@
+
 .vp-portfolio .vp-portfolio__items-wrap,
 .full-wide-container
-	margin-left: - $gutter-20/2
-	margin-right: - $gutter-20/2
+	margin-left: - math.div($gutter-20, 2)
+	margin-right: - math.div($gutter-20, 2)
 
 .vp-portfolio figure.vp-portfolio__item
 	margin: 2.5px !important
 .vp-pagination__load-more-no-more
 	visibility: hidden !important
 .vp-filter__style-default .vp-filter__item
+	--vp-filter-default--items__border-radius: 1px
+	//--vp-filter-default--items__background-color: #fff
+	font-size: 0.8rem !important
+	background-color: transparent
 	&.vp-filter__item-active > *
 		background-color: $theme-color !important
 		color: white !important
 		border-color: $theme-color !important
 	.vp-filter__item-count
-		font-size: 0.8em !important
+		font-size: 1em !important
 		font-weight: bold
 		color: $link-color !important

@@ -1,7 +1,7 @@
 [class*='wp-block-group']
 	ul
 		position: relative
-		margin-bottom: $gutter/4
+		margin-bottom: math.div($gutter, 4)
 		li
 			width: 100%
 			margin-left: 2em
@@ -26,7 +26,7 @@ hr
 	margin: 5vh 0
 
 .wp-block-image
-	margin: $gutter/2 0
+	margin: math.div($gutter, 2) 0
 	img
 		height: auto
 

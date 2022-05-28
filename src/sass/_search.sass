@@ -2,7 +2,7 @@
 	@extend .bounded
 
 	.post-count
-		margin-bottom: $gutter/2
+		margin-bottom: math.div($gutter, 2)
 		span
 			font-weight: 600
 			text-decoration: underline
@@ -12,7 +12,7 @@
 		display: flex
 		//max-width: 600px
 		&-submit	
-			margin-left: $gutter-20/2 
+			margin-left: math.div($gutter-20, 2)
 #searchform
 	position: relative
 	//@include push--auto

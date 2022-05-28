@@ -1,3 +1,4 @@
+@use "sass:math"
 /*
  * @package Starck-theme
  *
@@ -37,215 +38,218 @@
 @import gutenberg
 
 *
-	box-sizing: border-box
+    box-sizing: border-box
 
 a
-	text-decoration: none
-	//font-weight: bold
-	color: $link-color
-	&:hover
-	 	color: $link-color-hover
-	&:focus, &:active
-		color: $theme-color !important
+    text-decoration: none
+    //font-weight: bold
+    color: $link-color
+    &:hover
+        color: $link-color-hover
+    &:focus, &:active
+        color: $theme-color !important
 
 p
-	letter-spacing: 0.3px
-	line-height: $base-line-height
-	margin-top: 0
-	+media-breakpoint-down(xs)
-		text-align: justify
+    letter-spacing: 0.3px
+    line-height: $base-line-height
+    margin-top: 0
+    +media-breakpoint-down(xs)
+        text-align: justify
 ul
-	padding: 0
-	margin: 0
+    padding: 0
+    margin: 0
 li
-	list-style-type: none /* Убираем глобально маркеры */
-	letter-spacing: 0.3px
-	+media-breakpoint-down(xs)
-		text-align: justify
+    list-style-type: none /* Убираем глобально маркеры */
+    letter-spacing: 0.3px
+    +media-breakpoint-down(xs)
+        text-align: justify
 h1
-	margin: 0 0 .75em
-	//@include font-settings($title-font-family, black, 2em, lowercase, 500, 1.2)
-	font-size: 2em
-	font-weight: 500
-	line-height: 1.2
-	letter-spacing: 3px
-	text-transform: lowercase
+    margin: 0 0 .75em
+    //@include font-settings($title-font-family, black, 2em, lowercase, 500, 1.2)
+    font-size: 3rem
+    font-weight: 500
+    line-height: 1.2
+    letter-spacing: 3px
+    text-transform: lowercase
 
 h2
-	margin: 0 0 .75em
-	font-size: 1.6em
-	font-weight: 700
-	letter-spacing: 3px
-	color: $page-title-color
+    margin: 0 0 .75em
+    font-size: 1.6em
+    font-weight: 700
+    letter-spacing: 3px
+    color: $page-title-color
 
 h3
-	font-size: 1.4em
-	font-weight: 700
-	margin: 1.5em 0 .5em
+    font-size: 1.4em
+    font-weight: 700
+    margin: 1.5em 0 .5em
 
 
 h4
-	font-size: 1.2em
-	font-weight: 500
-	margin: 0 0 .2em
+    font-size: 1.2em
+    font-weight: 500
+    margin: 0 0 .2em
 
 
 h5
-	font-size: 1em
-	font-weight: 300
-	margin: 0 0 .2em
+    font-size: 1em
+    font-weight: 300
+    margin: 0 0 .2em
 
 header
-	text-transform: lowercase
-	letter-spacing: 1px
-
-html
-	@include font-settings($html-font-family, $base-text-color, $base-font-size, normal, initial, $base-line-height)
-	-ms-text-size-adjust: 100%
-	-webkit-text-size-adjust: 100%
-	-webkit-font-smoothing: antialiased
-	+media-breakpoint-down(lg)
-		//font-size: 15px
-	+media-breakpoint-down(md)
-		//font-size: 15px
-		overflow: scroll
-		overflow-x: hidden
-		::-webkit-scrollbar
-			//width: 0px  /* remove scrollbar space */
-			background: transparent  /* optional: just make scrollbar invisible */
-	+media-breakpoint-down(sm)
-		font-size: 15px
-	+media-breakpoint-down(xs)
-		//font-size: 15px
+    text-transform: lowercase
+    letter-spacing: 1px
 
 body
-	display: flex
-	flex-direction: column
-	min-height: 100vh
-	min-width: 320px
-	margin: 0
-	background-color: $body-bg
-	overflow-x: hidden
+    position: relative
+
+html
+    @include font-settings($html-font-family, $base-text-color, $base-font-size, normal, initial, $base-line-height)
+    -ms-text-size-adjust: 100%
+    -webkit-text-size-adjust: 100%
+    -webkit-font-smoothing: antialiased
+    +media-breakpoint-down(lg)
+        //font-size: 15px
+    +media-breakpoint-down(md)
+        font-size: 17px
+        overflow: scroll
+        overflow-x: hidden
+        ::-webkit-scrollbar
+            //width: 0px  /* remove scrollbar space */
+            background: transparent  /* optional: just make scrollbar invisible */
+    +media-breakpoint-down(sm)
+        font-size: 15px
+    +media-breakpoint-down(xs)
+        //font-size: 15px
+
+body
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    min-width: 320px
+    margin: 0
+    background-color: $body-bg
+    overflow-x: hidden
 
 %img
-	img
-		width: 100%
-		height: auto
+    img
+        width: 100%
+        height: auto
 
 // Avoid empty images to appear as broken
 img:not([src]):not([srcset])
-	visibility: hidden
+    visibility: hidden
 
 img[data-sizes="auto"]
-	display: block
-	width: 100%
+    display: block
+    width: 100%
 
 [data-vp-layout="tiles"] .vp-portfolio__item-img img
-	height: 100% !important
+    height: 100% !important
 
 .pswp
-	display: none
+    display: none
 
 
 .container
-	//width: 100%
-	@include push--auto
-	//margin-left: $gutter / 2
-	//margin-right: $gutter / 2
+    //width: 100%
+    @include push--auto
+    //margin-left: $gutter / 2
+    //margin-right: $gutter / 2
 
 .bounded
-	width: 100%
-	max-width: $container_max_w
-	//padding: 0 $gutter-20/2
-	@include push--auto
+    width: 100%
+    max-width: $container_max_w
+    //padding: 0 $gutter-20/2
+    @include push--auto
 
 .align-left
-	justify-content: flex-start
-	//align-items: flex-start
+    justify-content: flex-start
+    //align-items: flex-start
 
 .align-center
-	justify-content: center
-	//align-items: center
+    justify-content: center
+    //align-items: center
 
 .align-right
-	justify-content: flex-end
-	//align-items: flex-end
+    justify-content: flex-end
+    //align-items: flex-end
 
 .disabled
-	pointer-events: none
+    pointer-events: none
 
 .hidden
-	//display: none !important
-	visibility: hidden !important
-	opacity: 0 !important
-	z-index: -1 !important
+    //display: none !important
+    visibility: hidden !important
+    opacity: 0 !important
+    z-index: -1 !important
 
 header .hidden
-	display: none
+    display: none
 
 .visible
-	opacity: 1 !important
+    opacity: 1 !important
 
 .show
-	display: block !important
+    display: block !important
 
 .blur
-	@supports (backdrop-filter: blur(0))
-		backdrop-filter: blur(10px)
+    @supports (backdrop-filter: blur(0))
+        backdrop-filter: blur(10px)
 
 .blur-bg
-	@supports (filter: blur(0))
-		filter: blur(7px) grayscale(0)
-		margin: -10px
-	@supports not (filter: blur(0))
-		background-color: transparentize(black,.5) !important
+    @supports (filter: blur(0))
+        filter: blur(7px) grayscale(0)
+        margin: -10px
+    @supports not (filter: blur(0))
+        background-color: transparentize(black,.5) !important
 
 .header-background
-	@include push--absolute
-	background-size: cover
-	background-repeat: no-repeat
-	background-position: 50% 50%
+    @include push--absolute
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: 50% 50%
 
 .modal
-	position: fixed
-	left: 0
-	right: 0
-	top: 0
-	bottom: 0
-	//overflow: hidden
-	transition: all .3s ease
-	visibility: visible
-	opacity: 1
-	touch-action: none
-	//cursor: pointer
-	z-index: 10000
-	overflow: hidden
-	@extend .blur
+    position: fixed
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    //overflow: hidden
+    transition: all .3s ease
+    visibility: visible
+    opacity: 1
+    touch-action: none
+    //cursor: pointer
+    z-index: 10000
+    overflow: hidden
+    @extend .blur
 
 #dom-preloader
-	@extend .modal
-	background-color: $preloader-bg
-	z-index: 10000
+    @extend .modal
+    background-color: $preloader-bg
+    z-index: 10000
 
 #overlay
-	background-color: transparentize(black, .15)
-		//filter: blur(10px)
+    background-color: transparentize(black, .15)
+        //filter: blur(10px)
 
-	div.imagebox
-		position: relative
-		height: 100%
-		background-size: contain
-		background-position: 50% 50%
-		background-repeat: no-repeat
-		touch-action: pinch-zoom
+    div.imagebox
+        position: relative
+        height: 100%
+        background-size: contain
+        background-position: 50% 50%
+        background-repeat: no-repeat
+        touch-action: pinch-zoom
 
-	div.close
-		transform: translate(-50%, 100%)
+    div.close
+        transform: translate(-50%, 100%)
 
 
 .feedback
-	margin: $gutter/2 auto 0
-	max-width: 600px
+    margin: math.div($gutter, 2) auto 0
+    max-width: 600px
 
 @import header
 @import main
