@@ -35,3 +35,9 @@
 	.postbox-gallery-options input[type="text"] {
 		margin-top: 5px;
 	}
+
+	@media screen and (max-width: 600px) {
+		#wpadminbar {
+			position: fixed;
+		}
+	}

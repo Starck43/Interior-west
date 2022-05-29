@@ -436,8 +436,8 @@ function starck_breadcrumbs() {
 		get_template_part( 'breadcrumbs' );
 	}
 	else {
-		if ( is_single() ) $show_in_top = true;
-		if ( $_SERVER['HTTP_REFERER'] ) starck_back_to_previous_page( $show_in_top );
+		$show_in_top = is_single() ? true : false;
+		if ( isset($_SERVER['HTTP_REFERER'] )) starck_back_to_previous_page( $show_in_top );
 	}
 }
 

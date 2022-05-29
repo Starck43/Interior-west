@@ -1,11 +1,8 @@
-<h1>Инструкция по разворачиванию стартового проекта на Wordpress с Gulp</h1>
-<p>(Start-Web-Template v1.0.8)</p>
+# Инструкция по разворачиванию проекта Интерьер-West на Wordpress
 
 <p>Автор: <b>Станислав Шабалин</b></p>
 
-<p><i>PS: За основу был взят шаблон <a href="http://github.com/agragregra/oh5">OptimizedHTML 5</a></i></p>
-
-<p><b>В пакет входят:</b> 
+<p><b>В проект входят:</b>
 <div><b>resources</b> - папка для сбора и хранения исходных данных заказчика (ТЗ, макеты, примеры и тд)</div>
 <div><b>src/</b> - рабочаяя папка проекта для разработки</div>
 <div><b>src/css</b> - исходные подключаемые стили сторонних плагинов</div>
@@ -16,46 +13,22 @@
 <div><b>src/plugins</b> - библиотеки сторонних разработчиков (подключаются, например, в css/vendors.css и js/_vendors.js файлах)</div>
 <div><b>src/worpdress</b> - папка Worpress</div>
 <div><b>src/wp-content/</b> - папка контента для Worpress (вынесена из стандартного размещения внутри Worpdress)</div>
-<div><b>src/wp-content/themes/mytheme-child/</b> - папка с подключенной дочерней темой (functions.php, style.css)</div>
-<div><b>src/wp-content/themes/mytheme-child/css</b> - папка с подключаемыми стилями (main.min.css, vendors.min.css)</div>
-<div><b>src/wp-content/themes/mytheme-child/js</b> - папка с подключаемыми скриптами (custom.min.js, vendors.min.js)</div>
-<div><b>src/wp-content/themes/mytheme-child/img</b> - папка с подключаемыми изображениями</div>
-<div><b>src/wp-content/themes/mytheme-child/fonts</b> - папка с подключаемыми шрифтами</div>
+<div><b>src/wp-content/themes/starck-theme/</b> - папка с подключенной дочерней темой (functions.php, style.css)</div>
+<div><b>src/wp-content/themes/starck-theme/inc</b> - внутренние файлы для создания темы</div>
+<div><b>src/wp-content/themes/starck-theme/css</b> - папка с подключаемыми стилями (main.min.css, vendors.min.css)</div>
+<div><b>src/wp-content/themes/starck-theme/js</b> - папка с подключаемыми скриптами (custom.min.js, vendors.min.js)</div>
+<div><b>src/wp-content/themes/starck-theme/img</b> - папка с подключаемыми изображениями</div>
+<div><b>src/wp-content/themes/starck-theme/fonts</b> - папка с подключаемыми шрифтами</div>
 <div><b>src/wp-config.php</b> - файл для подключения БД настроек структуры Wordpress</div>
 <div><b>src/index.php</b> - продублированный стартовый файл из папки wordpress с измененными настройками</div>
-<div><b>node_modules</b> - набор плагинов для запуска проекта (определяется в файле <i>package.json</i> и устанавливается после команды <i>npm i</i>). См. ниже "Запуск проекта"</div>
-<div><b><i>package.json</i></b> - собранный установочный пакет необходимых плагинов</div>
 <div><b><i>wp-install.js</i></b> - скрипт для установки последней версии CMS WordPress (rus)</div>
 <div><b><i>gulpfile.js</i></b> - скрипты gulp для работы с проектом</div>
 </p>
 
-<h2>Запуск проекта</h2>
 
-<pre>git clone https://github.com/Starck43/Start-WP-Template.git</pre>
+## Запуск проекта
 
-<ol>
-	<li>Клонировать или <a href="https://github.com/Starck43/Start-WP-Template/archive/master.zip">скачать</a> <b>стартовый шаблон</b> с GitHub. Для клонирования должен быть установлен Git.</li>
-	<li>Распаковать архив и(или) перейти в папку <b>Start-WP-Template</b></li>
-	<li>Запустить консоль cmd или shell (в Total Commander [shift+правая кнопка мыши]) для выполнения последующих команд:</li>
-	<li><b>npm i</b> - установить плагины в node_modules для нового проекта (запускать в корне проекта через консоль с предустановленным Node.js и глобальным Gulp</li>
-	<li><b>npm update</b> - обновить плагины в node_modules до текущей версии (при необходимости)</li>
-	<li><b>node wp-install</b> - развернуть WordPress в отдельную папку</li>
-	<li><b>gulp [default(по умол.)|styles|vendors-styles|scripts|vendors-scripts|css-compress|browser-sync|watch|rsync]</b> - запуск Gulp</li>
-	<li>Создать БД в phpMyAdmin с названием wordpress и создать нового пользователя со своим именем и паролем (по умол: admin/admin). Предоставить полные права администратору БД на управление базой wordpress (настройки должны совпадать с теми, что прописаны в src/wp-config.php)</li>
-</ol>
-
-<pre>В папке src/wp-content/themes созданы две темы: 
-<ul>
-<div>Основная с минимальным кодом - Starck</div>
-<div>Дочерняя GeneratePress-child</div>
-</ul>
-<p>! Родительскую тему GeneratePress необходимо предварительно установить, чтобы заработала дочерняя.</p>
-<p>! Подключение стилей и скриптов настроено в <b>functions.php</b>. Кастомные файлы располагаются во вложенных в тему соответствующих папках.</p>
-</pre>
-
-<h2>Основные таски Gulp для работы с проектом:</h2>
-
-<pre><b>gulp</b> - главный таск для запуска всего пакета целиком. Выполняется через командную консоль</pre>
+### Основные таски Gulp для работы с проектом:
 
 <ul>
 	<li><b title="gulp styles"><em>gulp styles</em></b>: конвертирует все файлы sass в css/main.css</li>

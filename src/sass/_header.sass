@@ -1,17 +1,19 @@
 // Header styles
+.home #site-header
+	position: absolute
+	z-index: 3
+
 #site-header
 	display: flex
-	position: absolute
+	position: relative
 	left: 0
 	top: 0
 	width: 100%
 	height: $header-h
 	padding: 0 1rem
-	//margin-top: $gutter-20/2
-	//margin-bottom: $gutter-20/2
+	touch-action: auto
 	align-items: center
 	background-color: $header-bg
-	z-index: 10
 	+media-breakpoint-down(sm)
 		height: $header-h-sm
 	+media-breakpoint-down(xs)
@@ -32,15 +34,16 @@
 		+media-breakpoint-down(sm)
 			height: $header-h-sm - $gutter-20
 			//max-width: $logo-width / 1.5
+			img
+				width: auto !important
+				height: 35px
 		+media-breakpoint-down(xs)
 			height: $header-h-xs - $gutter-20
 			max-width: ($header-h-xs - $gutter-20)*1.9
-			img
-				width: 100% !important
 		#branding-logo
 			position: relative
 			a
-				display: block
+				display: flex
 
 		#branding-title
 			width: 100%

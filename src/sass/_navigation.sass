@@ -147,11 +147,11 @@
 			height: 100vh
 			flex-direction: column
 			align-items: center
-			justify-content: space-evenly
+			justify-content: center
 			background-color: $theme-color2
 			//border-top: 0px solid transparentize($theme-color , 1)
-			transition: all 300ms ease-out, opacity 0ms ease
-			transform: translate(100%,0)
+			transition: all 500ms ease-out, opacity 0ms ease-out
+			transform: translate(100%, 0)
 			//box-sizing: border-box
 			opacity: 0
 			z-index: -1
@@ -161,6 +161,7 @@
 				height: $burger-menu-font-size
 				flex-direction: column
 				align-items: center
+				margin: 2vh 0
 				//flex-basis: 100%
 				//flex-grow: 1
 				&.current-menu-item a
@@ -175,7 +176,7 @@
 					padding: 0
 					height: 0
 					opacity: 0
-					transition: all 150ms ease-in-out
+					transition: all 300ms ease-in-out
 					a
 						font-size: $burger-submenu-font-size
 						font-weight: normal
@@ -186,7 +187,7 @@
 
 					ul.sub-menu
 						display: table
-						@include animation(sub-menu, 200ms ease-in both, In, 0, 80px )
+						@include animation(sub-menu, 500ms ease-out both, In, 0, 50px )
 						margin-bottom: auto
 						height: 100%
 

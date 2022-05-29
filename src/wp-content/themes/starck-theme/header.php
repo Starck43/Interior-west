@@ -23,12 +23,10 @@
 	global $post;
 
 	$custom_header = get_custom_header();
-	if ( ! empty( $custom_header->attachment_id ) ) {
-		$header_img_attr = sprintf(' style="background-image: url(%s)"', $custom_header->url);
-		$background_class = 'header-background';
-	}
+	$header_img_attr =  !empty( $custom_header->attachment_id ) ? sprintf(' style="background-image: url(%s)"', $custom_header->url) : '';
 	?>
-	<header id="site-header" <?php starck_header_class(['site-header',$background_class]); echo $header_img_attr; ?>>
+
+	<header id="site-header" <?php starck_header_class(['site-header', !empty( $custom_header->attachment_id ) ? 'header-background' : '']); echo $header_img_attr; ?>>
 
 		<?php if ( 'enabled' === starck_get_option( 'top_bar_layout_setting' ) ) starck_get_top_bar(); ?>
 
@@ -102,7 +100,7 @@
 	?>
 
 	<!-- main -->
-	<main id="main" <?php starck_main_class(['main', get_post_type( $post->ID )]); ?> role="main">
+	<main id="main" <?php starck_main_class(['main', $post ? get_post_type( $post->ID ) : 'search-result']); ?> role="main">
 
 		<?php starck_breadcrumbs(); ?>
 

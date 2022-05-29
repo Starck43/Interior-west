@@ -11,9 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-/**
-
- */
 function starck_merge_classes( $classes = [], $merged_class = '' ) {
 
 	if ( ! empty( $merged_class ) ) {
@@ -112,6 +109,7 @@ if ( ! function_exists( 'starck_navigation_classes' ) ) {
 	 * Adds custom classes to the navigation. 
 	 */
 	function starck_navigation_classes( $merged_class ) {
+		$nav_position =  starck_get_option( 'nav_position_setting' );
 
 		if ( 'none' !== $nav_position ) {
 	
