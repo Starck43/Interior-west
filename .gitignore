@@ -1,9 +1,9 @@
 .*
-/node_modules/
+node_modules
 /.git/
 /**/Thumbs.db
 /**/*.DS_Store
-/resources/
+resources
 /backup/
 /src/wordpress/
 !/src/wordpress/search-replace-db
@@ -12,4 +12,5 @@
 !/src/wp-content/themes/
 !/src/wp-content/themes/starck-theme/
 !/src/wp-content/backup/
-/*.sublime-workspace
+*.sublime-workspace
+*.sublime-project
