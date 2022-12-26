@@ -1,10 +1,104 @@
+# Запрет доступа к .htaccess
+<Files .htaccess>
+  Order Allow,Deny
+  Deny from all
+</Files>
+
+# Защита xmlrpc
+<Files xmlrpc.php>
+  Satisfy any
+  Order Deny,Allow
+  Deny from all
+</Files>
+
+# Защита wp-config.php
+<Files wp-config.php>
+  Order Allow,Deny
+  Deny from all
+</Files>
+
+# Ограничиваем доступ к wp-includes
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^wp-admin/includes/ - [F,L]
+  RewriteRule !^wp-includes/ - [S=3]
+  RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+  RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+  RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
+# Определяем и блокируем вредоносные запросы к сайту
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK|DEBUG) [NC]
+  RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
+  RewriteCond %{THE_REQUEST} \/\*\ HTTP/ [NC,OR]
+  RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
+  RewriteCond %{THE_REQUEST} cgi-bin [NC,OR]
+  RewriteCond %{THE_REQUEST} (%0A|%0D) [NC,OR]
+  RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+#RewriteEngine on
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+
+RewriteEngine on
+RewriteCond %{HTTP_USER_AGENT} (SemrushBot|MJ12bot|AhrefsBot|bingbot|DotBot|LinkpadBot|SputnikBot|statdom.ru|MegaIndex.ru|WebDataStats|Jooblebot|Baiduspider|BackupLand|NetcraftSurveyAgent|openstat.ru) [NC]
+RewriteRule (.*) - [F,L]
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault A0
+
+<FilesMatch "\.(txt|xml|js)$">
+ExpiresDefault A2592000
+</FilesMatch>
+
+<FilesMatch "\.(css)$">
+ExpiresDefault A2592000
+</FilesMatch>
+
+<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|mp4|m4v|ogg|webm|aac|eot|ttf|otf|woff|svg)$">
+ExpiresDefault A31536000
+</FilesMatch>
+
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|webp)$">
+ExpiresDefault A31536000
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(txt|xml|js)$">
+   Header set Cache-Control "max-age=2592000"
+  </FilesMatch>
+
+  <FilesMatch "\.(css)$">
+   Header set Cache-Control "max-age=2592000"
+  </FilesMatch>
+
+  <FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav|mp4|m4v|ogg|webm|aac|eot|ttf|otf|woff|svg)$">
+   Header set Cache-Control "max-age=31536000"
+  </FilesMatch>
+
+  <FilesMatch "\.(jpg|jpeg|png|gif|swf|webp)$">
+   Header set Cache-Control "max-age=31536000"
+  </FilesMatch>
+</IfModule>
+
 
 # BEGIN WordPress
-# Строки между `BEGIN WordPress` и `END WordPress` были созданы автоматически.
-# Они могут быть изменены только фильтрами WordPress.
-# Все изменения между этими отметками будут перезаписаны.
+# Директивы (строки) между `BEGIN WordPress` и `END WordPress`
+# созданы автоматически и подлежат изменению только через фильтры WordPress.
+# Сделанные вручную изменения между этими маркерами будут перезаписаны.
 <IfModule mod_rewrite.c>
 RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
@@ -13,9 +107,3 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
-
-# Защита wp-config.php
-<Files wp-config.php>
-    order allow,deny
-    deny from all
-</Files>

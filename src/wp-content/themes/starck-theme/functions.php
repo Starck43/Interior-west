@@ -1,5 +1,5 @@
 <?php
-define( 'STARCK_VERSION', '1.9.2' );
+define( 'STARCK_VERSION', '1.9.3' );
 
 //!-- START ENQUEUE PARENT ACTION
 
@@ -67,4 +67,3 @@ add_action('wp_footer', function (){
 	}
 
 });
-

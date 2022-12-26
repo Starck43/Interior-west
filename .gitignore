@@ -6,7 +6,9 @@ node_modules
 resources
 /backup/
 /src/wordpress/
+/src/wp-content/themes/starck-theme/sftp-config.json
 !/src/wordpress/search-replace-db
+/src/wp-config.php
 /src/db/*
 /src/wp-content/*
 /src/wp-content/themes/*

@@ -54,7 +54,8 @@ if ( ! function_exists( 'starck_body_classes' ) ) {
 	function starck_body_classes( $classes ) {
 		global $template;
 		$template = basename($template, '.php');
-		$template = array_pop(explode('-',$template));
+		$tmp = explode('-',$template);
+		$template = array_pop($tmp);
         $classes[] = $template;
 		$classes[] = starck_get_layout();
 		
